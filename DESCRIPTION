@@ -1,0 +1,36 @@
+Package: RUBer
+Title: Parameterized Microsoft Word reports in the RUB corporate
+    design
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Richard",
+           family = "Meyer-Eppler",
+           role = c("aut", "cre"),
+           email = "richard.meyer-eppler@uv.ruhr-uni-bochum.de")
+Description: What the package does (one paragraph).
+License: MIT
+Encoding: UTF-8
+Language: en
+LazyData: true
+Imports: 
+    bookdown,
+    devEMF (>= 3.6.3),
+    dplyr,
+    extrafont,
+    flextable,
+    forcats,
+    ggforce (>= 0.3.0),
+    ggplot2,
+    here,
+    knitr,
+    magrittr,
+    officer,
+    purrr,
+    readr,
+    readxl,
+    rlang (>= 0.4.0),
+    rmarkdown,
+    stringr,
+    stringi,
+    tidyr
+RoxygenNote: 6.1.1
