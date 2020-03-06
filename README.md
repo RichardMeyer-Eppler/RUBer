@@ -13,7 +13,7 @@ The goal of RUBer is to …
 
 ## Installation
 
-You can install the released version of RUBer from
+Yous can install the released version of RUBer from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
