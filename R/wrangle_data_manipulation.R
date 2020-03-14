@@ -512,8 +512,9 @@ replace_cohort_data <- function(df, df_orga) {
 #' read_cohort_data()
 read_cohort_data <- function()  {
   df_cohort <- tibble::as_tibble(
-    readr::read_csv2(file = here::here(
-      "data", "Kohortenanalyse_2018_korrigiert.csv"),
+    readr::read_csv2(
+      file = here::here(
+        "data", "Kohortenanalyse_2018_korrigiert.csv"),
       col_types = readr::cols(
         bericht_id = readr::col_character(),
         bericht_nr = readr::col_double(),
@@ -549,7 +550,13 @@ read_cohort_data <- function()  {
         werte_je_abbildung = readr::col_integer(),
         wert_skala_invertieren = readr::col_logical(),
         abb_quelle_txt = readr::col_character()
-      )))
+      ),
+      locale = readr::locale(
+        decimal_mark = ",",
+        grouping_mark = "."
+      )
+    )
+  )
   return(df_cohort)
 }
 

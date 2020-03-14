@@ -1,0 +1,196 @@
+---
+title: "Formatting for the reference docx document"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Formatting for the reference docx document}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# The docx reference document
+As explained in [section 3.4 of R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/word-document.html), the first step in creating a reference document is to produce a .docx file using rmarkdown or Pandoc. The formatting and layout of this document can then be edited and saved.  The resulting reference document is then used in the YAML metadata of each R Markdown file.
+
+This vignette is intended to track all the changes made to the rub_reference.docx file, so that these changes are reproducible and documented.
+
+## Page Layout
+### Margins
+- Top: 2,5 cm
+- Left: 1,5 cm
+- Bottom: 2 cm
+- Right: 2 cm
+- Gutter: 0 cm
+- Gutter position: Left
+
+### Paper
+- Size: A4
+
+### Layout
+- Different first page (x)
+- From edge: Header: 1 cm
+- From edge: Footer: 1,1 cm
+
+## Header and Footer
+### Header
+- The header repeats the report author and title on the top right of every page using the following Word fields:
+    + { AUTHOR \* MERGEFORMAT }
+    + { TITLE \* MERGEFORMAT }
+    
+### Footer
+- The footer has the page number on the lower left using the following Word field:
+    + { PAGE \* MERGEFORMAT }
+
+## Styles
+### Title
+- Style type: Paragraph
+- Style based on: Normal
+- Style for following paragraphs: Body Text
+- Font: RubFlama, 26 pt, Bold, Font color: Custom Color(RGB(0;53;96)), Small caps
+- Right: 1cm, Centered
+- Space Before: 256 pt, After: 12pt, Keep with next, Keep lines together
+
+### Author
+- Style type: Paragraph
+- Style based on: (no style)
+- Style for following paragraphs: Body Text
+- Font: RubFlama, 26 pt, Font color: Custom Color(RGB(141;174;16)), All caps
+- Right: 1 cm, Centered
+- Line spacing: single
+- Space After: 10 pt, Widow/Orphan control, Keep with next, Keep lines together
+
+### Date
+- Style type: Paragraph
+- Style based on: (no style)
+- Style for following paragraphs: Body Text
+- Font: RubFlama, 16 pt, Font color: Custom Color(RGB(0;53;96)), Small caps
+- Right: 1 cm, Right
+- Line spacing: single 
+- Space Before: 256 pt, After: 10 pt, Widow/Orphan control, Keep with next, Keep lines together
+
+### TOC Heading
+- Style type: Paragraph
+- Style based on: Heading 1
+- Style for following paragraphs: Body Text
+- Indent left: 0 cm
+- Indent first line: 0 cm
+- Line spacing: Multiple 1,08 li 
+- Space Before: 12 pt, After: 12 pt, None, No bullets or numbering
+
+### TOC 1
+- Style type: Paragraph
+- Style based on: Normal
+- Style for following paragraphs: Normal
+- Right: 1 cm, Left, 
+- Space After: 5 pt
+- Tab stops: 0,85 cm, Left + 17,48 cm, Right, Leader: ...
+
+### Heading 1
+- Style type: Paragraph
+- Style based on: Normal
+- Style for following paragraphs: Body Text
+- Font: RubFlama, 14 pt, Bold, Font color: Custom Color(RGB(0;53;96)), All caps
+- Indent:
+    + Left: 0 cm
+    + Hanging: 1,02 cm, Left 
+- Space After: 6 pt, Page break before, Keep with next, Keep lines together
+- Level 1, Outline numbered + Level: 1 + Numbering Style: 1, 2, 3, … + Start at: 1 + Alignment: Left + Aligned at: 0 cm + Indent at: 1,02 cm
+
+### Heading 2
+- Style type: Paragraph
+- Style based on: Normal
+- Style for following paragraphs: Body Text
+- Font: RubFlama, 14 pt, Font color: Custom Color(RGB(0;53;96))
+- Indent:
+    + Left: 0 cm
+    + Hanging: 1,02 cm, Left
+- Space Before: 10 pt, After: 0 pt, Keep with next, Keep lines together, Level 2, Outline numbered + Level: 2 + Numbering Style: 1, 2, 3, … + Start at: 1 + Alignment: Left + Aligned at: 0 cm + Indent at: 1,02 cm
+
+### Heading 3
+- Style type: Paragraph
+- Style based on: Normal
+- Style for following paragraphs: Body Text
+- Font: (Default) RubFlama, 14 pt, Font color: Custom Color(RGB(141;174;16)), Left
+- Space Before: 10 pt, After: 0 pt, Keep with next, Keep lines together
+- Level 3
+
+### Heading 4
+- Style type: Paragraph
+- Style based on: Normal
+- Style for following paragraphs: Body Text
+- Font: RubFlama, Font color: Custom Color(RGB(141;174;16)), Left
+- Space Before: 10 pt, After: 0 pt, Keep with next, Keep lines together
+- Level 4
+
+### Heading 6 
+- Style type: Paragraph
+- Style based on: Normal
+- Style for following paragraphs: Body Text
+-Font: (Default) RUB Scala MZ, 9 pt, Italic, - Space After: 18 pt, Keep lines together
+- Level 6
+
+### Image Caption
+- Style type: Paragraph
+- Style based on: Caption
+- Style for following paragraphs: Image Caption
+- Font: 12 pt, Not Italic, Font color: Custom Color(RGB(0;53;96))
+- Space After: 0 pt, Keep with next, Keep lines together
+
+### First Paragraph
+- Style type: Paragraph
+- Style based on: Body Text
+- Style for following paragraphs: Body Text
+
+### Body Text
+- Style type: Linked (paragraph and character)
+- Style based on: Normal
+- Style for following paragraphs: Body Text
+- Space Before: 9 pt, After: 9 pt
+
+### Footnote Reference
+- Style type: Character
+- Style based on: Caption Char
+- Font: RUB Scala TZ, 12 pt, Not Italic, Superscript
+
+### Footnote Text
+- Style type: Paragraph
+- Style based on: Normal
+- Style for following paragraphs: Footnote Text
+- Font: 10 pt
+- Space After: 6 pt
+
+### Header
+- Style type: Linked (paragraph and character)
+- Style based on: Normal
+- Style for following paragraphs: Header
+- Space After: 0 pt
+- Tab stops: 16 cm, Right
+
+### Footer
+- Style type: Linked (paragraph and character)
+- Style based on: Normal
+- Style for following paragraphs: Footer
+- Space After: 0 pt
+- Tab stops: 16 cm, Right
+
+### Hyperlink
+- Style type: Character
+- Style based on: Caption Char
+- Font: RUB Scala TZ, 12 pt, Not Italic, Font color: Accent 1
+
+### Compact
+- Style type: Paragraph
+- Style based on: Body Text
+- Style for following paragraphs: Compact
+- Space Before: 1,8 pt, After:  1,8 pt
+
+### Captioned Figure
+- Style type: Paragraph
+- Style based on: Figure
+- Style for following paragraphs: Captioned Figure
+- Space Before: 12 pt, After: 0 pt, Keep with next

@@ -135,18 +135,21 @@ get_title <- function(report_nr) {
 #' Render report
 #'
 #' @param p_df Data frame containing the data for all reports
-#' @param report_nr Report number for the report to be rendered
+#' @param report_nr Report number of the report
+#' @param p_rmd_template Path to the R Markdown File for that report
+#' @param date Date of the report displayed on the title page, defaults to month
+#'     and year.
 #'
 #' @export
 #'
 #' @examples
 #' render_report(df, 12)
-render_report <- function(p_df, p_report_nr) {
-  df <- RUB::filter_report(p_df, p_report_nr)
+render_report <- function(p_df, report_nr,
+                          rmd_template = here::here("datenreport_new.Rmd"),
+                          date = format(Sys.Date(), format= "%B %Y")) {
+  df <- RUB::filter_report(p_df, report_nr)
   title <- df[[1, "report_title"]]
   author <- df[[1, "report_author"]]
-  date <- format(Sys.Date(), format= "%B %Y")
-  rmd_template <- here::here("datenreport_new.Rmd")
   file_name <- df[[1, "file_name"]]
   file_path <- RUB::get_file_path(file_name)
 

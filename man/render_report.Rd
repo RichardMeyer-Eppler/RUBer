@@ -4,12 +4,19 @@
 \alias{render_report}
 \title{Render report}
 \usage{
-render_report(p_df, p_report_nr)
+render_report(p_df, report_nr,
+  rmd_template = here::here("datenreport_new.Rmd"),
+  date = format(Sys.Date(), format = "\%B \%Y"))
 }
 \arguments{
 \item{p_df}{Data frame containing the data for all reports}
 
-\item{report_nr}{Report number for the report to be rendered}
+\item{report_nr}{Report number of the report}
+
+\item{date}{Date of the report displayed on the title page, defaults to month
+and year.}
+
+\item{p_rmd_template}{Path to the R Markdown File for that report}
 }
 \description{
 Render report
