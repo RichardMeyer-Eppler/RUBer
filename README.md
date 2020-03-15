@@ -24,8 +24,8 @@ functions making the RUB corporate design colors available.
 Install the development version from GitHub with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("RUBer")
+# install.packages("remotes")
+remotes::install_github("RUBer")
 ```
 
 ## Guiding principles
@@ -46,17 +46,17 @@ devtools::install_github("RUBer")
 ## Package components
 
   - Five preconfigured `ggplot2` plotting functions
-  - RUB `ggplot2` theme
-  - RUB `flextable` theme
-  - RUB Pandoc Word reference document
-  - RUB color palette
+  - A custom `ggplot2` theme
+  - A custom `flextable` theme
+  - Word reference document for use with Pandoc and R Markdown
+  - Functions for a RUB color palette
   - Scale functions to make the RUB color palette available in `ggplot2`
   - RMarkdown template that uses `knitr::knit_expand()` to dynamically
     create code chunks containing figures, captions and subcaptions
   - Fake data set that illustrates intended usage of the package
   - Data manipulation functions specific to the 2018 dataset. These
     function are probably of no interest externally, as access to this
-    dataset is confidential.
+    dataset is confidential
 
 ## Background
 
