@@ -81,7 +81,7 @@ RUB_palettes <- list(
   ),
   `discrete_4` = get_RUB_colors(
     "green",
-    "light grey",
+    "green_60",
     "blue_40",
     "blue"
   ),
@@ -96,8 +96,8 @@ RUB_palettes <- list(
     "green",
     "green_80",
     "green_40",
-    "light grey",
     "blue_40",
+    "blue_80",
     "blue"
   ),
   `discrete_7` = get_RUB_colors(
@@ -114,8 +114,8 @@ RUB_palettes <- list(
     "green_80",
     "green_60",
     "green_40",
-    "light grey",
     "blue_40",
+    "blue_60",
     "blue_80",
     "blue"
   ),

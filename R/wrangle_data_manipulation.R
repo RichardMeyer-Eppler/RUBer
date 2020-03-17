@@ -215,28 +215,6 @@ get_figure_caption <- function(param_list) {
   return(caption)
 }
 
-#' Prepare data frame for plotting of a particular figure by filtering and
-#'    setting factors.
-#'
-#' @param df Data frame
-#' @param figure_count Figure count of the figure
-#'
-#' @return Data frame
-#' @export
-#'
-#' @examples
-#' get_figure_df(df, figure_count = 16)
-get_figure_df <- function(df, figure_count) {
-  figure_df <- dplyr::filter(
-    df,
-    figure_count == {{ figure_count }}
-  )
-
-  figure_df <- RUB::set_factors(figure_df)
-
-  return(figure_df)
-}
-
 #' Get figure height
 #'
 #' @param param_list Data frame

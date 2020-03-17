@@ -315,7 +315,7 @@ add_label_position_typ_1 <- function(df, x, y) {
 }
 
 #' Add centered y-coordinates for filtered data labels of vertical stacked bar
-#' charts that are scaled to 100%
+#' charts that are scaled to 100\%
 #'
 #' Calculates the y-coordinates for vertical stacked bar charts, centered for
 #'    each group. The default function does not work if some labels are
@@ -324,6 +324,7 @@ add_label_position_typ_1 <- function(df, x, y) {
 #' @param x x-coordinate
 #' @param y y-coordinate
 #' @param facet facet variable
+#'
 #' @return Data frame with additional column "label_" + the name of the
 #'    y-coordinate variable
 #' @export
@@ -359,7 +360,7 @@ add_label_position_typ_2 <- function(df, x, y, facet) {
 }
 
 #' Add centered y-coordinates for filtered data labels of horizontal stacked bar
-#' charts that are scaled to 100%
+#' charts that are scaled to 100\%
 #'
 #' Calculates the y-coordinates for horizontal stacked bar charts, centered for
 #'    each group. The default function does not work if some labels are

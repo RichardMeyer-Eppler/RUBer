@@ -42,8 +42,6 @@
    setting factors. — get_figure_df" />
 
 <meta property="og:description" content="Prepare data frame for plotting of a particular figure by filtering and
-   setting factors.
-Prepare data frame for plotting of a particular figure by filtering and
    setting factors." />
 
 <meta property="og:image" content="/logo.png" />
@@ -102,6 +100,12 @@ Prepare data frame for plotting of a particular figure by filtering and
     <li>
       <a href="../articles/reference_docx.html">Formatting for the reference docx document</a>
     </li>
+    <li>
+      <a href="../articles/RUB_colors.html">Using RUB colors</a>
+    </li>
+    <li>
+      <a href="../articles/RUB_plot.html">Using the RUB plotting functions</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -127,7 +131,7 @@ Prepare data frame for plotting of a particular figure by filtering and
     <div class="page-header">
     <h1>Prepare data frame for plotting of a particular figure by filtering and
    setting factors.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/RichardMeyer-Eppler/RUBer/blob/master/R/wrangle_data_manipulation.R'><code>R/wrangle_data_manipulation.R</code></a>, <a href='https://github.com/RichardMeyer-Eppler/RUBer/blob/master/R/wrangle_get_functions.R'><code>R/wrangle_get_functions.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/RichardMeyer-Eppler/RUBer/blob/master/R/wrangle_get_functions.R'><code>R/wrangle_get_functions.R</code></a></small>
     <div class="hidden name"><code>get_figure_df.Rd</code></div>
     </div>
 
@@ -135,26 +139,14 @@ Prepare data frame for plotting of a particular figure by filtering and
     
     <p>Prepare data frame for plotting of a particular figure by filtering and
    setting factors.</p>
-<p>Prepare data frame for plotting of a particular figure by filtering and
-   setting factors.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_figure_df</span>(<span class='no'>df</span>, <span class='no'>figure_count</span>)
-
-<span class='fu'>get_figure_df</span>(<span class='no'>df</span>, <span class='no'>figure_count</span>)</pre>
+    <pre class="usage"><span class='fu'>get_figure_df</span>(<span class='no'>df</span>, <span class='no'>figure_count</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>df</th>
-      <td><p>Data frame</p></td>
-    </tr>
-    <tr>
-      <th>figure_count</th>
-      <td><p>Figure count of the figure</p></td>
-    </tr>
     <tr>
       <th>df</th>
       <td><p>Dataf rame</p></td>
@@ -168,11 +160,10 @@ Prepare data frame for plotting of a particular figure by filtering and
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Data frame</p>
-<p>Data frame</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>get_figure_df</span>(<span class='no'>df</span>, <span class='kw'>figure_count</span> <span class='kw'>=</span> <span class='fl'>16</span>)</div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("filter_"): nicht anwendbare Methode für 'filter_' auf Objekt der Klasse "function" angewendet</span></div><div class='input'><span class='fu'>get_figure_df</span>(<span class='no'>df</span>, <span class='kw'>figure_count</span> <span class='kw'>=</span> <span class='fl'>16</span>)</div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("filter_"): nicht anwendbare Methode für 'filter_' auf Objekt der Klasse "function" angewendet</span></div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>get_figure_df</span>(<span class='no'>df</span>, <span class='kw'>figure_count</span> <span class='kw'>=</span> <span class='fl'>16</span>)</div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("filter_"): nicht anwendbare Methode für 'filter_' auf Objekt der Klasse "function" angewendet</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

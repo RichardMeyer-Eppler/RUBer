@@ -2,34 +2,63 @@
 % Please edit documentation in R/rub_plot.R
 \name{rub_plot_typ_1}
 \alias{rub_plot_typ_1}
-\title{Zeichne gestapeltes Balkendiagramm (Abbildungstyp 1)}
+\title{Plot vertical stacked bar chart (figure type 1)}
 \usage{
-rub_plot_typ_1(df, x, y, y_label = "", fill, fill_label, caption = "",
-  filter_cutoff)
+rub_plot_typ_1(df, x, y, y_label = "", fill, fill_label = fill,
+  caption = "", filter_cutoff = 0.04, facet_var = NULL)
 }
 \arguments{
-\item{df}{Data Frame bzw. Tibble}
+\item{df}{Data frame}
 
-\item{x}{x-Position des Balkens}
+\item{x}{Required variable name for the variable containing the discrete
+x-coordinates}
 
-\item{y}{y-Position des Balkens}
+\item{y}{Required variable name for the variable containing the continuous
+y-coordinates}
 
-\item{y_label}{Beschriftung der y-Achse}
+\item{y_label}{Optional label for the y-axis, defaults to an empty string.}
 
-\item{fill}{Gruppierungsvariable für das Stapeln der Säulen (z.B. Abschluss ID)}
+\item{fill}{Variable name for the discrete variable which determines the
+groups to be stacked, e.g. degree}
 
-\item{fill_label}{Beschriftung für die einzelnen Werte der Gruppierungsvariablen (z.B. Abschluss DTXT)}
+\item{fill_label}{Optional variable name for the character variable
+containing the names of the fill variable, defaults to fill.}
 
-\item{caption}{Quellenangabe für die Abbildung (Präfix 'Quelle:' wird automatisch hinzugefügt)}
+\item{caption}{Optional character containing the data source for the figure
+(prefix 'Quelle:' is automatically added)}
 
-\item{filter_cutoff}{Schwellwert, ab dem Datenlabels unterdrückt werden (als Bruchteil von 100)}
+\item{filter_cutoff}{Optional cutoff value for the suppression of data
+labels. By default, all values below 0.04 of the total value of the
+stacked bar chart are suppressed.}
+
+\item{facet_var}{Optional variable name to facet by, defaults to NULL.}
 }
 \value{
-Ein ggplot Objekt
+A ggplot object
 }
 \description{
-Gestapeltes Balkendiagramm im RUB-Corporate Design mit optionalem Label für die y-Achse, optionaler Quellenangabe und der Möglichkeit, Datenlabels zu filtern.
+vertical stacked bar chart in the RUB corporate design. The variables x, y
+    and fill are mandatory, all others are optional.
 }
 \examples{
-rub_plot_typ_1(df = df_fig_t1, x = time, y = value_n_total, fill = degree_sort, fill_label = degree_txt )
+df_type_1 <- tibble::tribble(
+~x, ~y, ~fill,
+"WiSe 13/14", 120, "Bachelor 1-Fach",
+"WiSe 14/15", 105, "Bachelor 1-Fach",
+"WiSe 15/16", 124, "Bachelor 1-Fach",
+"WiSe 16/17", 114, "Bachelor 1-Fach",
+"WiSe 17/18", 122, "Bachelor 1-Fach",
+"WiSe 13/14", 121, "Master 1-Fach",
+"WiSe 14/15", 129, "Master 1-Fach",
+"WiSe 15/16", 122, "Master 1-Fach",
+"WiSe 16/17", 168, "Master 1-Fach",
+"WiSe 17/18", 7, "Master 1-Fach",
+)
+
+rub_plot_typ_1(
+  df = df_type_1,
+  x = x,
+  y = y,
+  fill = fill
+)
 }

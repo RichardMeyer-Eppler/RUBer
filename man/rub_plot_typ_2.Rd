@@ -5,7 +5,7 @@
 \title{Zeichne gestapeltes Balkendiagramm als Anteile von 100 mit Facets (Abbildungstyp 2)}
 \usage{
 rub_plot_typ_2(df, x, y, fill, fill_label, fill_reverse = FALSE, facet,
-  caption = "", filter_cutoff)
+  caption = "", filter_cutoff = 0.04)
 }
 \arguments{
 \item{df}{Data Frame bzw. Tibble}

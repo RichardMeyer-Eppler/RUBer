@@ -55,26 +55,55 @@ plot_figure <- function(df) {
   return(p)
 }
 
-#' Zeichne gestapeltes Balkendiagramm (Abbildungstyp 1)
+#' Plot vertical stacked bar chart (figure type 1)
 #'
-#' Gestapeltes Balkendiagramm im RUB-Corporate Design mit optionalem Label für die y-Achse, optionaler Quellenangabe und der Möglichkeit, Datenlabels zu filtern.
-#' @param df Data Frame bzw. Tibble
-#' @param x x-Position des Balkens
-#' @param y y-Position des Balkens
-#' @param y_label Beschriftung der y-Achse
-#' @param fill Gruppierungsvariable für das Stapeln der Säulen (z.B. Abschluss ID)
-#' @param fill_label Beschriftung für die einzelnen Werte der Gruppierungsvariablen (z.B. Abschluss DTXT)
-#' @param caption Quellenangabe für die Abbildung (Präfix 'Quelle:' wird automatisch hinzugefügt)
-#' @param filter_cutoff Schwellwert, ab dem Datenlabels unterdrückt werden (als Bruchteil von 100)
+#' vertical stacked bar chart in the RUB corporate design. The variables x, y
+#'     and fill are mandatory, all others are optional.
 #'
-#' @return Ein ggplot Objekt
+#' @param df Data frame
+#' @param x Required variable name for the variable containing the discrete
+#'     x-coordinates
+#' @param y Required variable name for the variable containing the continuous
+#'     y-coordinates
+#' @param y_label Optional label for the y-axis, defaults to an empty string.
+#' @param fill Variable name for the discrete variable which determines the
+#'     groups to be stacked, e.g. degree
+#' @param fill_label Optional variable name for the character variable
+#'     containing the names of the fill variable, defaults to fill.
+#' @param caption Optional character containing the data source for the figure
+#'     (prefix 'Quelle:' is automatically added)
+#' @param filter_cutoff Optional cutoff value for the suppression of data
+#'     labels. By default, all values below 0.04 of the total value of the
+#'     stacked bar chart are suppressed.
+#' @param facet_var Optional variable name to facet by, defaults to NULL.
+#'
+#' @return A ggplot object
 #' @export
 #'
 #' @examples
-#' rub_plot_typ_1(df = df_fig_t1, x = time, y = value_n_total, fill = degree_sort, fill_label = degree_txt )
+#' df_type_1 <- tibble::tribble(
+#' ~x, ~y, ~fill,
+#' "WiSe 13/14", 120, "Bachelor 1-Fach",
+#' "WiSe 14/15", 105, "Bachelor 1-Fach",
+#' "WiSe 15/16", 124, "Bachelor 1-Fach",
+#' "WiSe 16/17", 114, "Bachelor 1-Fach",
+#' "WiSe 17/18", 122, "Bachelor 1-Fach",
+#' "WiSe 13/14", 121, "Master 1-Fach",
+#' "WiSe 14/15", 129, "Master 1-Fach",
+#' "WiSe 15/16", 122, "Master 1-Fach",
+#' "WiSe 16/17", 168, "Master 1-Fach",
+#' "WiSe 17/18", 7, "Master 1-Fach",
+#' )
+#'
+#' rub_plot_typ_1(
+#'   df = df_type_1,
+#'   x = x,
+#'   y = y,
+#'   fill = fill
+#' )
 rub_plot_typ_1 <- function(df, x, y, y_label = "",
-                           fill, fill_label,
-                           caption = "", filter_cutoff) {
+                           fill, fill_label = fill,
+                           caption = "", filter_cutoff = 0.04, facet_var = NULL) {
 
   fill_label <- rlang::ensym(fill_label)
   fill_label_unique <- unique(df[[fill_label]])
@@ -87,8 +116,21 @@ rub_plot_typ_1 <- function(df, x, y, y_label = "",
     df, x = {{x}}, y = {{y}}
   ) %>%
     RUB::filter_label(
-      x = {{x}}, y = {{y}}
+      x = {{x}}, y = {{y}}, filter_cutoff = filter_cutoff
     )
+
+  facet_var <- rlang::enquo(facet_var)
+  if(is.null(facet_var))  {
+    facet <- NULL
+  } else {
+    facet <- ggplot2::facet_wrap(
+      ggplot2::vars(
+        !!facet_var
+        ),
+      ncol = 1,
+      scales = "free_y"
+      )
+  }
 
   ggplot2::ggplot(
     data = df,
@@ -117,6 +159,7 @@ rub_plot_typ_1 <- function(df, x, y, y_label = "",
       label.r = ggplot2::unit(0, "lines"),
       label.padding = ggplot2::unit(0.10, "lines")
     ) +
+    facet +
     ggplot2::scale_y_continuous(
       expand = c(0, 0),
       labels = function(y)
@@ -164,7 +207,7 @@ rub_plot_typ_1 <- function(df, x, y, y_label = "",
 #' rub_plot_typ_2(df = df_fig, x = variable_txt, y = value_percentage, fill = value_id, fill_label = value_txt, fill_reverse = df_fig[[1, "scale_invert_flag"]], facet = degree_id, caption = "Fuck You, Bitch!")
 rub_plot_typ_2 <- function(df, x, y,
                            fill, fill_label, fill_reverse = FALSE, facet,
-                           caption = "", filter_cutoff) {
+                           caption = "", filter_cutoff = 0.04) {
 
   fill_unique <- unique(df[[rlang::ensym(fill)]])
   fill_unique_length <- length(fill_unique)
@@ -177,7 +220,7 @@ rub_plot_typ_2 <- function(df, x, y,
     df, x = {{x}}, y = {{y}}, facet = {{facet}}
   ) %>%
     RUB::filter_label_typ_2(
-      x = {{x}}, y = {{y}}, facet = {{facet}}
+      x = {{x}}, y = {{y}}, facet = {{facet}}, filter_cutoff = filter_cutoff
     )
 
   ggplot2::ggplot() +
@@ -206,7 +249,8 @@ rub_plot_typ_2 <- function(df, x, y,
       label.r = ggplot2::unit(0, "lines"),
       label.padding = ggplot2::unit(0.10, "lines")
     ) +
-    ggplot2::facet_wrap(ggplot2::vars({{facet}}), nrow = 2) +
+    ggplot2::facet_wrap(
+      ggplot2::vars({{facet}}), ncol = 1) +
     ggplot2::scale_y_continuous(
       expand = c(0, 0),
       label = scales::percent
@@ -291,16 +335,6 @@ rub_plot_typ_3 <- function(df, x, y,
       label.r = ggplot2::unit(0, "lines"),
       label.padding = ggplot2::unit(0.10, "lines")
     ) +
-    # ggplot2::facet_wrap(ggplot2::vars({{facet}}),
-    #                     ncol = 1,
-    #                     scales = "free_y"
-    # ) +
-    # ggplot2::facet_grid(
-    #   rows = ggplot2::vars({{facet}}),
-    #   scales = "free_y",
-    #   space = "free_y",
-    #   switch = "x"
-    # ) +
     ggforce::facet_col(
       ggplot2::vars({{facet}}),
       scales = "free_y",

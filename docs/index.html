@@ -19,10 +19,11 @@
 <script src="pkgdown.js"></script><meta property="og:title" content="Parameterized Microsoft Word reports in the RUB corporate
     design">
 <meta property="og:description" content="RUBer is an R package created for parameterized reporting according
-    to the requirements at the Ruhr-Universität Bochum (RUB). The package
-    provides preconfigured ggplot2 plotting functions, custom themes for ggplot2
-    and flextable, as well as functions making the RUB corporate design colors
-    available.">
+    to the requirements at the Ruhr-Universität Bochum (RUB). The package 
+    provides a large example dataset containing fake values, an R Markdown
+    template in the RUB corporate design, preconfigured ggplot2 plotting
+    functions, custom themes for ggplot2 and flextable, as well as functions
+    making the RUB corporate design colors available.">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -68,6 +69,12 @@
 <li>
       <a href="articles/reference_docx.html">Formatting for the reference docx document</a>
     </li>
+    <li>
+      <a href="articles/RUB_colors.html">Using RUB colors</a>
+    </li>
+    <li>
+      <a href="articles/RUB_plot.html">Using the RUB plotting functions</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -96,50 +103,51 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <div id="ruber" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#ruber" class="anchor"></a>RUBer <img src="reference/figures/logo.png" align="right" height="139">
+<a href="#ruber" class="anchor"></a>RUBer <a href="https://richardmeyer-eppler.github.io/RUBer/"><img src="reference/figures/logo.png" align="right" height="139"></a>
 </h1></div>
 <!-- badges: start -->
 
-<p>RUBer is an R package created for parameterized reporting according to the requirements at the Ruhr-Universität Bochum (RUB). So far, the package was primarily used for the eigth reporting cycle for teaching (<a href="http://www.uv.ruhr-uni-bochum.de/dezernat1/aufgaben/abteilung1/qmp/instrumente/inst_lehrberichterstattung.html"><em>Lehrberichterstattung</em></a>) in 2018-19. The package provides preconfigured ggplot2 plotting functions, custom themes for <code>ggplot2</code> and <code>flextable</code>, as well as functions making the RUB corporate design colors available.</p>
+<div id="overview" class="section level2">
+<h2 class="hasAnchor">
+<a href="#overview" class="anchor"></a>Overview</h2>
+<p>RUBer is an R package created for parameterized reporting according to the requirements at the Ruhr-Universität Bochum (RUB). So far, the package was primarily used for the eigth reporting cycle for teaching (<a href="http://www.uv.ruhr-uni-bochum.de/dezernat1/aufgaben/abteilung1/qmp/instrumente/inst_lehrberichterstattung.html"><em>Lehrberichterstattung</em></a>) in 2018-19. The package provides a large example dataset containing fake values, an R Markdown template in the RUB corporate design, preconfigured <code>ggplot2</code> plotting functions, custom themes for <code>ggplot2</code> and <code>flextable</code>, as well as functions making the RUB corporate design colors available.</p>
+</div>
+<div id="main-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#main-features" class="anchor"></a>Main features</h2>
+<ul>
+<li>An R Markdown template for use with <code><a href="https://www.rdocumentation.org/packages/rmarkdown/topics/draft">rmarkdown::draft</a></code>. The template uses <code><a href="https://www.rdocumentation.org/packages/knitr/topics/knit_expand">knitr::knit_expand()</a></code> to dynamically create code chunks containing figures, captions and subcaptions based on the data frame passed on as a parameter. Figure captions are automatically numbered via <code>bookdown</code> and a table of figures is inserted via <code>officedown</code>.</li>
+<li>Vectorized figures in Microsoft’s Enhanced Metafile format using the <code>devEMF</code> package.</li>
+<li>Five preconfigured <code>ggplot2</code> plotting functions.</li>
+<li>A custom <code>ggplot2</code> theme.</li>
+<li>A custom <code>flextable</code> theme.</li>
+<li>Word reference document in the RUB corporate design for use with the R Markdown template.</li>
+<li>Functions to access the RUB color palette.</li>
+<li>Scale functions to make the RUB color palettes available in <code>ggplot2</code>.</li>
+<li>A dataset with 249,492 rows, <code>df_fake</code>, that illustrates how we used this package in 2018 to create 64 reports with a total of 3,024 unique figures. All values in the dataset are fake and algorithmically generated, all other columns, though, are identical to the confidential production dataset.</li>
+<li>Data wrangling functions specific to the 2018 dataset. These function are probably of no interest externally, as access to the raw production dataset is confidential.</li>
+</ul>
+</div>
+<div id="guiding-design-principles" class="section level2">
+<h2 class="hasAnchor">
+<a href="#guiding-design-principles" class="anchor"></a>Guiding design principles</h2>
+<ol style="list-style-type: decimal">
+<li>Output format for the paramterized reporting is Microsoft Word, so that the reports can be shared and edited as widely as possible.</li>
+<li>The generated reports adhere to the RUB corporate design and are ready for printing as is, with no further adjustments to layout or content required.</li>
+<li>As far as possible, the data manipulation is done independently of all the reporting steps. The idea is that the data passed to the R Markdown template can come from any source, not just R. While the data wrangling for the 2018 reports <em>was</em> done in R, this is not a requirement. If there is a need to create or alter datasets using Microsoft Excel, it is possible to use these datasets as basis for all reporting functions of <code>RUBer</code>.</li>
+</ol>
+</div>
+<div id="project-background" class="section level2">
+<h2 class="hasAnchor">
+<a href="#project-background" class="anchor"></a>Project background</h2>
+<p>Every three years, the teaching and program quality of all degree programs at the University of Bochum is assessed (<a href="http://www.uv.ruhr-uni-bochum.de/dezernat1/aufgaben/abteilung1/qmp/instrumente/inst_lehrberichterstattung.html"><em>Lehrberichterstattung</em></a>). The university administration assists this process by providing data reports that combine descriptive higher education statistics with survey data. The University of Bochum regularly collects survey data in the study entry phase (<em>Studieneingangsbefragung</em>), mid-study (<em>Studienverlaufsbefragung</em>) and for its graduates (<em>AbsolventInnenbefragung</em>, collected through the nationwide <a href="https://istat.de/de/koab_a.html">Graduate Survey Cooperation Project (KOAB)</a>). Previously, for the data reports, these rich data sources were analyzed and visualized by hand. <code>RUBer</code> automates this process, creating large numbers of print-ready reports in Microsoft Word.</p>
+</div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Install the development version from GitHub with:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># install.packages("remotes")</span></a>
 <a class="sourceLine" id="cb1-2" title="2">remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"RUBer"</span>)</a></code></pre></div>
-</div>
-<div id="guiding-principles" class="section level2">
-<h2 class="hasAnchor">
-<a href="#guiding-principles" class="anchor"></a>Guiding principles</h2>
-<ol style="list-style-type: decimal">
-<li>Output format is Microsoft Word, so that generated reports remain editable by non-technical staff.</li>
-<li>The generated reports adhere to the RUB corporate design and are ready for printing as is, with no further adjustments to layout or content required.</li>
-<li>As far as possible, data manipulation and data analyis / visualization are treated as separate steps. All data manipulation is reproducible through documented functions and does not alter the source data. All calculated and derived data is saved to file. Thus, it can be proofread and altered by non-technical staff (who frequently have no knowledge of R) prior to the data analysis and reporting step.</li>
-</ol>
-</div>
-<div id="package-components" class="section level2">
-<h2 class="hasAnchor">
-<a href="#package-components" class="anchor"></a>Package components</h2>
-<ul>
-<li>Five preconfigured <code>ggplot2</code> plotting functions</li>
-<li>A custom <code>ggplot2</code> theme</li>
-<li>A custom <code>flextable</code> theme</li>
-<li>Word reference document for use with Pandoc and R Markdown</li>
-<li>Functions for a RUB color palette</li>
-<li>Scale functions to make the RUB color palette available in <code>ggplot2</code>
-</li>
-<li>RMarkdown template that uses <code><a href="https://www.rdocumentation.org/packages/knitr/topics/knit_expand">knitr::knit_expand()</a></code> to dynamically create code chunks containing figures, captions and subcaptions</li>
-<li>Fake data set that illustrates intended usage of the package</li>
-<li>Data manipulation functions specific to the 2018 dataset. These function are probably of no interest externally, as access to this dataset is confidential</li>
-</ul>
-</div>
-<div id="background" class="section level2">
-<h2 class="hasAnchor">
-<a href="#background" class="anchor"></a>Background</h2>
-<p>The University of Bochum regularly obtains survey data through the nationwide Graduate Survey Cooperation Project (KOAB) and through its participation in the joint educational initiative RuhrFutur. <code>RUBer</code> is used to dynamically generate reports visualizing this survey data in the RUB corporate design. The output format is Microsoft Word, so that the reports remain editable by staff with non-technical backgrounds.</p>
-<p>This is a basic example which shows you how to solve a common problem:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co">## library(RUB)</span></a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="co">## basic example code</span></a></code></pre></div>
 </div>
 </div>
   </div>

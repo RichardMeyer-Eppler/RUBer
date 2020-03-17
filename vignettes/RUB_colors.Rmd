@@ -1,0 +1,127 @@
+---
+title: "Using RUB colors"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using RUB colors}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(RUBer)
+```
+
+This vignette describes how to display and retrieve the RUB colors and palettes. For details on using these palettes in ggplot2, see the separate vignette XXX.
+
+# Colors
+`RUBer` provides easy access to the colors as specified in the [RUB corporate
+design](https://www.ruhr-uni-bochum.de/cd/). Once the package is loaded, access 
+all available colors by typing `RUB_colors`. Note that I assigned that the color
+names were assigned as part of this package and are not offically sanctioned by
+the corporate design guide.
+
+```{r rub-colors}
+# Retrieve all available colors
+RUB_colors
+
+# ... access individual color by index
+RUB_colors[1]
+
+# ... or by name
+RUB_colors["dark red"]
+```
+
+To retrieve several colors at once, use the getter function 
+`get_RUB_colors()`.
+
+```{r get-rub-colors}
+# Retrieve several colors by name
+get_RUB_colors("green", "blue", "orange")
+
+# Retrieve several colors by index
+get_RUB_colors(4:6, 9)
+```
+
+# Palettes
+The colors are combined in several palettes. To retrieve all available palettes,
+use `RUB_palettes`. To retrieve a particular palette by name, use the
+function `get_RUB_palettes` plus the number of required colors in round
+brackets like so `get_RUB_palettes(palette = "discrete_5")(5)`. If the
+palette contains less elements than requested, additional colors will
+automatically be extrapolated.
+
+Note that the RUB colors as defined by the corporate design were not designed
+with data visualization in mind. The palettes presented here are ad-hoc and
+rather informal, until the corporate design is offically extended to include
+visualization design.
+
+```{r get-rub-palette}
+
+# All availabble palettes
+RUB_palettes
+
+# Retrieve five colors from the palette "discrete_5"
+get_RUB_palettes(palette = "discrete_5")(5)
+
+# Retrieve ten colors, five of which are extrapolated, from the palette 
+# "discrete_5".
+get_RUB_palettes(palette = "discrete_5")(10)
+```
+
+We can visualize all palettes using Emil Hvitfeldt's excellent `prismatic` 
+package.
+
+
+## Plots for the continuous palettes
+First off, we have the two continuous palettes, "continuous" and 
+"continuous_diverging".
+
+```{r plot-continuous}
+plot(prismatic::color(RUBer::get_RUB_palettes(palette = "continuous")(100)))
+
+plot(prismatic::color(RUBer::get_RUB_palettes(palette = "continuous_diverging")(100)))
+```
+
+## Plots for the numbered discrete palettes
+Second, we have all the numbered discrete palettes, which, for example, were
+used to display the distribution of answers for the survey items. numbered
+discrete palettes are pre-defined up to a total of eight separate colors, after,
+it is necessary to rely on extrapolation.
+
+```{r plot-discrete-numbered}
+plot(prismatic::color(get_RUB_palettes(palette = "discrete_1")(1)))
+plot(prismatic::color(get_RUB_palettes(palette = "discrete_2")(2)))
+plot(prismatic::color(get_RUB_palettes(palette = "discrete_3")(3)))
+plot(prismatic::color(get_RUB_palettes(palette = "discrete_4")(4)))
+plot(prismatic::color(get_RUB_palettes(palette = "discrete_5")(5)))
+plot(prismatic::color(get_RUB_palettes(palette = "discrete_6")(6)))
+plot(prismatic::color(get_RUB_palettes(palette = "discrete_7")(7)))
+plot(prismatic::color(get_RUB_palettes(palette = "discrete_8")(8)))
+
+# If you need more than eight unique colors, simply increase the number of
+# requested colors in the function call like this:
+plot(prismatic::color(get_RUB_palettes(palette = "discrete_8")(16)))
+```
+
+## Plots for the discrete palettes
+Last, I turned most of the unqiue colors in the RUB corporate design guide into
+one awfully looking palette simply called "discrete". Avert your eyes, if at all possible! The second palette, "discrete_contrast" has four colors that form a
+nice contrast to the base RUB colors, i.e. the Green and Blue.
+
+```{r plot-discrete}
+plot(prismatic::color(get_RUB_palettes(palette = "discrete")(7)))
+plot(prismatic::color(get_RUB_palettes(palette = "discrete_contrast")(4)))
+```
+
+# Further Reading
+The implementation is heavily indebted to Simon Jackson's great article on color palettes for ggplot2. At the moment, the University of Bochum really does not have anything like a Data Visualization Style Guide.
+
+[Simon Jackson - Creating corporate colour palettes for ggplot2](https://drsimonj.svbtle.com/creating-corporate-colour-palettes-for-ggplot2)
+[Lisa Charlotte Rost - Your Friendly Guide to Colors in Data Visualisation](https://blog.datawrapper.de/colorguide/)
+[Emil Hvitfeldt's Prismatic Package](https://emilhvitfeldt.github.io/prismatic/)
+[Emily Riederer's Rtistic Package](https://github.com/emilyriederer/Rtistic)
+[Amy Cesal - What Are Data Visualization Style Guidelines](https://medium.com/nightingale/style-guidelines-92ebe166addc)

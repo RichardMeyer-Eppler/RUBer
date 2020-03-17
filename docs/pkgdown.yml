@@ -3,4 +3,6 @@ pkgdown: 1.3.0
 pkgdown_sha: ~
 articles:
   reference_docx: reference_docx.html
+  RUB_colors: RUB_colors.html
+  RUB_plot: RUB_plot.html
 

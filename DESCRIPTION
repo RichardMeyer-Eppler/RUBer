@@ -8,12 +8,14 @@ Authors@R:
            role = c("aut", "cre"),
            email = "richard.meyer-eppler@uv.ruhr-uni-bochum.de")
 Description: RUBer is an R package created for parameterized reporting according
-    to the requirements at the Ruhr-Universität Bochum (RUB). The package
-    provides preconfigured ggplot2 plotting functions, custom themes for ggplot2
-    and flextable, as well as functions making the RUB corporate design colors
-    available.
+    to the requirements at the Ruhr-Universität Bochum (RUB). The package 
+    provides a large example dataset containing fake values, an R Markdown
+    template in the RUB corporate design, preconfigured ggplot2 plotting
+    functions, custom themes for ggplot2 and flextable, as well as functions
+    making the RUB corporate design colors available.
 License: MIT
 URL: https://github.com/RichardMeyer-Eppler/RUBer
+    https://richardmeyer-eppler.github.io/RUBer/
 Encoding: UTF-8
 Language: en
 LazyData: true
@@ -38,5 +40,6 @@ Imports:
     rmarkdown (>= 1.15),
     stringr (>= 1.4.0),
     stringi (>= 1.4.6),
-    tidyr (>= 1.0.0)
+    tidyr (>= 1.0.0),
+    officedown
 VignetteBuilder: knitr

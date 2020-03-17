@@ -3,7 +3,7 @@
 \name{add_label_position_typ_3}
 \alias{add_label_position_typ_3}
 \title{Add centered y-coordinates for filtered data labels of horizontal stacked bar
-charts that are scaled to 100%}
+charts that are scaled to 100\%}
 \usage{
 add_label_position_typ_3(df, x, y, facet, group, fill_reverse = FALSE)
 }
