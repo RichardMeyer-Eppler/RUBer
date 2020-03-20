@@ -5,7 +5,8 @@
 \alias{df_fake}
 \title{Fake data set illustrating the use of the RUBer parameterized
 reporting package.}
-\format{A data frame with 249,492 rows and 24 variables:
+\format{
+A data frame with 249,492 rows and 24 variables:
 \describe{
   \item{report_nr}{price, in US dollars}
   \item{figure_count}{weight of the diamond, in carats}
@@ -43,7 +44,8 @@ reporting package.}
   \item{file_name}{The file name for this report nr.}
   \item{figure_filter_flag}{weight of the diamond, in carats}
   \item{figure_height}{The height of the figure.}
-}}
+}
+}
 \usage{
 df_fake
 }

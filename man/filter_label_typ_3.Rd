@@ -22,7 +22,7 @@ Filtert in gestapelten, rotierten Säulendiagrammen die Datenlabels.
 \examples{
 x <- c("WiSe 13/14", "WiSe 13/14", "WiSe 13/14", "WiSe 13/14")
 y <- c(1989, 58, 163, 470)
-fill <- c("Bachelor 2-Fächer", "Master 1-Fach", "Master 2-Fächer", "Master of Education")
+fill <- c("Bachelor 2-FÃ¤cher", "Master 1-Fach", "Master 2-FÃ¤cher", "Master of Education")
 filter_cutoff <- 0.05
 df <- filter_label_y(x, y, fill, y_label, filter_cutoff)
 ggplot2::ggplot() +

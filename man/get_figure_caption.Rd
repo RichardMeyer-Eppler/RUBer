@@ -11,8 +11,6 @@ get_figure_caption(param_list)
 }
 \arguments{
 \item{df}{Dataframe bzw. Tibble}
-
-\item{df}{Dataframe bzw. Tibble}
 }
 \value{
 Caption as character

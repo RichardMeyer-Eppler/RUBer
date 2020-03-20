@@ -60,7 +60,7 @@ get_figure_df <- function(df, figure_count) {
     figure_count == {{ figure_count }}
   )
 
-  figure_df <- RUB::set_factors(figure_df)
+  figure_df <- RUBer::set_factors(figure_df)
 
   return(figure_df)
 }

@@ -4,8 +4,7 @@
 \alias{scale_color_rub}
 \title{Color scale constructor for RUB colors}
 \usage{
-scale_color_rub(palette = "discrete", discrete = TRUE,
-  reverse = FALSE, ...)
+scale_color_rub(palette = "discrete", discrete = TRUE, reverse = FALSE, ...)
 }
 \arguments{
 \item{palette}{Character name of palette in \code{RUB_palettes}}

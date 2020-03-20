@@ -4,8 +4,18 @@
 \alias{rub_plot_typ_3}
 \title{Zeichne gestapeltes, rotiertes Balkendiagramm als Anteile von 100 mit Facets (Abbildungstyp 3)}
 \usage{
-rub_plot_typ_3(df, x, y, fill, fill_label, fill_reverse, facet, group,
-  caption = "", filter_cutoff = 0.04)
+rub_plot_typ_3(
+  df,
+  x,
+  y,
+  fill,
+  fill_label,
+  fill_reverse,
+  facet,
+  group,
+  caption = "",
+  filter_cutoff = 0.04
+)
 }
 \arguments{
 \item{df}{Data Frame bzw. Tibble}

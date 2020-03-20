@@ -15,12 +15,6 @@ get_figure_height(param_list, lower_bound = 2, upper_bound = 9.6)
 \item{lower_bound}{Minimum height (default = 2.25)}
 
 \item{upper_bound}{Maximum height (default = 9.6)}
-
-\item{param_list}{Data frame}
-
-\item{lower_bound}{Minimum height (default = 2.25)}
-
-\item{upper_bound}{Maximum height (default = 9.6)}
 }
 \value{
 Figure height in inches

@@ -224,7 +224,7 @@ bind_subject_group <- function(df) {
         report_nr
       )
     ) %>%
-    RUB::sort_report()
+    RUBer::sort_report()
 
   return(df)
 }

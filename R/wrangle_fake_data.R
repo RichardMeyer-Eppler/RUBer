@@ -450,8 +450,8 @@ get_fake_values_type_2 <- function(fractions = 5, periods = 8) {
 #' create_fake_values_type_2(df)
 create_fake_values_type_2 <- function(df) {
   residual <- 0
-  periods <- length(RUB::get_unique(df, period))
-  fractions <- length(RUB::get_unique(df, fraction_id))
+  periods <- length(RUBer::get_unique(df, period))
+  fractions <- length(RUBer::get_unique(df, fraction_id))
   length_periods <- periods
   length_fractions <- fractions
 

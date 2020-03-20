@@ -5,16 +5,30 @@
 \title{Add centered y-coordinates for filtered data labels of vertical stacked bar
 charts that are scaled to 100\%}
 \usage{
-add_label_position_typ_2(df, x, y, facet)
+add_label_position_typ_2(
+  df,
+  x_var,
+  y_var,
+  facet_var,
+  filter_cutoff = 0.04,
+  reverse
+)
 }
 \arguments{
 \item{df}{Data frame}
 
-\item{x}{x-coordinate}
+\item{x_var}{Required variable name for the variable containing the discrete
+x-coordinates.}
 
-\item{y}{y-coordinate}
+\item{y_var}{Required variable name for the variable containing the continuous
+y-coordinates.}
 
-\item{facet}{facet variable}
+\item{facet_var}{Optional variable name for the discrete variable to facet
+by, defaults to NULL.}
+
+\item{filter_cutoff}{Optional cutoff value for the suppression of data
+labels. By default, all values below 0.04 of the total value of the
+stacked bar chart are suppressed.}
 }
 \value{
 Data frame with additional column "label_" + the name of the
@@ -27,11 +41,4 @@ Calculates the y-coordinates for vertical stacked bar charts, centered for
 }
 \examples{
 x <- c("WiSe 13/14", "WiSe 13/14", "WiSe 13/14", "WiSe 13/14")
-y <- c(1989, 58, 163, 470)
-fill <- c("Bachelor 2-Fächer", "Master 1-Fach", "Master 2-Fächer", "Master of Education")
-filter_cutoff <- 0.05
-df <- get_label_position(df, x, y)
-ggplot2::ggplot() +
-  ggplot2::geom_bar(aes(x = x, y = y, fill = fill), stat = "identity") +
-  ggplot2::geom_label(data = df, aes(x = x, y = y_label, group = fill, label = y))
 }

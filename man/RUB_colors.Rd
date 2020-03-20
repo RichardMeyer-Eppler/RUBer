@@ -4,7 +4,9 @@
 \name{RUB_colors}
 \alias{RUB_colors}
 \title{RUB colors}
-\format{An object of class \code{character} of length 19.}
+\format{
+An object of class \code{character} of length 19.
+}
 \usage{
 RUB_colors
 }

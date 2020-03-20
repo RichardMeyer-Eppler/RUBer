@@ -4,7 +4,9 @@
 \name{RUB_palettes}
 \alias{RUB_palettes}
 \title{RUB color palette}
-\format{An object of class \code{list} of length 12.}
+\format{
+An object of class \code{list} of length 12.
+}
 \usage{
 RUB_palettes
 }

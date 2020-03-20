@@ -13,28 +13,28 @@ plot_figure <- function(df) {
   if (length(figure_type_id) == 1) {
     if (figure_type_id == 1) {
       p <- df %>%
-        RUB::rub_plot_typ_1(
-          x = x,
-          y = y,
+        rub_plot_typ_1(
+          x_var = x,
+          y_var = y,
           y_label = .[[1, "y_label"]],
-          fill = fill,
+          fill_var = fill,
           fill_label = fill_label,
           caption = .[[1, "source_caption"]]
         )
     } else if (figure_type_id == 2) {
       p <- df %>%
-        RUB::rub_plot_typ_2(
-          x = x,
-          y = y,
-          fill = fill,
+        rub_plot_typ_2(
+          x_var = x,
+          y_var = y,
+          fill_var = fill,
           fill_label = fill_label,
           fill_reverse = .[[1, "fill_reverse"]],
-          facet = facet,
+          facet_var = facet,
           caption = .[[1, "source_caption"]]
         )
     } else if (figure_type_id == 3) {
       p <- df %>%
-        RUB::rub_plot_typ_3(
+        rub_plot_typ_3(
           x = x,
           y = y,
           fill = fill,
@@ -48,7 +48,7 @@ plot_figure <- function(df) {
   } else if (length(figure_type_id) > 1) {
     if (identical(figure_type_id, c(1L, 4L)) |
         identical(figure_type_id, c(4L, 1L))) {
-      p <- RUB::rub_plot_typ_1_and_4(df)
+      p <- rub_plot_typ_1_and_4(df)
     }
   }
 
@@ -57,75 +57,98 @@ plot_figure <- function(df) {
 
 #' Plot vertical stacked bar chart (figure type 1)
 #'
-#' vertical stacked bar chart in the RUB corporate design. The variables x, y
-#'     and fill are mandatory, all others are optional.
+#' vertical stacked bar chart in the RUB corporate design. The variables x_var,
+#' y_var and fill_var are required, all others are optional.
 #'
 #' @param df Data frame
-#' @param x Required variable name for the variable containing the discrete
-#'     x-coordinates
-#' @param y Required variable name for the variable containing the continuous
-#'     y-coordinates
+#' @param x_var Required variable name for the variable containing the discrete
+#'     x-coordinates.
+#' @param y_var Required variable name for the variable containing the continuous
+#'     y-coordinates.
 #' @param y_label Optional label for the y-axis, defaults to an empty string.
-#' @param fill Variable name for the discrete variable which determines the
-#'     groups to be stacked, e.g. degree
+#' @param fill_var Variable name for the discrete variable which determines the
+#'     groups to be stacked, e.g. degree.
 #' @param fill_label Optional variable name for the character variable
-#'     containing the names of the fill variable, defaults to fill.
+#'     containing the names of the fill variable, defaults to NULL.
 #' @param caption Optional character containing the data source for the figure
-#'     (prefix 'Quelle:' is automatically added)
+#'     (prefix 'Quelle:' is automatically added).
 #' @param filter_cutoff Optional cutoff value for the suppression of data
 #'     labels. By default, all values below 0.04 of the total value of the
 #'     stacked bar chart are suppressed.
-#' @param facet_var Optional variable name to facet by, defaults to NULL.
+#' @param facet_var Optional variable name for the discrete variable to facet
+#'     by, defaults to NULL.
+#' @inheritParams rub_style
 #'
 #' @return A ggplot object
 #' @export
 #'
 #' @examples
-#' df_type_1 <- tibble::tribble(
-#' ~x, ~y, ~fill,
-#' "WiSe 13/14", 120, "Bachelor 1-Fach",
-#' "WiSe 14/15", 105, "Bachelor 1-Fach",
-#' "WiSe 15/16", 124, "Bachelor 1-Fach",
-#' "WiSe 16/17", 114, "Bachelor 1-Fach",
-#' "WiSe 17/18", 122, "Bachelor 1-Fach",
-#' "WiSe 13/14", 121, "Master 1-Fach",
-#' "WiSe 14/15", 129, "Master 1-Fach",
-#' "WiSe 15/16", 122, "Master 1-Fach",
-#' "WiSe 16/17", 168, "Master 1-Fach",
-#' "WiSe 17/18", 7, "Master 1-Fach",
+#' # Create test values for all three mandatory variables (x_var, y_var, fill_var).
+#' df_t1_ex1 <- tibble::tribble(
+#' ~term, ~students, ~degree,
+#'"Spring '13", 120, "Bachelor 1-Subject",
+#' "Spring '14", 105, "Bachelor 1-Subject",
+#' "Spring '15", 124, "Bachelor 1-Subject",
+#' "Spring '16", 114, "Bachelor 1-Subject",
+#'  "Spring '17", 122, "Bachelor 1-Subject",
+#'  "Spring '13", 121, "Master 1-Subject",
+#'  "Spring '14", 129, "Master 1-Subject",
+#'  "Spring '15", 122, "Master 1-Subject",
+#'  "Spring '16", 168, "Master 1-Subject",
+#'  "Spring '17", 7, "Master 1-Subject",
 #' )
 #'
+#' # The data source is df_t1_ex1, x_var is mapped to term, y_var to students, and
+#' # the fill_var to degree.
 #' rub_plot_typ_1(
-#'   df = df_type_1,
-#'   x = x,
-#'   y = y,
-#'   fill = fill
+#'  df = df_t1_ex1,
+#'  x_var = term,
+#'  y_var = students,
+#'  fill_var = degree
 #' )
-rub_plot_typ_1 <- function(df, x, y, y_label = "",
-                           fill, fill_label = fill,
-                           caption = "", filter_cutoff = 0.04, facet_var = NULL) {
+rub_plot_typ_1 <- function(df, x_var,
+                           y_var, y_label = "",
+                           fill_var, fill_label = NULL,
+                           caption = "", filter_cutoff = 0.04,
+                           facet_var = NULL, color = RUB_colors["blue"],
+                           font = "RubFlama") {
 
-  fill_label <- rlang::ensym(fill_label)
-  fill_label_unique <- unique(df[[fill_label]])
-  fill_label_unique_length <- length(fill_label_unique)
-  palette <- paste0("discrete_", fill_label_unique_length)
-  label_var <- paste0("label_", rlang::quo_name(rlang::enquo(y)))
+  fill_var_sym <- rlang::ensym(fill_var)
+  fill_var_unique <- unique(df[[fill_var_sym]])
+  fill_var_n_distinct <- dplyr::n_distinct(df[[fill_var_sym]])
+  palette <- paste0("discrete_", fill_var_n_distinct)
+
+  fill_label_quo <- rlang::enquo(fill_label)
+  fill_label_null <- rlang::quo_is_null(fill_label_quo)
+
+  if(fill_label_null)  {
+    fill_label_sym <- rlang::ensym(fill_var)
+  } else  {
+    fill_label_sym <- rlang::ensym(fill_label)
+  }
+
+  fill_label_unique <- unique(df[[fill_label_sym]])
+
+  label_var <- paste0("label_", rlang::quo_name(rlang::enquo(y_var)))
   caption <- ifelse(caption[1] == "", "", paste("Quelle:", caption[1]))
 
-  df_label <- RUB::add_label_position_typ_1(
-    df, x = {{x}}, y = {{y}}
-  ) %>%
-    RUB::filter_label(
-      x = {{x}}, y = {{y}}, filter_cutoff = filter_cutoff
-    )
+  df_label <- add_label_position_typ_1(
+    df,
+    x_var = {{x_var}},
+    y_var = {{y_var}},
+    facet_var = {{facet_var}},
+    filter_cutoff = filter_cutoff
+  )
 
   facet_var <- rlang::enquo(facet_var)
-  if(is.null(facet_var))  {
+  no_facet <- rlang::quo_is_null(facet_var) # See https://rpubs.com/tjmahr/quo_is_missing
+
+  if(no_facet)  {
     facet <- NULL
   } else {
     facet <- ggplot2::facet_wrap(
       ggplot2::vars(
-        !!facet_var
+          !!facet_var
         ),
       ncol = 1,
       scales = "free_y"
@@ -135,9 +158,9 @@ rub_plot_typ_1 <- function(df, x, y, y_label = "",
   ggplot2::ggplot(
     data = df,
     ggplot2::aes(
-      x = {{x}},
-      y = {{y}},
-      fill = {{fill}}
+      x = {{x_var}},
+      y = {{y_var}},
+      fill = {{fill_var}}
     )
   ) +
     ggplot2::geom_bar(
@@ -147,13 +170,13 @@ rub_plot_typ_1 <- function(df, x, y, y_label = "",
     ggplot2::geom_label(
       data = df_label,
       ggplot2::aes(
-        x = {{x}},
+        x = {{x_var}},
         y = .data[[label_var]],
-        fill = {{fill}},
-        label = {{y}}
+        fill = {{fill_var}},
+        label = {{y_var}}
       ),
       size = 1.75,
-      colour = "#003560",
+      color = color,
       fill = "white",
       show.legend = FALSE,
       label.r = ggplot2::unit(0, "lines"),
@@ -162,74 +185,119 @@ rub_plot_typ_1 <- function(df, x, y, y_label = "",
     facet +
     ggplot2::scale_y_continuous(
       expand = c(0, 0),
-      labels = function(y)
+      labels = function(y_var)
         format(
-          {{y}},
+          {{y_var}},
           big.mark = ".",
           decimal.mark = ",",
           scientific = FALSE
         )
     ) +
-    RUB::scale_fill_rub(
+    scale_fill_rub(
       palette = palette,
       discrete = TRUE,
       name = NULL,
       label = fill_label_unique
     ) +
-    ggplot2::labs(y = y_label[1], caption = caption) +
-    RUB::rub_style() +
+    ggplot2::labs(
+      y = y_label[1],
+      caption = caption
+      ) +
+    rub_style(
+      font = font,
+      color = color,
+      facet_headings = !no_facet
+      ) +
     ggplot2::theme(
       axis.title.y = ggplot2::element_text(
         size = 12,
         hjust = 0.5,
-        family = "RubFlama",
-        color = "#003560"
+        family = font,
+        color = color
       )
     )
 }
 
-#' Zeichne gestapeltes Balkendiagramm als Anteile von 100 mit Facets (Abbildungstyp 2)
+#' Plot horizontal stacked bar charts that are scaled to 100\% (figure type 2)
 #'
-#' @param df Data Frame bzw. Tibble
-#' @param x x-Position des Balkens
-#' @param y y-Position des Balkens
-#' @param fill Gruppierungsvariable für das Stapeln der Säulen (z.B. Abschluss ID)
-#' @param fill_label Beschriftung für die einzelnen Werte der Gruppierungsvariablen (z.B. Abschluss DTXT)
-#' @param fill_reverse Boolean, ob die Reihenfolge der Gruppierungsvariable invertiert werden soll
-#' @param facet Name der Variable, die die Abbildung in Facets aufteilt
-#' @param caption Quellenangabe für die Abbildung (Präfix 'Quelle:' wird automatisch hinzugefügt)
-#' @param filter_cutoff Schwellwert, ab dem Datenlabels unterdrückt werden (als Bruchteil von 100)
+#' @param fill_reverse Boolean indicating whether the order of the fill variable
+#'     should be reversed, default = FALSE.
+#' @inheritParams rub_plot_typ_1
+#' @inheritParams rub_style
 #'
-#' @return Ein ggplot Objekt
+#' @return A ggplot object
 #' @export
 #'
 #' @examples
 #' rub_plot_typ_2(df = df_fig, x = variable_txt, y = value_percentage, fill = value_id, fill_label = value_txt, fill_reverse = df_fig[[1, "scale_invert_flag"]], facet = degree_id, caption = "Fuck You, Bitch!")
-rub_plot_typ_2 <- function(df, x, y,
-                           fill, fill_label, fill_reverse = FALSE, facet,
-                           caption = "", filter_cutoff = 0.04) {
+rub_plot_typ_2 <- function(df, x_var,
+                           y_var, fill_var,
+                           fill_label = NULL, fill_reverse = FALSE,
+                           facet_var = NULL, caption = "",
+                           filter_cutoff = 0.04, color = RUB_colors["blue"],
+                           font = "RubFlama") {
 
-  fill_unique <- unique(df[[rlang::ensym(fill)]])
-  fill_unique_length <- length(fill_unique)
-  palette <- paste0("discrete_", fill_unique_length)
-  fill_label <- unique(df[[rlang::ensym(fill_label)]])
-  label_var <- paste0("label_", rlang::quo_name(rlang::enquo(y)))
+  fill_var_sym <- rlang::ensym(fill_var)
+  fill_var_unique <- unique(df[[fill_var_sym]])
+  fill_var_n_distinct <- dplyr::n_distinct(df[[fill_var_sym]])
+  palette <- paste0("discrete_", fill_var_n_distinct)
+
+  fill_label_quo <- rlang::enquo(fill_label)
+  fill_label_null <- rlang::quo_is_null(fill_label_quo)
+
+  if(fill_label_null)  {
+    fill_label_sym <- rlang::ensym(fill_var)
+  } else  {
+    fill_label_sym <- rlang::ensym(fill_label)
+  }
+  fill_label_unique <- unique(df[[fill_label_sym]])
+
+  # Fill variable needs to be a factor before plotting
+  fill_is_factor <- is.factor(df[[fill_var_sym]])
+
+  if(!fill_is_factor) {
+    df <- set_factor_var(df, {{fill_var}}, fill_reverse)
+  }
+
+  # Fill labels need to be reversed if factor is reversed
+  if(fill_reverse)  {
+    fill_label_unique <- rev(fill_label_unique)
+  }
+
+  label_var <- paste0("label_", rlang::quo_name(rlang::enquo(y_var)))
   caption <- ifelse(caption[1] == "", "", paste("Quelle:", caption[1]))
 
-  df_label <- RUB::add_label_position_typ_2(
-    df, x = {{x}}, y = {{y}}, facet = {{facet}}
-  ) %>%
-    RUB::filter_label_typ_2(
-      x = {{x}}, y = {{y}}, facet = {{facet}}, filter_cutoff = filter_cutoff
+  df_label <- add_label_position_typ_2(
+    df,
+    x_var = {{x_var}},
+    y_var = {{y_var}},
+    facet_var = {{facet_var}},
+    filter_cutoff = filter_cutoff,
+    reverse = fill_reverse
+  )
+
+  facet_var <- rlang::enquo(facet_var)
+  no_facet <- rlang::quo_is_null(facet_var) # See https://rpubs.com/tjmahr/quo_is_missing
+
+  if(no_facet)  {
+    facet <- NULL
+  } else {
+    facet <- ggplot2::facet_wrap(
+      ggplot2::vars(
+        !!facet_var
+      ),
+      ncol = 1,
+      scales = "free_y"
     )
+  }
 
   ggplot2::ggplot() +
     ggplot2::geom_bar(
       data = df,
       ggplot2::aes(
-        x = {{x}},
-        y = {{y}},
-        fill = {{fill}}
+        x = {{x_var}},
+        y = {{y_var}},
+        fill = {{fill_var}}
       ),
       stat = "identity",
       width = 0.55
@@ -237,36 +305,45 @@ rub_plot_typ_2 <- function(df, x, y,
     ggplot2::geom_label(
       data = df_label,
       ggplot2::aes(
-        label = sprintf("%1.0f%%", {{y}} * 100),
-        x = {{x}},
+        label = sprintf(
+          "%1.0f%%",
+          {{y_var}} * 100
+          ),
+        x = {{x_var}},
         y = .data[[label_var]],
-        group = {{fill}}
+        group = {{fill_var}}
       ),
       size = 1.75,
-      colour = "#003560",
+      color = color,
       fill = "white",
       show.legend = FALSE,
       label.r = ggplot2::unit(0, "lines"),
       label.padding = ggplot2::unit(0.10, "lines")
     ) +
-    ggplot2::facet_wrap(
-      ggplot2::vars({{facet}}), ncol = 1) +
+    facet +
     ggplot2::scale_y_continuous(
       expand = c(0, 0),
       label = scales::percent
     ) +
-    RUB::scale_fill_rub(
+    scale_fill_rub(
       palette = palette,
       discrete = TRUE,
       name = NULL,
-      label = fill_label
+      label = fill_label_unique
     ) +
     ggplot2::guides(fill = ggplot2::guide_legend(
       reverse = fill_reverse,
-      byrow = TRUE)
+      byrow = TRUE
+      )
     ) +
-    ggplot2::labs(caption = caption) +
-    RUB::rub_style()
+    ggplot2::labs(
+      caption = caption
+      ) +
+    rub_style(
+      font = font,
+      color = color,
+      facet_headings = !no_facet
+    )
 }
 
 #'  Zeichne gestapeltes, rotiertes Balkendiagramm als Anteile von 100 mit Facets (Abbildungstyp 3)
@@ -298,7 +375,7 @@ rub_plot_typ_3 <- function(df, x, y,
   fill_label <- unique(df[[rlang::ensym(fill_label)]])
   caption <- ifelse(caption[1] == "", "", paste("Quelle:", caption[1]))
 
-  df_label <- RUB::add_label_position_typ_3(
+  df_label <- RUBer::add_label_position_typ_3(
     df,
     x = {{x}},
     y = {{y}},
@@ -306,7 +383,7 @@ rub_plot_typ_3 <- function(df, x, y,
     group = {{group}},
     fill_reverse = fill_reverse
   ) %>%
-    RUB::filter_label_typ_3(
+    RUBer::filter_label_typ_3(
       y = {{y}},
       filter_cutoff = filter_cutoff
     )
@@ -340,7 +417,7 @@ rub_plot_typ_3 <- function(df, x, y,
       scales = "free_y",
       space = "free"
     ) +
-    RUB::scale_fill_rub(
+    RUBer::scale_fill_rub(
       palette = palette,
       discrete = TRUE,
       name = NULL,
@@ -357,7 +434,7 @@ rub_plot_typ_3 <- function(df, x, y,
     ) +
     ggplot2::labs(caption = caption) +
     ggplot2::coord_flip() +
-    RUB::rub_style() +
+    RUBer::rub_style() +
     ggplot2::theme(
       axis.ticks.y = ggplot2::element_blank(),
       axis.line.y = ggplot2::element_blank()
@@ -405,7 +482,7 @@ rub_plot_typ_4 <- function(df, x, y, group, group_label, caption = "") {
       label.r = ggplot2::unit(0, "lines"),
       label.padding = ggplot2::unit(0.10, "lines")
     ) +
-    RUB::scale_color_rub(
+    RUBer::scale_color_rub(
       palette = "discrete_contrast",
       discrete = TRUE,
       name = NULL,
@@ -423,7 +500,7 @@ rub_plot_typ_4 <- function(df, x, y, group, group_label, caption = "") {
       limits = c(0, max_y) * 1.1
     ) +
     ggplot2::labs(caption = caption) +
-    RUB::rub_style()
+    RUBer::rub_style()
 }
 
 
@@ -439,11 +516,11 @@ rub_plot_typ_4 <- function(df, x, y, group, group_label, caption = "") {
 rub_plot_typ_1_and_4 <- function(df)  {
   plot <- df %>%
     dplyr::filter(figure_type_id == 1) %>%
-    RUB::plot_figure()
+    RUBer::plot_figure()
 
   plot_additions <- df %>%
     dplyr::filter(figure_type_id == 4) %>%
-    RUB::add_rub_plot_typ_4(
+    RUBer::add_rub_plot_typ_4(
       x = x,
       y = y,
       group = group,
@@ -510,7 +587,7 @@ add_rub_plot_typ_4 <- function(df, x, y, group, group_label) {
   )
 
   expr_list[[3]] <- rlang::quo(
-    RUB::scale_color_rub(
+    RUBer::scale_color_rub(
       palette = "discrete_contrast",
       discrete = TRUE,
       name = NULL,

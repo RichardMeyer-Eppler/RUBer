@@ -4,10 +4,20 @@
 \alias{rub_style}
 \title{Add RUB theme to ggplot chart}
 \usage{
-rub_style(font = "RubFlama")
+rub_style(
+  font = "RubFlama",
+  color = RUB_colors["blue"],
+  facet_headings = FALSE
+)
 }
 \arguments{
-\item{font}{Font for the ggplot theme, defaults to RubFlama}
+\item{font}{Font for the ggplot theme, defaults to RubFlama.}
+
+\item{color}{Color for font and borders, defaults to `RUB_colors["blue"]`,
+i.e. #003560.}
+
+\item{facet_headings}{Boolean indicating whether facet headings are required,
+defaults to FALSE.}
 }
 \description{
 This function allows you to add the RUB theme to your ggplot charts.

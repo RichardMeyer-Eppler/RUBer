@@ -4,9 +4,12 @@
 \alias{render_report}
 \title{Render report}
 \usage{
-render_report(p_df, report_nr,
+render_report(
+  p_df,
+  report_nr,
   rmd_template = here::here("datenreport_new.Rmd"),
-  date = format(Sys.Date(), format = "\%B \%Y"))
+  date = format(Sys.Date(), format = "\%B \%Y")
+)
 }
 \arguments{
 \item{p_df}{Data frame containing the data for all reports}

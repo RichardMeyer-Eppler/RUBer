@@ -2,35 +2,60 @@
 % Please edit documentation in R/rub_plot.R
 \name{rub_plot_typ_2}
 \alias{rub_plot_typ_2}
-\title{Zeichne gestapeltes Balkendiagramm als Anteile von 100 mit Facets (Abbildungstyp 2)}
+\title{Plot horizontal stacked bar charts that are scaled to 100\% (figure type 2)}
 \usage{
-rub_plot_typ_2(df, x, y, fill, fill_label, fill_reverse = FALSE, facet,
-  caption = "", filter_cutoff = 0.04)
+rub_plot_typ_2(
+  df,
+  x_var,
+  y_var,
+  fill_var,
+  fill_label = NULL,
+  fill_reverse = FALSE,
+  facet_var = NULL,
+  caption = "",
+  filter_cutoff = 0.04,
+  color = RUB_colors["blue"],
+  font = "RubFlama"
+)
 }
 \arguments{
-\item{df}{Data Frame bzw. Tibble}
+\item{df}{Data frame}
 
-\item{x}{x-Position des Balkens}
+\item{x_var}{Required variable name for the variable containing the discrete
+x-coordinates.}
 
-\item{y}{y-Position des Balkens}
+\item{y_var}{Required variable name for the variable containing the continuous
+y-coordinates.}
 
-\item{fill}{Gruppierungsvariable für das Stapeln der Säulen (z.B. Abschluss ID)}
+\item{fill_var}{Variable name for the discrete variable which determines the
+groups to be stacked, e.g. degree.}
 
-\item{fill_label}{Beschriftung für die einzelnen Werte der Gruppierungsvariablen (z.B. Abschluss DTXT)}
+\item{fill_label}{Optional variable name for the character variable
+containing the names of the fill variable, defaults to NULL.}
 
-\item{fill_reverse}{Boolean, ob die Reihenfolge der Gruppierungsvariable invertiert werden soll}
+\item{fill_reverse}{Boolean indicating whether the order of the fill variable
+should be reversed, default = FALSE.}
 
-\item{facet}{Name der Variable, die die Abbildung in Facets aufteilt}
+\item{facet_var}{Optional variable name for the discrete variable to facet
+by, defaults to NULL.}
 
-\item{caption}{Quellenangabe für die Abbildung (Präfix 'Quelle:' wird automatisch hinzugefügt)}
+\item{caption}{Optional character containing the data source for the figure
+(prefix 'Quelle:' is automatically added).}
 
-\item{filter_cutoff}{Schwellwert, ab dem Datenlabels unterdrückt werden (als Bruchteil von 100)}
+\item{filter_cutoff}{Optional cutoff value for the suppression of data
+labels. By default, all values below 0.04 of the total value of the
+stacked bar chart are suppressed.}
+
+\item{color}{Color for font and borders, defaults to `RUB_colors["blue"]`,
+i.e. #003560.}
+
+\item{font}{Font for the ggplot theme, defaults to RubFlama.}
 }
 \value{
-Ein ggplot Objekt
+A ggplot object
 }
 \description{
-Zeichne gestapeltes Balkendiagramm als Anteile von 100 mit Facets (Abbildungstyp 2)
+Plot horizontal stacked bar charts that are scaled to 100\% (figure type 2)
 }
 \examples{
 rub_plot_typ_2(df = df_fig, x = variable_txt, y = value_percentage, fill = value_id, fill_label = value_txt, fill_reverse = df_fig[[1, "scale_invert_flag"]], facet = degree_id, caption = "Fuck You, Bitch!")

@@ -4,61 +4,81 @@
 \alias{rub_plot_typ_1}
 \title{Plot vertical stacked bar chart (figure type 1)}
 \usage{
-rub_plot_typ_1(df, x, y, y_label = "", fill, fill_label = fill,
-  caption = "", filter_cutoff = 0.04, facet_var = NULL)
+rub_plot_typ_1(
+  df,
+  x_var,
+  y_var,
+  y_label = "",
+  fill_var,
+  fill_label = NULL,
+  caption = "",
+  filter_cutoff = 0.04,
+  facet_var = NULL,
+  color = RUB_colors["blue"],
+  font = "RubFlama"
+)
 }
 \arguments{
 \item{df}{Data frame}
 
-\item{x}{Required variable name for the variable containing the discrete
-x-coordinates}
+\item{x_var}{Required variable name for the variable containing the discrete
+x-coordinates.}
 
-\item{y}{Required variable name for the variable containing the continuous
-y-coordinates}
+\item{y_var}{Required variable name for the variable containing the continuous
+y-coordinates.}
 
 \item{y_label}{Optional label for the y-axis, defaults to an empty string.}
 
-\item{fill}{Variable name for the discrete variable which determines the
-groups to be stacked, e.g. degree}
+\item{fill_var}{Variable name for the discrete variable which determines the
+groups to be stacked, e.g. degree.}
 
 \item{fill_label}{Optional variable name for the character variable
-containing the names of the fill variable, defaults to fill.}
+containing the names of the fill variable, defaults to NULL.}
 
 \item{caption}{Optional character containing the data source for the figure
-(prefix 'Quelle:' is automatically added)}
+(prefix 'Quelle:' is automatically added).}
 
 \item{filter_cutoff}{Optional cutoff value for the suppression of data
 labels. By default, all values below 0.04 of the total value of the
 stacked bar chart are suppressed.}
 
-\item{facet_var}{Optional variable name to facet by, defaults to NULL.}
+\item{facet_var}{Optional variable name for the discrete variable to facet
+by, defaults to NULL.}
+
+\item{color}{Color for font and borders, defaults to `RUB_colors["blue"]`,
+i.e. #003560.}
+
+\item{font}{Font for the ggplot theme, defaults to RubFlama.}
 }
 \value{
 A ggplot object
 }
 \description{
-vertical stacked bar chart in the RUB corporate design. The variables x, y
-    and fill are mandatory, all others are optional.
+vertical stacked bar chart in the RUB corporate design. The variables x_var,
+y_var and fill_var are required, all others are optional.
 }
 \examples{
-df_type_1 <- tibble::tribble(
-~x, ~y, ~fill,
-"WiSe 13/14", 120, "Bachelor 1-Fach",
-"WiSe 14/15", 105, "Bachelor 1-Fach",
-"WiSe 15/16", 124, "Bachelor 1-Fach",
-"WiSe 16/17", 114, "Bachelor 1-Fach",
-"WiSe 17/18", 122, "Bachelor 1-Fach",
-"WiSe 13/14", 121, "Master 1-Fach",
-"WiSe 14/15", 129, "Master 1-Fach",
-"WiSe 15/16", 122, "Master 1-Fach",
-"WiSe 16/17", 168, "Master 1-Fach",
-"WiSe 17/18", 7, "Master 1-Fach",
+# Create test values for all three mandatory variables (x_var, y_var, fill_var).
+df_t1_ex1 <- tibble::tribble(
+~term, ~students, ~degree,
+"Spring '13", 120, "Bachelor 1-Subject",
+"Spring '14", 105, "Bachelor 1-Subject",
+"Spring '15", 124, "Bachelor 1-Subject",
+"Spring '16", 114, "Bachelor 1-Subject",
+ "Spring '17", 122, "Bachelor 1-Subject",
+ "Spring '13", 121, "Master 1-Subject",
+ "Spring '14", 129, "Master 1-Subject",
+ "Spring '15", 122, "Master 1-Subject",
+ "Spring '16", 168, "Master 1-Subject",
+ "Spring '17", 7, "Master 1-Subject",
 )
 
+# The data source is df_t1_ex1, x_var is mapped to term, y_var to students, and
+# the fill_var to degree.
 rub_plot_typ_1(
-  df = df_type_1,
-  x = x,
-  y = y,
-  fill = fill
+ df = df_t1_ex1,
+ x_var = term,
+ y_var = students,
+ fill_var = degree
 )
 }

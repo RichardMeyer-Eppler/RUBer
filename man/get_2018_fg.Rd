@@ -11,8 +11,6 @@ get_2018_fg(df)
 }
 \arguments{
 \item{df}{Data frame}
-
-\item{df}{Data frame}
 }
 \value{
 Data frame with all data for \code{report_id} "2018_FG"

@@ -33,7 +33,7 @@ Calculates the y-coordinates for horizontal stacked bar charts, centered for
 \examples{
 #' x <- c("WiSe 13/14", "WiSe 13/14", "WiSe 13/14", "WiSe 13/14")
 y <- c(1989, 58, 163, 470)
-fill <- c("Bachelor 2-Fächer", "Master 1-Fach", "Master 2-Fächer", "Master of Education")
+fill <- c("Bachelor 2-FÃ¤cher", "Master 1-Fach", "Master 2-FÃ¤cher", "Master of Education")
 filter_cutoff <- 0.05
 df <- get_label_position(df, x, y)
 ggplot2::ggplot() +

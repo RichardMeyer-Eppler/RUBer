@@ -1,34 +1,3 @@
-#' Add column \code{fgr_nrwbund_ltxt} to data frame
-#'
-#' @param df Data frame containing \code{fgr_nrwbund_id}
-#' @param df_orga Data frame containing \code{fgr_nrwbund_id} and \code{fgr_nrwbund_ltxt}
-#'
-#' @return Data frame with additional column \code{fgr_nrwbund_ltxt}
-#' @export
-#'
-#' @examples
-#' add_fgr_nrwbund_ltxt(df)
-add_fgr_nrwbund_ltxt <- function(df, df_orga) {
-  orga_fgr <- df_orga %>%
-    dplyr::distinct(
-      fgr_nrwbund_id,
-      fgr_nrwbund_ltxt
-    ) %>%
-    dplyr::mutate(
-      fgr_nrwbund_id = as.integer(
-        fgr_nrwbund_id
-      ))
-
-  df <- df %>%
-    dplyr::left_join(
-      orga_fgr,
-      by = c("fgr_nrwbund_id")
-    )
-
-  return(df)
-}
-
-
 #' Bind rows for \code{report_id} "2018_FG" to data frame
 #'
 #' @param df Data frame
@@ -285,72 +254,6 @@ get_map_parameters <- function(df) {
 
 #' Filtere Datenlabels anhand eines Schwellwerts
 #'
-#' Filtert in gestapelten Säulendiagrammen die Datenlabels.).
-#' @param df Dataframe bzw. Tibble
-#' @param x Name der Variable, die als x-Koordinate verwendet wird
-#' @param y Name der Variable, die als y-Koordinate verwendet wird
-#' @param filter_cutoff Schwellwert, ab dem Datenlabels unterdrückt werden (z.B. 0.05)
-#'
-#' @return Gefilterter Dataframe bzw. Tibble
-#' @export
-#'
-#' @examples
-#' x <- c("WiSe 13/14", "WiSe 13/14", "WiSe 13/14", "WiSe 13/14")
-#' y <- c(1989, 58, 163, 470)
-#' fill <- c("Bachelor 2-Fächer", "Master 1-Fach", "Master 2-Fächer", "Master of Education")
-#' filter_cutoff <- 0.05
-#' df <- filter_label_y(x, y, fill, y_label, filter_cutoff)
-#' ggplot2::ggplot() +
-#'   ggplot2::geom_bar(aes(x = x, y = y, fill = fill), stat = "identity") +
-#'   ggplot2::geom_label(data = df, aes(x = x, y = y_label, group = fill, label = y))
-filter_label <- function(df, x, y, filter_cutoff = 0.04) {
-  x <- rlang::enquo(x)
-  y <- rlang::enquo(y)
-  filter_cutoff <- rlang::enquo(filter_cutoff)
-
-  df <- df %>%
-    dplyr::group_by(!!x) %>%
-    dplyr::filter((!!y / sum(!!y) > !!filter_cutoff) == TRUE)
-
-  return(df)
-}
-
-#' Filtere Datenlabels anhand eines Schwellwerts
-#'
-#' Filtert in gestapelten Säulendiagrammen die Datenlabels.).
-#' @param df Dataframe bzw. Tibble
-#' @param x Name der Variable, die als x-Koordinate verwendet wird
-#' @param y Name der Variable, die als y-Koordinate verwendet wird
-#' @param facet Name der Variable, die die Abbildung in Facets aufteilt
-#' @param filter_cutoff Schwellwert, ab dem Datenlabels unterdrückt werden (z.B. 0.05)
-#'
-#' @return Gefilterter Dataframe bzw. Tibble
-#' @export
-#'
-#' @examples
-#' x <- c("WiSe 13/14", "WiSe 13/14", "WiSe 13/14", "WiSe 13/14")
-#' y <- c(1989, 58, 163, 470)
-#' fill <- c("Bachelor 2-Fächer", "Master 1-Fach", "Master 2-Fächer", "Master of Education")
-#' filter_cutoff <- 0.05
-#' df <- filter_label_y(x, y, fill, y_label, filter_cutoff)
-#' ggplot2::ggplot() +
-#'   ggplot2::geom_bar(aes(x = x, y = y, fill = fill), stat = "identity") +
-#'   ggplot2::geom_label(data = df, aes(x = x, y = y_label, group = fill, label = y))
-filter_label_typ_2 <- function(df, x, y, facet, filter_cutoff = 0.04) {
-  x <- rlang::enquo(x)
-  y <- rlang::enquo(y)
-  facet <- rlang::enquo(facet)
-  filter_cutoff <- rlang::enquo(filter_cutoff)
-
-  df <- df %>%
-    dplyr::group_by(!!x, !!facet) %>%
-    dplyr::filter((!!y / sum(!!y) > !!filter_cutoff) == TRUE)
-
-  return(df)
-}
-
-#' Filtere Datenlabels anhand eines Schwellwerts
-#'
 #' Filtert in gestapelten, rotierten Säulendiagrammen die Datenlabels.
 #' @param df Dataframe bzw. Tibble
 #' @param y Name der Variable, die als y-Koordinate verwendet wird
@@ -469,12 +372,12 @@ replace_cohort_data <- function(df, df_orga) {
 
   df <- dplyr::union(
     df,
-    RUB::get_cohort_data(
+    RUBer::get_cohort_data(
       df_orga
     )
   )
 
-  df <- RUB::sort_report(
+  df <- RUBer::sort_report(
     df
   )
 
@@ -548,16 +451,16 @@ read_cohort_data <- function()  {
 #' @examples
 #' get_cohort_data(df_orga)
 get_cohort_data <- function(df_orga)  {
-  df_cohort <- RUB::read_cohort_data()
-  df_cohort <- RUB::add_fgr_nrwbund_ltxt(df_cohort, df_orga)
-  df_cohort <- RUB::translate_df(df_cohort)
-  df_cohort_fg <- RUB::generate_cohort_data_2018_FG(df_cohort)
+  df_cohort <- RUBer::read_cohort_data()
+  df_cohort <- RUBer::add_fgr_nrwbund_ltxt(df_cohort, df_orga)
+  df_cohort <- RUBer::translate_df(df_cohort)
+  df_cohort_fg <- RUBer::generate_cohort_data_2018_FG(df_cohort)
   df_cohort <- dplyr::bind_rows(
     df_cohort,
     df_cohort_fg
   )
-  df_cohort <- RUB::update_cohort_axis_label(df_cohort)
-  df_cohort <- RUB::sort_report(df_cohort)
+  df_cohort <- RUBer::update_cohort_axis_label(df_cohort)
+  df_cohort <- RUBer::sort_report(df_cohort)
 
   return(df_cohort)
 }
@@ -752,6 +655,29 @@ set_factors <- function(df) {
 
   if(df[[1, "figure_type_id"]] == 3)  {
     df$x <- forcats::fct_rev(df$x)
+  }
+
+  return(df)
+}
+
+#' Turns a data frame column into a factor
+#'
+#' @param df Data frame
+#' @param var Variable name for the discrete variable to be turned into a factor
+#' @param reverse Whether the order of the factor should be reverted, defaults
+#'     to FALSE.
+#'
+#' @return Data frame with factor column.
+#' @export
+#'
+#' @examples
+#' set_factor_var(df, var, TRUE)
+set_factor_var <- function(df, var, reverse = FALSE)  {
+  var <- rlang::ensym(var)
+  df[[var]] <- factor(df[[var]], levels = unique(df[[var]]))
+
+  if (reverse) {
+    df[[var]] <- forcats::fct_rev(df[[var]])
   }
 
   return(df)

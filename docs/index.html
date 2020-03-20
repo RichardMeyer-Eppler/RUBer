@@ -14,8 +14,9 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Parameterized Microsoft Word reports in the RUB corporate
     design">
 <meta property="og:description" content="RUBer is an R package created for parameterized reporting according
@@ -32,7 +33,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-article">
+    <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -52,7 +53,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -81,7 +82,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/RichardMeyer-Eppler/RUBer">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -94,16 +95,12 @@
 <!--/.navbar -->
 
       
-      </header><div class="row">
-  <div class="col-md-9 contents">
-    
 
-    
-    
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-<div id="ruber" class="section level1">
+      </header><div class="row">
+  <div class="contents col-md-9">
+<div id="ruber-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#ruber" class="anchor"></a>RUBer <a href="https://richardmeyer-eppler.github.io/RUBer/"><img src="reference/figures/logo.png" align="right" height="139"></a>
+<a href="#ruber-" class="anchor"></a>RUBer <a href="https://richardmeyer-eppler.github.io/RUBer/"><img src="reference/figures/logo.png" align="right" height="139"></a>
 </h1></div>
 <!-- badges: start -->
 
@@ -116,7 +113,7 @@
 <h2 class="hasAnchor">
 <a href="#main-features" class="anchor"></a>Main features</h2>
 <ul>
-<li>An R Markdown template for use with <code><a href="https://www.rdocumentation.org/packages/rmarkdown/topics/draft">rmarkdown::draft</a></code>. The template uses <code><a href="https://www.rdocumentation.org/packages/knitr/topics/knit_expand">knitr::knit_expand()</a></code> to dynamically create code chunks containing figures, captions and subcaptions based on the data frame passed on as a parameter. Figure captions are automatically numbered via <code>bookdown</code> and a table of figures is inserted via <code>officedown</code>.</li>
+<li>An R Markdown template for use with <code><a href="https://rdrr.io/pkg/rmarkdown/man/draft.html">rmarkdown::draft</a></code>. The template uses <code><a href="https://rdrr.io/pkg/knitr/man/knit_expand.html">knitr::knit_expand()</a></code> to dynamically create code chunks containing figures, captions and subcaptions based on the data frame passed on as a parameter. Figure captions are automatically numbered via <code>bookdown</code> and a table of figures is inserted via <code>officedown</code>.</li>
 <li>Vectorized figures in Microsoft’s Enhanced Metafile format using the <code>devEMF</code> package.</li>
 <li>Five preconfigured <code>ggplot2</code> plotting functions.</li>
 <li>A custom <code>ggplot2</code> theme.</li>
@@ -131,7 +128,7 @@
 <div id="guiding-design-principles" class="section level2">
 <h2 class="hasAnchor">
 <a href="#guiding-design-principles" class="anchor"></a>Guiding design principles</h2>
-<ol style="list-style-type: decimal">
+<ol>
 <li>Output format for the paramterized reporting is Microsoft Word, so that the reports can be shared and edited as widely as possible.</li>
 <li>The generated reports adhere to the RUB corporate design and are ready for printing as is, with no further adjustments to layout or content required.</li>
 <li>As far as possible, the data manipulation is done independently of all the reporting steps. The idea is that the data passed to the R Markdown template can come from any source, not just R. While the data wrangling for the 2018 reports <em>was</em> done in R, this is not a requirement. If there is a need to create or alter datasets using Microsoft Excel, it is possible to use these datasets as basis for all reporting functions of <code>RUBer</code>.</li>
@@ -147,7 +144,7 @@
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Install the development version from GitHub with:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># install.packages("remotes")</span></a>
-<a class="sourceLine" id="cb1-2" title="2">remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"RUBer"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb1-2" title="2">remotes<span class="op">::</span><span class="kw"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"RUBer"</span>)</a></code></pre></div>
 </div>
 </div>
   </div>
@@ -173,7 +170,7 @@
 </ul>
 </div>
 
-      <div class="dev-status">
+  <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
@@ -181,7 +178,6 @@
 </ul>
 </div>
 </div>
-
 </div>
 
 
@@ -190,12 +186,14 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

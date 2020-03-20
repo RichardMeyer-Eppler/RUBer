@@ -70,7 +70,7 @@ get_file_name <- function(param_list) {
     )
   }
 
-  file_name <- RUB::clean_file_name(file_name)
+  file_name <- RUBer::clean_file_name(file_name)
   file_name <- paste0(file_name, ".docx")
 
   return(file_name)
@@ -147,11 +147,11 @@ get_title <- function(report_nr) {
 render_report <- function(p_df, report_nr,
                           rmd_template = here::here("datenreport_new.Rmd"),
                           date = format(Sys.Date(), format= "%B %Y")) {
-  df <- RUB::filter_report(p_df, report_nr)
+  df <- RUBer::filter_report(p_df, report_nr)
   title <- df[[1, "report_title"]]
   author <- df[[1, "report_author"]]
   file_name <- df[[1, "file_name"]]
-  file_path <- RUB::get_file_path(file_name)
+  file_path <- RUBer::get_file_path(file_name)
 
   rmarkdown::render(rmd_template, params = list(
     p_title = title,
