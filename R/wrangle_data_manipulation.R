@@ -1,19 +1,3 @@
-#' Bind rows for \code{report_id} "2018_FG" to data frame
-#'
-#' @param df Data frame
-#'
-#' @return Data frame with additional rows for \code{report_id} "2018_FG"
-#' @export
-#'
-#' @examples
-#' add_2018_fg(df)
-bind_2018_fg <- function(df) {
-  df <- dplyr::union(
-    df,
-    get_2018_fg(df)
-  )
-}
-
 #' Fixes data errors in report numbers 42, 43, 61 and 62.
 #'
 #' @param df
@@ -62,161 +46,6 @@ fix_data_errors <- function(df) {
   return(df)
 }
 
-
-
-#' Get data frame with generated data for \code{report_id} "2018_FG"
-#'
-#' @param df Data frame
-#'
-#' @return Data frame with all data for \code{report_id} "2018_FG"
-#' @export
-#'
-#' @examples
-#' get_2018_fg(df)
-get_2018_fg <- function(df) {
-  pattern_sg <- c(
-    "Humanmedizin / Gesundheitswissenschaften" = "Humanmedizin,\nGesundheitswissenschaften"
-    ,"Mathematik, Naturwissenschaften" = "Mathematik, \nNaturwissenschaften"
-    ,"Rechts-, Wirtschafts- und Sozialwissenschaften" = "Rechts-, Wirtschafts- und\nSozialwissenschaften"
-  )
-  pattern_var <- "\\([^()]+\\)" ## Inhalt in runden Klammern
-
-  df <- df %>%
-    dplyr::filter(
-      is.na(
-        report_nr
-      )) %>%
-    dplyr::filter(
-      report_id != "2018_M_ED"
-    ) %>%
-    dplyr::filter(
-      figure_id %in% c(1:58)
-    ) %>%
-    dplyr::filter(
-      value_n_total != 0
-    ) %>%
-    dplyr::mutate(
-      report_id = "2018_FG",
-      report_nr = 64,
-      figure_sort = dplyr::if_else(
-        figure_id < 5,
-        as.integer(
-          figure_id
-        ),
-        as.integer(
-          figure_id + 5
-        )),
-      subject_group_txt_tmp = stringr::str_replace_all(
-        subject_group_txt,
-        pattern_sg
-      ),
-      axis_label = as.character(
-        glue::glue(
-          "{subject_group_txt_tmp} (n={value_n_total})"
-        ))) %>%
-    dplyr::select(
-      -subject_group_txt_tmp
-    ) %>%
-    dplyr::group_by(
-      figure_id
-    ) %>%
-    dplyr::mutate(variable_txt = dplyr::if_else(
-      figure_id %in% c(3, 5, 6),
-      stringr::str_replace(
-        variable_txt,
-        pattern = pattern_var,
-        replacement = as.character(
-          stringr::str_glue(
-            "({degree_txt})"
-          ))),
-      as.character(
-        stringr::str_glue(
-          "{variable_txt} ({degree_txt})"
-        )))) %>%
-    dplyr::ungroup() %>%
-    dplyr::distinct()
-
-  return(df)
-}
-
-#' Get figure caption
-#'
-#' @param df Dataframe bzw. Tibble
-#'
-#' @return Caption as character
-#' @export
-#'
-#' @examples
-#' get_figure_caption(df)
-get_figure_caption <- function(param_list) {
-  txt <- param_list[["figure_txt"]]
-
-  fig_type_id <- param_list[["figure_type_id"]]
-  fig_id <- param_list[["figure_id"]]
-  dg_txt <- param_list[["degree_group_txt"]]
-  sa_txt <- param_list[["subject_area_txt"]]
-  sg_txt <- param_list[["subject_group_txt"]]
-  rep_id <- param_list[["report_id"]]
-
-  txt_paranthesis <- if (fig_type_id == 1 |
-                         fig_type_id == 4 |
-                         fig_id %in% c(2,3,5,6)) {
-    NULL
-  } else if (fig_type_id == 2L &
-             fig_id == 4L &
-             rep_id == "2018_M_ED") {
-    sa_txt
-  } else if (fig_type_id == 2L &
-             fig_id == 4L &
-             rep_id == "2018_FG"
-  ) {
-    paste(sg_txt, dg_txt, sep = ", ")
-  } else {
-    dg_txt
-  }
-
-  txt_paranthesis <- if (!is.null(txt_paranthesis)) {
-    paste0(" (", txt_paranthesis, ")")
-  }
-
-  caption <- paste0(txt, txt_paranthesis)
-
-  return(caption)
-}
-
-#' Get figure height
-#'
-#' @param param_list Data frame
-#' @param lower_bound Minimum height (default = 2.25)
-#' @param upper_bound Maximum height (default = 9.6)
-#'
-#' @return Figure height in inches
-#' @export
-#'
-#' @examples
-#' get_figure_height(param_list)
-get_figure_height <- function(param_list, lower_bound = 2, upper_bound = 9.6) {
-  figure_type_id <- param_list[["figure_type_id"]]
-  facet_count <- param_list[["facet_count"]]
-  x_facet_count <- param_list[["x_facet_count"]]
-
-  if(figure_type_id == 2)  {
-    x_facet_count <- 5 * facet_count
-  }
-
-  figure_height <- (x_facet_count * 0.75) + (facet_count * 0.15)
-
-  if (figure_height > upper_bound) {
-    figure_height <- upper_bound
-  }
-
-  else if (figure_height < lower_bound) {
-    figure_height <- lower_bound
-  }
-
-  return(figure_height)
-}
-
 #' Get function calls and parameters for use of purrr::map
 #'
 #' @param df Dataframe bzw. Tibble
@@ -252,35 +81,6 @@ get_map_parameters <- function(df) {
   return(map_parameters)
 }
 
-#' Filtere Datenlabels anhand eines Schwellwerts
-#'
-#' Filtert in gestapelten, rotierten Säulendiagrammen die Datenlabels.
-#' @param df Dataframe bzw. Tibble
-#' @param y Name der Variable, die als y-Koordinate verwendet wird
-#' @param filter_cutoff Schwellwert, ab dem Datenlabels unterdrückt werden (z.B. 0.05)
-#'
-#' @return Gefilterter Dataframe bzw. Tibble
-#' @export
-#'
-#' @examples
-#' x <- c("WiSe 13/14", "WiSe 13/14", "WiSe 13/14", "WiSe 13/14")
-#' y <- c(1989, 58, 163, 470)
-#' fill <- c("Bachelor 2-Fächer", "Master 1-Fach", "Master 2-Fächer", "Master of Education")
-#' filter_cutoff <- 0.05
-#' df <- filter_label_y(x, y, fill, y_label, filter_cutoff)
-#' ggplot2::ggplot() +
-#'   ggplot2::geom_bar(aes(x = x, y = y, fill = fill), stat = "identity") +
-#'   ggplot2::geom_label(data = df, aes(x = x, y = y_label, group = fill, label = y))
-filter_label_typ_3 <- function(df, y, filter_cutoff = 0.04) {
-  y <- rlang::enquo(y)
-  filter_cutoff <- rlang::enquo(filter_cutoff)
-
-  df <- df %>%
-    dplyr::filter(!! y > !!filter_cutoff)
-
-  return(df)
-}
-
 #' Generiert für die Abbildungstypen 1-4 Variablen für die Ploterstellung
 #'
 #' @param df Dataframe bzw. Tibble
@@ -293,38 +93,39 @@ filter_label_typ_3 <- function(df, y, filter_cutoff = 0.04) {
 mutate_plot_variables <- function(df) {
   df <- df %>%
     dplyr::mutate(x = dplyr::case_when(
-      figure_type_id %in% c(1, 4) ~ time,
-      figure_type_id == 2 ~ variable_txt,
-      figure_type_id == 3 ~ axis_label
+      figure_type_id %in% c(1L, 4L) ~ time,
+      figure_type_id == 2L ~ variable_txt,
+      figure_type_id == 3L ~ as.character(value_percentage)
     )) %>%
     dplyr::mutate(y = dplyr::case_when(
-      figure_type_id %in% c(1, 4) ~ as.double(value_n_total),
-      figure_type_id %in% c(2, 3) ~ as.double(value_percentage)
+      figure_type_id %in% c(1L, 4L) ~ as.character(value_n_total),
+      figure_type_id == 2L ~ as.character(value_percentage),
+      figure_type_id == 3L ~ axis_label
     )) %>%
     dplyr::mutate(y_label = dplyr::case_when(
-      figure_type_id %in% c(1, 4) ~ axis_label,
+      figure_type_id %in% c(1L, 4L) ~ axis_label,
     )) %>%
     dplyr::mutate(fill = dplyr::case_when(
-      figure_type_id == 1 ~ degree_sort,
-      figure_type_id %in% c(2, 3) ~ value_id
+      figure_type_id == 1L ~ degree_sort,
+      figure_type_id %in% c(2L, 3L) ~ value_id
     )) %>%
     dplyr::mutate(fill_label = dplyr::case_when(
-      figure_type_id == 1 ~ degree_txt,
-      figure_type_id %in% c(2, 3) ~ value_txt
+      figure_type_id == 1L ~ degree_txt,
+      figure_type_id %in% c(2L, 3L) ~ value_txt
     )) %>%
     dplyr::mutate(fill_reverse = dplyr::case_when(
       is.na(scale_invert_flag) ~ FALSE,
       TRUE ~ scale_invert_flag
     )) %>%
     dplyr::mutate(facet = dplyr::case_when(
-      figure_type_id == 2 ~ axis_label,
-      figure_type_id == 3 ~ variable_txt
+      figure_type_id == 2L ~ axis_label,
+      figure_type_id == 3L ~ variable_txt
     )) %>%
     dplyr::mutate(group = dplyr::case_when(
-      figure_type_id %in% c(3, 4) ~ degree_id
+      figure_type_id %in% c(3L, 4L) ~ degree_id
     )) %>%
     dplyr::mutate(group_label = dplyr::case_when(
-      figure_type_id == 4 ~ degree_txt
+      figure_type_id == 4L ~ degree_txt
     )) %>%
     dplyr::select(
       report_nr,

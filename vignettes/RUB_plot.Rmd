@@ -59,7 +59,7 @@ df_t1_ex1 <- tibble::tribble(
 
 # The data source is df_t1_ex1, x_var is mapped to term, y_var to students, and
 # the fill_var to degree.
-rub_plot_typ_1(
+rub_plot_type_1(
   df = df_t1_ex1,
   x_var = term,
   y_var = students,
@@ -69,13 +69,16 @@ rub_plot_typ_1(
 
 Next a more complex example, in which we additionally provide the label
 for the y-axis, `y_label` and a caption indicating the source of the data, 
-`caption`. We also want to suppress the value label for Master students in the
-spring term 2017, because the value is so small. By default, labels
-for values accounting for less than 4% of the total value are suppressed. In
-this case, the seven students account for 7/(7+122) = 5.4% of the total value,
-so we increase the value for `filter_cutoff` from the default of 0.04 to 0.06.
+`caption`. By default, the caption has the prefix "*Quelle:*", which we change 
+from German to English using the parameter `caption_preifx`. We also want to 
+suppress the value label for Master students in the spring term 2017, because 
+the value is so small. By default, labels for values accounting for less than 4% 
+of the total value are suppressed. In this case, the seven students account for 
+7/(7+122) = 5.4% of the total value, so we increase the value for `filter_cutoff`
+from the default of 0.04 to 0.06.
 
 ```{r type-1-example-2}
+# Create test values for all three mandatory variables (x_var, y_var, fill_var).
 df_t1_ex2 <- tibble::tribble(
    ~term, ~students, ~degree,
    "Spring '13", 120, "Bachelor 1-Subject",
@@ -92,23 +95,27 @@ df_t1_ex2 <- tibble::tribble(
 
 # Set values for parameters setting the y-axis title, captioning the source data
 # and filtering small value labels (all labels below 6% of the stacked total).
-rub_plot_typ_1(
+rub_plot_type_1(
   df = df_t1_ex2,
   x_var = term,
   y_var = students,
   fill_var = degree,
   y_label = "Students (1st degree program, 1st and 2nd field of study)",
   caption = "Information management system of the University of Bochum",
+  caption_prefix = "Source:",
   filter_cutoff = 0.06
 )
 ```
 
 The third example adds even more parameters. You can facet the figure by a
-discrete variable in order to make direct comparisons between groups, e.g.
-different departments. You can also change the default color and font used in 
-figures (see the documentation for `RUBer::rub_style()`).
+discrete variable, `facet_var`, in order to make direct comparisons between 
+groups, e.g. different departments. You can also change a figure's default color
+with `color` and the default font with `font` (see the documentation for 
+`RUBer::rub_style()`).
 
 ```{r type-1-example-3}
+# Create test values for all three mandatory variables (x_var, y_var, fill_var)
+# and the optional facet variable (facet_var).
 df_t1_ex3 <- tibble::tribble(
    ~term, ~students, ~degree, ~department, 
    "Spring '13", 120, "Bachelor 1-Subject", "Department of Mathematics and Statistics",
@@ -136,13 +143,14 @@ df_t1_ex3 <- tibble::tribble(
 # Facet by department, which effectively leads to two plots in one figure. The
 # default font is changed to RUB Scala TZ and the main color is changed from
 # RUB blue to dark red.
-rub_plot_typ_1(
+rub_plot_type_1(
   df = df_t1_ex3,
   x_var = term,
   y_var = students,
   fill_var = degree,
   y_label = "Students (1st degree program, 1st and 2nd field of study)",
   caption = "Information management system of the University of Bochum",
+  caption_prefix = "Source:",
   filter_cutoff = 0.06,
   facet_var = department,
   color = RUB_colors["dark red"],
@@ -151,8 +159,55 @@ rub_plot_typ_1(
 ```
 
 ## Figure Type 2 - Vertical stacked bar charts scaled to 100%
+Figure type 2 is very similar to type 1. The main differences are that the
+y-axis uses a percentage scale rather than an absolute one and that all stacked
+bars are scaled to 100%. Like for figure type 1, three variable names are 
+mandatory: `x_var` for the x-coordinate, `y_var` for the y-coordinate and 
+`fill_var` for the fill variable, which determines the groups to be stacked.
+
 ```{r type-2-example-1}
+# Create test values for all three mandatory variables (x_var, y_var, fill_var)
 df_t2_ex1 <- tibble::tribble(
+   ~cohort_term, ~status_percentage, ~cohort_status, 
+   "2. cohort term", 0.9513551740, "Studying",
+   "2. cohort term", 0.0029748098, "Changed subject",
+   "2. cohort term", 0.0004673679, "Graduated",
+   "2. cohort term", 0.0186648938, "Disenrolled without degree",
+   "2. cohort term", 0.0265377545, "Dropped subject",
+   "4. cohort term", 0.8896149868, "Studying",
+   "4. cohort term", 0.0616919929, "Changed subject",
+   "4. cohort term", 0.0016484686, "Graduated",
+   "4. cohort term", 0.0201024499, "Disenrolled without degree",
+   "4. cohort term", 0.0269421019, "Dropped subject",
+   "6. cohort term", 0.7901183540, "Studying",
+   "6. cohort term", 0.1502641318, "Changed subject",
+   "6. cohort term", 0.0074548056, "Graduated",
+   "6. cohort term", 0.0243490259, "Disenrolled without degree",
+   "6. cohort term", 0.0278136827, "Dropped subject",
+   "8. cohort term", 0.6115873010, "Studying",
+   "8. cohort term", 0.2961468339, "Changed subject",
+   "8. cohort term", 0.0104080044, "Graduated",
+   "8. cohort term", 0.0274549015, "Disenrolled without degree",
+   "8. cohort term", 0.0544029593, "Dropped subject",
+)
+
+rub_plot_type_2(
+  df = df_t2_ex1,
+  x_var = cohort_term,
+  y_var = status_percentage,
+  fill_var = cohort_status
+) 
+```
+
+Now let us say we are unhappy with the default ordering of the stacked bars,
+because we want the largest cohort group, those still studying, on the bottom.
+We can use the boolean parameter `fill_reverse` to do just that. We also provide
+a discrete facetting variable, `facet_var`, a text for `caption` and 
+`caption_prefix` a lower threshhold for the `filter_cutoff`, leading to more 
+labels being displayed.
+
+```{r type-2-example-2}
+df_t2_ex2 <- tibble::tribble(
    ~cohort_term, ~status_percentage, ~cohort_status, ~cohort_label, 
    "2. cohort term", 0.9513551740, "Studying", "Bachelor 1-Subject: Starting cohort fall 2011 (n=222)",
    "2. cohort term", 0.0029748098, "Changed subject", "Bachelor 1-Subject: Starting cohort fall 2011 (n=222)",
@@ -174,27 +229,112 @@ df_t2_ex1 <- tibble::tribble(
    "8. cohort term", 0.0104080044, "Graduated", "Bachelor 1-Subject: Starting cohort fall 2011 (n=222)",
    "8. cohort term", 0.0274549015, "Disenrolled without degree", "Bachelor 1-Subject: Starting cohort fall 2011 (n=222)",
    "8. cohort term", 0.0544029593, "Dropped subject", "Bachelor 1-Subject: Starting cohort fall 2011 (n=222)",
+   "2. cohort term", 0.769899396, "Studying", "Bachelor 1-Subject: Starting cohort fall 2012 (n=240)",
+   "2. cohort term", 0.173399178, "Changed subject", "Bachelor 1-Subject: Starting cohort fall 2012 (n=240)",
+   "2. cohort term", 0.034702328, "Graduated", "Bachelor 1-Subject: Starting cohort fall 2012 (n=240)",
+   "2. cohort term", 0.006062833, "Disenrolled without degree", "Bachelor 1-Subject: Starting cohort fall 2012 (n=240)",
+   "2. cohort term", 0.015936266, "Dropped subject", "Bachelor 1-Subject: Starting cohort fall 2012 (n=240)",
+   "4. cohort term", 0.769421630, "Studying", "Bachelor 1-Subject: Starting cohort fall 2012 (n=240)",
+   "4. cohort term", 0.173700319, "Changed subject", "Bachelor 1-Subject: Starting cohort fall 2012 (n=240)",
+   "4. cohort term", 0.034742910, "Graduated", "Bachelor 1-Subject: Starting cohort fall 2012 (n=240)",
+   "4. cohort term", 0.006156721, "Disenrolled without degree", "Bachelor 1-Subject: Starting cohort fall 2012 (n=240)",
+   "4. cohort term", 0.015978420, "Dropped subject", "Bachelor 1-Subject: Starting cohort fall 2012 (n=240)",
+   "6. cohort term", 0.667217426, "Studying", "Bachelor 1-Subject: Starting cohort fall 2012 (n=240)",
+   "6. cohort term", 0.228271544, "Changed subject", "Bachelor 1-Subject: Starting cohort fall 2012 (n=240)",
+   "6. cohort term", 0.065634578, "Graduated", "Bachelor 1-Subject: Starting cohort fall 2012 (n=240)",
+   "6. cohort term", 0.010729695, "Disenrolled without degree", "Bachelor 1-Subject: Starting cohort fall 2012 (n=240)",
+   "6. cohort term", 0.028146757, "Dropped subject", "Bachelor 1-Subject: Starting cohort fall 2012 (n=240)",
+   "8. cohort term", 0.511075289, "Studying", "Bachelor 1-Subject: Starting cohort fall 2012 (n=240)",
+   "8. cohort term", 0.353166732, "Changed subject", "Bachelor 1-Subject: Starting cohort fall 2012 (n=240)",
+   "8. cohort term", 0.073315208, "Graduated", "Bachelor 1-Subject: Starting cohort fall 2012 (n=240)",
+   "8. cohort term", 0.026374195, "Disenrolled without degree", "Bachelor 1-Subject: Starting cohort fall 2012 (n=240)",
+   "8. cohort term", 0.036068576, "Dropped subject", "Bachelor 1-Subject: Starting cohort fall 2012 (n=240)",
 )
 
-rub_plot_typ_2(
-  df = df_t2_ex1,
+rub_plot_type_2(
+  df = df_t2_ex2,
   x_var = cohort_term,
   y_var = status_percentage,
   fill_var = cohort_status,
+  fill_reverse = TRUE,
   facet_var = cohort_label,
-  fill_reverse = TRUE
-) 
+  filter_cutoff = 0.03,
+  caption = "Comparison of two fictitious cohorts",
+  caption_prefix = "Source:"
+)
+```
+
+## Figure Type 3 - Horizontal stacked bar charts scaled to 100%
+Figure type 3 is very similar to figure type 2, with the exception that the
+stacked bar charts are plotted horizontally. As with the first two figure types,
+three variable names are mandatory: `x_var` for the x-coordinate, `y_var` for 
+the y-coordinate and `fill_var` for the fill variable, which determines the 
+groups to be stacked.
+
+```{r type-3-example-1}
+# Create test values for all three mandatory variables (x_var, y_var, fill_var)
+df_t3_ex1 <- tibble::tribble(
+   ~survey_group, ~item_value, ~item_value_percentage,
+   "Bachelor 1-Subject (n=400)", "Exceeded prescribed period of study", 0.3070448,
+   "Bachelor 1-Subject (n=400)", "Within prescribed period of study", 0.6929552,
+   "SG Bachelor 1-Subject (n=669)", "Exceeded prescribed period of study", 0.1122486,
+   "SG Bachelor 1-Subject (n=669)", "Within prescribed period of study", 0.8877514
+)
+
+rub_plot_type_3(
+   df = df_t3_ex1,
+   x_var = item_value_percentage,
+   y_var = survey_group,
+   fill_var = item_value,
+)
+```
+
+The second example once again adds a facetting variable, `fill_var`, for 
+plotting direct comparisons between groups. We also use `caption`,
+`caption_prefix` and a `filter_cutoff` that suppresses all values below 20%.
+
+```{r type-3-example-2}
+df_t3_ex2 <- tibble::tribble(
+   ~survey_group, ~item_value, ~item_value_percentage, ~degree,
+   "Bachelor 1-Subject (n=400)", "Exceeded prescribed period of study", 0.3070448, "Bachelor 1-Subject",
+   "Bachelor 1-Subject (n=400)", "Within prescribed period of study", 0.6929552, "Bachelor 1-Subject",
+   "SG Bachelor 1-Subject (n=726)", "Exceeded prescribed period of study", 0.1122486, "Bachelor 1-Subject",
+   "SG Bachelor 1-Subject (n=726)", "Within prescribed period of study", 0.8877514, "Bachelor 1-Subject",
+   "Master 1-Subject (n=369)", "Exceeded prescribed period of study", 0.1416009, "Master 1-Subject",
+   "Master 1-Subject (n=369)", "Within prescribed period of study", 0.8583991, "Master 1-Subject",
+   "SG Master 1-Subject (n=669)", "Exceeded prescribed period of study", 0.4417682, "Master 1-Subject",
+   "SG Master 1-Subject (n=669)", "Within prescribed period of study", 0.5582318, "Master 1-Subject"
+)
+
+rub_plot_type_3(
+   df = df_t3_ex2,
+   x_var = item_value_percentage,
+   y_var = survey_group,
+   fill_var = item_value,
+   facet_var = degree,
+   caption = "Graduate survey 2017/18",
+   caption_prefix = "Source:",
+   filter_cutoff = 0.20
+)
 ```
 
 
 
+```{r dev-chunck, eval = FALSE}
+debugonce()
+traceback()
+
+devtools::load_all()
+devtools::document()
+```
+
 
 # For experienced ggplot2 users
-## The RUB Theme
+## Applying the RUB Theme
 ## Scale Functions
 
 # Further Reading
-[BBC - bbplot package](https://github.com/bbc/bbplot)
-[BBC Visual and Data Journalism cookbook for R graphics](https://bbc.github.io/rcookbook/)
-[Dewey Dunnington at rstudio::conf 2020 - Best practices for programming with ggplot2](https://resources.rstudio.com/rstudio-conf-2020/best-practices-for-programming-with-ggplot2-dewey-dunnington)
-[gglot 2 vignette - Using ggplot2 in packages](https://ggplot2.tidyverse.org/dev/articles/ggplot2-in-packages.html)
+* [BBC - bbplot package](https://github.com/bbc/bbplot)
+* [BBC Visual and Data Journalism cookbook for R graphics](https://bbc.github.io/rcookbook/)
+* [Dewey Dunnington at rstudio::conf 2020 - Best practices for programming with ggplot2](https://resources.rstudio.com/rstudio-conf-2020/best-practices-for-programming-with-ggplot2-dewey-dunnington)
+* [gglot 2 vignette - Using ggplot2 in packages](https://ggplot2.tidyverse.org/dev/articles/ggplot2-in-packages.html)

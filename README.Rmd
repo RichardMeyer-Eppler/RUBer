@@ -47,6 +47,9 @@ Every three years, the teaching and program quality of all degree programs at th
 Install the development version from GitHub with:
 
 ```{r installation, eval = FALSE}
+# If package "remotes" is not installed, install this first:
 # install.packages("remotes")
+
+# Install RUBer from Github:
 remotes::install_github("RUBer")
 ```

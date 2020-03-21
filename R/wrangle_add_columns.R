@@ -272,83 +272,23 @@ add_file_name <- function(df) {
   return(df)
 }
 
-#' Add centered y-coordinates for filtered data labels of vertical stacked bar
-#' charts
+#' Add centered y-coordinates for filtered data labels of figure types 1 and 2
 #'
-#' Calculates the y-coordinates for vertical stacked bar charts, centered for
+#' Calculates the y-coordinates for stacked bar charts, centered for
 #'    each group. The default function does not work if some labels are
 #'    filtered.
 #'
-#' @inheritParams rub_plot_typ_1
+#' @inheritParams rub_plot_type_2
 #'
 #' @return Data frame with additional column "label_" + the name of the
 #'    y-coordinate variable
 #' @export
 #'
 #' @examples
-#' x <- c("WiSe 13/14", "WiSe 13/14", "WiSe 13/14", "WiSe 13/14")
-#' y <- c(1989, 58, 163, 470)
-#' fill <- c("Bachelor 2-Fächer", "Master 1-Fach", "Master 2-Fächer", "Master of Education")
-#' filter_cutoff <- 0.05
-#' df <- add_label_position_typ_1(df, x_var, y_var)
-add_label_position_typ_1 <- function(df, x_var, y_var, facet_var,
-                                     filter_cutoff = 0.04) {
-  no_facet <- rlang::quo_is_null(
-    rlang::enquo(
-      facet_var
-      )
-    )
-
-  if(no_facet) {
-    group_vars <- dplyr::vars(
-      rlang::ensym(x_var)
-    )
-  } else {
-    group_vars <- dplyr::vars(
-      rlang::ensym(x_var),
-      rlang::ensym(facet_var)
-    )
-  }
-
-  y_var <- rlang::enquo(y_var)
-
-  label_name <- paste0(
-    "label_",
-    rlang::as_label(y_var)
-  )
-
-  df_label <- df %>%
-    dplyr::group_by_at(
-      group_vars
-    ) %>%
-    dplyr::mutate(
-      !!label_name := sum(!!y_var) - cumsum(!!y_var) + !!y_var / 2
-    ) %>%
-    dplyr::filter(
-      (!!y_var / sum(!!y_var) > !!filter_cutoff) == TRUE
-    )
-
-  return(df_label)
-}
-
-#' Add centered y-coordinates for filtered data labels of vertical stacked bar
-#' charts that are scaled to 100\%
-#'
-#' Calculates the y-coordinates for vertical stacked bar charts, centered for
-#'    each group. The default function does not work if some labels are
-#'    filtered.
-#'
-#' @inheritParams rub_plot_typ_2
-#'
-#' @return Data frame with additional column "label_" + the name of the
-#'    y-coordinate variable
-#' @export
-#'
-#' @examples
-#' x <- c("WiSe 13/14", "WiSe 13/14", "WiSe 13/14", "WiSe 13/14")
-add_label_position_typ_2 <- function(df, x_var,
-                                     y_var, facet_var,
-                                     filter_cutoff = 0.04, reverse) {
+#' add_label_position(df, x_var, y_var, fill)
+add_label_position <- function(df, x_var,
+                               y_var, facet_var,
+                               filter_cutoff = 0.04, fill_reverse = FALSE) {
 
   no_facet <- rlang::quo_is_null(
     rlang::enquo(
@@ -374,7 +314,7 @@ add_label_position_typ_2 <- function(df, x_var,
     rlang::as_label(y_var)
   )
 
-  if(reverse) {
+  if(fill_reverse) {
     label_formula <- rlang::expr(1 - sum(!!y_var) + cumsum(!!y_var) - !!y_var / 2)
   } else {
     label_formula <- rlang::expr(sum(!!y_var) - cumsum(!!y_var) + !!y_var / 2)
@@ -388,7 +328,7 @@ add_label_position_typ_2 <- function(df, x_var,
       !!label_name := eval(label_formula)
     ) %>%
     dplyr::filter(
-      (!!y_var / sum(!!y_var) > !!filter_cutoff) == TRUE
+      (!!y_var / sum(!!y_var) > filter_cutoff) == TRUE
     )
 
   return(df_label)
@@ -400,47 +340,61 @@ add_label_position_typ_2 <- function(df, x_var,
 #' Calculates the y-coordinates for horizontal stacked bar charts, centered for
 #'    each group. The default function does not work if some labels are
 #'    filtered.
-#' @param df Data frame
-#' @param x x-coordinate
-#' @param y y-coordinate
-#' @param facet facet variable
-#' @param group grouping variable
-#' @param fill_reverse Boolean, whether the sort order of the grouping variable
-#'    needs to be inverted
+#' @inheritParams rub_plot_type_3
 #'
 #' @return Data frame with additional column "label_" + the name of the
 #'    y-coordinate variable
 #' @export
 #'
 #' @examples
-#' #' x <- c("WiSe 13/14", "WiSe 13/14", "WiSe 13/14", "WiSe 13/14")
-#' y <- c(1989, 58, 163, 470)
-#' fill <- c("Bachelor 2-Fächer", "Master 1-Fach", "Master 2-Fächer", "Master of Education")
-#' filter_cutoff <- 0.05
-#' df <- get_label_position(df, x, y)
-#' ggplot2::ggplot() +
-#'   ggplot2::geom_bar(aes(x = x, y = y, fill = fill), stat = "identity") +
-#'   ggplot2::geom_label(data = df, aes(x = x, y = y_label, group = fill, label = y))
-add_label_position_typ_3 <- function(df, x, y, facet, group, fill_reverse = FALSE) {
-  x <- rlang::enquo(x)
-  y <- rlang::enquo(y)
-  facet <- rlang::enquo(facet)
-  group <- rlang::enquo(group)
+#' add_label_position_type_3(df, x_var, y_var, fill)
+add_label_position_type_3 <- function(df, x_var,
+                                     y_var, facet_var,
+                                     fill_reverse = FALSE, filter_cutoff = 0.04) {
+
+  no_facet <- rlang::quo_is_null(
+    rlang::enquo(
+      facet_var
+    )
+  )
+
+  if(no_facet) {
+    group_vars <- dplyr::vars(
+      rlang::ensym(x_var)
+    )
+  } else {
+    group_vars <- dplyr::vars(
+      rlang::ensym(x_var),
+      rlang::ensym(facet_var)
+    )
+  }
+
+  y_var <- rlang::enquo(y_var)
 
   label_name <- paste0(
     "label_",
-    rlang::quo_name(y)
+    rlang::as_label(y_var)
   )
 
-  df <- df %>%
-    dplyr::group_by(
-      !!x,
-      !!facet,
-      !!group
-    ) %>%
+  if(fill_reverse) {
+    label_formula <- rlang::expr(cumsum(!!y_var) - !!y_var / 2)
+  } else {
+    label_formula <- rlang::expr(1 - cumsum(!!y_var) + !!y_var / 2)
+  }
+
+  df_label <- df %>%
+    dplyr::group_by_at(
+      group_vars
+      ) %>%
     dplyr::mutate(
-      !!label_name := if (!!fill_reverse) cumsum(!!y) - !!y / 2 else 1 - cumsum(!!y) + !!y / 2)
-  return(df)
+      !!label_name := eval(label_formula)
+      ) %>%
+    dplyr::ungroup() %>%
+    dplyr::filter(
+        (!!y_var > filter_cutoff) == TRUE
+      )
+
+  return(df_label)
 }
 
 #' Adds column \code{report_author} to data frame
