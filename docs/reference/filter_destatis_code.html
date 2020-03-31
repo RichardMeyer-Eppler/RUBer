@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Joins left hand and right hand side of subject group data — join_subject_group • RUBer</title>
+<title>Filter data frame using the Destatis table code, discarding all columns that
+only consist of NA. — filter_destatis_code • RUBer</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,8 +43,10 @@
 
 
 
-<meta property="og:title" content="Joins left hand and right hand side of subject group data — join_subject_group" />
-<meta property="og:description" content="Joins left hand and right hand side of subject group data" />
+<meta property="og:title" content="Filter data frame using the Destatis table code, discarding all columns that
+only consist of NA. — filter_destatis_code" />
+<meta property="og:description" content="Filter data frame using the Destatis table code, discarding all columns that
+only consist of NA." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -134,36 +137,38 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Joins left hand and right hand side of subject group data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/RichardMeyer-Eppler/RUBer/blob/master/R/wrangle_bind_rows.R'><code>R/wrangle_bind_rows.R</code></a></small>
-    <div class="hidden name"><code>join_subject_group.Rd</code></div>
+    <h1>Filter data frame using the Destatis table code, discarding all columns that
+only consist of NA.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/RichardMeyer-Eppler/RUBer/blob/master/R/utility.R'><code>R/utility.R</code></a></small>
+    <div class="hidden name"><code>filter_destatis_code.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Joins left hand and right hand side of subject group data</p>
+    <p>Filter data frame using the Destatis table code, discarding all columns that
+only consist of NA.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>join_subject_group</span>(<span class='no'>df_lhs</span>, <span class='no'>df_rhs</span>)</pre>
+    <pre class="usage"><span class='fu'>filter_destatis_code</span>(<span class='no'>df</span>, <span class='no'>tablename</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>df_lhs</th>
-      <td><p>Left hand side of subject group data</p></td>
+      <th>df</th>
+      <td><p>Data frame with <code>tablename</code> column</p></td>
     </tr>
     <tr>
-      <th>df_rhs</th>
-      <td><p>Right hand side of subject group data</p></td>
+      <th>tablename</th>
+      <td><p>Destatis table code</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Joined data frame</p>
+    <p>Filtered data frame with all NA-columns dropped</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>join_subject_group</span>(<span class='no'>df_lhs</span>, <span class='no'>df_rhs</span>)</div><div class='output co'>#&gt; <span class='error'>Error in eval(lhs, parent, parent): Objekt 'df_lhs' nicht gefunden</span></div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>filter_destatis_code</span>(<span class='kw'>df</span> <span class='kw'>=</span> <span class='no'>db_nrw_213</span>, <span class='kw'>tablename</span> <span class='kw'>=</span> <span class='st'>"21391KF061"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in eval(lhs, parent, parent): Objekt 'db_nrw_213' nicht gefunden</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

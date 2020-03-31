@@ -8,15 +8,17 @@ rub_plot_type_1(
   df,
   x_var,
   y_var,
-  y_label = "",
+  y_axis_label = "",
   fill_var,
+  fill_reverse = FALSE,
   fill_label = NULL,
   caption = "",
   caption_prefix = "Quelle:",
   filter_cutoff = 0.04,
   facet_var = NULL,
   color = RUB_colors["blue"],
-  font = "RubFlama"
+  base_family = "RubFlama",
+  base_size = 11
 )
 }
 \arguments{
@@ -28,10 +30,14 @@ x-coordinates.}
 \item{y_var}{Required variable name for the variable containing the continuous
 y-coordinates.}
 
-\item{y_label}{Optional label for the y-axis, defaults to an empty string.}
+\item{y_axis_label}{Optional label for the y-axis, defaults to an empty
+string.}
 
 \item{fill_var}{Variable name for the discrete variable which determines the
 groups to be stacked, e.g. degree.}
+
+\item{fill_reverse}{Boolean indicating whether the order of the fill variable
+should be reversed, default = FALSE.}
 
 \item{fill_label}{Optional variable name for the character variable
 containing the names of the fill variable, defaults to NULL.}
@@ -52,7 +58,9 @@ by, defaults to NULL.}
 \item{color}{Color for font and borders, defaults to `RUB_colors["blue"]`,
 i.e. #003560.}
 
-\item{font}{Font for the ggplot theme, defaults to RubFlama.}
+\item{base_family}{base font family, defaults to RubFlama}
+
+\item{base_size}{base font size, defaults to 11}
 }
 \value{
 A ggplot object

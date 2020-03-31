@@ -9,8 +9,10 @@ add_label_position(
   x_var,
   y_var,
   facet_var,
+  fill_var,
   filter_cutoff = 0.04,
-  fill_reverse = FALSE
+  fill_reverse = FALSE,
+  is_percentage = FALSE
 )
 }
 \arguments{
@@ -25,12 +27,18 @@ y-coordinates.}
 \item{facet_var}{Optional variable name for the discrete variable to facet
 by, defaults to NULL.}
 
+\item{fill_var}{Variable name for the discrete variable which determines the
+groups to be stacked, e.g. degree.}
+
 \item{filter_cutoff}{Optional cutoff value for the suppression of data
 labels. By default, all values below 0.04 of the total value of the
 stacked bar chart are suppressed.}
 
 \item{fill_reverse}{Boolean indicating whether the order of the fill variable
 should be reversed, default = FALSE.}
+
+\item{is_percentage}{Optional boolean indicating whether the value label is
+expressed in absolute numbers or as a percentage, defaults to false}
 }
 \value{
 Data frame with additional column "label_" + the name of the

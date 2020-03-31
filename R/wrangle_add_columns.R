@@ -272,6 +272,34 @@ add_file_name <- function(df) {
   return(df)
 }
 
+#' Get formula for calculating position of value labels
+#'
+#' @param label_var The name of the variabler requiring value labels
+#' @inheritParams add_label_position
+#'
+#' @return A defused expression for caluclating the position of the y-label
+#' @export
+#'
+#' @examples
+#' get_label_formula(y_var = cyl, label_reverse = TRUE, is_percentage = FALSE)
+get_label_formula <- function(label_var,
+                              is_percentage = FALSE) {
+  label_var <- rlang::enquo(label_var)
+
+  if(!is_percentage) {
+    label_formula <- rlang::expr(
+      sum(!!label_var) - cumsum(!!label_var) + !!label_var / 2
+    )
+  } else if(is_percentage)  {
+    label_formula <- rlang::expr(
+      (sum(!!label_var) - cumsum(!!label_var) + !!label_var / 2) / sum(!!label_var)
+    )
+  }
+
+  return(label_formula)
+}
+
+
 #' Add centered y-coordinates for filtered data labels of figure types 1 and 2
 #'
 #' Calculates the y-coordinates for stacked bar charts, centered for
@@ -279,6 +307,8 @@ add_file_name <- function(df) {
 #'    filtered.
 #'
 #' @inheritParams rub_plot_type_2
+#' @param is_percentage Optional boolean indicating whether the value label is
+#'     expressed in absolute numbers or as a percentage, defaults to false
 #'
 #' @return Data frame with additional column "label_" + the name of the
 #'    y-coordinate variable
@@ -288,113 +318,83 @@ add_file_name <- function(df) {
 #' add_label_position(df, x_var, y_var, fill)
 add_label_position <- function(df, x_var,
                                y_var, facet_var,
-                               filter_cutoff = 0.04, fill_reverse = FALSE) {
+                               fill_var, filter_cutoff = 0.04,
+                               fill_reverse = FALSE, is_percentage = FALSE) {
 
-  no_facet <- rlang::quo_is_null(
+  has_facet <- !rlang::quo_is_null(
     rlang::enquo(
       facet_var
     )
   )
 
-  if(no_facet) {
-    group_vars <- dplyr::vars(
-      rlang::ensym(x_var)
-    )
-  } else {
+  # Group vars with and without fill_var for different summary statistics
+  # Caution: Order of grouping vars matters for dplyr::summarise!
+  if(!has_facet)  {
     group_vars <- dplyr::vars(
       rlang::ensym(x_var),
-      rlang::ensym(facet_var)
-    )
-  }
-
-  y_var <- rlang::enquo(y_var)
-
-  label_name <- paste0(
-    "label_",
-    rlang::as_label(y_var)
-  )
-
-  if(fill_reverse) {
-    label_formula <- rlang::expr(1 - sum(!!y_var) + cumsum(!!y_var) - !!y_var / 2)
-  } else {
-    label_formula <- rlang::expr(sum(!!y_var) - cumsum(!!y_var) + !!y_var / 2)
-  }
-
-  df_label <- df %>%
-    dplyr::group_by_at(
-      group_vars
-    ) %>%
-    dplyr::mutate(
-      !!label_name := eval(label_formula)
-    ) %>%
-    dplyr::filter(
-      (!!y_var / sum(!!y_var) > filter_cutoff) == TRUE
-    )
-
-  return(df_label)
-}
-
-#' Add centered y-coordinates for filtered data labels of horizontal stacked bar
-#' charts that are scaled to 100\%
-#'
-#' Calculates the y-coordinates for horizontal stacked bar charts, centered for
-#'    each group. The default function does not work if some labels are
-#'    filtered.
-#' @inheritParams rub_plot_type_3
-#'
-#' @return Data frame with additional column "label_" + the name of the
-#'    y-coordinate variable
-#' @export
-#'
-#' @examples
-#' add_label_position_type_3(df, x_var, y_var, fill)
-add_label_position_type_3 <- function(df, x_var,
-                                     y_var, facet_var,
-                                     fill_reverse = FALSE, filter_cutoff = 0.04) {
-
-  no_facet <- rlang::quo_is_null(
-    rlang::enquo(
-      facet_var
-    )
-  )
-
-  if(no_facet) {
-    group_vars <- dplyr::vars(
-      rlang::ensym(x_var)
-    )
-  } else {
-    group_vars <- dplyr::vars(
-      rlang::ensym(x_var),
-      rlang::ensym(facet_var)
-    )
-  }
-
-  y_var <- rlang::enquo(y_var)
-
-  label_name <- paste0(
-    "label_",
-    rlang::as_label(y_var)
-  )
-
-  if(fill_reverse) {
-    label_formula <- rlang::expr(cumsum(!!y_var) - !!y_var / 2)
-  } else {
-    label_formula <- rlang::expr(1 - cumsum(!!y_var) + !!y_var / 2)
-  }
-
-  df_label <- df %>%
-    dplyr::group_by_at(
-      group_vars
-      ) %>%
-    dplyr::mutate(
-      !!label_name := eval(label_formula)
-      ) %>%
-    dplyr::ungroup() %>%
-    dplyr::filter(
-        (!!y_var > filter_cutoff) == TRUE
+      rlang::ensym(fill_var)
       )
+    } else if(has_facet) {
+    group_vars <- dplyr::vars(
+      rlang::ensym(x_var),
+      rlang::ensym(facet_var),
+      rlang::ensym(fill_var)
+    )
+  }
 
-  return(df_label)
+  y_var <- rlang::enquo(y_var)
+
+  label_name <- paste0(
+    "label_",
+    rlang::as_label(y_var)
+  )
+
+  label_formula <- get_label_formula(
+    label_var = {{y_var}},
+    is_percentage = is_percentage
+  )
+
+  # y formula
+  if(is_percentage) {
+    y_formula <- rlang::expr(
+      !!y_var / sum(!!y_var)
+    )
+  } else  {
+    y_formula <- rlang::expr(
+      !!y_var
+    )
+  }
+
+  df_label <- df %>%
+    dplyr::group_by_at(
+      group_vars
+    ) %>%
+    dplyr::summarise(
+      !!y_var := sum(!!y_var)
+    ) %>%
+    dplyr::mutate(
+      # sum_var = sum(!!y_var),
+      # cumsum_var = cumsum(!!y_var),
+      # half_var_var = !!y_var / 2,
+      !!label_name := eval(label_formula)
+    )
+
+  if(is_percentage) {
+      df_label <- df_label %>%
+        dplyr::ungroup(
+          {{fill_var}}
+        ) %>%
+        dplyr::mutate(
+          !!y_var := eval(y_formula)
+        )
+  }
+
+  df_label_filtered <- df_label %>%
+    dplyr::filter(
+      round((!!y_var / sum(!!y_var)), digits = 2) >= filter_cutoff
+    )
+
+  return(df_label_filtered)
 }
 
 #' Adds column \code{report_author} to data frame

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Joins left hand and right hand side of subject group data — join_subject_group • RUBer</title>
+<title>Get formula for calculating position of value labels — get_label_formula • RUBer</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,8 +42,8 @@
 
 
 
-<meta property="og:title" content="Joins left hand and right hand side of subject group data — join_subject_group" />
-<meta property="og:description" content="Joins left hand and right hand side of subject group data" />
+<meta property="og:title" content="Get formula for calculating position of value labels — get_label_formula" />
+<meta property="og:description" content="Get formula for calculating position of value labels" />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -134,36 +134,37 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Joins left hand and right hand side of subject group data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/RichardMeyer-Eppler/RUBer/blob/master/R/wrangle_bind_rows.R'><code>R/wrangle_bind_rows.R</code></a></small>
-    <div class="hidden name"><code>join_subject_group.Rd</code></div>
+    <h1>Get formula for calculating position of value labels</h1>
+    <small class="dont-index">Source: <a href='https://github.com/RichardMeyer-Eppler/RUBer/blob/master/R/wrangle_add_columns.R'><code>R/wrangle_add_columns.R</code></a></small>
+    <div class="hidden name"><code>get_label_formula.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Joins left hand and right hand side of subject group data</p>
+    <p>Get formula for calculating position of value labels</p>
     </div>
 
-    <pre class="usage"><span class='fu'>join_subject_group</span>(<span class='no'>df_lhs</span>, <span class='no'>df_rhs</span>)</pre>
+    <pre class="usage"><span class='fu'>get_label_formula</span>(<span class='no'>label_var</span>, <span class='kw'>is_percentage</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>df_lhs</th>
-      <td><p>Left hand side of subject group data</p></td>
+      <th>label_var</th>
+      <td><p>The name of the variabler requiring value labels</p></td>
     </tr>
     <tr>
-      <th>df_rhs</th>
-      <td><p>Right hand side of subject group data</p></td>
+      <th>is_percentage</th>
+      <td><p>Optional boolean indicating whether the value label is
+expressed in absolute numbers or as a percentage, defaults to false</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Joined data frame</p>
+    <p>A defused expression for caluclating the position of the y-label</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>join_subject_group</span>(<span class='no'>df_lhs</span>, <span class='no'>df_rhs</span>)</div><div class='output co'>#&gt; <span class='error'>Error in eval(lhs, parent, parent): Objekt 'df_lhs' nicht gefunden</span></div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>get_label_formula</span>(<span class='kw'>y_var</span> <span class='kw'>=</span> <span class='no'>cyl</span>, <span class='kw'>label_reverse</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>is_percentage</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in get_label_formula(y_var = cyl, label_reverse = TRUE, is_percentage = FALSE): unbenutzte Argumente (y_var = cyl, label_reverse = TRUE)</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -16,7 +16,7 @@ plot_figure <- function(df) {
         rub_plot_type_1(
           x_var = x,
           y_var = y,
-          y_label = .[[1, "y_label"]],
+          y_axis_label = .[[1, "y_label"]],
           fill_var = fill,
           fill_label = fill_label,
           caption = .[[1, "source_caption"]]
@@ -65,9 +65,12 @@ plot_figure <- function(df) {
 #'     x-coordinates.
 #' @param y_var Required variable name for the variable containing the continuous
 #'     y-coordinates.
-#' @param y_label Optional label for the y-axis, defaults to an empty string.
+#' @param y_axis_label Optional label for the y-axis, defaults to an empty
+#'     string.
 #' @param fill_var Variable name for the discrete variable which determines the
 #'     groups to be stacked, e.g. degree.
+#' @param fill_reverse Boolean indicating whether the order of the fill variable
+#'     should be reversed, default = FALSE.
 #' @param fill_label Optional variable name for the character variable
 #'     containing the names of the fill variable, defaults to NULL.
 #' @param caption Optional character containing the data source for the figure
@@ -79,7 +82,7 @@ plot_figure <- function(df) {
 #'     stacked bar chart are suppressed.
 #' @param facet_var Optional variable name for the discrete variable to facet
 #'     by, defaults to NULL.
-#' @inheritParams rub_style
+#' @inheritParams theme_rub
 #'
 #' @return A ggplot object
 #' @export
@@ -109,19 +112,27 @@ plot_figure <- function(df) {
 #'  fill_var = degree
 #' )
 rub_plot_type_1 <- function(df, x_var,
-                           y_var, y_label = "",
-                           fill_var, fill_label = NULL,
+                           y_var, y_axis_label = "",
+                           fill_var, fill_reverse = FALSE,
+                           fill_label = NULL,
                            caption = "", caption_prefix = "Quelle:",
                            filter_cutoff = 0.04, facet_var = NULL,
-                           color = RUB_colors["blue"], font = "RubFlama") {
+                           color = RUB_colors["blue"], base_family = "RubFlama",
+                           base_size = 11) {
 
   fill_var_sym <- rlang::ensym(fill_var)
-  fill_var_unique <- unique(df[[fill_var_sym]])
   fill_var_n_distinct <- dplyr::n_distinct(df[[fill_var_sym]])
   palette <- paste0("discrete_", fill_var_n_distinct)
 
   fill_label_quo <- rlang::enquo(fill_label)
   fill_label_null <- rlang::quo_is_null(fill_label_quo)
+
+  # Fill variable is turned into a factor before plotting to preserve ordering
+  df <- set_factor_var(
+    df = df,
+    var = {{fill_var}},
+    reverse = fill_reverse
+    )
 
   if(fill_label_null)  {
     fill_label_sym <- rlang::ensym(fill_var)
@@ -131,15 +142,39 @@ rub_plot_type_1 <- function(df, x_var,
 
   fill_label_unique <- unique(df[[fill_label_sym]])
 
-  label_var <- paste0("label_", rlang::quo_name(rlang::enquo(y_var)))
-  caption <- ifelse(caption[1] == "", "", paste(caption_prefix, caption[1]))
+  # Fill labels need to be reversed if the factor was reversed
+  if(fill_reverse)  {
+    fill_label_unique <- rev(fill_label_unique)
+  }
+
+  y_var_quo <-  rlang::enquo(
+    y_var
+  )
+
+  label_var <- paste0(
+    "label_",
+    rlang::as_label(
+      y_var_quo
+      )
+    )
+
+  caption <- ifelse(
+    caption[1] == "",
+    "",
+    paste(
+      caption_prefix,
+      caption[1]
+      )
+    )
 
   df_label <- add_label_position(
     df,
     x_var = {{x_var}},
     y_var = {{y_var}},
+    fill_var = {{fill_var}},
     facet_var = {{facet_var}},
-    filter_cutoff = filter_cutoff
+    filter_cutoff = filter_cutoff,
+    is_percentage = FALSE
   )
 
   facet_var <- rlang::enquo(facet_var)
@@ -156,6 +191,8 @@ rub_plot_type_1 <- function(df, x_var,
       scales = "free_y"
       )
   }
+
+  has_y_axis_label <- y_axis_label != ""
 
   ggplot2::ggplot(
     data = df,
@@ -177,7 +214,8 @@ rub_plot_type_1 <- function(df, x_var,
         fill = {{fill_var}},
         label = {{y_var}}
       ),
-      size = 1.75,
+      size = base_size / 5,
+      family = base_family,
       color = color,
       fill = "white",
       show.legend = FALSE,
@@ -198,31 +236,29 @@ rub_plot_type_1 <- function(df, x_var,
       name = NULL,
       label = fill_label_unique
     ) +
+    ggplot2::guides(
+      fill = ggplot2::guide_legend(
+        reverse = fill_reverse,
+        byrow = TRUE
+      )
+    ) +
     ggplot2::labs(
-      y = y_label[1],
+      y = y_axis_label[1],
       caption = caption
       ) +
-    rub_style(
-      font = font,
+    theme_rub(
+      base_family = base_family,
+      base_size = base_size,
       color = color,
-      facet_headings = !no_facet
-      ) +
-    ggplot2::theme(
-      axis.title.y = ggplot2::element_text(
-        size = 12,
-        hjust = 0.5,
-        family = font,
-        color = color
+      facet_headings = !no_facet,
+      y_axis_label = has_y_axis_label
       )
-    )
 }
 
 #' Plot vertical stacked bar charts that are scaled to 100\% (figure type 2)
 #'
-#' @param fill_reverse Boolean indicating whether the order of the fill variable
-#'     should be reversed, default = FALSE.
 #' @inheritParams rub_plot_type_1
-#' @inheritParams rub_style
+#' @inheritParams theme_rub
 #'
 #' @return A ggplot object
 #' @export
@@ -260,14 +296,15 @@ rub_plot_type_1 <- function(df, x_var,
 #'   fill_var = cohort_status
 #' )
 rub_plot_type_2 <- function(df, x_var,
-                           y_var, fill_var,
-                           fill_label = NULL, fill_reverse = FALSE,
+                           y_var, y_axis_label = "",
+                           fill_var, fill_label = NULL,
+                           fill_reverse = FALSE,
                            facet_var = NULL, caption = "",
                            caption_prefix = "Quelle:", filter_cutoff = 0.04,
-                           color = RUB_colors["blue"], font = "RubFlama") {
+                           color = RUB_colors["blue"], base_family = "RubFlama",
+                           base_size = 11) {
 
   fill_var_sym <- rlang::ensym(fill_var)
-  fill_var_unique <- unique(df[[fill_var_sym]])
   fill_var_n_distinct <- dplyr::n_distinct(df[[fill_var_sym]])
   palette <- paste0("discrete_", fill_var_n_distinct)
 
@@ -279,30 +316,49 @@ rub_plot_type_2 <- function(df, x_var,
   } else  {
     fill_label_sym <- rlang::ensym(fill_label)
   }
-  fill_label_unique <- unique(df[[fill_label_sym]])
 
   # Fill variable is turned into a factor before plotting to preserve ordering
-  fill_is_factor <- is.factor(df[[fill_var_sym]])
+  df <- set_factor_var(
+    df = df,
+    var = {{fill_var}},
+    reverse = fill_reverse
+  )
 
-  if(!fill_is_factor) {
-    df <- set_factor_var(df, {{fill_var}}, fill_reverse)
-  }
+  fill_label_unique <- unique(df[[fill_label_sym]])
 
   # Fill labels need to be reversed if the factor was reversed
   if(fill_reverse)  {
     fill_label_unique <- rev(fill_label_unique)
   }
 
-  label_var <- paste0("label_", rlang::quo_name(rlang::enquo(y_var)))
-  caption <- ifelse(caption[1] == "", "", paste(caption_prefix, caption[1]))
+  y_var_quo <-  rlang::enquo(
+    y_var
+  )
+
+  label_var <- paste0(
+    "label_",
+    rlang::as_label(
+      y_var_quo
+    )
+  )
+
+  caption <- ifelse(
+    caption[1] == "",
+    "",
+    paste(
+      caption_prefix,
+      caption[1]
+    )
+  )
 
   df_label <- add_label_position(
     df,
     x_var = {{x_var}},
     y_var = {{y_var}},
+    fill_var = {{fill_var}},
     facet_var = {{facet_var}},
     filter_cutoff = filter_cutoff,
-    fill_reverse = fill_reverse
+    is_percentage = TRUE
   )
 
   facet_var <- rlang::enquo(facet_var)
@@ -320,6 +376,8 @@ rub_plot_type_2 <- function(df, x_var,
     )
   }
 
+  has_y_axis_label <- y_axis_label != ""
+
   ggplot2::ggplot() +
     ggplot2::geom_bar(
       data = df,
@@ -328,6 +386,7 @@ rub_plot_type_2 <- function(df, x_var,
         y = {{y_var}},
         fill = {{fill_var}}
       ),
+      position = "fill",
       stat = "identity",
       width = 0.55
     ) +
@@ -342,7 +401,8 @@ rub_plot_type_2 <- function(df, x_var,
           accuracy = 1L
         )({{y_var}})
       ),
-      size = 1.75,
+      size = base_size / 5,
+      family = base_family,
       color = color,
       fill = "white",
       show.legend = FALSE,
@@ -360,16 +420,20 @@ rub_plot_type_2 <- function(df, x_var,
       name = NULL,
       label = fill_label_unique
     ) +
-    ggplot2::guides(fill = ggplot2::guide_legend(
-      reverse = fill_reverse,
-      byrow = TRUE
+    ggplot2::guides(
+      fill = ggplot2::guide_legend(
+        reverse = fill_reverse,
+        byrow = TRUE
       )
     ) +
     ggplot2::labs(
-      caption = caption
+      y = y_axis_label[1],
+      caption = caption,
+      y_axis_label = has_y_axis_label
       ) +
-    rub_style(
-      font = font,
+    theme_rub(
+      base_family = base_family,
+      base_size = base_size,
       color = color,
       facet_headings = !no_facet
     )
@@ -383,7 +447,7 @@ rub_plot_type_2 <- function(df, x_var,
 #' @param y_var Required variable name for the variable containing the discrete
 #'     y-coordinates.
 #' @inheritParams rub_plot_type_1
-#' @inheritParams rub_style
+#' @inheritParams theme_rub
 #'
 #' @return A ggplot object
 #' @export
@@ -405,12 +469,13 @@ rub_plot_type_2 <- function(df, x_var,
 #'  fill_var = item_value,
 #' )
 rub_plot_type_3 <- function(df, x_var,
-                           y_var, fill_var,
-                           fill_label = NULL, fill_reverse = FALSE,
-                           facet_var = NULL, group_var = NULL,
-                           caption = "", caption_prefix = "Quelle:",
-                           filter_cutoff = 0.04, color = RUB_colors["blue"],
-                           font = "RubFlama") {
+                           y_var, y_axis_label = "",
+                           fill_var, fill_label = NULL,
+                           fill_reverse = FALSE, facet_var = NULL,
+                           group_var = NULL, caption = "",
+                           caption_prefix = "Quelle:", filter_cutoff = 0.04,
+                           color = RUB_colors["blue"], base_family = "RubFlama",
+                           base_size = 11) {
 
   # Using ggplot2::coord_flip() effectively switches the x- and y-axis. This is
   # confusing to the user, because what is displayed as x-axis are actually the
@@ -418,7 +483,6 @@ rub_plot_type_3 <- function(df, x_var,
   # switches x and y internally.
 
   fill_var_sym <- rlang::ensym(fill_var)
-  fill_var_unique <- unique(df[[fill_var_sym]])
   fill_var_n_distinct <- dplyr::n_distinct(df[[fill_var_sym]])
   palette <- paste0("discrete_", fill_var_n_distinct)
 
@@ -430,7 +494,6 @@ rub_plot_type_3 <- function(df, x_var,
   } else  {
     fill_label_sym <- rlang::ensym(fill_label)
   }
-  fill_label_unique <- unique(df[[fill_label_sym]])
 
   # y variable is turned into a factor before plotting to preserve ordering.
   # Order of y variable always needs to be reverted for this plot type.
@@ -441,11 +504,13 @@ rub_plot_type_3 <- function(df, x_var,
   }
 
   # Fill variable is turned into a factor before plotting to preserve ordering
-  fill_is_factor <- is.factor(df[[fill_var_sym]])
+  df <- set_factor_var(
+    df = df,
+    var = {{fill_var}},
+    reverse = fill_reverse
+  )
 
-  if(!fill_is_factor) {
-    df <- set_factor_var(df, {{fill_var}}, fill_reverse)
-  }
+  fill_label_unique <- unique(df[[fill_label_sym]])
 
   # Fill labels need to be reversed if the factor was reversed
   if(fill_reverse)  {
@@ -455,13 +520,14 @@ rub_plot_type_3 <- function(df, x_var,
   label_var <- paste0("label_", rlang::quo_name(rlang::enquo(x_var)))
   caption <- ifelse(caption[1] == "", "", paste(caption_prefix, caption[1]))
 
-  df_label <- add_label_position_type_3(
+  df_label <- add_label_position(
     df,
     x = {{y_var}},
     y = {{x_var}},
+    fill_var = {{fill_var}},
     facet = {{facet_var}},
-    fill_reverse = fill_reverse,
-    filter_cutoff = filter_cutoff
+    filter_cutoff = filter_cutoff,
+    is_percentage = TRUE
   )
 
   facet_var <- rlang::enquo(facet_var)
@@ -479,13 +545,14 @@ rub_plot_type_3 <- function(df, x_var,
     )
   }
 
+  has_y_axis_label <- y_axis_label != ""
+
   ggplot2::ggplot(
     data = df,
     ggplot2::aes(
       x = {{y_var}},
       y = {{x_var}},
       fill = {{fill_var}}
-#     ,order = {{fill_var}}
     )
   ) +
     ggplot2::geom_bar(
@@ -501,7 +568,8 @@ rub_plot_type_3 <- function(df, x_var,
         y = .data[[label_var]],
         group = {{fill_var}}
       ),
-      size = 1.75,
+      size = base_size / 5,
+      family = base_family,
       colour = color,
       fill = "white",
       show.legend = FALSE,
@@ -520,7 +588,7 @@ rub_plot_type_3 <- function(df, x_var,
       ) +
     ggplot2::scale_y_continuous(
       label = scales::percent,
-      expand = ggplot2::expand_scale(
+      expand = ggplot2::expansion(
         mult = c(0, .025)
         )
       ) +
@@ -534,10 +602,12 @@ rub_plot_type_3 <- function(df, x_var,
       caption = caption
       ) +
     ggplot2::coord_flip() +
-    rub_style(
-      font = font,
+    theme_rub(
+      base_family = base_family,
+      base_size = base_size,
       color = color,
-      facet_headings = !no_facet
+      facet_headings = !no_facet,
+      y_axis_label = has_y_axis_label
     ) +
     ggplot2::theme(
       axis.ticks.y = ggplot2::element_blank(),

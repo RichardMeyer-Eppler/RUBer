@@ -8,6 +8,7 @@ rub_plot_type_2(
   df,
   x_var,
   y_var,
+  y_axis_label = "",
   fill_var,
   fill_label = NULL,
   fill_reverse = FALSE,
@@ -16,7 +17,8 @@ rub_plot_type_2(
   caption_prefix = "Quelle:",
   filter_cutoff = 0.04,
   color = RUB_colors["blue"],
-  font = "RubFlama"
+  base_family = "RubFlama",
+  base_size = 11
 )
 }
 \arguments{
@@ -27,6 +29,9 @@ x-coordinates.}
 
 \item{y_var}{Required variable name for the variable containing the continuous
 y-coordinates.}
+
+\item{y_axis_label}{Optional label for the y-axis, defaults to an empty
+string.}
 
 \item{fill_var}{Variable name for the discrete variable which determines the
 groups to be stacked, e.g. degree.}
@@ -53,7 +58,9 @@ stacked bar chart are suppressed.}
 \item{color}{Color for font and borders, defaults to `RUB_colors["blue"]`,
 i.e. #003560.}
 
-\item{font}{Font for the ggplot theme, defaults to RubFlama.}
+\item{base_family}{base font family, defaults to RubFlama}
+
+\item{base_size}{base font size, defaults to 11}
 }
 \value{
 A ggplot object

@@ -27,7 +27,7 @@ RUBer is an R package created for parameterized reporting according to the requi
 * An R Markdown template for use with `rmarkdown::draft`. The template uses `knitr::knit_expand()` to dynamically create code chunks containing figures, captions and subcaptions based on the data frame passed on as a parameter. Figure captions are automatically numbered via `bookdown` and a table of figures is inserted via `officedown`.
 * Vectorized figures in Microsoft's Enhanced Metafile format using the `devEMF` package. 
 * Five preconfigured `ggplot2` plotting functions.
-* A custom `ggplot2` theme.
+* A custom `ggplot2` theme, `theme_rub`.
 * A custom `flextable` theme.
 * Word reference document in the RUB corporate design for use with the R Markdown template.
 * Functions to access the RUB color palette.

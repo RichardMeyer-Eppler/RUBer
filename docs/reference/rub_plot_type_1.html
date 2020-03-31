@@ -109,6 +109,9 @@ y_var and fill_var are required, all others are optional." />
     <li>
       <a href="../articles/RUB_plot.html">Using the RUB plotting functions</a>
     </li>
+    <li>
+      <a href="../articles/Wiesbaden.html">Retrieving Destatis data</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -146,15 +149,17 @@ y_var and fill_var are required, all others are optional.</p>
   <span class='no'>df</span>,
   <span class='no'>x_var</span>,
   <span class='no'>y_var</span>,
-  <span class='kw'>y_label</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>y_axis_label</span> <span class='kw'>=</span> <span class='st'>""</span>,
   <span class='no'>fill_var</span>,
+  <span class='kw'>fill_reverse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>fill_label</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>caption</span> <span class='kw'>=</span> <span class='st'>""</span>,
   <span class='kw'>caption_prefix</span> <span class='kw'>=</span> <span class='st'>"Quelle:"</span>,
   <span class='kw'>filter_cutoff</span> <span class='kw'>=</span> <span class='fl'>0.04</span>,
   <span class='kw'>facet_var</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>RUB_colors</span>[<span class='st'>"blue"</span>],
-  <span class='kw'>font</span> <span class='kw'>=</span> <span class='st'>"RubFlama"</span>
+  <span class='kw'>base_family</span> <span class='kw'>=</span> <span class='st'>"RubFlama"</span>,
+  <span class='kw'>base_size</span> <span class='kw'>=</span> <span class='fl'>11</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -175,13 +180,19 @@ x-coordinates.</p></td>
 y-coordinates.</p></td>
     </tr>
     <tr>
-      <th>y_label</th>
-      <td><p>Optional label for the y-axis, defaults to an empty string.</p></td>
+      <th>y_axis_label</th>
+      <td><p>Optional label for the y-axis, defaults to an empty
+string.</p></td>
     </tr>
     <tr>
       <th>fill_var</th>
       <td><p>Variable name for the discrete variable which determines the
 groups to be stacked, e.g. degree.</p></td>
+    </tr>
+    <tr>
+      <th>fill_reverse</th>
+      <td><p>Boolean indicating whether the order of the fill variable
+should be reversed, default = FALSE.</p></td>
     </tr>
     <tr>
       <th>fill_label</th>
@@ -215,8 +226,12 @@ by, defaults to NULL.</p></td>
 i.e. #003560.</p></td>
     </tr>
     <tr>
-      <th>font</th>
-      <td><p>Font for the ggplot theme, defaults to RubFlama.</p></td>
+      <th>base_family</th>
+      <td><p>base font family, defaults to RubFlama</p></td>
+    </tr>
+    <tr>
+      <th>base_size</th>
+      <td><p>base font size, defaults to 11</p></td>
     </tr>
     </table>
 

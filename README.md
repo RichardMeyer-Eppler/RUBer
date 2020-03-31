@@ -33,7 +33,7 @@ colors available.
   - Vectorized figures in Microsoft’s Enhanced Metafile format using the
     `devEMF` package.
   - Five preconfigured `ggplot2` plotting functions.
-  - A custom `ggplot2` theme.
+  - A custom `ggplot2` theme, `theme_rub`.
   - A custom `flextable` theme.
   - Word reference document in the RUB corporate design for use with the
     R Markdown template.

@@ -2,60 +2,87 @@
 #'
 #' This function allows you to add the RUB theme to your ggplot charts.
 #'
-#' @param font Font for the ggplot theme, defaults to RubFlama.
+#' @param base_size base font size, defaults to 11
+#' @param base_family base font family, defaults to RubFlama
+#' @param base_line_size base size for line elements, defaults to base_size/22
+#' @param base_rect_size base size for rect elements, defaults to base_size/22
 #' @param color Color for font and borders, defaults to `RUB_colors["blue"]`,
 #'     i.e. #003560.
 #' @param facet_headings Boolean indicating whether facet headings are required,
 #'     defaults to FALSE.
-#'
-#' @keywords rub_style
+#' @param y_axis_label Boolean indicating whether there is a label for the
+#'     y-axis, defaults to FALSE.
+#' @keywords theme_rub
 #' @export
 #' @examples
 #' line <- ggplot(line_df, aes(x = year, y = lifeExp)) +
 #'   geom_line(colour = "#007f7f", size = 1) +
 #'   geom_hline(yintercept = 0, size = 1, colour = "#333333") +
-#'   rub_style()
-rub_style <- function(font = "RubFlama",
+#'   theme_rub()
+theme_rub <- function(base_size = 11,
+                      base_family = "RubFlama",
+                      base_line_size = base_size/22,
+                      base_rect_size = base_size/22,
                       color = RUB_colors["blue"],
-                      facet_headings = FALSE) {
+                      facet_headings = FALSE,
+                      y_axis_label = FALSE) {
 
   if(facet_headings) {
     facet_text <- ggplot2::element_text(
-      family = font,
+      size = ggplot2::rel(0.8),
+      family = base_family,
       color = color,
       hjust = 0,
       face = "bold"
     )
   } else {
     facet_text <- ggplot2::element_blank()
-    }
+  }
 
+  if(y_axis_label)  {
+    y_axis_text <- ggplot2::element_text(
+      hjust = 0.5
+    )
+  } else  {
+    y_axis_text <- ggplot2::element_blank()
+  }
+
+  base_theme <- ggplot2::theme_minimal(
+    base_size = base_size,
+    base_family = base_family,
+    base_line_size = base_line_size,
+    base_rect_size = base_rect_size
+  )
+
+  rub_theme <- base_theme +
   ggplot2::theme(
     ## Plot
     # Text format
     text = ggplot2::element_text(
-      family = font,
-      size = 10,
+      size = base_size,
+      color = color
+    ),
+    # Line format
+    line = ggplot2::element_line(
       color = color
     ),
     # This sets the font, size, type and colour of text for the chart's title
     plot.title = ggplot2::element_text(
-      size = 28,
+      size = ggplot2::rel(2.5),
       face = "bold"
     ),
     # This sets the font, size, type and colour of text for the chart's subtitle
     plot.subtitle = ggplot2::element_text(
-      size = 22
+      size = ggplot2::rel(2)
     ),
     plot.caption = ggplot2::element_text(
-      size = 8,
+      size = ggplot2::rel(0.67),
       face = "italic"
     ),
 
     ## Plot Border
     plot.background = ggplot2::element_rect(
-      color = "black",
-      size = 0.5
+      color = "black"
     ),
 
     ## Legend
@@ -64,14 +91,12 @@ rub_style <- function(font = "RubFlama",
     legend.key.size =  ggplot2::unit(0.25, "cm"),
 
     ## Axis
-    axis.text = ggplot2::element_text(
-      family = font,
-      color = color
-    ),
     # axis.text.x = ggplot2::element_text(margin = ggplot2::margin(5, b = 10)),
-    axis.ticks = ggplot2::element_line(color = color),
-    axis.line = ggplot2::element_line(color = color),
-    axis.title = ggplot2::element_blank(),
+    axis.text = ggplot2::element_text(color = color),
+    axis.ticks = ggplot2::element_line(),
+    axis.line = ggplot2::element_line(),
+    axis.title.x = ggplot2::element_blank(),
+    axis.title.y = y_axis_text,
 
     # Grid lines and panel background
     panel.grid.minor = ggplot2::element_blank(),
@@ -83,6 +108,8 @@ rub_style <- function(font = "RubFlama",
     strip.background = ggplot2::element_blank(),
     strip.text = facet_text
   )
+
+  return(rub_theme)
 }
 
 #' Applies RUB-Style to flextable object
