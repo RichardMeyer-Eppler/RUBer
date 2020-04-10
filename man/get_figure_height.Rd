@@ -20,5 +20,7 @@ Figure height in inches
 Get figure height
 }
 \examples{
+\dontrun{
 get_figure_height(param_list)
+}
 }

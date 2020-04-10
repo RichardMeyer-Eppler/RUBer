@@ -7,7 +7,8 @@
 get_author(param_list)
 }
 \arguments{
-\item{df}{}
+\item{param_list}{List of parameters containing report_id, faculty_txt,
+subject_txt, subject_area_txt}
 }
 \value{
 String
@@ -16,5 +17,7 @@ String
 Get author for report title page
 }
 \examples{
+\dontrun{
 get_author(df)
+}
 }

@@ -4,10 +4,13 @@
 \alias{clean_file_name}
 \title{Clean file name of special characters}
 \usage{
-clean_file_name(file_name)
+clean_file_name(file_name, char_limit = 85L)
 }
 \arguments{
-\item{file_name}{}
+\item{file_name}{Required string containing file name}
+
+\item{char_limit}{Optional integer determining the maximum length of the file
+name in characters, defaults to 85.}
 }
 \value{
 String
@@ -16,5 +19,5 @@ String
 Clean file name of special characters
 }
 \examples{
-clean_file_name("Test_File-Name__X__")
+clean_file_name(file_name = "Test_File-Name__X__")
 }

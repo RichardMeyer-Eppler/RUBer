@@ -2,14 +2,20 @@
 % Please edit documentation in R/wrangle_data_manipulation.R
 \name{set_factor_var}
 \alias{set_factor_var}
-\title{Turns a data frame column into a factor}
+\title{Prepares var and var_label columns for plotting by ordering them and turning
+them into factors}
 \usage{
-set_factor_var(df, var, reverse = FALSE)
+set_factor_var(df, var, var_label = NULL, reverse = FALSE)
 }
 \arguments{
 \item{df}{Data frame}
 
-\item{var}{Variable name for the discrete variable to be turned into a factor}
+\item{var}{Required variable name for the discrete variable to be turned into
+a factor. This variable is sorted alphabetically to determine the order.}
+
+\item{var_label}{Optional variable name for the discrete variable labels
+to be used instead of var. If var is a sort key, for instance, var_label
+can be used for the actual labels.}
 
 \item{reverse}{Whether the order of the factor should be reverted, defaults
 to FALSE.}
@@ -18,8 +24,11 @@ to FALSE.}
 Data frame with factor column.
 }
 \description{
-Turns a data frame column into a factor
+Prepares var and var_label columns for plotting by ordering them and turning
+them into factors
 }
 \examples{
+\dontrun{
 set_factor_var(df, var, TRUE)
+}
 }

@@ -10,8 +10,10 @@ theme_rub(
   base_line_size = base_size/22,
   base_rect_size = base_size/22,
   color = RUB_colors["blue"],
-  facet_headings = FALSE,
-  y_axis_label = FALSE
+  has_facet = FALSE,
+  x_axis_label = FALSE,
+  y_axis_label = FALSE,
+  legend_title = FALSE
 )
 }
 \arguments{
@@ -26,19 +28,32 @@ theme_rub(
 \item{color}{Color for font and borders, defaults to `RUB_colors["blue"]`,
 i.e. #003560.}
 
-\item{facet_headings}{Boolean indicating whether facet headings are required,
+\item{has_facet}{Boolean indicating whether facet headings are required,
 defaults to FALSE.}
+
+\item{x_axis_label}{Boolean indicating whether there is a label for the
+x-axis, defaults to FALSE.}
 
 \item{y_axis_label}{Boolean indicating whether there is a label for the
 y-axis, defaults to FALSE.}
+
+\item{legend_title}{Boolean indicating whether there is a label for the
+legend, defaults to FALSE.}
 }
 \description{
 This function allows you to add the RUB theme to your ggplot charts.
 }
 \examples{
-line <- ggplot(line_df, aes(x = year, y = lifeExp)) +
-  geom_line(colour = "#007f7f", size = 1) +
-  geom_hline(yintercept = 0, size = 1, colour = "#333333") +
-  theme_rub()
+# Base plot
+ggplot2::ggplot(
+mtcars,
+ggplot2::aes(
+    x = mpg,
+    y = disp,
+    color = as.factor(carb)
+  )
+) +
+ggplot2::geom_point() +
+theme_rub()
 }
 \keyword{theme_rub}

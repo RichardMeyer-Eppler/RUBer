@@ -36,17 +36,15 @@ library(tidyselect)
 library(wiesbaden)
 ```
 
-The R package wiesbaden by Moritz Marbach provides functions to directly
+The R package `wiesbaden` by Moritz Marbach provides functions to directly
 retrieve data from databases maintained by the Federal Statistical Office of
 Germany (Destatis) in Wiesbaden. After installing the package with
 `remotes::install_github("sumtxt/wiesbaden")`, you can check 
 `vignette("using-wiesbaden", package = "wiesbaden")` for more info.
 
 In order to retrieve data from the four available databases
-([Regionalstatistik](https://www.regionalstatistik.de/genesis/online),
-[Genesis](https://www-genesis.destatis.de/genesis/online), [Landesdatenbank
-NRW](https://www.landesdatenbank.nrw.de),
-[Bildungsmonitoring](https://www.bildungsmonitoring.de)), you need to register
+([Bildungsmonitoring](https://www.bildungsmonitoring.de), [Genesis](https://www-genesis.destatis.de/genesis/online), [Landesdatenbank
+NRW](https://www.landesdatenbank.nrw.de), [Regionalstatistik](https://www.regionalstatistik.de/genesis/online)), you need to register
 on the respective website. For this vignette, we use the Landesdatenbank NRW
 database, so please register an account there. Once you have registered, use
 `wiesbaden::save_credentials` to save your login information and
@@ -78,6 +76,11 @@ df_table <- wiesbaden::retrieve_datalist(
    tableseries= "213",
    genesis = c(db = "nrw")
    )
+
+df_table %>% dplyr::arrange(desc(description)) %>% tibble::as_tibble()
+
+writeLines(df_table$description)
+
 ```
 
 Looking at the retrieved data frame, a problem becomes apparent: the function
@@ -252,7 +255,8 @@ list_value_labels_unique <- purrr::map2(
   list_value_labels_wrangled,
   description_names,
   ~dplyr::rename(
-    .x, !!.y := description
+    .x,
+    !!.y := description
     )
 )
 ```
@@ -307,18 +311,19 @@ data frame into a tibble, for better print defaults among other benefits.
 
 ```{r finalize-data, eval = FALSE}
 # Order columns alphabetically, put columns tablename and tablename_description 
-# first, turn data frame into tibble.
+# first, put value columns last, turn data frame into tibble.
 db_nrw_213 <- df_joined %>% 
   dplyr::select(
     sort(
       tidyselect::peek_vars()
       )
   ) %>% 
-  dplyr::select(
+  dplyr::relocate(
     tablename,
     tablename_description,
-    everything()
-  ) %>% 
+    !(ends_with("_val")),
+    ends_with("val")
+    ) %>% 
   tibble::as_tibble()
 ```
 
@@ -332,10 +337,6 @@ usethis::use_data(
   overwrite = TRUE,
   version = 3
   )
-
-load(
-  "D:\\Git\\db_nrw_213.rda"
-)
 ```
 
 # Working with the Destatis data
@@ -345,7 +346,11 @@ the data based on a table code. It also discards all columns that only consist
 of NA after filtering. As an example, let us create a data frame consisting of
 all data for table code "21311LS001A".
 
-```{r filter-destatis-code, eval = FALSE}
+```{r filter-destatis-code}
+load(
+  "D:\\Git\\db_nrw_213.rda"
+)
+
 # Get all rows and columns for table code 21311LS001A
 df_21311LS001A <- filter_destatis_code(
   df = db_nrw_213,
@@ -360,19 +365,33 @@ term, and university. We will do some basic analysis and plotting using this
 data.
 
 First, let us find out which five universities had the highest overall number of
-students with the help of `forcats::fct_lump`.
+students with the help of `forcats::fct_lump_n`.
 
-```{r 21311LS001A-plot1, eval = FALSE}
+```{r 21311LS001A-plot1}
+# Create data frame with plotting data, filtering on the winter term 2017/18,
+# focusing on the top five universities in terms of student count and keeping
+# the top five degree types, in addition to a lumped category "other degrees".
 df_plot <- df_21311LS001A %>% 
   dplyr::filter(
     semest == "WS 2017/18"
-  ) %>% 
+  ) %>%   
   dplyr::mutate(
     bilhs1_description = forcats::fct_lump_n(
       bilhs1_description,
       n = 5,
       w = bil002_val,
       other_level = "Other NRW universities"
+      )
+  ) %>%
+  dplyr::filter(
+    bilhs1_description != "Other NRW universities"
+  ) %>% 
+  dplyr::mutate(
+    bilap1 = forcats::fct_lump_n(
+      bilap1,
+      n = 5,
+      w = bil002_val,
+      other_level = "Other degrees"
       ),
     bilap1_description = forcats::fct_lump_n(
       bilap1_description,
@@ -380,10 +399,7 @@ df_plot <- df_21311LS001A %>%
       w = bil002_val,
       other_level = "Other degrees"
       )
-    ) %>% 
-  dplyr::filter(
-    bilhs1_description != "Other NRW universities"
-  )
+    )
 
 rub_plot_type_1(
   df = df_plot,
@@ -404,7 +420,7 @@ in the winter term 2017/18. Maybe we are interested more specifically in the
 relative importance of each degree type at each university. We can use 
 `rub_plot_type_2` for that:
 
-```{r 21311LS001A-plot2, eval = FALSE}
+```{r 21311LS001A-plot2}
 rub_plot_type_2(
   df = df_plot,
   x_var = bilhs1_description,
@@ -413,26 +429,88 @@ rub_plot_type_2(
   fill_var = bilap1_description,
   caption = "Landesdatenbank NRW, Table Code 21311LS001A (license dl-de/by-2-0)",
   caption_prefix = "Source:",
-  filter_cutoff = 0.06
-#  ,fill_reverse = TRUE
+  filter_cutoff = 0.05
+# ,fill_reverse = TRUE
+# ,palette_reverse = TRUE
 )
+```
+
+If we wanted to examine how the relative importance of each degree has developed
+over time, we could switch to `rub_plot_type_3` (a rotated version of type 2),
+use the term as y-variable and the university name as facet variable.
+
+```{r 21311LS001A-plot3}
+# Create data frame with plotting data, filtering on the winter terms 2013-2018,
+# focusing on the top five universities in terms of student count and keeping
+# the top five degree types, in addition to a lumped category "other degrees".
+df_plot_t3 <- df_21311LS001A %>% 
+  dplyr::filter(
+    semest %in% c(
+      "WS 2017/18",
+      "WS 2016/17",
+      "WS 2015/16",
+      "WS 2014/15",
+      "WS 2013/14"
+      )
+    ) %>% 
+  dplyr::mutate(
+    bilhs1_description = forcats::fct_lump_n(
+      bilhs1_description,
+      n = 5,
+      w = bil002_val,
+      other_level = "Other NRW universities"
+      )
+  ) %>%
+  dplyr::filter(
+    bilhs1_description != "Other NRW universities"
+  ) %>% 
+  dplyr::mutate(
+    bilap1 = forcats::fct_lump_n(
+      bilap1,
+      n = 5,
+      w = bil002_val,
+      other_level = "Other degrees"
+      ),
+    bilap1_description = forcats::fct_lump_n(
+      bilap1_description,
+      n = 5,
+      w = bil002_val,
+      other_level = "Other degrees"
+      )
+    )
+
+rub_plot_type_3(
+  df = df_plot_t3,
+  x_var = bil002_val,
+  y_var = semest,
+  facet_var = bilhs1_description,
+  fill_var = bilap1_description,
+  caption = "Landesdatenbank NRW, Table Code 21311LS001A (license dl-de/by-2-0)",
+  caption_prefix = "Source:",
+  filter_cutoff = 0.06
+  ,fill_reverse = FALSE
+)
+
+
+# rub_plot_type_3(
+#   df = df_plot_t3,
+#   x_var = bil002_val,
+#   y_var = semest,
+#   facet_var = bilhs1_description,
+#   fill_label = bilap1_description,
+#   fill_var = bilap1,
+#   caption = "Landesdatenbank NRW, Table Code 21311LS001A (license dl-de/by-2-0)",
+#   caption_prefix = "Source:",
+#   filter_cutoff = 0.06
+#   ,fill_reverse = FALSE
+# )
 ```
 
 # Data license for the Destatis data
 
-Data obtained from Destatis is available under the Data licence Germany –
-attribution – version 2.0 (dl-de/by-2-0). The license text is available at
-[www.govdata.de/dl-de/by-2-0](www.govdata.de/dl-de/by-2-0). The data in this
-vignette was obtained from the Landesdatenbank NRW using the code "213" for
-"Hochschulen". The license requests a reference to the dataset using the URI. To
-the best of my knowledge, the Landesdatenbank NRW does not yet provide Uniform
-Resource Identifiers (URI) to identify these tables.
-
-
-# Data Analysis
-
-```{r dev, eval = FALSE}
-debugonce(rub_plot_type_1)
-devtools::document()
-devtools::load_all()
-```
+Data obtained from Destatis is available under the [Data licence Germany –
+attribution – version 2.0 (dl-de/by-2-0)](www.govdata.de/dl-de/by-2-0). The data
+in this vignette was obtained from the Landesdatenbank NRW using the code "213"
+for "Hochschulen". The license requests a reference to the dataset using the
+URI. To the best of my knowledge, the Landesdatenbank NRW does not yet provide
+Uniform Resource Identifiers (URI) to identify these tables.

@@ -6,7 +6,9 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' translate_df(df)
+#' }
 translate_df <- function(df)  {
   df <- df %>%
     dplyr::select(
@@ -52,7 +54,9 @@ translate_df <- function(df)  {
 #' @export
 #'
 #' @examples
-#' orga <- generate_orga(df)
+#' \dontrun{
+#' generate_orga(df)
+#' }
 generate_orga <- function(df) {
   orga <- df %>%
     dplyr::distinct(
@@ -101,7 +105,9 @@ generate_orga <- function(df) {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' filter_destatis_code(df = db_nrw_213, tablename = "21391KF061")
+#' }
 filter_destatis_code <- function(df, tablename) {
   df_filtered <- df %>%
     dplyr::filter(
@@ -115,16 +121,16 @@ filter_destatis_code <- function(df, tablename) {
 }
 
 
-#' Filtere Datensatz auf eine Berichtsnummer plus jeweils relevante Vergleichsgruppe
+#' Filter data frame based on \code{report_nr} column
 #'
-#' @param df Dataframe bzw. Tibble mit den Berichtsdaten
-#' @param report_nr Berichtsnummer
+#' @param df Data frame
+#' @param report_nr Required integer indicating the report_nr
 #'
-#' @return Dataframe bzw. Tibble mit den gefilterten Berichtsdaten
+#' @return Filtered data frame with data for the report nr
 #' @export
 #'
 #' @examples
-#' filter_report(df, report_nr = 12)
+#' filter_report(df_fake, report_nr = 12)
 filter_report <- function(df, report_nr) {
   filtered_df <- df %>%
     dplyr::filter(
@@ -144,7 +150,9 @@ filter_report <- function(df, report_nr) {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' get_headings(df)
+#' }
 get_headings <- function(df) {
   headings <- readxl::read_xlsx(
     path = here::here("data", "headings.xlsx"),
@@ -221,7 +229,7 @@ get_headings <- function(df) {
 #' @param df Data frame
 #' @param column Column name
 #'
-#' @return Vector with unique values
+#' @return Vector with unique values in that column, excluding NA
 #' @export
 #'
 #' @examples
@@ -253,13 +261,15 @@ rub_format_mixed <- function(x) {
     else if (suppressWarnings(
       !is.na(
         as.double(x[i])
+        )
       )
-    )) {
+    ) {
       if ((as.double(x[i])) %% 1 == 0) {
         x[i] <- as.character(
-          format(as.integer(x[i]),
-                 big.mark = ".",
-                 decimal.mark = ","
+          format(
+            as.integer(x[i]),
+            big.mark = ".",
+            decimal.mark = ","
           )
         )
       }
@@ -321,7 +331,9 @@ rub_format_percent <- function(x) {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' sort_report(df)
+#' }
 sort_report <- function(df) {
   df_sorted <- df %>%
     dplyr::arrange(

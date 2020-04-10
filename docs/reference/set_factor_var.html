@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Turns a data frame column into a factor — set_factor_var • RUBer</title>
+<title>Prepares var and var_label columns for plotting by ordering them and turning
+them into factors — set_factor_var • RUBer</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,8 +43,10 @@
 
 
 
-<meta property="og:title" content="Turns a data frame column into a factor — set_factor_var" />
-<meta property="og:description" content="Turns a data frame column into a factor" />
+<meta property="og:title" content="Prepares var and var_label columns for plotting by ordering them and turning
+them into factors — set_factor_var" />
+<meta property="og:description" content="Prepares var and var_label columns for plotting by ordering them and turning
+them into factors" />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -134,16 +137,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Turns a data frame column into a factor</h1>
+    <h1>Prepares var and var_label columns for plotting by ordering them and turning
+them into factors</h1>
     <small class="dont-index">Source: <a href='https://github.com/RichardMeyer-Eppler/RUBer/blob/master/R/wrangle_data_manipulation.R'><code>R/wrangle_data_manipulation.R</code></a></small>
     <div class="hidden name"><code>set_factor_var.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Turns a data frame column into a factor</p>
+    <p>Prepares var and var_label columns for plotting by ordering them and turning
+them into factors</p>
     </div>
 
-    <pre class="usage"><span class='fu'>set_factor_var</span>(<span class='no'>df</span>, <span class='no'>var</span>, <span class='kw'>reverse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>set_factor_var</span>(<span class='no'>df</span>, <span class='no'>var</span>, <span class='kw'>var_label</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>reverse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -154,7 +159,14 @@
     </tr>
     <tr>
       <th>var</th>
-      <td><p>Variable name for the discrete variable to be turned into a factor</p></td>
+      <td><p>Required variable name for the discrete variable to be turned into
+a factor. This variable is sorted alphabetically to determine the order.</p></td>
+    </tr>
+    <tr>
+      <th>var_label</th>
+      <td><p>Optional variable name for the discrete variable labels
+to be used instead of var. If var is a sort key, for instance, var_label
+can be used for the actual labels.</p></td>
     </tr>
     <tr>
       <th>reverse</th>
@@ -168,7 +180,9 @@ to FALSE.</p></td>
     <p>Data frame with factor column.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>set_factor_var</span>(<span class='no'>df</span>, <span class='no'>var</span>, <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in df[[var]]: Objekt des Typs 'closure' ist nicht indizierbar</span></div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>set_factor_var</span>(<span class='no'>df</span>, <span class='no'>var</span>, <span class='fl'>TRUE</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

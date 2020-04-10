@@ -17,5 +17,7 @@ Data frame with four additional columns: "heading", "subheading",
 Add headings to report data frame
 }
 \examples{
+\dontrun{
 get_headings(df)
+}
 }

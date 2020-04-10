@@ -7,9 +7,10 @@
 get_RUB_palettes(palette = "discrete", reverse = FALSE, ...)
 }
 \arguments{
-\item{palette}{Character name of palette in drsimonj_palettes}
+\item{palette}{Character name of palette in \code{RUB_palettes}}
 
-\item{reverse}{Boolean indicating whether the palette should be reversed}
+\item{reverse}{Optional boolean indicating whether the palette should be
+reversed, defaults to FALSE.}
 
 \item{...}{Additional arguments to pass to
 \code{\link[grDevices]{colorRamp}}}

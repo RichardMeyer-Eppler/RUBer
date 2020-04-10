@@ -4,6 +4,9 @@
 #'
 #' @references https://www.ruhr-uni-bochum.de/cd/
 #' @export
+#'
+#' @examples
+#' RUB_colors["green"]
 RUB_colors <- c(
   `green`         = "#8DAE10",
   `green_80`      = "#A4BE40",
@@ -51,6 +54,9 @@ get_RUB_colors <- function(...) {
 #'
 #' @references https://www.ruhr-uni-bochum.de/cd/
 #' @export
+#'
+#' @examples
+#' RUB_palettes["discrete_5"]
 RUB_palettes <- list(
   `discrete` = get_RUB_colors(
     "green",
@@ -132,8 +138,9 @@ RUB_palettes <- list(
 
 #' Return function to interpolate a RUB color palette
 #'
-#' @param palette Character name of palette in drsimonj_palettes
-#' @param reverse Boolean indicating whether the palette should be reversed
+#' @param palette Character name of palette in \code{RUB_palettes}
+#' @param reverse Optional boolean indicating whether the palette should be
+#'     reversed, defaults to FALSE.
 #' @param ... Additional arguments to pass to
 #'    \code{\link[grDevices]{colorRamp}}
 #'
@@ -152,9 +159,9 @@ get_RUB_palettes <- function(palette = "discrete", reverse = FALSE, ...) {
 
 #' Color scale constructor for RUB colors
 #'
-#' @param palette Character name of palette in \code{RUB_palettes}
-#' @param discrete Boolean indicating whether color aesthetic is discrete or not
-#' @param reverse Boolean indicating whether the palette should be reversed
+#' @inheritParams get_RUB_palettes
+#' @param discrete Boolean indicating whether color aesthetic is discrete or
+#'     not, defaults to TRUE.
 #' @param ... Additional arguments passed to
 #'    \code{\link[ggplot2]{discrete_scale}} or
 #'    \code{\link[ggplot2]{scale_gradient}}, used when discrete is TRUE
@@ -163,10 +170,22 @@ get_RUB_palettes <- function(palette = "discrete", reverse = FALSE, ...) {
 #' @export
 #'
 #' @examples
-#' ggplot(mpg, aes(displ, cty, color = trans)) +
-#' geom_point(size = 4) +
-#' scale_color_rub(discrete = TRUE, palette = "discrete")
-scale_color_rub <- function(palette = "discrete", discrete = TRUE, reverse = FALSE, ...) {
+#' ggplot2::ggplot(
+#'   data = mtcars,
+#'   ggplot2::aes(
+#'     x = mpg,
+#'     y = disp,
+#'     color = as.factor(carb)
+#'     )
+#'   ) +
+#'   ggplot2::geom_point() +
+#'   scale_color_rub(
+#'     palette = "discrete"
+#'   )
+scale_color_rub <- function(palette = "discrete",
+                            discrete = TRUE,
+                            reverse = FALSE,
+                            ...) {
   pal <- get_RUB_palettes(
     palette = palette,
     reverse = reverse
@@ -183,6 +202,13 @@ scale_color_rub <- function(palette = "discrete", discrete = TRUE, reverse = FAL
   } else {
     ggplot2::scale_color_gradientn(
       colours = pal(256),
+      guide = ggplot2::guide_colorbar(
+        label = FALSE,
+        ticks = FALSE,
+        barwidth = ggplot2::unit(4, "cm"),
+        barheight = ggplot2::unit(0.5, "cm"),
+        title.vjust = 1
+      ),
       ...
     )
   }
@@ -201,9 +227,17 @@ scale_color_rub <- function(palette = "discrete", discrete = TRUE, reverse = FAL
 #' @export
 #'
 #' @examples
-#' ggplot(mpg, aes(x = trans, y = displ, fill = class)) +
-#' geom_bar(stat = "identity") +
-#' scale_fill_rub()
+#' ggplot2::ggplot(
+#'   data = mtcars,
+#'   ggplot2::aes(
+#'     x = as.factor(gear),
+#'     fill = as.factor(vs)
+#'     )
+#'   ) +
+#'   ggplot2::geom_bar() +
+#'   scale_fill_rub(
+#'     palette = "discrete_2"
+#'   )
 scale_fill_rub <- function(palette = "discrete", discrete = TRUE, reverse = FALSE, ...) {
   pal <- get_RUB_palettes(
     palette = palette,
@@ -221,6 +255,13 @@ scale_fill_rub <- function(palette = "discrete", discrete = TRUE, reverse = FALS
   } else {
     ggplot2::scale_fill_gradientn(
       colours = pal(256),
+      guide = ggplot2::guide_colorbar(
+        label = FALSE,
+        ticks = FALSE,
+        barwidth = ggplot2::unit(4, "cm"),
+        barheight = ggplot2::unit(0.5, "cm"),
+        title.vjust = 1
+      ),
       ...
     )
   }

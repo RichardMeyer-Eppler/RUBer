@@ -2,19 +2,19 @@
 % Please edit documentation in R/report.R
 \name{get_title}
 \alias{get_title}
-\title{Get title for report title page based on the column "report_nr"}
+\title{Get title for report title page based on the column \code{report_nr}}
 \usage{
 get_title(report_nr)
 }
 \arguments{
-\item{report_nr}{}
+\item{report_nr}{Required}
 }
 \value{
 String
 }
 \description{
-Get title for report title page based on the column "report_nr"
+Get title for report title page based on the column \code{report_nr}
 }
 \examples{
-get_title(df)
+get_title(report_nr = 5)
 }

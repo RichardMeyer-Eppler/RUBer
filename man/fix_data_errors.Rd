@@ -7,7 +7,7 @@
 fix_data_errors(df)
 }
 \arguments{
-\item{df}{}
+\item{df}{Data frame}
 }
 \value{
 Data frame with fixes to the columns \code{faculty_txt},
@@ -17,5 +17,7 @@ Data frame with fixes to the columns \code{faculty_txt},
 Fixes data errors in report numbers 42, 43, 61 and 62.
 }
 \examples{
+\dontrun{
 fix_data_errors(df)
+}
 }

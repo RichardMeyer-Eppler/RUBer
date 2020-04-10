@@ -4,10 +4,10 @@
 \alias{rub_style_flextable}
 \title{Applies RUB-Style to flextable object}
 \usage{
-rub_style_flextable(tbl, font = "RUB Scala TZ")
+rub_style_flextable(table, font = "RUB Scala TZ")
 }
 \arguments{
-\item{tbl}{Flextable object}
+\item{table}{Flextable object}
 
 \item{font}{Font for the ggplot theme, defaults to RUB Scala TZ}
 }
@@ -18,5 +18,6 @@ Styled flextable object
 Applies RUB-Style to flextable object
 }
 \examples{
-rub_style_flextable(tbl)
+table_mtcars <- flextable::flextable(mtcars)
+rub_style_flextable(table_mtcars)
 }

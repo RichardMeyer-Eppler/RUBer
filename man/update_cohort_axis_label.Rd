@@ -16,5 +16,7 @@ Data frame with updated column "axis_label"
 Update axis label for cohort data
 }
 \examples{
+\dontrun{
 update_cohort_axis_label(df)
+}
 }

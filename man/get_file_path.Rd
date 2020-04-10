@@ -7,7 +7,7 @@
 get_file_path(file_name)
 }
 \arguments{
-\item{file_name}{with file extension}
+\item{file_name}{Required string containing file name with file extension}
 }
 \value{
 String file path
@@ -16,5 +16,5 @@ String file path
 Get file path for automatic report generation
 }
 \examples{
-get_file_path("test")
+get_file_path(file_name = "test")
 }

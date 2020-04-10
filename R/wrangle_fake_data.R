@@ -9,7 +9,9 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' get_fake_df(df, report_id_group_level = c(62, 64))
+#' }
 get_fake_df <- function(df, report_id_group_level = NULL) {
   df_t1_t4 <- get_fake_data_type_1_4(df)
   df_t2 <- get_fake_data_type_2(df)
@@ -50,7 +52,9 @@ get_fake_df <- function(df, report_id_group_level = NULL) {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' get_fake_data_type_1_4(df)
+#' }
 get_fake_data_type_1_4 <- function(df) {
   df_type_1_4 <- dplyr::filter(
     df,
@@ -85,7 +89,7 @@ get_fake_data_type_1_4 <- function(df) {
         ),
         list(0)
       ),
-      median_fake_values_1 = median(
+      median_fake_values_1 = stats::median(
         unlist(
           fake_values_1
         )
@@ -158,7 +162,9 @@ get_fake_data_type_1_4 <- function(df) {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' get_fake_data_type_2(df)
+#' }
 get_fake_data_type_2 <- function(df) {
   df_type_2 <- dplyr::filter(
     df,
@@ -227,13 +233,16 @@ get_fake_data_type_2 <- function(df) {
 #' Create fake values for figure type 3
 #'
 #' @param df Data frame
-#' @param report_id_group_level A vector of report_ids, indicating which reports do not have hierarchical reference group comparisons
+#' @param report_id_group_level A vector of report_ids, indicating which reports
+#'     do not have hierarchical reference group comparisons
 #'
 #' @return Data frame with fake values for figure type 3
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' get_fake_data_type_3(df, report_id_group_level = c(62, 64))
+#' }
 get_fake_data_type_3 <- function(df, report_id_group_level = NULL) {
   df_type_3 <- dplyr::filter(
     df,
@@ -273,7 +282,7 @@ get_fake_data_type_3 <- function(df, report_id_group_level = NULL) {
       value_n_total_fake =
         as.integer(
           value_n_total_fake_base *
-            runif(1, min = 0.9, max = 1.1)
+            stats::runif(1, min = 0.9, max = 1.1)
         )
     ) %>%
     dplyr::ungroup() %>%
@@ -305,7 +314,7 @@ get_fake_data_type_3 <- function(df, report_id_group_level = NULL) {
           report_nr %in% report_id_group_level,
         value_n_total_fake,
         as.integer(
-          value_n_total_fake * runif(1, min = 0, max = 1)
+          value_n_total_fake * stats::runif(1, min = 0, max = 1)
         )
       ),
       # Axis label updated with new total N value
@@ -372,7 +381,11 @@ get_fake_data_type_3 <- function(df, report_id_group_level = NULL) {
 #' @export
 #'
 #' @examples
-#' get_fake_values_type_1_4(figure_type_id = 4, length = 5, base_value = 800)
+#' get_fake_values_type_1_4(
+#'    figure_type_id = 4,
+#'    length = 5,
+#'    base_value = 800
+#'    )
 get_fake_values_type_1_4 <- function(figure_type_id, length, base_value = NULL) {
   fake_values <- vector(
     mode = "integer",
@@ -383,15 +396,15 @@ get_fake_values_type_1_4 <- function(figure_type_id, length, base_value = NULL) 
   max <- 0
 
   if (is.null(base_value)) {
-    base_value <- runif(1, min = 50, max = 1000)
+    base_value <- stats::runif(1, min = 50, max = 1000)
   }
 
   if (figure_type_id == 1) {
-    factor <- runif(1, min = 0, max = 0.25)
+    factor <- stats::runif(1, min = 0, max = 0.25)
     min <- base_value - factor * base_value
     max <- base_value + factor * base_value
   } else if (figure_type_id == 4) {
-    factor <- runif(1, min = 0.05, max = 0.40)
+    factor <- stats::runif(1, min = 0.05, max = 0.40)
     min <- 0.05 * base_value
     max <- factor * base_value
   }
@@ -399,7 +412,7 @@ get_fake_values_type_1_4 <- function(figure_type_id, length, base_value = NULL) 
   for (i in seq_along(fake_values)) {
     if (!is.na(base_value)) {
       fake_values[i] <- as.integer(
-        runif(1, min = min, max = max)
+        stats::runif(1, min = min, max = max)
       )
     }
   }
@@ -416,7 +429,10 @@ get_fake_values_type_1_4 <- function(figure_type_id, length, base_value = NULL) 
 #' @export
 #'
 #' @examples
-#' get_fake_tibble_type_2(fractions = 6, periods = 3)
+#' get_fake_values_type_2(
+#'    fractions = 6,
+#'    periods = 3
+#'    )
 get_fake_values_type_2 <- function(fractions = 5, periods = 8) {
   df <- dplyr::tibble(
     fraction_id = rep(1:fractions, times = periods),
@@ -424,11 +440,11 @@ get_fake_values_type_2 <- function(fractions = 5, periods = 8) {
     percentage = 0
   )
 
-  start_value <- runif(1, min = 0.75, max = 1)
+  start_value <- stats::runif(1, min = 0.75, max = 1)
   df[[1, "percentage"]] <- start_value
 
   for (i in 2:periods) {
-    decay_rate <- runif(1, min = 0.75, max = 1)
+    decay_rate <- stats::runif(1, min = 0.75, max = 1)
     lag_value <- df[[((i - 1) * fractions) - fractions + 1, "percentage"]]
     df[[(i * fractions) - fractions + 1, "percentage"]] <-
       lag_value * decay_rate
@@ -447,7 +463,9 @@ get_fake_values_type_2 <- function(fractions = 5, periods = 8) {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' create_fake_values_type_2(df)
+#' }
 create_fake_values_type_2 <- function(df) {
   residual <- 0
   periods <- length(RUBer::get_unique(df, period))
@@ -472,7 +490,7 @@ create_fake_values_type_2 <- function(df) {
       if (j == fractions) {
         increase <- residual
       } else {
-        increase <- runif(1, min = 0, max = residual)
+        increase <- stats::runif(1, min = 0, max = residual)
       }
 
       lag_value <- 0
@@ -491,10 +509,10 @@ create_fake_values_type_2 <- function(df) {
 #'
 #' @param x Length
 #'
-#' @return
+#' @return Numeric vector of length x
 #'
 #' @examples
-#' get_fake_values_type_3(5)
+#' get_fake_values_type_3(x = 5)
 get_fake_values_type_3 <- function(x) {
   fake_values <- vector(
     mode = "double",
@@ -507,7 +525,7 @@ get_fake_values_type_3 <- function(x) {
       fake_values[i] <- residual
       residual <- residual - residual
     } else {
-      rnd <- runif(1, min = 0, max = residual)
+      rnd <- stats::runif(1, min = 0, max = residual)
       fake_values[i] <- rnd
       residual <- residual - rnd
     }

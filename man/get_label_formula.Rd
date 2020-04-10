@@ -7,17 +7,19 @@
 get_label_formula(label_var, is_percentage = FALSE)
 }
 \arguments{
-\item{label_var}{The name of the variabler requiring value labels}
+\item{label_var}{The name of the variable requiring value labels}
 
 \item{is_percentage}{Optional boolean indicating whether the value label is
 expressed in absolute numbers or as a percentage, defaults to false}
 }
 \value{
-A defused expression for caluclating the position of the y-label
+A defused expression for calculating the position of the y-label
 }
 \description{
 Get formula for calculating position of value labels
 }
 \examples{
+\dontrun{
 get_label_formula(y_var = cyl, label_reverse = TRUE, is_percentage = FALSE)
+}
 }

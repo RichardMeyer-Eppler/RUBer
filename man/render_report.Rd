@@ -16,14 +16,17 @@ render_report(
 
 \item{report_nr}{Report number of the report}
 
-\item{date}{Date of the report displayed on the title page, defaults to month
-and year.}
+\item{rmd_template}{Path to the R Markdown File for that report, defaults to
+\code{here::here("datenreport_new.Rmd")}}
 
-\item{p_rmd_template}{Path to the R Markdown File for that report}
+\item{date}{Date of the report displayed on the title page, defaults to
+\code{format(Sys.Date(), format= "\%B \%Y")}.}
 }
 \description{
 Render report
 }
 \examples{
+\dontrun{
 render_report(df, 12)
+}
 }

@@ -7,7 +7,7 @@
 add_file_name(df)
 }
 \arguments{
-\item{df}{}
+\item{df}{Data frame}
 }
 \value{
 Data frame with additional column \code{file_name}
@@ -16,5 +16,7 @@ Data frame with additional column \code{file_name}
 Add column \code{file_name} to data frame
 }
 \examples{
+\dontrun{
 add_file_name(df)
+}
 }

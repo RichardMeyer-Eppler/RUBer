@@ -7,7 +7,7 @@
 add_figure_caption(df)
 }
 \arguments{
-\item{df}{}
+\item{df}{Data frame}
 }
 \value{
 Data frame with additional column \code{figure_caption}
@@ -16,5 +16,7 @@ Data frame with additional column \code{figure_caption}
 Adds column \code{figure_caption} to data frame
 }
 \examples{
+\dontrun{
 add_figure_caption(df)
+}
 }

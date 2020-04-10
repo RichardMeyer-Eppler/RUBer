@@ -9,7 +9,8 @@ get_fake_data_type_3(df, report_id_group_level = NULL)
 \arguments{
 \item{df}{Data frame}
 
-\item{report_id_group_level}{A vector of report_ids, indicating which reports do not have hierarchical reference group comparisons}
+\item{report_id_group_level}{A vector of report_ids, indicating which reports
+do not have hierarchical reference group comparisons}
 }
 \value{
 Data frame with fake values for figure type 3
@@ -18,5 +19,7 @@ Data frame with fake values for figure type 3
 Create fake values for figure type 3
 }
 \examples{
+\dontrun{
 get_fake_data_type_3(df, report_id_group_level = c(62, 64))
+}
 }

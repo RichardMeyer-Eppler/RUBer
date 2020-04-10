@@ -16,5 +16,7 @@ Data frame with fake values for figure type 2
 Create fake values for figure type 2
 }
 \examples{
+\dontrun{
 get_fake_data_type_2(df)
+}
 }

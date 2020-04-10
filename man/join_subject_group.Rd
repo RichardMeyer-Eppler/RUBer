@@ -18,5 +18,7 @@ Joined data frame
 Joins left hand and right hand side of subject group data
 }
 \examples{
+\dontrun{
 join_subject_group(df_lhs, df_rhs)
+}
 }

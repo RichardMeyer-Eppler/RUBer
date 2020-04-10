@@ -7,7 +7,7 @@
 bind_subject_group(df)
 }
 \arguments{
-\item{df}{}
+\item{df}{Data frame}
 }
 \value{
 Data frame with subject group data for each report_nr. This means
@@ -18,5 +18,7 @@ Data frame with subject group data for each report_nr. This means
 Bind rows of subject group data to data frame
 }
 \examples{
+\dontrun{
 bind_subject_group(df)
+}
 }

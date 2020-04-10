@@ -6,7 +6,9 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' add_2018_fg(df)
+#' }
 bind_2018_fg <- function(df) {
   df <- dplyr::union(
     df,
@@ -22,7 +24,9 @@ bind_2018_fg <- function(df) {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' get_2018_fg(df)
+#' }
 get_2018_fg <- function(df) {
   pattern_sg <- c(
     "Humanmedizin / Gesundheitswissenschaften" = "Humanmedizin,\nGesundheitswissenschaften"
@@ -91,13 +95,15 @@ get_2018_fg <- function(df) {
 
 #' Get left hand side of generated subject group data
 #'
-#' @param df
+#' @param df Data frame
 #'
 #' @return Data frame with left hand side of generated subject group data
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' get_subject_group_lhs(df)
+#' }
 get_subject_group_lhs <- function(df) {
 
   subject_group_lhs <- df %>%
@@ -127,13 +133,15 @@ get_subject_group_lhs <- function(df) {
 
 #' Get right hand side of generated subject group data
 #'
-#' @param df
+#' @param df Data frame
 #'
 #' @return Data frame with right hand side of generated subject group data
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' get_subject_group_rhs(df)
+#' }
 get_subject_group_rhs <- function(df) {
   subject_group_rhs <- df %>%
     dplyr::filter(
@@ -179,7 +187,9 @@ get_subject_group_rhs <- function(df) {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' join_subject_group(df_lhs, df_rhs)
+#' }
 join_subject_group <- function(df_lhs, df_rhs) {
   subject_group_df <- df_lhs %>%
     dplyr::left_join(
@@ -198,7 +208,7 @@ join_subject_group <- function(df_lhs, df_rhs) {
 
 #' Bind rows of subject group data to data frame
 #'
-#' @param df
+#' @param df Data frame
 #'
 #' @return Data frame with subject group data for each report_nr. This means
 #'    that the subject group data is repeated several times over. Binding the
@@ -206,7 +216,9 @@ join_subject_group <- function(df_lhs, df_rhs) {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' bind_subject_group(df)
+#' }
 bind_subject_group <- function(df) {
   lhs_df <- get_subject_group_lhs(df)
   rhs_df <- get_subject_group_rhs(df)
@@ -224,7 +236,7 @@ bind_subject_group <- function(df) {
         report_nr
       )
     ) %>%
-    RUBer::sort_report()
+    sort_report()
 
   return(df)
 }

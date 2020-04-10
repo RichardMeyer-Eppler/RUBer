@@ -7,7 +7,7 @@
 add_figure_count(df)
 }
 \arguments{
-\item{df}{}
+\item{df}{Data frame}
 }
 \value{
 Data frame with additional column \code{figure_count}
@@ -16,5 +16,7 @@ Data frame with additional column \code{figure_count}
 Adds column \code{figure_count} to data frame
 }
 \examples{
+\dontrun{
 add_figure_count(df)
+}
 }

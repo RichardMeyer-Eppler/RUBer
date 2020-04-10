@@ -85,9 +85,12 @@ numbers of print-ready reports in Microsoft Word.
 Install the development version from GitHub with:
 
 ``` r
-# If package "remotes" is not installed, install this first:
+# If package "remotes" is not installed, install it first:
 # install.packages("remotes")
 
-# Install RUBer from Github:
-remotes::install_github("RUBer")
+# Install RUBer from Github
+remotes::install_github(
+  repo = "RichardMeyer-Eppler/RUBer",
+  build_vignettes = TRUE
+  )
 ```

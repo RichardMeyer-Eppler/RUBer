@@ -20,5 +20,7 @@ Data frame with fake values for \code{axis_label},
 Get data frame with generated fake values
 }
 \examples{
+\dontrun{
 get_fake_df(df, report_id_group_level = c(62, 64))
+}
 }

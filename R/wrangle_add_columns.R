@@ -1,13 +1,16 @@
 #' Add column \code{fgr_nrwbund_ltxt} to data frame
 #'
 #' @param df Data frame containing \code{fgr_nrwbund_id}
-#' @param df_orga Data frame containing \code{fgr_nrwbund_id} and \code{fgr_nrwbund_ltxt}
+#' @param df_orga Data frame containing \code{fgr_nrwbund_id} and
+#'     \code{fgr_nrwbund_ltxt}
 #'
 #' @return Data frame with additional column \code{fgr_nrwbund_ltxt}
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' add_fgr_nrwbund_ltxt(df)
+#' }
 add_fgr_nrwbund_ltxt <- function(df, df_orga) {
   orga_fgr <- df_orga %>%
     dplyr::distinct(
@@ -30,13 +33,15 @@ add_fgr_nrwbund_ltxt <- function(df, df_orga) {
 
 #' Adds column \code{figure_caption} to data frame
 #'
-#' @param df
+#' @param df Data frame
 #'
 #' @return Data frame with additional column \code{figure_caption}
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' add_figure_caption(df)
+#' }
 add_figure_caption <- function(df)  {
   df <- df %>%
     dplyr::group_by(
@@ -80,13 +85,15 @@ add_figure_caption <- function(df)  {
 
 #' Adds column \code{figure_count} to data frame
 #'
-#' @param df
+#' @param df Data frame
 #'
 #' @return Data frame with additional column \code{figure_count}
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' add_figure_count(df)
+#' }
 add_figure_count <- function(df) {
   df <- df %>%
     dplyr::group_by(
@@ -127,7 +134,8 @@ add_figure_count <- function(df) {
       cols = c(data)
     )
 
-  ## For some figures, several degree groups are plotted in one figure. The figure count column needs to account for that.
+  # For some figures, several degree groups are plotted in one figure.
+  # The figure count column needs to account for that.
   df <- df %>%
     dplyr::group_by(
       report_nr,
@@ -164,13 +172,15 @@ add_figure_count <- function(df) {
 
 #' Add column \code{figure_height} to data frame
 #'
-#' @param df
+#' @param df Data frame
 #'
 #' @return Data frame with additional column \code{figure_height}
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' add_figure_height(df)
+#' }
 add_figure_height <- function(df) {
   df <- df %>%
     dplyr::group_by(
@@ -219,13 +229,15 @@ add_figure_height <- function(df) {
 
 #' Add column \code{file_name} to data frame
 #'
-#' @param df
+#' @param df Data frame
 #'
 #' @return Data frame with additional column \code{file_name}
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' add_file_name(df)
+#' }
 add_file_name <- function(df) {
   df <- df %>%
     dplyr::group_by(
@@ -274,14 +286,16 @@ add_file_name <- function(df) {
 
 #' Get formula for calculating position of value labels
 #'
-#' @param label_var The name of the variabler requiring value labels
+#' @param label_var The name of the variable requiring value labels
 #' @inheritParams add_label_position
 #'
-#' @return A defused expression for caluclating the position of the y-label
+#' @return A defused expression for calculating the position of the y-label
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' get_label_formula(y_var = cyl, label_reverse = TRUE, is_percentage = FALSE)
+#' }
 get_label_formula <- function(label_var,
                               is_percentage = FALSE) {
   label_var <- rlang::enquo(label_var)
@@ -315,9 +329,11 @@ get_label_formula <- function(label_var,
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' add_label_position(df, x_var, y_var, fill)
+#' }
 add_label_position <- function(df, x_var,
-                               y_var, facet_var,
+                               y_var, facet_var = NULL,
                                fill_var, filter_cutoff = 0.04,
                                fill_reverse = FALSE, is_percentage = FALSE) {
 
@@ -394,18 +410,33 @@ add_label_position <- function(df, x_var,
       round((!!y_var / sum(!!y_var)), digits = 2) >= filter_cutoff
     )
 
-  return(df_label_filtered)
+  # Format percentage values with no decimals and percentage sign
+  # https://community.rstudio.com/t/using-label-percent-with-the-label-argument-of-geom-text-and-geom-label/54244/2
+  if(is_percentage) {
+    df_label_formatted <- df_label_filtered %>%
+      dplyr::mutate(
+        !!y_var := scales::label_percent(
+          accuracy = 1L
+        )(!!y_var)
+      )
+    } else  {
+      df_label_formatted <- df_label_filtered
+      }
+
+  return(df_label_formatted)
 }
 
 #' Adds column \code{report_author} to data frame
 #'
-#' @param df
+#' @param df Data frame
 #'
 #' @return Data frame with additional column \code{report_author}
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' add_report_author(df)
+#' }
 add_report_author <- function(df) {
   df <- df %>%
     dplyr::group_by(
@@ -480,20 +511,23 @@ add_report_author <- function(df) {
 
 #' Adds column \code{report_title} to data frame
 #'
-#' @param df
+#' @param df Data frame
 #'
 #' @return Data frame with additional column \code{report_title}
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' add_report_title(df)
+#' }
 add_report_title <- function(df)  {
-  df <- df %>%
+  df_title <- df %>%
     dplyr::mutate(
       report_title = purrr::map_chr(
         report_nr,
         RUBer::get_title
-      ))
+        )
+      )
 
-  return(df)
+  return(df_title)
 }

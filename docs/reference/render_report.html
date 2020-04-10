@@ -162,19 +162,22 @@
       <td><p>Report number of the report</p></td>
     </tr>
     <tr>
-      <th>date</th>
-      <td><p>Date of the report displayed on the title page, defaults to month
-and year.</p></td>
+      <th>rmd_template</th>
+      <td><p>Path to the R Markdown File for that report, defaults to
+<code><a href='https://rdrr.io/pkg/here/man/here.html'>here::here("datenreport_new.Rmd")</a></code></p></td>
     </tr>
     <tr>
-      <th>p_rmd_template</th>
-      <td><p>Path to the R Markdown File for that report</p></td>
+      <th>date</th>
+      <td><p>Date of the report displayed on the title page, defaults to
+<code><a href='https://rdrr.io/r/base/format.html'>format(Sys.Date(), format= "%B %Y")</a></code>.</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>render_report</span>(<span class='no'>df</span>, <span class='fl'>12</span>)</div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("filter_"): nicht anwendbare Methode für 'filter_' auf Objekt der Klasse "function" angewendet</span></div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>render_report</span>(<span class='no'>df</span>, <span class='fl'>12</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

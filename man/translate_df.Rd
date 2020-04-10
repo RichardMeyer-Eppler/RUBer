@@ -16,5 +16,7 @@ Translated data set
 Translate data frame columns from German to English
 }
 \examples{
+\dontrun{
 translate_df(df)
+}
 }

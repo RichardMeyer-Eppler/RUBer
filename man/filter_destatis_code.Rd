@@ -20,5 +20,7 @@ Filter data frame using the Destatis table code, discarding all columns that
 only consist of NA.
 }
 \examples{
+\dontrun{
 filter_destatis_code(df = db_nrw_213, tablename = "21391KF061")
+}
 }

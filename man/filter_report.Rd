@@ -2,21 +2,21 @@
 % Please edit documentation in R/utility.R
 \name{filter_report}
 \alias{filter_report}
-\title{Filtere Datensatz auf eine Berichtsnummer plus jeweils relevante Vergleichsgruppe}
+\title{Filter data frame based on \code{report_nr} column}
 \usage{
 filter_report(df, report_nr)
 }
 \arguments{
-\item{df}{Dataframe bzw. Tibble mit den Berichtsdaten}
+\item{df}{Data frame}
 
-\item{report_nr}{Berichtsnummer}
+\item{report_nr}{Required integer indicating the report_nr}
 }
 \value{
-Dataframe bzw. Tibble mit den gefilterten Berichtsdaten
+Filtered data frame with data for the report nr
 }
 \description{
-Filtere Datensatz auf eine Berichtsnummer plus jeweils relevante Vergleichsgruppe
+Filter data frame based on \code{report_nr} column
 }
 \examples{
-filter_report(df, report_nr = 12)
+filter_report(df_fake, report_nr = 12)
 }

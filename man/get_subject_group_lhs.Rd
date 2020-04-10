@@ -7,7 +7,7 @@
 get_subject_group_lhs(df)
 }
 \arguments{
-\item{df}{}
+\item{df}{Data frame}
 }
 \value{
 Data frame with left hand side of generated subject group data
@@ -16,5 +16,7 @@ Data frame with left hand side of generated subject group data
 Get left hand side of generated subject group data
 }
 \examples{
+\dontrun{
 get_subject_group_lhs(df)
+}
 }

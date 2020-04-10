@@ -16,5 +16,7 @@ Data frame with faked values
 Create faked value percentages for figure type 2
 }
 \examples{
+\dontrun{
 create_fake_values_type_2(df)
+}
 }

@@ -8,6 +8,8 @@ replace_cohort_data(df, df_orga)
 }
 \arguments{
 \item{df}{Data frame}
+
+\item{df_orga}{Data frame with organization hierarchies}
 }
 \value{
 Original data frame with new data for figure_id 4
@@ -16,5 +18,7 @@ Original data frame with new data for figure_id 4
 Replaces original cohort data with corrected cohort data.
 }
 \examples{
+\dontrun{
 replace_cohort_data(df, df_orga)
+}
 }

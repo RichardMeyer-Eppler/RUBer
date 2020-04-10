@@ -1,13 +1,15 @@
 #' Fixes data errors in report numbers 42, 43, 61 and 62.
 #'
-#' @param df
+#' @param df Data frame
 #'
 #' @return Data frame with fixes to the columns \code{faculty_txt},
 #'    \code{report_nr}, and \code{figure_sort}
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' fix_data_errors(df)
+#' }
 fix_data_errors <- function(df) {
   df <- df %>%
     dplyr::group_by(
@@ -16,7 +18,7 @@ fix_data_errors <- function(df) {
     dplyr::mutate(
       faculty_txt = dplyr::if_else(
         report_nr == 61,
-        "Medizinische Fakultät",
+        "Medizinische Fakult\u00e4t",
         faculty_txt
       )
     ) %>%
@@ -48,85 +50,91 @@ fix_data_errors <- function(df) {
 
 #' Get function calls and parameters for use of purrr::map
 #'
-#' @param df Dataframe bzw. Tibble
+#' @param df Data frame
 #'
-#' @return Dataframe bzw. Tibble with chunk_label and function_param columns
+#' @return Data frame with chunk_label and function_param columns
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' get_map_paramters(df)
+#' }
 get_map_parameters <- function(df) {
   map_parameters <- df %>%
     dplyr::filter(
       !is.na(
         figure_count
-      )
-    ) %>%
+        )
+      ) %>%
     dplyr::distinct(
       figure_count,
-    ) %>%
+      ) %>%
     dplyr::mutate(
-      chunk_label = figure_count
-    ) %>%
-    dplyr::mutate(
+      chunk_label = figure_count,
       function_parameters = paste0(
         "(df, figure_count = ",
         figure_count,
         ")"
-      )) %>%
+        )
+      ) %>%
     dplyr::select(
       -figure_count
-    )
+      )
 
   return(map_parameters)
 }
 
 #' Generiert für die Abbildungstypen 1-4 Variablen für die Ploterstellung
 #'
-#' @param df Dataframe bzw. Tibble
+#' @param df Data frame
 #'
-#' @return Dataframe bzw. Tibble mit den zusätzlichen Spalten x, y, fill, fill_label, fill_reverse, facet und group.
+#' @return Data frame with additional columns \code{x}, \code{y}, \code{fill},
+#'     \code{fill_label}, \code{fill_reverse}, \code{facet} und \code{group}.
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' mutate_plot_variables(df_filtered)
+#' }
 mutate_plot_variables <- function(df) {
   df <- df %>%
-    dplyr::mutate(x = dplyr::case_when(
-      figure_type_id %in% c(1L, 4L) ~ time,
-      figure_type_id == 2L ~ variable_txt,
-      figure_type_id == 3L ~ as.character(value_percentage)
-    )) %>%
-    dplyr::mutate(y = dplyr::case_when(
-      figure_type_id %in% c(1L, 4L) ~ as.character(value_n_total),
-      figure_type_id == 2L ~ as.character(value_percentage),
-      figure_type_id == 3L ~ axis_label
-    )) %>%
-    dplyr::mutate(y_label = dplyr::case_when(
-      figure_type_id %in% c(1L, 4L) ~ axis_label,
-    )) %>%
-    dplyr::mutate(fill = dplyr::case_when(
-      figure_type_id == 1L ~ degree_sort,
-      figure_type_id %in% c(2L, 3L) ~ value_id
-    )) %>%
-    dplyr::mutate(fill_label = dplyr::case_when(
-      figure_type_id == 1L ~ degree_txt,
-      figure_type_id %in% c(2L, 3L) ~ value_txt
-    )) %>%
-    dplyr::mutate(fill_reverse = dplyr::case_when(
-      is.na(scale_invert_flag) ~ FALSE,
-      TRUE ~ scale_invert_flag
-    )) %>%
-    dplyr::mutate(facet = dplyr::case_when(
-      figure_type_id == 2L ~ axis_label,
-      figure_type_id == 3L ~ variable_txt
-    )) %>%
-    dplyr::mutate(group = dplyr::case_when(
-      figure_type_id %in% c(3L, 4L) ~ degree_id
-    )) %>%
-    dplyr::mutate(group_label = dplyr::case_when(
-      figure_type_id == 4L ~ degree_txt
-    )) %>%
+    dplyr::mutate(
+      x = dplyr::case_when(
+        figure_type_id %in% c(1L, 4L) ~ time,
+        figure_type_id == 2L ~ variable_txt,
+        figure_type_id == 3L ~ as.character(value_percentage)
+        ),
+      y = dplyr::case_when(
+        figure_type_id %in% c(1L, 4L) ~ as.character(value_n_total),
+        figure_type_id == 2L ~ as.character(value_percentage),
+        figure_type_id == 3L ~ axis_label
+        ),
+      y_label = dplyr::case_when(
+        figure_type_id %in% c(1L, 4L) ~ axis_label,
+        ),
+      fill = dplyr::case_when(
+        figure_type_id == 1L ~ degree_sort,
+        figure_type_id %in% c(2L, 3L) ~ value_id
+        ),
+      fill_label = dplyr::case_when(
+        figure_type_id == 1L ~ degree_txt,
+        figure_type_id %in% c(2L, 3L) ~ value_txt
+        ),
+      fill_reverse = dplyr::case_when(
+        is.na(scale_invert_flag) ~ FALSE,
+        TRUE ~ scale_invert_flag
+        ),
+      facet = dplyr::case_when(
+        figure_type_id == 2L ~ axis_label,
+        figure_type_id == 3L ~ variable_txt
+        ),
+      group = dplyr::case_when(
+        figure_type_id %in% c(3L, 4L) ~ degree_id
+        ),
+      group_label = dplyr::case_when(
+        figure_type_id == 4L ~ degree_txt
+        )
+      ) %>%
     dplyr::select(
       report_nr,
       figure_count,
@@ -159,12 +167,15 @@ mutate_plot_variables <- function(df) {
 #' Replaces original cohort data with corrected cohort data.
 #'
 #' @param df Data frame
+#' @param df_orga Data frame with organization hierarchies
 #'
 #' @return Original data frame with new data for figure_id 4
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' replace_cohort_data(df, df_orga)
+#' }
 replace_cohort_data <- function(df, df_orga) {
   df <- dplyr::filter(
     df,
@@ -173,12 +184,12 @@ replace_cohort_data <- function(df, df_orga) {
 
   df <- dplyr::union(
     df,
-    RUBer::get_cohort_data(
+    get_cohort_data(
       df_orga
     )
   )
 
-  df <- RUBer::sort_report(
+  df <- sort_report(
     df
   )
 
@@ -191,7 +202,9 @@ replace_cohort_data <- function(df, df_orga) {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' read_cohort_data()
+#' }
 read_cohort_data <- function()  {
   df_cohort <- tibble::as_tibble(
     readr::read_csv2(
@@ -246,22 +259,24 @@ read_cohort_data <- function()  {
 #'
 #' @param df_orga Data frame with orga
 #'
-#' @return Data frame with correct cohort analysis data
+#' @return Data frame with corrected cohort analysis data
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' get_cohort_data(df_orga)
+#' }
 get_cohort_data <- function(df_orga)  {
-  df_cohort <- RUBer::read_cohort_data()
-  df_cohort <- RUBer::add_fgr_nrwbund_ltxt(df_cohort, df_orga)
-  df_cohort <- RUBer::translate_df(df_cohort)
-  df_cohort_fg <- RUBer::generate_cohort_data_2018_FG(df_cohort)
+  df_cohort <- read_cohort_data()
+  df_cohort <- add_fgr_nrwbund_ltxt(df_cohort, df_orga)
+  df_cohort <- translate_df(df_cohort)
+  df_cohort_fg <- generate_cohort_data_2018_FG(df_cohort)
   df_cohort <- dplyr::bind_rows(
     df_cohort,
     df_cohort_fg
   )
-  df_cohort <- RUBer::update_cohort_axis_label(df_cohort)
-  df_cohort <- RUBer::sort_report(df_cohort)
+  df_cohort <- update_cohort_axis_label(df_cohort)
+  df_cohort <- sort_report(df_cohort)
 
   return(df_cohort)
 }
@@ -274,7 +289,9 @@ get_cohort_data <- function(df_orga)  {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' update_cohort_axis_label(df)
+#' }
 update_cohort_axis_label <- function(df) {
   df <- df %>%
     dplyr::mutate(
@@ -299,13 +316,15 @@ update_cohort_axis_label <- function(df) {
 
 #' Generate cohort data on the level of subject degree groups
 #'
-#' @param df_cohort
+#' @param df_cohort Data frame
 #'
 #' @return Data frame with cohort data for report_id "2018_FG"
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' generate_cohort_data_2018_FG(df_cohort)
+#' }
 generate_cohort_data_2018_FG <- function(df_cohort) {
 
   ## Replaces content of round brackets
@@ -433,15 +452,17 @@ generate_cohort_data_2018_FG <- function(df_cohort) {
   return(df_cohort_fg)
 }
 
-#' Erzeuge Faktoren für die Abbildungserstellung
+#' Creates factors for plotting the 2018 data
 #'
-#' @param df Dataframe bzw. Tibble
+#' @param df Data frame
 #'
-#' @return Dataframe bzw. Tibble mit den Faktoren x, fill, fill_label und group
+#' @return Data frame with the factors x, fill, fill_label and group
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' set_factors(df)
+#' }
 set_factors <- function(df) {
   df$x <- factor(df$x, levels = unique(df$x))
   df$fill <- factor(df$fill, levels = unique(df$fill))
@@ -461,10 +482,15 @@ set_factors <- function(df) {
   return(df)
 }
 
-#' Turns a data frame column into a factor
+#' Prepares var and var_label columns for plotting by ordering them and turning
+#' them into factors
 #'
 #' @param df Data frame
-#' @param var Variable name for the discrete variable to be turned into a factor
+#' @param var Required variable name for the discrete variable to be turned into
+#'     a factor. This variable is sorted alphabetically to determine the order.
+#' @param var_label Optional variable name for the discrete variable labels
+#'     to be used instead of var. If var is a sort key, for instance, var_label
+#'     can be used for the actual labels.
 #' @param reverse Whether the order of the factor should be reverted, defaults
 #'     to FALSE.
 #'
@@ -472,16 +498,47 @@ set_factors <- function(df) {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' set_factor_var(df, var, TRUE)
-set_factor_var <- function(df, var, reverse = FALSE)  {
-  var <- rlang::ensym(var)
-  df[[var]] <- factor(df[[var]], levels = unique(df[[var]]))
+#' }
+set_factor_var <- function(df, var, var_label = NULL, reverse = FALSE)  {
+  var_sym <- rlang::ensym(var)
 
-  if (reverse) {
-    df[[var]] <- forcats::fct_rev(df[[var]])
+  # Var is always used to determine the ordering, even if var_label will later
+  # get displayed. This allows, for instance, to have sort_keys in var and the
+  # associated labels in var_label.
+  # Note that unlike base factor, forcats::as_factor does not alter ordering
+  df_ordered <- dplyr::arrange(df, {{var}})
+
+  var_label_quo <- rlang::enquo(var_label)
+  is_null_var_label_quo <- rlang::quo_is_null(var_label_quo)
+
+  if(!is_null_var_label_quo)  {
+    var_label_sym <- rlang::ensym(var_label)
+
+    # If var_label is not a factor yet, it will get converted to one
+    is_factor_var_label <- is.factor(df_ordered[[var_label_sym]])
+    if(!is_factor_var_label)  {
+      df_ordered[[var_sym]] <- forcats::as_factor(df_ordered[[var_label_sym]])
+    }
+    # var_label effectively replaces var. We only needed var for the ordering.
+    # Use of forcats::reorder is not possible, because it only works for numeric
+    # and var may not be numeric.
+    df_ordered[[var_sym]] <- forcats::as_factor(df_ordered[[var_label_sym]])
   }
 
-  return(df)
+  is_factor_var <- is.factor(df[[var_sym]])
+  # If var is not yet a factor, it gets gets turned into a factor. Otherwise
+  # no action required.
+  if(!is_factor_var)  {
+    df_ordered[[var_sym]] <- forcats::as_factor(df_ordered[[var_sym]])
+  }
+
+  if (reverse) {
+    df_ordered[[var_sym]] <- forcats::fct_rev(df_ordered[[var_sym]])
+  }
+
+  return(df_ordered)
 }
 
 #' Split up data for large figures
@@ -489,8 +546,7 @@ set_factor_var <- function(df, var, reverse = FALSE)  {
 #' This checks whether the total number of rows for a figures exceeds a limit.
 #' If it does, the variables of the figure will be split in pieces by assigning
 #' an additional figure_sort_key. The size of a figure is calculated by the
-#' number of unique x-Axis + Facet variables. The function currently creates
-#' problems by doubling headings.
+#' number of unique x-axis + facet variables.
 #'
 #' @param df Data frame
 #' @param max_row_limit The maximum number of rows for each figure sort key
@@ -499,7 +555,9 @@ set_factor_var <- function(df, var, reverse = FALSE)  {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' split_up_big_figures(df)
+#' }
 split_up_big_figures <- function(df, max_row_limit = 30)  {
   big_figures <- df %>%
     dplyr::mutate(

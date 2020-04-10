@@ -7,7 +7,7 @@
 generate_cohort_data_2018_FG(df_cohort)
 }
 \arguments{
-\item{df_cohort}{}
+\item{df_cohort}{Data frame}
 }
 \value{
 Data frame with cohort data for report_id "2018_FG"
@@ -16,5 +16,7 @@ Data frame with cohort data for report_id "2018_FG"
 Generate cohort data on the level of subject degree groups
 }
 \examples{
+\dontrun{
 generate_cohort_data_2018_FG(df_cohort)
+}
 }

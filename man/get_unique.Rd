@@ -12,7 +12,7 @@ get_unique(df, column)
 \item{column}{Column name}
 }
 \value{
-Vector with unique values
+Vector with unique values in that column, excluding NA
 }
 \description{
 Returns all unique values for a specified column in a data frame

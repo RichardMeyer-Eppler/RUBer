@@ -7,7 +7,7 @@
 add_report_title(df)
 }
 \arguments{
-\item{df}{}
+\item{df}{Data frame}
 }
 \value{
 Data frame with additional column \code{report_title}
@@ -16,5 +16,7 @@ Data frame with additional column \code{report_title}
 Adds column \code{report_title} to data frame
 }
 \examples{
+\dontrun{
 add_report_title(df)
+}
 }

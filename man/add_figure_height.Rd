@@ -7,7 +7,7 @@
 add_figure_height(df)
 }
 \arguments{
-\item{df}{}
+\item{df}{Data frame}
 }
 \value{
 Data frame with additional column \code{figure_height}
@@ -16,5 +16,7 @@ Data frame with additional column \code{figure_height}
 Add column \code{figure_height} to data frame
 }
 \examples{
+\dontrun{
 add_figure_height(df)
+}
 }

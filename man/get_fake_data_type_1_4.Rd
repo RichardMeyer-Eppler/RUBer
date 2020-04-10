@@ -16,5 +16,7 @@ Data frame with fake values for value_n_total
 Get data frame with fake values for figure types 1 and 4
 }
 \examples{
+\dontrun{
 get_fake_data_type_1_4(df)
+}
 }

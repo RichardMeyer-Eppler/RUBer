@@ -9,7 +9,8 @@ add_fgr_nrwbund_ltxt(df, df_orga)
 \arguments{
 \item{df}{Data frame containing \code{fgr_nrwbund_id}}
 
-\item{df_orga}{Data frame containing \code{fgr_nrwbund_id} and \code{fgr_nrwbund_ltxt}}
+\item{df_orga}{Data frame containing \code{fgr_nrwbund_id} and
+\code{fgr_nrwbund_ltxt}}
 }
 \value{
 Data frame with additional column \code{fgr_nrwbund_ltxt}
@@ -18,5 +19,7 @@ Data frame with additional column \code{fgr_nrwbund_ltxt}
 Add column \code{fgr_nrwbund_ltxt} to data frame
 }
 \examples{
+\dontrun{
 add_fgr_nrwbund_ltxt(df)
+}
 }

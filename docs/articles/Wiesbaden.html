@@ -119,8 +119,8 @@
 <a class="sourceLine" id="cb1-7" title="7"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tibble)</a>
 <a class="sourceLine" id="cb1-8" title="8"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tidyselect)</a>
 <a class="sourceLine" id="cb1-9" title="9"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(wiesbaden)</a></code></pre></div>
-<p>The R package wiesbaden by Moritz Marbach provides functions to directly retrieve data from databases maintained by the Federal Statistical Office of Germany (Destatis) in Wiesbaden. After installing the package with <code><a href="https://remotes.r-lib.org/reference/install_github.html">remotes::install_github("sumtxt/wiesbaden")</a></code>, you can check <code>vignette("using-wiesbaden", package = "wiesbaden")</code> for more info.</p>
-<p>In order to retrieve data from the four available databases (<a href="https://www.regionalstatistik.de/genesis/online">Regionalstatistik</a>, <a href="https://www-genesis.destatis.de/genesis/online">Genesis</a>, <a href="https://www.landesdatenbank.nrw.de">Landesdatenbank NRW</a>, <a href="https://www.bildungsmonitoring.de">Bildungsmonitoring</a>), you need to register on the respective website. For this vignette, we use the Landesdatenbank NRW database, so please register an account there. Once you have registered, use <code><a href="https://rdrr.io/pkg/wiesbaden/man/save_credentials.html">wiesbaden::save_credentials</a></code> to save your login information and <code><a href="https://rdrr.io/pkg/wiesbaden/man/test_login.html">wiesbaden::test_login</a></code> to test the connection. If you cannot establish a valid connection, you will not be able to execute all subsequent code chunks!</p>
+<p>The R package <code>wiesbaden</code> by Moritz Marbach provides functions to directly retrieve data from databases maintained by the Federal Statistical Office of Germany (Destatis) in Wiesbaden. After installing the package with <code><a href="https://remotes.r-lib.org/reference/install_github.html">remotes::install_github("sumtxt/wiesbaden")</a></code>, you can check <code>vignette("using-wiesbaden", package = "wiesbaden")</code> for more info.</p>
+<p>In order to retrieve data from the four available databases (<a href="https://www.bildungsmonitoring.de">Bildungsmonitoring</a>, <a href="https://www-genesis.destatis.de/genesis/online">Genesis</a>, <a href="https://www.landesdatenbank.nrw.de">Landesdatenbank NRW</a>, <a href="https://www.regionalstatistik.de/genesis/online">Regionalstatistik</a>), you need to register on the respective website. For this vignette, we use the Landesdatenbank NRW database, so please register an account there. Once you have registered, use <code><a href="https://rdrr.io/pkg/wiesbaden/man/save_credentials.html">wiesbaden::save_credentials</a></code> to save your login information and <code><a href="https://rdrr.io/pkg/wiesbaden/man/test_login.html">wiesbaden::test_login</a></code> to test the connection. If you cannot establish a valid connection, you will not be able to execute all subsequent code chunks!</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># Save your credentials for the Landesdatenbank NRW</span></a>
 <a class="sourceLine" id="cb2-2" title="2">wiesbaden<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/wiesbaden/man/save_credentials.html">save_credentials</a></span>(</a>
 <a class="sourceLine" id="cb2-3" title="3">  <span class="dt">db =</span> <span class="st">"nrw"</span>,                        <span class="co"># Do not change</span></a>
@@ -141,7 +141,11 @@
 <a class="sourceLine" id="cb3-2" title="2">df_table &lt;-<span class="st"> </span>wiesbaden<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/wiesbaden/man/retrieve_datalist.html">retrieve_datalist</a></span>(</a>
 <a class="sourceLine" id="cb3-3" title="3">   <span class="dt">tableseries=</span> <span class="st">"213"</span>,</a>
 <a class="sourceLine" id="cb3-4" title="4">   <span class="dt">genesis =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dt">db =</span> <span class="st">"nrw"</span>)</a>
-<a class="sourceLine" id="cb3-5" title="5">   )</a></code></pre></div>
+<a class="sourceLine" id="cb3-5" title="5">   )</a>
+<a class="sourceLine" id="cb3-6" title="6"></a>
+<a class="sourceLine" id="cb3-7" title="7">df_table <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(<span class="kw">desc</span>(description)) <span class="op">%&gt;%</span><span class="st"> </span>tibble<span class="op">::</span><span class="kw"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span>()</a>
+<a class="sourceLine" id="cb3-8" title="8"></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="kw"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span>(df_table<span class="op">$</span>description)</a></code></pre></div>
 <p>Looking at the retrieved data frame, a problem becomes apparent: the function not only returns tables that start with code “213” but all tables with the fragment “213” anywhere in their code. In addition to tables on universities, this returns tables on wastewater sewage, among other things. So let us filter the data frame to all table names whose code starts with “213”:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># Filtering the tables to codes starting with "213".</span></a>
 <a class="sourceLine" id="cb4-2" title="2">df_table_filtered &lt;-<span class="st"> </span>df_table <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -249,9 +253,10 @@
 <a class="sourceLine" id="cb9-23" title="23">  list_value_labels_wrangled,</a>
 <a class="sourceLine" id="cb9-24" title="24">  description_names,</a>
 <a class="sourceLine" id="cb9-25" title="25">  <span class="op">~</span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span>(</a>
-<a class="sourceLine" id="cb9-26" title="26">    .x, <span class="op">!!</span><span class="dt">.y :=</span> description</a>
-<a class="sourceLine" id="cb9-27" title="27">    )</a>
-<a class="sourceLine" id="cb9-28" title="28">)</a></code></pre></div>
+<a class="sourceLine" id="cb9-26" title="26">    .x,</a>
+<a class="sourceLine" id="cb9-27" title="27">    <span class="op">!!</span><span class="dt">.y :=</span> description</a>
+<a class="sourceLine" id="cb9-28" title="28">    )</a>
+<a class="sourceLine" id="cb9-29" title="29">)</a></code></pre></div>
 <p>We are now ready to combine the data with the corresponding labels. Before, though, we will retrieve another set of labels, describing the contents of each table. As with the value labels, we rename the generic “description” column to “tablename_description” to make it unique.</p>
 <p>For combining tables that share a mutual key or mutal set of keys, we use <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">dplyr::left_join</a></code>. Because we have so many individual tables and keys, doing this manually would be tedious. To avoid this manual process, we use <code><a href="https://purrr.tidyverse.org/reference/reduce.html">purrr::reduce</a></code> on a list of all data frames we want to join. So before applying <code><a href="https://purrr.tidyverse.org/reference/reduce.html">purrr::reduce</a></code>, we put the data frame with the actual data, the data frame with the table descriptions, and the list of data frames containing value labels into one big list.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="co"># Create data frame with table name and table description</span></a>
@@ -283,74 +288,87 @@
 <a class="sourceLine" id="cb10-27" title="27">)</a></code></pre></div>
 <p>We also sort the columns (not the rows!) alphabetically, so that the descriptions come immediately after the respective key column. The first two columns are always the table code and the table description. We also turn the data frame into a tibble, for better print defaults among other benefits.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co"># Order columns alphabetically, put columns tablename and tablename_description </span></a>
-<a class="sourceLine" id="cb11-2" title="2"><span class="co"># first, turn data frame into tibble.</span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="co"># first, put value columns last, turn data frame into tibble.</span></a>
 <a class="sourceLine" id="cb11-3" title="3">db_nrw_<span class="dv">213</span> &lt;-<span class="st"> </span>df_joined <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb11-4" title="4"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(</a>
 <a class="sourceLine" id="cb11-5" title="5">    <span class="kw"><a href="https://rdrr.io/r/base/sort.html">sort</a></span>(</a>
 <a class="sourceLine" id="cb11-6" title="6">      tidyselect<span class="op">::</span><span class="kw"><a href="https://tidyselect.r-lib.org/reference/peek_vars.html">peek_vars</a></span>()</a>
 <a class="sourceLine" id="cb11-7" title="7">      )</a>
 <a class="sourceLine" id="cb11-8" title="8">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb11-9" title="9"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(</a>
+<a class="sourceLine" id="cb11-9" title="9"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate</a></span>(</a>
 <a class="sourceLine" id="cb11-10" title="10">    tablename,</a>
 <a class="sourceLine" id="cb11-11" title="11">    tablename_description,</a>
-<a class="sourceLine" id="cb11-12" title="12">    <span class="kw">everything</span>()</a>
-<a class="sourceLine" id="cb11-13" title="13">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb11-14" title="14"><span class="st">  </span>tibble<span class="op">::</span><span class="kw"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span>()</a></code></pre></div>
+<a class="sourceLine" id="cb11-12" title="12">    <span class="op">!</span>(<span class="kw">ends_with</span>(<span class="st">"_val"</span>)),</a>
+<a class="sourceLine" id="cb11-13" title="13">    <span class="kw">ends_with</span>(<span class="st">"val"</span>)</a>
+<a class="sourceLine" id="cb11-14" title="14">    ) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-15" title="15"><span class="st">  </span>tibble<span class="op">::</span><span class="kw"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span>()</a></code></pre></div>
 <p>The resulting data frame, <code>db_nrw_213</code>, actually comes bundled with the <code>RUBer</code> package. We use <code><a href="https://usethis.r-lib.org/reference/use_data.html">usethis::use_data</a></code> to handle this step for us. We have now added 37 tables of university related data to our package!</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_data.html">use_data</a></span>(</a>
 <a class="sourceLine" id="cb12-2" title="2">  db_nrw_<span class="dv">213</span>,</a>
 <a class="sourceLine" id="cb12-3" title="3">  <span class="dt">overwrite =</span> <span class="ot">TRUE</span>,</a>
 <a class="sourceLine" id="cb12-4" title="4">  <span class="dt">version =</span> <span class="dv">3</span></a>
-<a class="sourceLine" id="cb12-5" title="5">  )</a>
-<a class="sourceLine" id="cb12-6" title="6"></a>
-<a class="sourceLine" id="cb12-7" title="7"><span class="kw"><a href="https://rdrr.io/r/base/load.html">load</a></span>(</a>
-<a class="sourceLine" id="cb12-8" title="8">  <span class="st">"D:</span><span class="ch">\\</span><span class="st">Git</span><span class="ch">\\</span><span class="st">db_nrw_213.rda"</span></a>
-<a class="sourceLine" id="cb12-9" title="9">)</a></code></pre></div>
+<a class="sourceLine" id="cb12-5" title="5">  )</a></code></pre></div>
 </div>
 <div id="working-with-the-destatis-data" class="section level1">
 <h1 class="hasAnchor">
 <a href="#working-with-the-destatis-data" class="anchor"></a>Working with the Destatis data</h1>
 <p>We usually do not want to work with the entire data frame at once. The RUBer package provides the function <code>filter_destatis_code</code>, which allows you to filter the data based on a table code. It also discards all columns that only consist of NA after filtering. As an example, let us create a data frame consisting of all data for table code “21311LS001A”.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co"># Get all rows and columns for table code 21311LS001A</span></a>
-<a class="sourceLine" id="cb13-2" title="2">df_21311LS001A &lt;-<span class="st"> </span><span class="kw"><a href="../reference/filter_destatis_code.html">filter_destatis_code</a></span>(</a>
-<a class="sourceLine" id="cb13-3" title="3">  <span class="dt">df =</span> db_nrw_<span class="dv">213</span>,</a>
-<a class="sourceLine" id="cb13-4" title="4">  <span class="dt">tablename =</span> <span class="st">"21311LS001A"</span></a>
-<a class="sourceLine" id="cb13-5" title="5">  )</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/load.html">load</a></span>(</a>
+<a class="sourceLine" id="cb13-2" title="2">  <span class="st">"D:</span><span class="ch">\\</span><span class="st">Git</span><span class="ch">\\</span><span class="st">db_nrw_213.rda"</span></a>
+<a class="sourceLine" id="cb13-3" title="3">)</a>
+<a class="sourceLine" id="cb13-4" title="4"></a>
+<a class="sourceLine" id="cb13-5" title="5"><span class="co"># Get all rows and columns for table code 21311LS001A</span></a>
+<a class="sourceLine" id="cb13-6" title="6">df_21311LS001A &lt;-<span class="st"> </span><span class="kw"><a href="../reference/filter_destatis_code.html">filter_destatis_code</a></span>(</a>
+<a class="sourceLine" id="cb13-7" title="7">  <span class="dt">df =</span> db_nrw_<span class="dv">213</span>,</a>
+<a class="sourceLine" id="cb13-8" title="8">  <span class="dt">tablename =</span> <span class="st">"21311LS001A"</span></a>
+<a class="sourceLine" id="cb13-9" title="9">  )</a></code></pre></div>
 <p>The table description says that this table contains “Studierende / Studenten, Land, Hochschulen, Studienfach, Fachsemester, Angestrebte Abschlussprüfung, Semester”. So essentially it is a table of students for each degree program, term, and university. We will do some basic analysis and plotting using this data.</p>
-<p>First, let us find out which five universities had the highest overall number of students with the help of <code><a href="https://forcats.tidyverse.org/reference/fct_lump.html">forcats::fct_lump</a></code>.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">df_plot &lt;-<span class="st"> </span>df_21311LS001A <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-2" title="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(</a>
-<a class="sourceLine" id="cb14-3" title="3">    semest <span class="op">==</span><span class="st"> "WS 2017/18"</span></a>
-<a class="sourceLine" id="cb14-4" title="4">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-5" title="5"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(</a>
-<a class="sourceLine" id="cb14-6" title="6">    <span class="dt">bilhs1_description =</span> forcats<span class="op">::</span><span class="kw"><a href="https://forcats.tidyverse.org/reference/fct_lump.html">fct_lump_n</a></span>(</a>
-<a class="sourceLine" id="cb14-7" title="7">      bilhs1_description,</a>
-<a class="sourceLine" id="cb14-8" title="8">      <span class="dt">n =</span> <span class="dv">5</span>,</a>
-<a class="sourceLine" id="cb14-9" title="9">      <span class="dt">w =</span> bil002_val,</a>
-<a class="sourceLine" id="cb14-10" title="10">      <span class="dt">other_level =</span> <span class="st">"Other NRW universities"</span></a>
-<a class="sourceLine" id="cb14-11" title="11">      ),</a>
-<a class="sourceLine" id="cb14-12" title="12">    <span class="dt">bilap1_description =</span> forcats<span class="op">::</span><span class="kw"><a href="https://forcats.tidyverse.org/reference/fct_lump.html">fct_lump_n</a></span>(</a>
-<a class="sourceLine" id="cb14-13" title="13">      bilap1_description,</a>
-<a class="sourceLine" id="cb14-14" title="14">      <span class="dt">n =</span> <span class="dv">5</span>,</a>
-<a class="sourceLine" id="cb14-15" title="15">      <span class="dt">w =</span> bil002_val,</a>
-<a class="sourceLine" id="cb14-16" title="16">      <span class="dt">other_level =</span> <span class="st">"Other degrees"</span></a>
-<a class="sourceLine" id="cb14-17" title="17">      )</a>
-<a class="sourceLine" id="cb14-18" title="18">    ) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-19" title="19"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(</a>
-<a class="sourceLine" id="cb14-20" title="20">    bilhs1_description <span class="op">!=</span><span class="st"> "Other NRW universities"</span></a>
-<a class="sourceLine" id="cb14-21" title="21">  )</a>
-<a class="sourceLine" id="cb14-22" title="22"></a>
-<a class="sourceLine" id="cb14-23" title="23"><span class="kw"><a href="../reference/rub_plot_type_1.html">rub_plot_type_1</a></span>(</a>
-<a class="sourceLine" id="cb14-24" title="24">  <span class="dt">df =</span> df_plot,</a>
-<a class="sourceLine" id="cb14-25" title="25">  <span class="dt">x_var =</span> bilhs1_description,</a>
-<a class="sourceLine" id="cb14-26" title="26">  <span class="dt">y_var =</span> bil002_val,</a>
-<a class="sourceLine" id="cb14-27" title="27">  <span class="dt">fill_var =</span> bilap1_description,</a>
-<a class="sourceLine" id="cb14-28" title="28">  <span class="dt">y_axis_label =</span> <span class="st">"Students in winter term 2017/18"</span>,</a>
-<a class="sourceLine" id="cb14-29" title="29">  <span class="dt">caption =</span> <span class="st">"Landesdatenbank NRW, Table Code 21311LS001A (license dl-de/by-2-0)"</span>,</a>
-<a class="sourceLine" id="cb14-30" title="30">  <span class="dt">caption_prefix =</span> <span class="st">"Source:"</span>,</a>
-<a class="sourceLine" id="cb14-31" title="31">  <span class="dt">filter_cutoff =</span> <span class="fl">0.06</span></a>
-<a class="sourceLine" id="cb14-32" title="32"><span class="co">#  ,fill_reverse = TRUE</span></a>
-<a class="sourceLine" id="cb14-33" title="33">)</a></code></pre></div>
+<p>First, let us find out which five universities had the highest overall number of students with the help of <code><a href="https://forcats.tidyverse.org/reference/fct_lump.html">forcats::fct_lump_n</a></code>.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="co"># Create data frame with plotting data, filtering on the winter term 2017/18,</span></a>
+<a class="sourceLine" id="cb14-2" title="2"><span class="co"># focusing on the top five universities in terms of student count and keeping</span></a>
+<a class="sourceLine" id="cb14-3" title="3"><span class="co"># the top five degree types, in addition to a lumped category "other degrees".</span></a>
+<a class="sourceLine" id="cb14-4" title="4">df_plot &lt;-<span class="st"> </span>df_21311LS001A <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb14-5" title="5"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(</a>
+<a class="sourceLine" id="cb14-6" title="6">    semest <span class="op">==</span><span class="st"> "WS 2017/18"</span></a>
+<a class="sourceLine" id="cb14-7" title="7">  ) <span class="op">%&gt;%</span><span class="st">   </span></a>
+<a class="sourceLine" id="cb14-8" title="8"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(</a>
+<a class="sourceLine" id="cb14-9" title="9">    <span class="dt">bilhs1_description =</span> forcats<span class="op">::</span><span class="kw"><a href="https://forcats.tidyverse.org/reference/fct_lump.html">fct_lump_n</a></span>(</a>
+<a class="sourceLine" id="cb14-10" title="10">      bilhs1_description,</a>
+<a class="sourceLine" id="cb14-11" title="11">      <span class="dt">n =</span> <span class="dv">5</span>,</a>
+<a class="sourceLine" id="cb14-12" title="12">      <span class="dt">w =</span> bil002_val,</a>
+<a class="sourceLine" id="cb14-13" title="13">      <span class="dt">other_level =</span> <span class="st">"Other NRW universities"</span></a>
+<a class="sourceLine" id="cb14-14" title="14">      )</a>
+<a class="sourceLine" id="cb14-15" title="15">  ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-16" title="16"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(</a>
+<a class="sourceLine" id="cb14-17" title="17">    bilhs1_description <span class="op">!=</span><span class="st"> "Other NRW universities"</span></a>
+<a class="sourceLine" id="cb14-18" title="18">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb14-19" title="19"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(</a>
+<a class="sourceLine" id="cb14-20" title="20">    <span class="dt">bilap1 =</span> forcats<span class="op">::</span><span class="kw"><a href="https://forcats.tidyverse.org/reference/fct_lump.html">fct_lump_n</a></span>(</a>
+<a class="sourceLine" id="cb14-21" title="21">      bilap1,</a>
+<a class="sourceLine" id="cb14-22" title="22">      <span class="dt">n =</span> <span class="dv">5</span>,</a>
+<a class="sourceLine" id="cb14-23" title="23">      <span class="dt">w =</span> bil002_val,</a>
+<a class="sourceLine" id="cb14-24" title="24">      <span class="dt">other_level =</span> <span class="st">"Other degrees"</span></a>
+<a class="sourceLine" id="cb14-25" title="25">      ),</a>
+<a class="sourceLine" id="cb14-26" title="26">    <span class="dt">bilap1_description =</span> forcats<span class="op">::</span><span class="kw"><a href="https://forcats.tidyverse.org/reference/fct_lump.html">fct_lump_n</a></span>(</a>
+<a class="sourceLine" id="cb14-27" title="27">      bilap1_description,</a>
+<a class="sourceLine" id="cb14-28" title="28">      <span class="dt">n =</span> <span class="dv">5</span>,</a>
+<a class="sourceLine" id="cb14-29" title="29">      <span class="dt">w =</span> bil002_val,</a>
+<a class="sourceLine" id="cb14-30" title="30">      <span class="dt">other_level =</span> <span class="st">"Other degrees"</span></a>
+<a class="sourceLine" id="cb14-31" title="31">      )</a>
+<a class="sourceLine" id="cb14-32" title="32">    )</a>
+<a class="sourceLine" id="cb14-33" title="33"></a>
+<a class="sourceLine" id="cb14-34" title="34"><span class="kw"><a href="../reference/rub_plot_type_1.html">rub_plot_type_1</a></span>(</a>
+<a class="sourceLine" id="cb14-35" title="35">  <span class="dt">df =</span> df_plot,</a>
+<a class="sourceLine" id="cb14-36" title="36">  <span class="dt">x_var =</span> bilhs1_description,</a>
+<a class="sourceLine" id="cb14-37" title="37">  <span class="dt">y_var =</span> bil002_val,</a>
+<a class="sourceLine" id="cb14-38" title="38">  <span class="dt">fill_var =</span> bilap1_description,</a>
+<a class="sourceLine" id="cb14-39" title="39">  <span class="dt">y_axis_label =</span> <span class="st">"Students in winter term 2017/18"</span>,</a>
+<a class="sourceLine" id="cb14-40" title="40">  <span class="dt">caption =</span> <span class="st">"Landesdatenbank NRW, Table Code 21311LS001A (license dl-de/by-2-0)"</span>,</a>
+<a class="sourceLine" id="cb14-41" title="41">  <span class="dt">caption_prefix =</span> <span class="st">"Source:"</span>,</a>
+<a class="sourceLine" id="cb14-42" title="42">  <span class="dt">filter_cutoff =</span> <span class="fl">0.06</span></a>
+<a class="sourceLine" id="cb14-43" title="43"><span class="co">#  ,fill_reverse = TRUE</span></a>
+<a class="sourceLine" id="cb14-44" title="44">)</a></code></pre></div>
+<p><img src="Wiesbaden_files/figure-html/21311LS001A-plot1-1.png" width="700"></p>
 <p>The Fernuniversität Hagen, the TH Aachen, the University of Bochum, the University of Köln and the University of Münster had the highest student count in the winter term 2017/18. Maybe we are interested more specifically in the relative importance of each degree type at each university. We can use <code>rub_plot_type_2</code> for that:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw"><a href="../reference/rub_plot_type_2.html">rub_plot_type_2</a></span>(</a>
 <a class="sourceLine" id="cb15-2" title="2">  <span class="dt">df =</span> df_plot,</a>
@@ -360,21 +378,82 @@
 <a class="sourceLine" id="cb15-6" title="6">  <span class="dt">fill_var =</span> bilap1_description,</a>
 <a class="sourceLine" id="cb15-7" title="7">  <span class="dt">caption =</span> <span class="st">"Landesdatenbank NRW, Table Code 21311LS001A (license dl-de/by-2-0)"</span>,</a>
 <a class="sourceLine" id="cb15-8" title="8">  <span class="dt">caption_prefix =</span> <span class="st">"Source:"</span>,</a>
-<a class="sourceLine" id="cb15-9" title="9">  <span class="dt">filter_cutoff =</span> <span class="fl">0.06</span></a>
-<a class="sourceLine" id="cb15-10" title="10"><span class="co">#  ,fill_reverse = TRUE</span></a>
-<a class="sourceLine" id="cb15-11" title="11">)</a></code></pre></div>
+<a class="sourceLine" id="cb15-9" title="9">  <span class="dt">filter_cutoff =</span> <span class="fl">0.05</span></a>
+<a class="sourceLine" id="cb15-10" title="10"><span class="co"># ,fill_reverse = TRUE</span></a>
+<a class="sourceLine" id="cb15-11" title="11"><span class="co"># ,palette_reverse = TRUE</span></a>
+<a class="sourceLine" id="cb15-12" title="12">)</a></code></pre></div>
+<p><img src="Wiesbaden_files/figure-html/21311LS001A-plot2-1.png" width="700"></p>
+<p>If we wanted to examine how the relative importance of each degree has developed over time, we could switch to <code>rub_plot_type_3</code> (a rotated version of type 2), use the term as y-variable and the university name as facet variable.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="co"># Create data frame with plotting data, filtering on the winter terms 2013-2018,</span></a>
+<a class="sourceLine" id="cb16-2" title="2"><span class="co"># focusing on the top five universities in terms of student count and keeping</span></a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="co"># the top five degree types, in addition to a lumped category "other degrees".</span></a>
+<a class="sourceLine" id="cb16-4" title="4">df_plot_t3 &lt;-<span class="st"> </span>df_21311LS001A <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb16-5" title="5"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(</a>
+<a class="sourceLine" id="cb16-6" title="6">    semest <span class="op">%in%</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(</a>
+<a class="sourceLine" id="cb16-7" title="7">      <span class="st">"WS 2017/18"</span>,</a>
+<a class="sourceLine" id="cb16-8" title="8">      <span class="st">"WS 2016/17"</span>,</a>
+<a class="sourceLine" id="cb16-9" title="9">      <span class="st">"WS 2015/16"</span>,</a>
+<a class="sourceLine" id="cb16-10" title="10">      <span class="st">"WS 2014/15"</span>,</a>
+<a class="sourceLine" id="cb16-11" title="11">      <span class="st">"WS 2013/14"</span></a>
+<a class="sourceLine" id="cb16-12" title="12">      )</a>
+<a class="sourceLine" id="cb16-13" title="13">    ) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb16-14" title="14"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(</a>
+<a class="sourceLine" id="cb16-15" title="15">    <span class="dt">bilhs1_description =</span> forcats<span class="op">::</span><span class="kw"><a href="https://forcats.tidyverse.org/reference/fct_lump.html">fct_lump_n</a></span>(</a>
+<a class="sourceLine" id="cb16-16" title="16">      bilhs1_description,</a>
+<a class="sourceLine" id="cb16-17" title="17">      <span class="dt">n =</span> <span class="dv">5</span>,</a>
+<a class="sourceLine" id="cb16-18" title="18">      <span class="dt">w =</span> bil002_val,</a>
+<a class="sourceLine" id="cb16-19" title="19">      <span class="dt">other_level =</span> <span class="st">"Other NRW universities"</span></a>
+<a class="sourceLine" id="cb16-20" title="20">      )</a>
+<a class="sourceLine" id="cb16-21" title="21">  ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb16-22" title="22"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(</a>
+<a class="sourceLine" id="cb16-23" title="23">    bilhs1_description <span class="op">!=</span><span class="st"> "Other NRW universities"</span></a>
+<a class="sourceLine" id="cb16-24" title="24">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb16-25" title="25"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(</a>
+<a class="sourceLine" id="cb16-26" title="26">    <span class="dt">bilap1 =</span> forcats<span class="op">::</span><span class="kw"><a href="https://forcats.tidyverse.org/reference/fct_lump.html">fct_lump_n</a></span>(</a>
+<a class="sourceLine" id="cb16-27" title="27">      bilap1,</a>
+<a class="sourceLine" id="cb16-28" title="28">      <span class="dt">n =</span> <span class="dv">5</span>,</a>
+<a class="sourceLine" id="cb16-29" title="29">      <span class="dt">w =</span> bil002_val,</a>
+<a class="sourceLine" id="cb16-30" title="30">      <span class="dt">other_level =</span> <span class="st">"Other degrees"</span></a>
+<a class="sourceLine" id="cb16-31" title="31">      ),</a>
+<a class="sourceLine" id="cb16-32" title="32">    <span class="dt">bilap1_description =</span> forcats<span class="op">::</span><span class="kw"><a href="https://forcats.tidyverse.org/reference/fct_lump.html">fct_lump_n</a></span>(</a>
+<a class="sourceLine" id="cb16-33" title="33">      bilap1_description,</a>
+<a class="sourceLine" id="cb16-34" title="34">      <span class="dt">n =</span> <span class="dv">5</span>,</a>
+<a class="sourceLine" id="cb16-35" title="35">      <span class="dt">w =</span> bil002_val,</a>
+<a class="sourceLine" id="cb16-36" title="36">      <span class="dt">other_level =</span> <span class="st">"Other degrees"</span></a>
+<a class="sourceLine" id="cb16-37" title="37">      )</a>
+<a class="sourceLine" id="cb16-38" title="38">    )</a>
+<a class="sourceLine" id="cb16-39" title="39"></a>
+<a class="sourceLine" id="cb16-40" title="40"><span class="kw"><a href="../reference/rub_plot_type_3.html">rub_plot_type_3</a></span>(</a>
+<a class="sourceLine" id="cb16-41" title="41">  <span class="dt">df =</span> df_plot_t3,</a>
+<a class="sourceLine" id="cb16-42" title="42">  <span class="dt">x_var =</span> bil002_val,</a>
+<a class="sourceLine" id="cb16-43" title="43">  <span class="dt">y_var =</span> semest,</a>
+<a class="sourceLine" id="cb16-44" title="44">  <span class="dt">facet_var =</span> bilhs1_description,</a>
+<a class="sourceLine" id="cb16-45" title="45">  <span class="dt">fill_var =</span> bilap1_description,</a>
+<a class="sourceLine" id="cb16-46" title="46">  <span class="dt">caption =</span> <span class="st">"Landesdatenbank NRW, Table Code 21311LS001A (license dl-de/by-2-0)"</span>,</a>
+<a class="sourceLine" id="cb16-47" title="47">  <span class="dt">caption_prefix =</span> <span class="st">"Source:"</span>,</a>
+<a class="sourceLine" id="cb16-48" title="48">  <span class="dt">filter_cutoff =</span> <span class="fl">0.06</span></a>
+<a class="sourceLine" id="cb16-49" title="49">  ,<span class="dt">fill_reverse =</span> <span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb16-50" title="50">)</a></code></pre></div>
+<p><img src="Wiesbaden_files/figure-html/21311LS001A-plot3-1.png" width="700"></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"></a>
+<a class="sourceLine" id="cb17-2" title="2"></a>
+<a class="sourceLine" id="cb17-3" title="3"><span class="co"># rub_plot_type_3(</span></a>
+<a class="sourceLine" id="cb17-4" title="4"><span class="co">#   df = df_plot_t3,</span></a>
+<a class="sourceLine" id="cb17-5" title="5"><span class="co">#   x_var = bil002_val,</span></a>
+<a class="sourceLine" id="cb17-6" title="6"><span class="co">#   y_var = semest,</span></a>
+<a class="sourceLine" id="cb17-7" title="7"><span class="co">#   facet_var = bilhs1_description,</span></a>
+<a class="sourceLine" id="cb17-8" title="8"><span class="co">#   fill_label = bilap1_description,</span></a>
+<a class="sourceLine" id="cb17-9" title="9"><span class="co">#   fill_var = bilap1,</span></a>
+<a class="sourceLine" id="cb17-10" title="10"><span class="co">#   caption = "Landesdatenbank NRW, Table Code 21311LS001A (license dl-de/by-2-0)",</span></a>
+<a class="sourceLine" id="cb17-11" title="11"><span class="co">#   caption_prefix = "Source:",</span></a>
+<a class="sourceLine" id="cb17-12" title="12"><span class="co">#   filter_cutoff = 0.06</span></a>
+<a class="sourceLine" id="cb17-13" title="13"><span class="co">#   ,fill_reverse = FALSE</span></a>
+<a class="sourceLine" id="cb17-14" title="14"><span class="co"># )</span></a></code></pre></div>
 </div>
 <div id="data-license-for-the-destatis-data" class="section level1">
 <h1 class="hasAnchor">
 <a href="#data-license-for-the-destatis-data" class="anchor"></a>Data license for the Destatis data</h1>
-<p>Data obtained from Destatis is available under the Data licence Germany – attribution – version 2.0 (dl-de/by-2-0). The license text is available at <a href="www.govdata.de/dl-de/by-2-0">www.govdata.de/dl-de/by-2-0</a>. The data in this vignette was obtained from the Landesdatenbank NRW using the code “213” for “Hochschulen”. The license requests a reference to the dataset using the URI. To the best of my knowledge, the Landesdatenbank NRW does not yet provide Uniform Resource Identifiers (URI) to identify these tables.</p>
-</div>
-<div id="data-analysis" class="section level1">
-<h1 class="hasAnchor">
-<a href="#data-analysis" class="anchor"></a>Data Analysis</h1>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/debug.html">debugonce</a></span>(rub_plot_type_<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb16-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://devtools.r-lib.org//reference/document.html">document</a></span>()</a>
-<a class="sourceLine" id="cb16-3" title="3">devtools<span class="op">::</span><span class="kw"><a href="https://devtools.r-lib.org//reference/load_all.html">load_all</a></span>()</a></code></pre></div>
+<p>Data obtained from Destatis is available under the <a href="www.govdata.de/dl-de/by-2-0">Data licence Germany – attribution – version 2.0 (dl-de/by-2-0)</a>. The data in this vignette was obtained from the Landesdatenbank NRW using the code “213” for “Hochschulen”. The license requests a reference to the dataset using the URI. To the best of my knowledge, the Landesdatenbank NRW does not yet provide Uniform Resource Identifiers (URI) to identify these tables.</p>
 </div>
   </div>
 
@@ -389,7 +468,6 @@
       <li><a href="#data-wrangling">Data Wrangling</a></li>
       <li><a href="#working-with-the-destatis-data">Working with the Destatis data</a></li>
       <li><a href="#data-license-for-the-destatis-data">Data license for the Destatis data</a></li>
-      <li><a href="#data-analysis">Data Analysis</a></li>
       </ul>
 </div>
       </div>

@@ -13,6 +13,9 @@ RUB_palettes
 \description{
 This is a color palette using the colors defined by the corporate design.
 }
+\examples{
+RUB_palettes["discrete_5"]
+}
 \references{
 https://www.ruhr-uni-bochum.de/cd/
 }

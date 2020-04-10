@@ -8,7 +8,7 @@
 get_figure_df(df, figure_count)
 }
 \arguments{
-\item{df}{Dataf rame}
+\item{df}{Data frame}
 
 \item{figure_count}{Figure count of the figure}
 }
@@ -20,5 +20,5 @@ Prepare data frame for plotting of a particular figure by filtering and
    setting factors.
 }
 \examples{
-get_figure_df(df, figure_count = 16)
+get_figure_df(df_fake, figure_count = 16)
 }

@@ -20,5 +20,9 @@ Vector with fake values
 Get vector with faked values for figure types 1 and 4
 }
 \examples{
-get_fake_values_type_1_4(figure_type_id = 4, length = 5, base_value = 800)
+get_fake_values_type_1_4(
+   figure_type_id = 4,
+   length = 5,
+   base_value = 800
+   )
 }

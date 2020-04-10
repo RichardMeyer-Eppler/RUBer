@@ -10,11 +10,13 @@ get_cohort_data(df_orga)
 \item{df_orga}{Data frame with orga}
 }
 \value{
-Data frame with correct cohort analysis data
+Data frame with corrected cohort analysis data
 }
 \description{
 Get cohort data, including generated cohort data for report_id 2018_FG
 }
 \examples{
+\dontrun{
 get_cohort_data(df_orga)
+}
 }

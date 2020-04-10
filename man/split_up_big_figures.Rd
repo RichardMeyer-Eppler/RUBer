@@ -18,9 +18,10 @@ Data frame with newly assigned figure sort keys
 This checks whether the total number of rows for a figures exceeds a limit.
 If it does, the variables of the figure will be split in pieces by assigning
 an additional figure_sort_key. The size of a figure is calculated by the
-number of unique x-Axis + Facet variables. The function currently creates
-problems by doubling headings.
+number of unique x-axis + facet variables.
 }
 \examples{
+\dontrun{
 split_up_big_figures(df)
+}
 }

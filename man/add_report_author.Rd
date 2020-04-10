@@ -7,7 +7,7 @@
 add_report_author(df)
 }
 \arguments{
-\item{df}{}
+\item{df}{Data frame}
 }
 \value{
 Data frame with additional column \code{report_author}
@@ -16,5 +16,7 @@ Data frame with additional column \code{report_author}
 Adds column \code{report_author} to data frame
 }
 \examples{
+\dontrun{
 add_report_author(df)
+}
 }

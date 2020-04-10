@@ -7,7 +7,8 @@
 get_file_name(param_list)
 }
 \arguments{
-\item{param_list}{}
+\item{param_list}{List of parameters containing report_id, report_nr,
+subject_txt, subject_area_txt}
 }
 \value{
 String
@@ -16,5 +17,7 @@ String
 Get file name for automatic report generation
 }
 \examples{
+\dontrun{
 get_file_name(param_list)
+}
 }

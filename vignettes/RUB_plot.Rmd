@@ -64,6 +64,7 @@ rub_plot_type_1(
   y_var = students,
   fill_var = degree
 #  ,fill_reverse = TRUE
+#  ,palette_reverse = TRUE
 )
 ```
 
@@ -90,7 +91,7 @@ df_t1_ex2 <- tibble::tribble(
    "Spring '14", 129, "Master 1-Subject",
    "Spring '15", 122, "Master 1-Subject",
    "Spring '16", 168, "Master 1-Subject",
-   "Spring '17", 7, "Master 1-Subject",
+   "Spring '17", 7, "Master 1-Subject"
 )
 
 # Set values for parameters setting the y-axis title, captioning the source data
@@ -105,14 +106,15 @@ rub_plot_type_1(
   caption_prefix = "Source:",
   filter_cutoff = 0.06
 #  ,fill_reverse = TRUE
+#  ,palette_reverse = TRUE
 )
 ```
 
 The third example adds even more parameters. You can facet the figure by a
 discrete variable, `facet_var`, in order to make direct comparisons between 
 groups, e.g. different departments. You can also change a figure's default color
-with `color` and the default font with `base_family` (see the documentation for 
-`RUBer::theme_rub()`).
+with `color`, the default font with `base_family`, and the size of all text 
+elements with `base_size` (see the documentation for `RUBer::theme_rub()`).
 
 ```{r type-1-example-3}
 # Create test values for all three mandatory variables (x_var, y_var, fill_var)
@@ -142,8 +144,8 @@ df_t1_ex3 <- tibble::tribble(
 )
 
 # Facet by department, which effectively leads to two plots in one figure. The
-# default font is changed to RUB Scala TZ and the main color is changed from
-# RUB blue to dark red.
+# default font is changed to RUB Scala TZ, the main color is changed from
+# RUB blue to dark red, and the size is increased from 11 to 14.
 rub_plot_type_1(
   df = df_t1_ex3,
   x_var = term,
@@ -155,8 +157,10 @@ rub_plot_type_1(
   filter_cutoff = 0.06,
   facet_var = department,
   color = RUB_colors["dark red"],
-  base_family = "RUB Scala TZ"
- # ,fill_reverse = TRUE
+  base_family = "RUB Scala TZ",
+  base_size = 14
+#  ,fill_reverse = TRUE
+#  ,palette_reverse = TRUE
 )
 ```
 
@@ -199,15 +203,16 @@ rub_plot_type_2(
   x_var = cohort_term,
   y_var = status_percentage,
   fill_var = cohort_status
-#  ,fill_reverse = TRUE
+  # ,fill_reverse = TRUE
+  # ,palette_reverse = TRUE
 ) 
 ```
 
 Now let us say we are unhappy with the default ordering of the stacked bars,
-because we want the largest cohort group, those still studying, on the bottom.
-We can use the boolean parameter `fill_reverse` to do just that. We also provide
-a discrete facetting variable, `facet_var`, a text for `caption` and 
-`caption_prefix`, and a lower threshhold for the `filter_cutoff`, leading to 
+because we want the largest cohort group, those still studying, on top. We can
+use the boolean parameter `fill_reverse` to do just that. We also provide a
+discrete facetting variable, `facet_var`, a text for `caption` and
+`caption_prefix`, and a lower threshhold for the `filter_cutoff`, leading to
 more labels being displayed.
 
 ```{r type-2-example-2}
@@ -264,7 +269,7 @@ rub_plot_type_2(
   filter_cutoff = 0.05,
   caption = "Comparison of two fictitious cohorts",
   caption_prefix = "Source:"
-#  ,fill_reverse = TRUE
+  ,fill_reverse = TRUE
 )
 ```
 
@@ -290,19 +295,20 @@ rub_plot_type_3(
    x_var = item_value_percentage,
    y_var = survey_group,
    fill_var = item_value
-#   ,fill_reverse = TRUE
+ # ,fill_reverse = TRUE
 )
 ```
 
 The second example once again adds a facetting variable, `fill_var`, for 
 plotting direct comparisons between groups. We also use `caption`,
-`caption_prefix` and a `filter_cutoff` that suppresses all values below 20%.
+`caption_prefix`, a `filter_cutoff` that suppresses all values below 20%, and 
+increase the text size to 12.
 
 ```{r type-3-example-2}
 df_t3_ex2 <- tibble::tribble(
    ~survey_group, ~item_value, ~item_value_percentage, ~degree,
-   "Bachelor 1-Subject (n=400)", "Exceeded prescribed period of study", 0.3070448, "Bachelor 1-Subject",
-   "Bachelor 1-Subject (n=400)", "Within prescribed period of study", 0.6929552, "Bachelor 1-Subject",
+   "Bachelor 1-Subject (n=400)", "Exceeded prescribed period of study", 0.30, "Bachelor 1-Subject",
+   "Bachelor 1-Subject (n=400)", "Within prescribed period of study", 0.60, "Bachelor 1-Subject",
    "SG Bachelor 1-Subject (n=726)", "Exceeded prescribed period of study", 0.1122486, "Bachelor 1-Subject",
    "SG Bachelor 1-Subject (n=726)", "Within prescribed period of study", 0.8877514, "Bachelor 1-Subject",
    "Master 1-Subject (n=369)", "Exceeded prescribed period of study", 0.1416009, "Master 1-Subject",
@@ -319,21 +325,347 @@ rub_plot_type_3(
    facet_var = degree,
    caption = "Graduate survey 2017/18",
    caption_prefix = "Source:",
-   filter_cutoff = 0.20
+   filter_cutoff = 0.20,
+   base_size = 12
 )
 ```
 
-```{r dev-chunck, eval = FALSE}
-debugonce()
-traceback()
+### Changing ordering
+In the last example above, the ordering of the fill variable, item_value, is
+going from bad ("Exceeded prescribed period of study") to good ("Within
+prescribed period of study"). This is because, by default, the fill variable
+will be ordered alphabetically if not a factor. So what if we want the fill
+variable ordered the other way? We can use the optional boolean parameter
+`fill_reverse` to change the ordering of the the fill variable and of the
+legend.
 
-devtools::load_all()
-devtools::document()
+```{r type-3-example-3}
+# Reversed fill, reversed legend
+rub_plot_type_3(
+   df = df_t3_ex2,
+   x_var = item_value_percentage,
+   y_var = survey_group,
+   fill_var = item_value,
+   facet_var = degree,
+   caption = "Graduate survey 2017/18",
+   caption_prefix = "Source:",
+   filter_cutoff = 0.20,
+   base_size = 12,
+   fill_reverse = TRUE
+)
 ```
+
+If we simply want to reverse the order of the legend items, without actually
+reversing the order of the stacked bar segments, we can use the optional 
+parameter `legend_reverse` instead.
+
+```{r type-3-example-4}
+# Reversed legend
+rub_plot_type_3(
+   df = df_t3_ex2,
+   x_var = item_value_percentage,
+   y_var = survey_group,
+   fill_var = item_value,
+   facet_var = degree,
+   caption = "Graduate survey 2017/18",
+   caption_prefix = "Source:",
+   filter_cutoff = 0.20,
+   base_size = 12,
+#  legend_reverse = TRUE
+)
+```
+
+What if we want to use a custom ordering of the fill variable? Consider the 
+following example:
+
+```{r type-3-example-5}
+df_t3_ex4 <- tibble::tribble(
+   ~survey_group, ~item_value, ~item_value_percentage, ~degree,
+   "Bachelor 1-Subject (n=400)", "Exceeded prescribed period of study", 0.30, "Bachelor 1-Subject",
+   "Bachelor 1-Subject (n=400)", "Within prescribed period of study", 0.60, "Bachelor 1-Subject",
+      "Bachelor 1-Subject (n=400)", "Unknown", 0.10, "Bachelor 1-Subject",
+   "SG Bachelor 1-Subject (n=726)", "Exceeded prescribed period of study", 0.11, "Bachelor 1-Subject",
+   "SG Bachelor 1-Subject (n=726)", "Within prescribed period of study", 0.77, "Bachelor 1-Subject",
+      "SG Bachelor 1-Subject (n=726)", "Unknown", 0.12, "Bachelor 1-Subject",
+   "Master 1-Subject (n=369)", "Exceeded prescribed period of study", 0.12, "Master 1-Subject",
+   "Master 1-Subject (n=369)", "Within prescribed period of study", 0.83, "Master 1-Subject",
+      "Master 1-Subject (n=369)", "Unknown", 0.04, "Master 1-Subject",
+   "SG Master 1-Subject (n=669)", "Exceeded prescribed period of study", 0.44, "Master 1-Subject",
+   "SG Master 1-Subject (n=669)", "Within prescribed period of study", 0.50, "Master 1-Subject",
+   "SG Master 1-Subject (n=669)", "Unknown", 0.05, "Master 1-Subject"
+)
+
+rub_plot_type_3(
+   df = df_t3_ex4,
+   x_var = item_value_percentage,
+   y_var = survey_group,
+   fill_var = item_value,
+   facet_var = degree,
+   caption = "Graduate survey 2017/18",
+   caption_prefix = "Source:",
+#   ,fill_reverse = TRUE
+)
+```
+
+Here, we neither want alphabetic ordering, nor its reverse. Instead, we would
+prefer an alphabetic ordering with the item_value "Unknown" always coming last.
+For this, we can explicitly turn the `fill_var` into a factor with a
+predetermined ordering. The plotting function will respect this ordering.
+
+```{r type-3-example-6}
+# Take the data from previous example
+df_t3_ex5 <- df_t3_ex4
+
+# Turn the column "item_value" into a factor
+df_t3_ex5[["item_value"]] <- factor(df_t3_ex5[["item_value"]])
+
+# Examine the levels, default is alphabetic ordering
+levels(df_t3_ex5[["item_value"]])
+
+# Make sure that level unknown always comes last
+df_t3_ex5[["item_value"]] <- forcats::fct_relevel(
+   df_t3_ex5[["item_value"]],
+   c("Unknown"),
+   after = Inf
+)
+
+# Check new ordering
+levels(df_t3_ex5[["item_value"]])
+
+# Plot
+rub_plot_type_3(
+   df = df_t3_ex5,
+   x_var = item_value_percentage,
+   y_var = survey_group,
+   fill_var = item_value,
+   facet_var = degree,
+   caption = "Graduate survey 2017/18",
+   caption_prefix = "Source:"
+)
+```
+
+## Figure Type 4 - Line Charts
+```{r type-4-example-1}
+rub_plot_type_4(
+  df = df_t1_ex1,
+  x_var = term,
+  y_var = students,
+  group_var = degree,
+  y_axis_label = "Students (1st degree program, 1st and 2nd field of study)",
+  caption = "Information management system of the University of Bochum",
+  caption_prefix = "Source:",
+  filter_cutoff = 10,
+  base_size = 14
+)
+
+rub_plot_type_4(
+  df = df_t1_ex3,
+  x_var = term,
+  y_var = students,
+  group_var = degree,
+  facet_var = department,
+  y_axis_label = "Students (1st degree program, 1st and 2nd field of study)",
+  caption = "Information management system of the University of Bochum",
+  caption_prefix = "Source:",
+  filter_cutoff = 5
+)
+```
+
+```{r type-5-example-3}
+df_t5_ex1 <- tibble::tribble(
+   ~term, ~students, ~degree, ~group, ~figure_type_id,
+   "Spring '13", 120, "Bachelor 1-Subject", NA_character_, 1L,
+   "Spring '14", 105, "Bachelor 1-Subject", NA_character_, 1L,
+   "Spring '15", 124, "Bachelor 1-Subject", NA_character_, 1L,
+   "Spring '16", 114, "Bachelor 1-Subject", NA_character_, 1L,
+   "Spring '17", 122, "Bachelor 1-Subject", NA_character_, 1L,
+   "Spring '13", 121, "Master 1-Subject", NA_character_, 1L,
+   "Spring '14", 129, "Master 1-Subject", NA_character_, 1L,
+   "Spring '15", 122, "Master 1-Subject", NA_character_, 1L,
+   "Spring '16", 168, "Master 1-Subject", NA_character_, 1L,
+   "Spring '17", 7, "Master 1-Subject", NA_character_, 1L,
+   "Spring '13", 20, NA_character_, "Freshman students", 4L,
+   "Spring '14", 30, NA_character_, "Freshman students", 4L,
+   "Spring '15", 41, NA_character_, "Freshman students", 4L,
+   "Spring '16", 27, NA_character_, "Freshman students", 4L,
+   "Spring '17", 35, NA_character_, "Freshman students", 4L
+)
+
+rub_plot_type_1_and_4(
+   df = df_t5_ex1,
+   x_var = term,
+   y_var = students,
+   fill_var = degree,
+   group_var = group
+)
+```
+
 
 # For experienced ggplot2 users
 ## Applying the RUB Theme
+The function `theme_rub` is a normal `ggplot2::theme()` function based on 
+`ggplot2::theme_minimal()`. You can use it for any ggplot object:
+
+```{r theme-rub}
+# Base plot
+ggplot2::ggplot(
+   data = mtcars,
+   ggplot2::aes(
+      x = mpg,
+      y = disp,
+      color = as.factor(carb)
+   )
+) + 
+   ggplot2::geom_point() +
+   theme_rub()
+```
+
 ## Scale Functions
+The RUB palettes are used through corresponding scale functions. Currently, (1)
+`scale_color_rub` (a wrapper for `ggplot2::discrete_scale()` if discrete, or for
+`ggplot2::scale_color_gradientn()` if continuous) and (2) `scale_fill_rub` (a
+wrapper for `ggplot2::discrete_scale()` if discrete, or for
+`ggplot2::scale_fill_gradientn()` if continuous) are implemented. Use these 
+scale functions to ensure that appropriate RUB palettes and colors are used.
+
+```{r theme-rub-color-discrete}
+# Basic themed plot with discrete scale function
+ggplot2::ggplot(
+   data = mtcars,
+   ggplot2::aes(
+      x = mpg,
+      y = disp,
+      color = as.factor(carb)
+      )
+   ) + 
+   ggplot2::geom_point() +
+   scale_color_rub(
+      palette = "discrete"
+   ) +
+   theme_rub()
+
+# By default, the theme shows no axis labels and no legend title. Use the 
+# boolean parameters x_axis_label, y_axis_label and legend_title to activate 
+# them.
+ggplot2::ggplot(
+   data = mtcars,
+   ggplot2::aes(
+      x = mpg,
+      y = disp,
+      color = as.factor(carb)
+   )
+) + 
+   ggplot2::geom_point() +
+   scale_color_rub(
+      palette = "discrete"
+   ) +
+   theme_rub(
+      x_axis_label = TRUE,
+      y_axis_label = TRUE,
+      legend_title = FALSE
+   )
+
+# Reverse the color palette by setting reverse to TRUE in the scale function
+ggplot2::ggplot(
+   data = mtcars,
+   ggplot2::aes(
+      x = mpg,
+      y = disp,
+      color = as.factor(carb)
+   )
+) + 
+   ggplot2::geom_point() +
+   scale_color_rub(
+      palette = "discrete",
+      reverse = TRUE
+   ) +
+   theme_rub(
+      x_axis_label = TRUE,
+      y_axis_label = TRUE,
+      legend_title = FALSE
+   )
+``` 
+
+Continuous scales are used by setting `discrete` to `FALSE` and by providing 
+the name of a continuous palette to `palette` (see `vignette("RUB_colors")`).
+
+```{r theme-rub-color-continuous}
+# Basic plot with continuous scale function
+ggplot2::ggplot(
+   data = mtcars,
+   ggplot2::aes(
+      x = mpg,
+      y = disp,
+      color = disp
+   )
+) + 
+   ggplot2::geom_point() +
+   scale_color_rub(
+      palette = "continuous",
+      discrete = FALSE
+   ) +
+   theme_rub(
+      x_axis_label = TRUE,
+      y_axis_label = TRUE,
+      legend_title = TRUE
+   )
+
+# Reverse the color palette by setting reverse to TRUE in the scale function
+ggplot2::ggplot(
+   data = mtcars,
+   ggplot2::aes(
+      x = mpg,
+      y = disp,
+      color = disp
+   )
+) + 
+   ggplot2::geom_point() +
+   scale_color_rub(
+      palette = "continuous",
+      discrete = FALSE,
+      reverse = TRUE
+   ) +
+   theme_rub(
+      x_axis_label = TRUE,
+      y_axis_label = TRUE,
+      legend_title = TRUE
+   )
+
+# Example of continuous_diverging palette
+ggplot2::ggplot(
+   data = mtcars,
+   ggplot2::aes(
+      x = mpg,
+      y = disp,
+      color = disp
+   )
+) + 
+   ggplot2::geom_point() +
+   scale_color_rub(
+      palette = "continuous_diverging",
+      discrete = FALSE
+   ) +
+   theme_rub(
+      x_axis_label = TRUE,
+      y_axis_label = TRUE,
+      legend_title = TRUE
+   )
+```
+
+```{r theme-rub-scale}
+ggplot2::ggplot(
+   data = mtcars,
+   ggplot2::aes(
+      x = as.factor(gear),
+      fill = as.factor(vs)
+      )
+   ) + 
+   ggplot2::geom_bar() +
+   scale_fill_rub(
+      palette = "discrete_2"
+   )
+```
+
 
 # Further Reading
 * [BBC - bbplot package](https://github.com/bbc/bbplot)

@@ -7,14 +7,17 @@
 mutate_plot_variables(df)
 }
 \arguments{
-\item{df}{Dataframe bzw. Tibble}
+\item{df}{Data frame}
 }
 \value{
-Dataframe bzw. Tibble mit den zusätzlichen Spalten x, y, fill, fill_label, fill_reverse, facet und group.
+Data frame with additional columns \code{x}, \code{y}, \code{fill},
+    \code{fill_label}, \code{fill_reverse}, \code{facet} und \code{group}.
 }
 \description{
 Generiert für die Abbildungstypen 1-4 Variablen für die Ploterstellung
 }
 \examples{
+\dontrun{
 mutate_plot_variables(df_filtered)
+}
 }

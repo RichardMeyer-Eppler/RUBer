@@ -16,5 +16,7 @@ Data frame with additional rows for \code{report_id} "2018_FG"
 Bind rows for \code{report_id} "2018_FG" to data frame
 }
 \examples{
+\dontrun{
 add_2018_fg(df)
+}
 }

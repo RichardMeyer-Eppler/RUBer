@@ -17,5 +17,7 @@ Sorts report_nr, figure_sort, subject_id, subject_area_id, degree_sort,
 time, variable_id, subject_group_id, value_id
 }
 \examples{
+\dontrun{
 sort_report(df)
+}
 }

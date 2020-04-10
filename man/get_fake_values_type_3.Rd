@@ -10,11 +10,11 @@ get_fake_values_type_3(x)
 \item{x}{Length}
 }
 \value{
-
+Numeric vector of length x
 }
 \description{
 Get faked value percentages for figure type 3
 }
 \examples{
-get_fake_values_type_3(5)
+get_fake_values_type_3(x = 5)
 }

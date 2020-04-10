@@ -1,12 +1,15 @@
 #' Get figure caption
 #'
-#' @param df Dataframe bzw. Tibble
+#' @param param_list List of parameters containing figure_type_id, figure_id,
+#'     degree_group_txt, subject_area_txt, subject_group_txt, report_id
 #'
-#' @return Caption as character
+#' @return String containing figure caption
 #' @export
 #'
 #' @examples
-#' get_figure_caption(df)
+#' \dontrun{
+#' get_figure_caption(param_list)
+#' }
 get_figure_caption <- function(param_list) {
   txt <- param_list[["figure_txt"]]
 
@@ -46,14 +49,14 @@ get_figure_caption <- function(param_list) {
 #' Prepare data frame for plotting of a particular figure by filtering and
 #'    setting factors.
 #'
-#' @param df Dataf rame
+#' @param df Data frame
 #' @param figure_count Figure count of the figure
 #'
 #' @return Data frame
 #' @export
 #'
 #' @examples
-#' get_figure_df(df, figure_count = 16)
+#' get_figure_df(df_fake, figure_count = 16)
 get_figure_df <- function(df, figure_count) {
   figure_df <- dplyr::filter(
     df,
@@ -75,7 +78,9 @@ get_figure_df <- function(df, figure_count) {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' get_figure_height(param_list)
+#' }
 get_figure_height <- function(param_list, lower_bound = 2, upper_bound = 9.6) {
   figure_type_id <- param_list[["figure_type_id"]]
   facet_count <- param_list[["facet_count"]]

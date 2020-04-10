@@ -13,6 +13,9 @@ RUB_colors
 \description{
 These are available RUB colors as defined by the corporate design.
 }
+\examples{
+RUB_colors["green"]
+}
 \references{
 https://www.ruhr-uni-bochum.de/cd/
 }

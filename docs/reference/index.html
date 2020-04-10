@@ -202,7 +202,7 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="add_rub_plot_typ_4.html">add_rub_plot_typ_4()</a></code> </p>
+          <p><code><a href="add_rub_plot_type_4.html">add_rub_plot_type_4()</a></code> <code><a href="add_rub_plot_type_4.html">add_rub_plot_type_4()</a></code> </p>
         </td>
         <td><p>Helper Function</p></td>
       </tr><tr>
@@ -248,7 +248,7 @@ only consist of NA.</p></td>
         <td>
           <p><code><a href="filter_report.html">filter_report()</a></code> </p>
         </td>
-        <td><p>Filtere Datensatz auf eine Berichtsnummer plus jeweils relevante Vergleichsgruppe</p></td>
+        <td><p>Filter data frame based on <code>report_nr</code> column</p></td>
       </tr><tr>
         
         <td>
@@ -405,7 +405,7 @@ only consist of NA.</p></td>
         <td>
           <p><code><a href="get_title.html">get_title()</a></code> </p>
         </td>
-        <td><p>Get title for report title page based on the column "report_nr"</p></td>
+        <td><p>Get title for report title page based on the column <code>report_nr</code></p></td>
       </tr><tr>
         
         <td>
@@ -427,7 +427,13 @@ only consist of NA.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="plot_figure.html">plot_figure()</a></code> </p>
+          <p><code><a href="plot_discrete_palette.html">plot_discrete_palette()</a></code> <code><a href="plot_discrete_palette.html">plot_discrete_palette()</a></code> </p>
+        </td>
+        <td><p>Get discrete palette for the plot</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="plot_figure.html">plot_figure()</a></code> <code><a href="plot_figure.html">plot_figure()</a></code> </p>
         </td>
         <td><p>Plot RUB figure</p></td>
       </tr><tr>
@@ -448,6 +454,13 @@ only consist of NA.</p></td>
           <p><code><a href="replace_cohort_data.html">replace_cohort_data()</a></code> </p>
         </td>
         <td><p>Replaces original cohort data with corrected cohort data.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="Ruber.html">Ruber</a></code> </p>
+        </td>
+        <td><p>RUBer: Parameterized Microsoft Word reports in the RUB corporate
+design</p></td>
       </tr><tr>
         
         <td>
@@ -475,33 +488,33 @@ only consist of NA.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="rub_plot_type_1.html">rub_plot_type_1()</a></code> </p>
+          <p><code><a href="rub_plot_type_1.html">rub_plot_type_1()</a></code> <code><a href="rub_plot_type_1.html">rub_plot_type_1()</a></code> </p>
         </td>
         <td><p>Plot vertical stacked bar chart (figure type 1)</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="rub_plot_type_2.html">rub_plot_type_2()</a></code> </p>
+          <p><code><a href="rub_plot_type_1_and_4.html">rub_plot_type_1_and_4()</a></code> <code><a href="rub_plot_type_1_and_4.html">rub_plot_type_1_and_4()</a></code> </p>
+        </td>
+        <td><p>Plot grouped line chart on top of vertical stacked bar chart (figure type 5)</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="rub_plot_type_2.html">rub_plot_type_2()</a></code> <code><a href="rub_plot_type_2.html">rub_plot_type_2()</a></code> </p>
         </td>
         <td><p>Plot vertical stacked bar charts that are scaled to 100% (figure type 2)</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="rub_plot_type_3.html">rub_plot_type_3()</a></code> </p>
+          <p><code><a href="rub_plot_type_3.html">rub_plot_type_3()</a></code> <code><a href="rub_plot_type_3.html">rub_plot_type_3()</a></code> </p>
         </td>
         <td><p>Plot horizontal stacked bar charts that are scaled to 100% (figure type 3)</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="rub_plot_typ_1_and_4.html">rub_plot_typ_1_and_4()</a></code> </p>
+          <p><code><a href="rub_plot_type_4.html">rub_plot_type_4()</a></code> <code><a href="rub_plot_type_4.html">rub_plot_type_4()</a></code> </p>
         </td>
-        <td><p>Zeichne gruppiertes Liniendiagramm (Abbildungstyp 5)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rub_plot_typ_4.html">rub_plot_typ_4()</a></code> </p>
-        </td>
-        <td><p>Zeichne gruppiertes Liniendiagramm (Abbildungstyp 4)</p></td>
+        <td><p>Plot grouped line chart (figure type 4)</p></td>
       </tr><tr>
         
         <td>
@@ -525,13 +538,14 @@ only consist of NA.</p></td>
         <td>
           <p><code><a href="set_factors.html">set_factors()</a></code> </p>
         </td>
-        <td><p>Erzeuge Faktoren für die Abbildungserstellung</p></td>
+        <td><p>Creates factors for plotting the 2018 data</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="set_factor_var.html">set_factor_var()</a></code> </p>
         </td>
-        <td><p>Turns a data frame column into a factor</p></td>
+        <td><p>Prepares var and var_label columns for plotting by ordering them and turning
+them into factors</p></td>
       </tr><tr>
         
         <td>

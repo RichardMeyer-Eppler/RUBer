@@ -19,12 +19,13 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Parameterized Microsoft Word reports in the RUB corporate
     design">
-<meta property="og:description" content="RUBer is an R package created for parameterized reporting according
-    to the requirements at the Ruhr-Universität Bochum (RUB). The package 
-    provides a large example dataset containing fake values, an R Markdown
-    template in the RUB corporate design, preconfigured ggplot2 plotting
-    functions, custom themes for ggplot2 and flextable, as well as functions
-    making the RUB corporate design colors available.">
+<meta property="og:description" content="RUBer is an R package created for parameterized
+    reporting according to the requirements at the Ruhr-Universität Bochum
+    (RUB). The package provides a large example dataset containing fake
+    values, an R Markdown template in the RUB corporate design,
+    preconfigured ggplot2 plotting functions, custom themes for ggplot2
+    and flextable, as well as functions making the RUB corporate design
+    colors available.">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -146,11 +147,14 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Install the development version from GitHub with:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># If package "remotes" is not installed, install this first:</span></a>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># If package "remotes" is not installed, install it first:</span></a>
 <a class="sourceLine" id="cb1-2" title="2"><span class="co"># install.packages("remotes")</span></a>
 <a class="sourceLine" id="cb1-3" title="3"></a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="co"># Install RUBer from Github:</span></a>
-<a class="sourceLine" id="cb1-5" title="5">remotes<span class="op">::</span><span class="kw"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"RUBer"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb1-4" title="4"><span class="co"># Install RUBer from Github</span></a>
+<a class="sourceLine" id="cb1-5" title="5">remotes<span class="op">::</span><span class="kw"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(</a>
+<a class="sourceLine" id="cb1-6" title="6">  <span class="dt">repo =</span> <span class="st">"RichardMeyer-Eppler/RUBer"</span>,</a>
+<a class="sourceLine" id="cb1-7" title="7">  <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb1-8" title="8">  )</a></code></pre></div>
 </div>
 </div>
   </div>
@@ -166,7 +170,8 @@
 <div class="license">
 <h2>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://opensource.org/licenses/mit-license.php">MIT</a></li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
 <div class="developers">

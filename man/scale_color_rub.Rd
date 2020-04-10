@@ -9,9 +9,11 @@ scale_color_rub(palette = "discrete", discrete = TRUE, reverse = FALSE, ...)
 \arguments{
 \item{palette}{Character name of palette in \code{RUB_palettes}}
 
-\item{discrete}{Boolean indicating whether color aesthetic is discrete or not}
+\item{discrete}{Boolean indicating whether color aesthetic is discrete or
+not, defaults to TRUE.}
 
-\item{reverse}{Boolean indicating whether the palette should be reversed}
+\item{reverse}{Optional boolean indicating whether the palette should be
+reversed, defaults to FALSE.}
 
 \item{...}{Additional arguments passed to
 \code{\link[ggplot2]{discrete_scale}} or
@@ -22,7 +24,16 @@ or FALSE, respectively}
 Color scale constructor for RUB colors
 }
 \examples{
-ggplot(mpg, aes(displ, cty, color = trans)) +
-geom_point(size = 4) +
-scale_color_rub(discrete = TRUE, palette = "discrete")
+ggplot2::ggplot(
+  data = mtcars,
+  ggplot2::aes(
+    x = mpg,
+    y = disp,
+    color = as.factor(carb)
+    )
+  ) +
+  ggplot2::geom_point() +
+  scale_color_rub(
+    palette = "discrete"
+  )
 }

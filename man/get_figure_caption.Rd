@@ -7,14 +7,17 @@
 get_figure_caption(param_list)
 }
 \arguments{
-\item{df}{Dataframe bzw. Tibble}
+\item{param_list}{List of parameters containing figure_type_id, figure_id,
+degree_group_txt, subject_area_txt, subject_group_txt, report_id}
 }
 \value{
-Caption as character
+String containing figure caption
 }
 \description{
 Get figure caption
 }
 \examples{
-get_figure_caption(df)
+\dontrun{
+get_figure_caption(param_list)
+}
 }

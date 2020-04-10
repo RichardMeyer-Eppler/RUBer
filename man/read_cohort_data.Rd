@@ -13,5 +13,7 @@ Data frame with cohort data
 Reads csv file with cohort data
 }
 \examples{
+\dontrun{
 read_cohort_data()
+}
 }

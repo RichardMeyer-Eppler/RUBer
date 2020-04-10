@@ -18,5 +18,8 @@ Vector with faked value percentages
 Get vector with faked value percentages for figure type 2
 }
 \examples{
-get_fake_tibble_type_2(fractions = 6, periods = 3)
+get_fake_values_type_2(
+   fractions = 6,
+   periods = 3
+   )
 }

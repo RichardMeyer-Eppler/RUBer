@@ -16,5 +16,7 @@ Dataframe bzw. Tibble mit Berichtsübersicht
 Erzeuge Übersicht aller Berichte aus den Daten
 }
 \examples{
-orga <- generate_orga(df)
+\dontrun{
+generate_orga(df)
+}
 }

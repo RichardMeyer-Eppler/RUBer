@@ -8,7 +8,7 @@ add_label_position(
   df,
   x_var,
   y_var,
-  facet_var,
+  facet_var = NULL,
   fill_var,
   filter_cutoff = 0.04,
   fill_reverse = FALSE,
@@ -21,8 +21,8 @@ add_label_position(
 \item{x_var}{Required variable name for the variable containing the discrete
 x-coordinates.}
 
-\item{y_var}{Required variable name for the variable containing the continuous
-y-coordinates.}
+\item{y_var}{Required variable name for the variable containing the
+continuous y-coordinates.}
 
 \item{facet_var}{Optional variable name for the discrete variable to facet
 by, defaults to NULL.}
@@ -35,7 +35,7 @@ labels. By default, all values below 0.04 of the total value of the
 stacked bar chart are suppressed.}
 
 \item{fill_reverse}{Boolean indicating whether the order of the fill variable
-should be reversed, default = FALSE.}
+should be reversed, defaults to FALSE.}
 
 \item{is_percentage}{Optional boolean indicating whether the value label is
 expressed in absolute numbers or as a percentage, defaults to false}
@@ -50,5 +50,7 @@ Calculates the y-coordinates for stacked bar charts, centered for
    filtered.
 }
 \examples{
+\dontrun{
 add_label_position(df, x_var, y_var, fill)
+}
 }

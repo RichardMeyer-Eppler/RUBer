@@ -22,7 +22,15 @@ or FALSE, respectively}
 Fill scale constructor for RUB colors
 }
 \examples{
-ggplot(mpg, aes(x = trans, y = displ, fill = class)) +
-geom_bar(stat = "identity") +
-scale_fill_rub()
+ggplot2::ggplot(
+  data = mtcars,
+  ggplot2::aes(
+    x = as.factor(gear),
+    fill = as.factor(vs)
+    )
+  ) +
+  ggplot2::geom_bar() +
+  scale_fill_rub(
+    palette = "discrete_2"
+  )
 }

@@ -2,19 +2,21 @@
 % Please edit documentation in R/wrangle_data_manipulation.R
 \name{set_factors}
 \alias{set_factors}
-\title{Erzeuge Faktoren für die Abbildungserstellung}
+\title{Creates factors for plotting the 2018 data}
 \usage{
 set_factors(df)
 }
 \arguments{
-\item{df}{Dataframe bzw. Tibble}
+\item{df}{Data frame}
 }
 \value{
-Dataframe bzw. Tibble mit den Faktoren x, fill, fill_label und group
+Data frame with the factors x, fill, fill_label and group
 }
 \description{
-Erzeuge Faktoren für die Abbildungserstellung
+Creates factors for plotting the 2018 data
 }
 \examples{
+\dontrun{
 set_factors(df)
+}
 }

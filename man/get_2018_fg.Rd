@@ -16,5 +16,7 @@ Data frame with all data for \code{report_id} "2018_FG"
 Get data frame with generated data for \code{report_id} "2018_FG"
 }
 \examples{
+\dontrun{
 get_2018_fg(df)
+}
 }

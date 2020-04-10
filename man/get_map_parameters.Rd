@@ -7,14 +7,16 @@
 get_map_parameters(df)
 }
 \arguments{
-\item{df}{Dataframe bzw. Tibble}
+\item{df}{Data frame}
 }
 \value{
-Dataframe bzw. Tibble with chunk_label and function_param columns
+Data frame with chunk_label and function_param columns
 }
 \description{
 Get function calls and parameters for use of purrr::map
 }
 \examples{
+\dontrun{
 get_map_paramters(df)
+}
 }
