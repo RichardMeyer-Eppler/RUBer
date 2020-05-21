@@ -16,7 +16,7 @@ Description: RUBer is an R package created for parameterized
     colors available.
 License: MIT + file LICENSE
 URL: https://github.com/RichardMeyer-Eppler/RUBer
-    https://richardmeyer-eppler.github.io/RUBer/
+     https://richardmeyer-eppler.github.io/RUBer/
 Imports: 
     bookdown (>= 0.11),
     devEMF (>= 3.7),
@@ -53,3 +53,6 @@ Encoding: UTF-8
 Language: en
 LazyData: true
 RoxygenNote: 7.1.0
+BugReports: https://github.com/RichardMeyer-Eppler/RUBer/issues
+Depends: 
+    R (>= 2.10)

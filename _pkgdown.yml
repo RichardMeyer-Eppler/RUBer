@@ -1,1 +1,38 @@
 destination: docs
+
+reference:
+- title: Plot
+  desc: Plotting functions for each `figure_type_id`
+  contents:
+  - rub_plot_type_1
+
+- title: Scale functions
+  desc: Wrappers for
+  contents:
+  - scale_color_rub
+  - scale_fill_rub
+
+- title: Color and palette functions
+  desc: Wrappers for
+  contents:
+  - get_RUB_colors
+  - get_RUB_palettes
+  - RUB_colors
+  - RUB_palettes
+
+- title: Reporting functions
+  desc: Wrappers for
+  contents:
+  - filter_report
+  - render_report
+
+- title: Theming functions
+  desc: Wrappers for
+  contents:
+  - rub_style_flextable
+  - theme_rub
+
+- title: Data
+  desc: Included data sets
+  contents:
+  - df_fake

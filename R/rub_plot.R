@@ -141,7 +141,7 @@ plot_discrete_palette <- function(colors_n)  {
 #'
 #' # The data source is df_t1_ex1, x_var is mapped to term, y_var to students,
 #' # and the fill_var to degree.
-#' rub_plot_typ_1(
+#' rub_plot_type_1(
 #'    df = df_t1_ex1,
 #'    x_var = term,
 #'    y_var = students,
@@ -732,7 +732,7 @@ rub_plot_type_4 <- function(df, x_var, x_axis_label = "",
   ) +
     ggplot2::geom_line(
       stat = "identity",
-      size = 1
+      size = base_size / 10
     ) +
     ggplot2::geom_label(
       data = df_label,
@@ -900,7 +900,7 @@ add_rub_plot_type_4 <- function(df_t4, x_var,
         color = {{group_var}}
       ),
       stat = "identity",
-      size = 1
+      size = base_size / 10
     #  ,show.legend = FALSE
     )
   )
@@ -940,8 +940,7 @@ add_rub_plot_type_4 <- function(df_t4, x_var,
       fill = ggplot2::guide_legend(
         order = 1,
         reverse = FALSE,
-        byrow = TRUE,
-        override.aes = list(shape = 24)
+        byrow = TRUE
         ),
       color = ggplot2::guide_legend(
         order = 2

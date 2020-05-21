@@ -142,9 +142,11 @@ add_figure_count <- function(df) {
       figure_sort
     ) %>%
     dplyr::mutate(
-      min_figure_count = min(
-        figure_count,
-        na.rm = TRUE
+      min_figure_count = suppressWarnings(
+        min(
+          figure_count,
+          na.rm = TRUE
+        )
       )
     ) %>%
     dplyr::mutate(
@@ -360,11 +362,6 @@ add_label_position <- function(df, x_var,
 
   y_var <- rlang::enquo(y_var)
 
-  label_name <- paste0(
-    "label_",
-    rlang::as_label(y_var)
-  )
-
   label_formula <- get_label_formula(
     label_var = {{y_var}},
     is_percentage = is_percentage
@@ -392,7 +389,7 @@ add_label_position <- function(df, x_var,
       # sum_var = sum(!!y_var),
       # cumsum_var = cumsum(!!y_var),
       # half_var_var = !!y_var / 2,
-      !!label_name := eval(label_formula)
+      "label_{{y_var}}" := eval(label_formula)
     )
 
   if(is_percentage) {

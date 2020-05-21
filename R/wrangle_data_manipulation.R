@@ -608,18 +608,18 @@ split_up_big_figures <- function(df, max_row_limit = 30)  {
       variable_id
     ) %>%
     dplyr::mutate(
-      row_number = row_number(),
+      row_number_tmp = dplyr::row_number(),
       new_number_of_figures = trunc(figure_row_total / max_row_limit) + 1,
       divisor = figure_var_total / new_number_of_figures,
-      figure_sort_add = (ceiling(row_number / divisor) - 1)
+      figure_sort_add = (ceiling(row_number_tmp / divisor) - 1)
     ) %>%
     dplyr::group_by(
       figure_sort_add,
-      add = TRUE
+      .add = TRUE
     ) %>%
     dplyr::mutate(
       figure_sort_add_cond = dplyr::if_else(
-        row_number == min(row_number) &
+        row_number_tmp == min(row_number_tmp) &
           figure_sort_add != 0,
         1,
         0

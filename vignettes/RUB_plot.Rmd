@@ -1,6 +1,8 @@
 ---
 title: "Using the RUB plotting functions"
-output: rmarkdown::html_vignette
+output:
+    bookdown::html_document2:
+      base_format: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Using the RUB plotting functions}
   %\VignetteEngine{knitr::rmarkdown}
@@ -502,6 +504,11 @@ rub_plot_type_1_and_4(
 
 
 # For experienced ggplot2 users
+The level of flexibility and customizability achievable through the plotting 
+functions of RUBer are limited. At some point, it makes more sense to properly
+learn `ggplot2` and to use the individual components directly (scales, colors, 
+etc.). See the [resources section](#resources) for help on getting started with `ggplot2`.
+
 ## Applying the RUB Theme
 The function `theme_rub` is a normal `ggplot2::theme()` function based on 
 `ggplot2::theme_minimal()`. You can use it for any ggplot object:
@@ -666,9 +673,42 @@ ggplot2::ggplot(
    )
 ```
 
+# Resources for learning ggplot2 {#resources}
+## Books
+1. The [Data visualisation][r4ds-vis] and [Graphics for communication][r4ds-comm] 
+   chapters in [R for Data Science][r4ds] by Garrett Grolemund and Hadley 
+   Wickham,
+1. The [R Graphics Cookbook, 2nd Edition][cookbook] by Winston Chang,
+1. [Data Visualization - A practical introduction][socviz] by Kieran Healy,
+1. [ggplot2 - Elegant Graphics for Data Analysis, 3rd Edition][ggplot2-book] by
+   Hadley Wickham.
+
+## Presentations and tutorials
+1. [Designing ggplots - making clear figures that communicate][barett] by 
+   Malcolm Barrett,
+1. [A ggplot2 Tutorial for Beautiful Plotting in R][scherer] by Cédric Scherer,
+1. [Step-by-step examples of building publication-quality figures in ggplot2][Wilke]
+   by Claus Wilke,
+1. [A Gentle Guide to the Grammar of Graphics with ggplot2][aden-buie] by 
+   Garrick Aden-Buie.
+
+## Interactive courses
+1. The [R Studio Cloud Primer on ggplot2][ggplot-primer].
 
 # Further Reading
 * [BBC - bbplot package](https://github.com/bbc/bbplot)
 * [BBC Visual and Data Journalism cookbook for R graphics](https://bbc.github.io/rcookbook/)
 * [Dewey Dunnington at rstudio::conf 2020 - Best practices for programming with ggplot2](https://resources.rstudio.com/rstudio-conf-2020/best-practices-for-programming-with-ggplot2-dewey-dunnington)
 * [gglot 2 vignette - Using ggplot2 in packages](https://ggplot2.tidyverse.org/dev/articles/ggplot2-in-packages.html)
+
+[r4ds]: https://r4ds.had.co.nz
+[r4ds-vis]: https://r4ds.had.co.nz/data-visualisation.html
+[r4ds-comm]: https://r4ds.had.co.nz/graphics-for-communication.html
+[cookbook]: https://r-graphics.org/
+[socviz]: http://socviz.co/
+[ggplot2-book]: https://ggplot2-book.org/
+[barett]: https://designing-ggplots.netlify.com/
+[scherer]: https://cedricscherer.netlify.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/
+[wilke]: https://github.com/clauswilke/practical_ggplot2
+[aden-buie]: https://www.garrickadenbuie.com/talk/trug-ggplot2/
+[ggplot-primer]: https://rstudio.cloud/learn/primers/3
