@@ -46,3 +46,10 @@
 #'   \item{figure_height}{The height of the figure.}
 #' }
 "df_fake"
+
+#' Table series retrieved from...
+#'
+#' See vignette for details...
+#'
+"db_nrw_213"
+

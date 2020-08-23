@@ -89,7 +89,6 @@ get_file_name <- function(param_list) {
 #'     name in characters, defaults to 85.
 #'
 #' @return String
-#' @export
 #'
 #' @examples
 #' clean_file_name(file_name = "Test_File-Name__X__")
@@ -104,6 +103,26 @@ clean_file_name <- function(file_name, char_limit = 85L) {
     datei_name <- stringr::str_sub(datei_name, 1, char_limit)
   }
   return(datei_name)
+}
+
+#' Filter data frame based on \code{report_nr} column
+#'
+#' @param df Data frame
+#' @param report_nr Required integer indicating the report_nr
+#'
+#' @return Filtered data frame with data for the report nr
+#' @export
+#'
+#' @examples
+#' filter_report(df_fake, report_nr = 12)
+filter_report <- function(df, report_nr) {
+  filtered_df <- df %>%
+    dplyr::filter(
+      report_nr == {{ report_nr }} &
+        !figure_filter_flag
+    )
+
+  return(filtered_df)
 }
 
 #' Get file path for automatic report generation
@@ -177,4 +196,35 @@ render_report <- function(p_df, report_nr,
     encoding = "UTF-8",
     output_file = file_path
     )
+}
+
+#' Sorts the report data frame
+#'
+#' Sorts report_nr, figure_sort, subject_id, subject_area_id, degree_sort,
+#' time, variable_id, subject_group_id, value_id
+#'
+#' @param df Data frame with report data
+#'
+#' @return Sorted data frame
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' sort_report(df)
+#' }
+sort_report <- function(df) {
+  df_sorted <- df %>%
+    dplyr::arrange(
+      report_nr,
+      figure_sort,
+      subject_id,
+      subject_area_id,
+      degree_sort,
+      time,
+      variable_id,
+      subject_group_id,
+      value_id
+    )
+
+  return(df_sorted)
 }

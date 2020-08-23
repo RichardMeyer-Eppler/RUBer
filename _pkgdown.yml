@@ -1,18 +1,18 @@
 destination: docs
 
 reference:
-- title: Plot
+- title: Plotting
   desc: Plotting functions for each `figure_type_id`
   contents:
-  - rub_plot_type_1
+  - plot_figure
+  - starts_with("rub_plot_")
 
-- title: Scale functions
+- title: Scaling
   desc: Wrappers for
   contents:
-  - scale_color_rub
-  - scale_fill_rub
+  - starts_with("scale_")
 
-- title: Color and palette functions
+- title: Colors and palettes
   desc: Wrappers for
   contents:
   - get_RUB_colors
@@ -20,19 +20,37 @@ reference:
   - RUB_colors
   - RUB_palettes
 
-- title: Reporting functions
+- title: Reporting
   desc: Wrappers for
   contents:
+  - get_author
+  - get_file_name
+  - get_file_path
+  - get_title
+  - filter_destatis_code
   - filter_report
   - render_report
 
-- title: Theming functions
+- title: Theming
   desc: Wrappers for
   contents:
   - rub_style_flextable
   - theme_rub
+  - rub_format_mixed
+  - rub_format_percent
 
 - title: Data
   desc: Included data sets
   contents:
   - df_fake
+  - db_nrw_213
+
+figures:
+  dev: grDevices::png
+  dpi: 96
+  dev.args: []
+  fig.ext: png
+  fig.width: 7.2916667
+  fig.height: ~
+  fig.retina: 2
+  fig.asp: 1.618

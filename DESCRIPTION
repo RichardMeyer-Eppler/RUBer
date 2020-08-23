@@ -40,19 +40,19 @@ Imports:
     stringr (>= 1.4.0),
     tibble (>= 3.0.0),
     tidyr (>= 1.0.0),
-    tidyselect (>= 1.0.0),
     glue,
     scales
 Suggests: 
     janitor (>= 1.2.1),
     prismatic (>= 0.2.0),
+    tidyselect (>= 1.0.0),
     wiesbaden (>= 1.2.2)
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
 Language: en
 LazyData: true
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 BugReports: https://github.com/RichardMeyer-Eppler/RUBer/issues
 Depends: 
-    R (>= 2.10)
+    R (>= 3.5.0)

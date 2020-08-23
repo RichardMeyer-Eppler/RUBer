@@ -2,20 +2,22 @@
 % Please edit documentation in R/rub_styles.R
 \name{rub_style_flextable}
 \alias{rub_style_flextable}
-\title{Applies RUB-Style to flextable object}
+\title{Applies RUB-Style to Flextable object}
 \usage{
-rub_style_flextable(table, font = "RUB Scala TZ")
+rub_style_flextable(table, font = "RUB Scala TZ", font_size = 9)
 }
 \arguments{
 \item{table}{Flextable object}
 
-\item{font}{Font for the ggplot theme, defaults to RUB Scala TZ}
+\item{font}{Font for the Flextable theme, defaults to RUB Scala TZ}
+
+\item{font_size}{Font size, defaults to 9}
 }
 \value{
-Styled flextable object
+Styled Flextable object
 }
 \description{
-Applies RUB-Style to flextable object
+Applies RUB-Style to Flextable object
 }
 \examples{
 table_mtcars <- flextable::flextable(mtcars)

@@ -121,8 +121,8 @@ plot(prismatic::color(get_RUB_palettes(palette = "discrete_contrast")(4)))
 # Further Reading
 The implementation is heavily indebted to Simon Jackson's great article on color palettes for ggplot2. At the moment, the University of Bochum really does not have anything like a Data Visualization Style Guide.
 
-[Simon Jackson - Creating corporate colour palettes for ggplot2](https://drsimonj.svbtle.com/creating-corporate-colour-palettes-for-ggplot2)
-[Lisa Charlotte Rost - Your Friendly Guide to Colors in Data Visualisation](https://blog.datawrapper.de/colorguide/)
-[Emil Hvitfeldt's Prismatic Package](https://emilhvitfeldt.github.io/prismatic/)
-[Emily Riederer's Rtistic Package](https://github.com/emilyriederer/Rtistic)
-[Amy Cesal - What Are Data Visualization Style Guidelines](https://medium.com/nightingale/style-guidelines-92ebe166addc)
+* [Simon Jackson - Creating corporate colour palettes for ggplot2](https://drsimonj.svbtle.com/creating-corporate-colour-palettes-for-ggplot2)
+* [Lisa Charlotte Rost - Your Friendly Guide to Colors in Data Visualisation](https://blog.datawrapper.de/colorguide/)
+* [Emil Hvitfeldt's Prismatic Package](https://emilhvitfeldt.github.io/prismatic/)
+* [Emily Riederer's Rtistic Package](https://github.com/emilyriederer/Rtistic)
+* [Amy Cesal - What Are Data Visualization Style Guidelines](https://medium.com/nightingale/style-guidelines-92ebe166addc)

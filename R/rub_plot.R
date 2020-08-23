@@ -789,7 +789,9 @@ rub_plot_type_4 <- function(df, x_var, x_axis_label = "",
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' rub_plot_type_1_and_4(df = df)
+#' }
 rub_plot_type_1_and_4 <- function(df, x_var, x_axis_label = "",
                                   y_var, y_axis_label = "",
                                   fill_var, fill_reverse = FALSE,
@@ -859,10 +861,11 @@ rub_plot_type_1_and_4 <- function(df, x_var, x_axis_label = "",
 #' @inheritParams rub_plot_type_1_and_4
 #'
 #' @return List of ggplot2 expressions
-#' @export
 #'
 #' @examples
+#' \dontrun{
 #' add_rub_plot_type_4(df, x, y, group, group_label)
+#' }
 add_rub_plot_type_4 <- function(df_t4, x_var,
                                y_var, group_var,
                                group_label = NULL, base_size = 11,
@@ -949,4 +952,198 @@ add_rub_plot_type_4 <- function(df_t4, x_var,
     )
 
   return(expr_list)
+}
+
+#' Prepares var and var_label columns for plotting by ordering them and turning
+#' them into factors
+#'
+#' @param df Data frame
+#' @param var Required variable name for the discrete variable to be turned into
+#'     a factor. This variable is sorted alphabetically to determine the order.
+#' @param var_label Optional variable name for the discrete variable labels
+#'     to be used instead of var. If var is a sort key, for instance, var_label
+#'     can be used for the actual labels.
+#' @param reverse Whether the order of the factor should be reverted, defaults
+#'     to FALSE.
+#'
+#' @return Data frame with factor column.
+#'
+#' @examples
+#' \dontrun{
+#' set_factor_var(df, var, TRUE)
+#' }
+set_factor_var <- function(df, var, var_label = NULL, reverse = FALSE)  {
+  var_sym <- rlang::ensym(var)
+
+  # Var is always used to determine the ordering, even if var_label will later
+  # get displayed. This allows, for instance, to have sort_keys in var and the
+  # associated labels in var_label.
+  # Note that unlike base factor, forcats::as_factor does not alter ordering
+  df_ordered <- dplyr::arrange(df, {{var}})
+
+  var_label_quo <- rlang::enquo(var_label)
+  is_null_var_label_quo <- rlang::quo_is_null(var_label_quo)
+
+  if(!is_null_var_label_quo)  {
+    var_label_sym <- rlang::ensym(var_label)
+
+    # If var_label is not a factor yet, it will get converted to one
+    is_factor_var_label <- is.factor(df_ordered[[var_label_sym]])
+    if(!is_factor_var_label)  {
+      df_ordered[[var_sym]] <- forcats::as_factor(df_ordered[[var_label_sym]])
+    }
+    # var_label effectively replaces var. We only needed var for the ordering.
+    # Use of forcats::reorder is not possible, because it only works for numeric
+    # and var may not be numeric.
+    df_ordered[[var_sym]] <- forcats::as_factor(df_ordered[[var_label_sym]])
+  }
+
+  is_factor_var <- is.factor(df[[var_sym]])
+  # If var is not yet a factor, it gets gets turned into a factor. Otherwise
+  # no action required.
+  if(!is_factor_var)  {
+    df_ordered[[var_sym]] <- forcats::as_factor(df_ordered[[var_sym]])
+  }
+
+  if (reverse) {
+    df_ordered[[var_sym]] <- forcats::fct_rev(df_ordered[[var_sym]])
+  }
+
+  return(df_ordered)
+}
+
+#' Get formula for calculating position of value labels
+#'
+#' @param label_var The name of the variable requiring value labels
+#' @inheritParams add_label_position
+#'
+#' @return A defused expression for calculating the position of the y-label
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' get_label_formula(y_var = cyl, label_reverse = TRUE, is_percentage = FALSE)
+#' }
+get_label_formula <- function(label_var,
+                              is_percentage = FALSE) {
+  label_var <- rlang::enquo(label_var)
+
+  if(!is_percentage) {
+    label_formula <- rlang::expr(
+      sum(!!label_var) - cumsum(!!label_var) + !!label_var / 2
+    )
+  } else if(is_percentage)  {
+    label_formula <- rlang::expr(
+      (sum(!!label_var) - cumsum(!!label_var) + !!label_var / 2) / sum(!!label_var)
+    )
+  }
+
+  return(label_formula)
+}
+
+
+#' Add centered y-coordinates for filtered data labels of figure types 1 and 2
+#'
+#' Calculates the y-coordinates for stacked bar charts, centered for
+#'    each group. The default function does not work if some labels are
+#'    filtered.
+#'
+#' @inheritParams rub_plot_type_2
+#' @param is_percentage Optional boolean indicating whether the value label is
+#'     expressed in absolute numbers or as a percentage, defaults to false
+#'
+#' @return Data frame with additional column "label_" + the name of the
+#'    y-coordinate variable
+#'
+#' @examples
+#' \dontrun{
+#' add_label_position(df, x_var, y_var, fill)
+#' }
+add_label_position <- function(df, x_var,
+                               y_var, facet_var = NULL,
+                               fill_var, filter_cutoff = 0.04,
+                               fill_reverse = FALSE, is_percentage = FALSE) {
+
+  has_facet <- !rlang::quo_is_null(
+    rlang::enquo(
+      facet_var
+    )
+  )
+
+  # Group vars with and without fill_var for different summary statistics
+  # Caution: Order of grouping vars matters for dplyr::summarise!
+  if(!has_facet)  {
+    group_vars <- dplyr::vars(
+      rlang::ensym(x_var),
+      rlang::ensym(fill_var)
+      )
+    } else if(has_facet) {
+    group_vars <- dplyr::vars(
+      rlang::ensym(x_var),
+      rlang::ensym(facet_var),
+      rlang::ensym(fill_var)
+    )
+  }
+
+  y_var <- rlang::enquo(y_var)
+
+  label_formula <- get_label_formula(
+    label_var = {{y_var}},
+    is_percentage = is_percentage
+  )
+
+  # y formula
+  if(is_percentage) {
+    y_formula <- rlang::expr(
+      !!y_var / sum(!!y_var)
+    )
+  } else  {
+    y_formula <- rlang::expr(
+      !!y_var
+    )
+  }
+
+  df_label <- df %>%
+    dplyr::group_by_at(
+      group_vars
+    ) %>%
+    dplyr::summarise(
+      !!y_var := sum(!!y_var)
+    ) %>%
+    dplyr::mutate(
+      # sum_var = sum(!!y_var),
+      # cumsum_var = cumsum(!!y_var),
+      # half_var_var = !!y_var / 2,
+      "label_{{y_var}}" := eval(label_formula)
+    )
+
+  if(is_percentage) {
+      df_label <- df_label %>%
+        dplyr::ungroup(
+          {{fill_var}}
+        ) %>%
+        dplyr::mutate(
+          !!y_var := eval(y_formula)
+        )
+  }
+
+  df_label_filtered <- df_label %>%
+    dplyr::filter(
+      round((!!y_var / sum(!!y_var)), digits = 2) >= filter_cutoff
+    )
+
+  # Format percentage values with no decimals and percentage sign
+  # https://community.rstudio.com/t/using-label-percent-with-the-label-argument-of-geom-text-and-geom-label/54244/2
+  if(is_percentage) {
+    df_label_formatted <- df_label_filtered %>%
+      dplyr::mutate(
+        !!y_var := scales::label_percent(
+          accuracy = 1L
+        )(!!y_var)
+      )
+    } else  {
+      df_label_formatted <- df_label_filtered
+      }
+
+  return(df_label_formatted)
 }

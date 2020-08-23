@@ -141,18 +141,20 @@ theme_rub <- function(base_size = 11,
   return(rub_theme)
 }
 
-#' Applies RUB-Style to flextable object
+#' Applies RUB-Style to Flextable object
 #'
 #' @param table Flextable object
-#' @param font Font for the ggplot theme, defaults to RUB Scala TZ
-#'
-#' @return Styled flextable object
+#' @param font Font for the Flextable theme, defaults to RUB Scala TZ
+#' @param font_size Font size, defaults to 9
+#' @return Styled Flextable object
 #' @export
 #'
 #' @examples
 #' table_mtcars <- flextable::flextable(mtcars)
 #' rub_style_flextable(table_mtcars)
-rub_style_flextable <- function(table, font = "RUB Scala TZ")  {
+rub_style_flextable <- function(table,
+                                font = "RUB Scala TZ",
+                                font_size = 9)  {
   rub_table_font <- font
   header_color <- RUB_colors["green_40"]
   border_green <- RUB_colors["green"]
@@ -160,7 +162,7 @@ rub_style_flextable <- function(table, font = "RUB Scala TZ")  {
 
   def_text <- officer::fp_text(
     color = RUB_colors["blue"],
-    font.size = 9,
+    font.size = font_size,
     font.family = rub_table_font
     )
 
@@ -223,4 +225,81 @@ rub_style_flextable <- function(table, font = "RUB Scala TZ")  {
       )
 
   return(table_formatted)
+}
+
+#' Format flextable mixed type columns (integer, percentages, NAs)
+#'
+#' @param x Vector
+#'
+#' @return Formatted vector
+#' @export
+#'
+#' @examples
+#' x <- c("2500", "0.29", NA)
+#' rub_format_mixed(x)
+rub_format_mixed <- function(x) {
+  for (i in seq_along(x)) {
+    if (is.na(x[i])) {
+      x[i] <- ""
+    }
+    else if (suppressWarnings(
+      !is.na(
+        as.double(x[i])
+        )
+      )
+    ) {
+      if ((as.double(x[i])) %% 1 == 0) {
+        x[i] <- as.character(
+          format(
+            as.integer(x[i]),
+            big.mark = ".",
+            decimal.mark = ","
+          )
+        )
+      }
+      else {
+        x[i] <- as.character(
+          sprintf(
+            "%.01f%%",
+            as.double(x[i]) * 100
+          )
+        )
+      }
+    }
+  }
+
+  return(x)
+}
+
+#' Format flextable columns with percentages (percentages, NAs)
+#'
+#' @param x Vector
+#'
+#' @return Formatted vector
+#' @export
+#'
+#' @examples
+#' x <- c("0.29", NA)
+#' rub_format_percent(x)
+rub_format_percent <- function(x) {
+  for (i in seq_along(x)) {
+    if (is.na(x[i])) {
+      x[i] <- ""
+    }
+
+    else if (suppressWarnings(
+      !is.na(
+        as.double(x[i])
+      )
+    )) {
+      x[i] <- as.character(
+        sprintf(
+          "%.00f%%",
+          as.double(x[i]) * 100
+        )
+      )
+    }
+  }
+
+  return(x)
 }

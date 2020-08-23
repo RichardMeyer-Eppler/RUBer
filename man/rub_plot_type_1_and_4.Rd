@@ -85,5 +85,7 @@ A ggplot object
 Plot grouped line chart on top of vertical stacked bar chart (figure type 5)
 }
 \examples{
+\dontrun{
 rub_plot_type_1_and_4(df = df)
+}
 }

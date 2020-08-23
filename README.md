@@ -45,9 +45,6 @@ colors available.
     unique figures. All values in the dataset are fake and
     algorithmically generated, all other columns, though, are identical
     to the confidential production dataset.
-  - Data wrangling functions specific to the 2018 dataset. These
-    function are probably of no interest externally, as access to the
-    raw production dataset is confidential.
 
 ## Guiding design principles
 

@@ -24,16 +24,63 @@ table series. Feedback welcome!
 # Wiesbaden Setup
 First off, load the packages we will be using throughout this vignette.
 
-```{r setup}
+```{r libraries}
 library(dplyr)
 library(extrafont)
 library(forcats)
+library(httptest)
 library(janitor)
 library(purrr)
 library(RUBer)
 library(tibble)
 library(tidyselect)
 library(wiesbaden)
+```
+
+```{r httptest, include = FALSE}
+api_root <- "https://www.landesdatenbank.nrw.de/ldbnrwws/services/"
+
+# Makes sure that the user and password information is not stored in the cached
+# HTTP responses.
+# Shorten URLs
+set_redactor(function (response) {
+    response %>%
+      gsub_response(
+        "kennung=[^&]+",
+        "kennung=REDACTED"
+      ) %>%
+      gsub_response(
+        "passwort=[^&]+",
+        "passwort=REDACTED"
+      ) %>% 
+      gsub_response(
+        api_root,
+        "",
+        fixed = TRUE
+      )
+})
+
+# Makes sure that the user and password information is not stored in the cached
+# HTTP responses.
+# Shorten URLs
+set_requester(function (request) {
+    request %>%
+      gsub_request(
+        "kennung=[^&]+",
+        "kennung=REDACTED"
+      ) %>%
+      gsub_request(
+        "passwort=[^&]+",
+        "passwort=REDACTED"
+      ) %>%   
+      gsub_request(
+        api_root,
+        "",
+        fixed = TRUE
+      )
+})
+
+httptest::start_vignette("wiesbaden")
 ```
 
 The R package `wiesbaden` by Moritz Marbach provides functions to directly
@@ -68,56 +115,34 @@ wiesbaden::test_login(
 # Retrieving Data
 In this vignette, we are interested in tables with data on universities. On the
 Landesdatenbank NRW website, the code for tables on universities is "213". So 
-let us retrieve all table names with code "213":
+let us retrieve all table names with code "213" and turn the resulting data 
+frame into a tibble for prettier printing.
 
-```{r df-table, eval = FALSE}
-# Retrieve all tables with code "213"
+```{r df-table}
+# Retrieve all tables with code "213" and turn data frame into tibble
 df_table <- wiesbaden::retrieve_datalist(
-   tableseries= "213",
+   tableseries= "21311*",
    genesis = c(db = "nrw")
-   )
+   ) %>% 
+  tibble::as_tibble()
 
-df_table %>% dplyr::arrange(desc(description)) %>% tibble::as_tibble()
-
-writeLines(df_table$description)
-
+df_table
 ```
 
-Looking at the retrieved data frame, a problem becomes apparent: the function
-not only returns tables that start with code "213" but all tables with the
-fragment "213" anywhere in their code. In addition to tables on universities,
-this returns tables on wastewater sewage, among other things. So let us filter
-the data frame to all table names whose code starts with "213":
+We now have a data frame with the names and descriptions of 37 tables with data on universities in NRW. In the next step, we are going to create a named vector of these table names using `purrr::set_names`. We then download the data for all table names in this vector and put them in one big data frame using a combination of `purrr::map_dfr` and `wiesbaden::retrieve_data`. You will be downloading a lot of data, so this step may take a while!
 
-```{r df-table-filtered, eval = FALSE}
-# Filtering the tables to codes starting with "213".
-df_table_filtered <- df_table %>% 
-  dplyr::filter(
-    stringr::str_starts(
-      tablename,
-      "213"
-      )
-  )
-```
-
-This looks much better, we now have a data frame with the names and descriptions
-of 37 tables with data on universities in NRW. In the next step, we are going to
-create a named vector of these table names using `purrr::set_names`. We then
-download the data for all table names in this vector and put them in one big
-data frame using a combination of `purrr::map_dfr` and
-`wiesbaden::retrieve_data`. You will be downloading a lot of data, so this step
-may take a while!
-
-```{r get-data, eval = FALSE}
+```{r get-data, message = FALSE}
 # Get all table names and turn them into a named vector
 table_names <- purrr::set_names(
   x = as.character(
-    df_table_filtered[["tablename"]]
+    df_table[["tablename"]]
   ),
   nm = as.character(
-      df_table_filtered[["tablename"]]
+      df_table[["tablename"]]
       )
   )
+
+table_names
 
 # Retrieve data for every table name and bind them into one data frame. Note
 # that this may take a while!
@@ -126,7 +151,10 @@ df <- purrr::map_dfr(
   wiesbaden::retrieve_data,
   genesis = c(db = "nrw"),
   .id = "tablename"
-  )
+  ) %>% 
+  tibble::as_tibble()
+
+df
 ```
 
 For each table, we now download the available metadata with
@@ -136,14 +164,17 @@ table. The metadata consists of four columns: tablename, (variable) name,
 (variable) description and (variable) unit. We then create a character vector of
 the unique variable names for all tables.
 
-```{r get-metadata, eval = FALSE}
+```{r get-metadata}
 # Retrieve metadata for every table name and bind them into one data frame
 df_metadata <- purrr::map_dfr(
   table_names,
   wiesbaden::retrieve_metadata,
   genesis = c(db = "nrw"),
   .id = "tablename"
-)
+) %>% 
+  tibble::as_tibble()
+
+df_metadata
 
 # Create character vector of all unique variable names in all tables
 variables_unique <- unique(
@@ -151,6 +182,8 @@ variables_unique <- unique(
     df_metadata[["name"]]
     )
   )
+
+variables_unique
 ```
 
 We now have a vector of 30 unique variables that are used in the table series
@@ -159,22 +192,17 @@ variable "SX-A01" has the two value keys "SX-OPSCHUL1" and "SX-OPSCHUL2" with
 the labels "Öffentlich" (*Public*) and "Privat" (*private*) stored in separate
 key tables). We use a combination of `purrr::map` and
 `wiesbaden::retrieve_valuelabel` to retrieve all value labels for our data
-tables in a list. We then do some data cleaning using `purrr::discard`.
+tables in a list.
 
-```{r get-value-labels, eval = FALSE}
+```{r get-value-labels}
 # Retrieve value labels with wiesbaden::retrieve_valuelabel
 list_value_labels <- purrr::map(
   variables_unique,
   wiesbaden::retrieve_valuelabel,
   genesis = c(db = "nrw")
-  ) 
-
-# Variables with no labels return a list with the character "No results found."
-# We use purrr::discard to drop all these empty list elements of type character.
-list_value_labels_filtered <- list_value_labels %>% 
-  purrr::discard(
-    ~ is.character(.x)
   )
+
+str(list_value_labels)
 ```
 
 Unlike the downloaded data and metadata, which we have put into one data frame
@@ -195,7 +223,7 @@ serve no apparent purpose. Specifically, the undocumented columns ending in
 "qual" (the only value being "e"), "err" (always 0) and "lock" (always NA) are
 of no value to us, so we discard them from the data frame.
 
-```{r wrangle-data, eval = FALSE}
+```{r wrangle-data}
 # Clean all column names (e.g. replacing hyphens with underscores) and make them
 # use snake case.
 # Discard columns ending in "qual", "err", or "lock".
@@ -212,34 +240,45 @@ df_cleaned <- df %>%
         )
       )
     )
+
+df_cleaned
 ```
 
-We clean the list of value labels by turning all factors into character vectors
-using `dplyr::mutate_all`. Factors can be very useful, but I think it is easiest
-to use them selectively and only set them with a specific use case in mind. We
+In our list of value labels, some elements contain the string "No results 
+found". We drop these empty elements using `purrr::discard`. We
 then apply `janitor::clean_names` to the list of data frames containing value
 labels. As we have also applied this function to the data frame with the actual
 data, this makes the column names between the different tables consistent.
 
-We want to combine all value labels with the data frame containing the actual
-data. Unfortunately, each data frame with value labels has a column 
-"description". We need to make this column unique across the list of data frames
-containing value labels, so that we know which value key the description applies 
-to. First, we use `purrr::map_chr` to generate a character vector of the 
-descriptions. This is then used as the input to another function, where we 
-rename all the description columns to "description_" plus "key_id".
+Next, we want to 
+combine all value labels with the data frame containing the actual data. 
+Unfortunately, each data frame with value labels has a column "description". We 
+need to make this column unique across the list of data frames containing value 
+labels, so that we know which value key the description applies to. First, we 
+use `purrr::map_chr` to generate a character vector of the descriptions. This is
+then used as the input to another function, where we rename all the description 
+columns to "description_" plus "key_id".
 
-```{r wrangle-value-labels, eval = FALSE}
-# Turn factors into character vectors and clean all column names with janitor
+```{r wrangle-value-labels}
+# Variables with no labels return a list with the character "No results found."
+# We use purrr::discard to drop all these empty list elements of type character.
+list_value_labels_filtered <- purrr::discard(
+  list_value_labels,
+  ~ is.character(.x)
+  )
+
+str(list_value_labels_filtered)
+
+str(list_value_labels_filtered[[1]][["description"]])
+
+# Clean all column names with janitor
 list_value_labels_wrangled <- list_value_labels_filtered %>% 
-  purrr::map(
-    dplyr::mutate_all,
-    as.character
-  ) %>% 
   purrr::map(
     janitor::clean_names,
     case = "snake"
   )
+
+str(list_value_labels_wrangled)
 
 # Generate a character vector of unique description column names
 description_names <- purrr::map_chr(
@@ -250,6 +289,8 @@ description_names <- purrr::map_chr(
   1
 )
 
+description_names
+
 # Rename the existing description column names to make them unique
 list_value_labels_unique <- purrr::map2(
   list_value_labels_wrangled,
@@ -259,6 +300,8 @@ list_value_labels_unique <- purrr::map2(
     !!.y := description
     )
 )
+
+str(list_value_labels_unique)
 ```
 
 We are now ready to combine the data with the corresponding labels. Before,
@@ -274,16 +317,14 @@ this manually would be tedious. To avoid this manual process, we use
 the table descriptions, and the list of data frames containing value labels into 
 one big list.
 
-```{r join-data-to-labels, eval = FALSE}
+```{r join-data-to-labels}
 # Create data frame with table name and table description
-df_table_descriptions <- df_table_filtered %>% 
-  dplyr::mutate_all(
-    as.character
-  ) %>% 
-  dplyr::select(
-   tablename,
+df_table_descriptions <- df_table %>% 
+  dplyr::rename(
    tablename_description = description
   )
+
+df_table_descriptions
 
 # Combine actual data with the data frame of table names and the list of data 
 # frames containing value labels into one list.
@@ -297,21 +338,25 @@ df_list <- append(
   list_value_labels_unique
 )
 
+str(df_list)
+
 # Join data with all the value label data frames to create one big data frame
 df_joined <- purrr::reduce(
   df_list,
   dplyr::left_join
-)
+) %>% 
+  tibble::as_tibble()
+
+df_joined
 ```
 
 We also sort the columns (not the rows!) alphabetically, so that the
 descriptions come immediately after the respective key column. The first two
-columns are always the table code and the table description. We also turn the
-data frame into a tibble, for better print defaults among other benefits.
+columns are always the table code and the table description.
 
-```{r finalize-data, eval = FALSE}
+```{r finalize-data}
 # Order columns alphabetically, put columns tablename and tablename_description 
-# first, put value columns last, turn data frame into tibble.
+# first, put value columns last.
 db_nrw_213 <- df_joined %>% 
   dplyr::select(
     sort(
@@ -323,23 +368,13 @@ db_nrw_213 <- df_joined %>%
     tablename_description,
     !(ends_with("_val")),
     ends_with("val")
-    ) %>% 
-  tibble::as_tibble()
-```
+    )
 
-The resulting data frame, `db_nrw_213`, actually comes bundled with the `RUBer`
-package. We use `usethis::use_data` to handle this step for us. We have now 
-added 37 tables of university related data to our package!
-
-```{r save-data, eval = FALSE}
-usethis::use_data(
-  db_nrw_213,
-  overwrite = TRUE,
-  version = 3
-  )
+db_nrw_213
 ```
 
 # Working with the Destatis data
+
 We usually do not want to work with the entire data frame at once. The RUBer
 package provides the function `filter_destatis_code`, which allows you to filter
 the data based on a table code. It also discards all columns that only consist
@@ -347,10 +382,6 @@ of NA after filtering. As an example, let us create a data frame consisting of
 all data for table code "21311LS001A".
 
 ```{r filter-destatis-code}
-load(
-  "D:\\Git\\db_nrw_213.rda"
-)
-
 # Get all rows and columns for table code 21311LS001A
 df_21311LS001A <- filter_destatis_code(
   df = db_nrw_213,
@@ -367,7 +398,7 @@ data.
 First, let us find out which five universities had the highest overall number of
 students with the help of `forcats::fct_lump_n`.
 
-```{r 21311LS001A-plot1}
+```{r 21311LS001A-plot1, fig.cap = "Students at the five biggest universities in NRW for the winter term 2017/18 for each degree (Vertical stacked bar chart)"}
 # Create data frame with plotting data, filtering on the winter term 2017/18,
 # focusing on the top five universities in terms of student count and keeping
 # the top five degree types, in addition to a lumped category "other degrees".
@@ -420,7 +451,7 @@ in the winter term 2017/18. Maybe we are interested more specifically in the
 relative importance of each degree type at each university. We can use 
 `rub_plot_type_2` for that:
 
-```{r 21311LS001A-plot2}
+```{r 21311LS001A-plot2, fig.cap = "Students at the five biggest universities in NRW for the winter term 2017/18 for each degree (Vertical stacked bar chart scaled to 100 percent)"}
 rub_plot_type_2(
   df = df_plot,
   x_var = bilhs1_description,
@@ -439,7 +470,7 @@ If we wanted to examine how the relative importance of each degree has developed
 over time, we could switch to `rub_plot_type_3` (a rotated version of type 2),
 use the term as y-variable and the university name as facet variable.
 
-```{r 21311LS001A-plot3}
+```{r 21311LS001A-plot3, fig.cap = "Students at the five biggest universities in NRW from 2013 to 2018 for each degree (Vertical stacked bar chart scaled to 100 percent)"}
 # Create data frame with plotting data, filtering on the winter terms 2013-2018,
 # focusing on the top five universities in terms of student count and keeping
 # the top five degree types, in addition to a lumped category "other degrees".
@@ -490,20 +521,6 @@ rub_plot_type_3(
   filter_cutoff = 0.06
   ,fill_reverse = FALSE
 )
-
-
-# rub_plot_type_3(
-#   df = df_plot_t3,
-#   x_var = bil002_val,
-#   y_var = semest,
-#   facet_var = bilhs1_description,
-#   fill_label = bilap1_description,
-#   fill_var = bilap1,
-#   caption = "Landesdatenbank NRW, Table Code 21311LS001A (license dl-de/by-2-0)",
-#   caption_prefix = "Source:",
-#   filter_cutoff = 0.06
-#   ,fill_reverse = FALSE
-# )
 ```
 
 # Data license for the Destatis data
@@ -514,3 +531,7 @@ in this vignette was obtained from the Landesdatenbank NRW using the code "213"
 for "Hochschulen". The license requests a reference to the dataset using the
 URI. To the best of my knowledge, the Landesdatenbank NRW does not yet provide
 Uniform Resource Identifiers (URI) to identify these tables.
+
+```{r httptest-end, include=FALSE}
+httptest::end_vignette()
+```
