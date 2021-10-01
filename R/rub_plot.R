@@ -50,7 +50,17 @@ plot_figure <- function(df) {
   } else if (length(figure_type_id) > 1) {
     if (identical(figure_type_id, c(1L, 4L)) |
         identical(figure_type_id, c(4L, 1L))) {
-      p <- rub_plot_type_1_and_4(df)
+       p <- df %>%
+        rub_plot_type_1_and_4(
+          x_var = x,
+          y_var = y,
+          y_axis_label = .[[1, "y_label"]],
+          fill_var = fill,
+          fill_label = fill_label,
+          fill_reverse = .[[1, "fill_reverse"]],
+          group_var = group,
+          group_label = group_label
+        )
     }
   }
 
@@ -974,6 +984,9 @@ add_rub_plot_type_4 <- function(df_t4, x_var,
 #' }
 set_factor_var <- function(df, var, var_label = NULL, reverse = FALSE)  {
   var_sym <- rlang::ensym(var)
+  # https://community.rstudio.com/t/unquoting-issue-in-purrr-map-df-function/106676/2
+  # Required in call to forcats::fct_rev()
+  var_name <- rlang::as_name(var_sym)
 
   # Var is always used to determine the ordering, even if var_label will later
   # get displayed. This allows, for instance, to have sort_keys in var and the
@@ -990,23 +1003,23 @@ set_factor_var <- function(df, var, var_label = NULL, reverse = FALSE)  {
     # If var_label is not a factor yet, it will get converted to one
     is_factor_var_label <- is.factor(df_ordered[[var_label_sym]])
     if(!is_factor_var_label)  {
-      df_ordered[[var_sym]] <- forcats::as_factor(df_ordered[[var_label_sym]])
+      df_ordered[[var_name]] <- forcats::as_factor(df_ordered[[var_label_sym]])
     }
     # var_label effectively replaces var. We only needed var for the ordering.
     # Use of forcats::reorder is not possible, because it only works for numeric
     # and var may not be numeric.
-    df_ordered[[var_sym]] <- forcats::as_factor(df_ordered[[var_label_sym]])
+    df_ordered[[var_name]] <- forcats::as_factor(df_ordered[[var_label_sym]])
   }
 
-  is_factor_var <- is.factor(df[[var_sym]])
+  is_factor_var <- is.factor(df[[var_name]])
   # If var is not yet a factor, it gets gets turned into a factor. Otherwise
   # no action required.
   if(!is_factor_var)  {
-    df_ordered[[var_sym]] <- forcats::as_factor(df_ordered[[var_sym]])
+    df_ordered[[var_name]] <- forcats::as_factor(df_ordered[[var_name]])
   }
 
   if (reverse) {
-    df_ordered[[var_sym]] <- forcats::fct_rev(df_ordered[[var_sym]])
+    df_ordered[[var_name]] <- forcats::fct_rev(df_ordered[[var_name]])
   }
 
   return(df_ordered)

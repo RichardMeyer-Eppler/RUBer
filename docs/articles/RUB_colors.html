@@ -46,7 +46,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -69,16 +69,13 @@
     <li>
       <a href="../articles/RUB_plot.html">Using the RUB plotting functions</a>
     </li>
-    <li>
-      <a href="../articles/wiesbaden.html">Retrieving Destatis data</a>
-    </li>
   </ul>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/RichardMeyer-Eppler/RUBer/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -92,7 +89,7 @@
 
       
 
-      </header><script src="RUB_colors_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="RUB_colors_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Using RUB colors</h1>
@@ -110,43 +107,42 @@
 <h1 class="hasAnchor">
 <a href="#colors" class="anchor"></a>Colors</h1>
 <p><code>RUBer</code> provides easy access to the colors as specified in the <a href="https://www.ruhr-uni-bochum.de/cd/">RUB corporate design</a>. Once the package is loaded, access all available colors by typing <code>RUB_colors</code>. Note that I assigned that the color names were assigned as part of this package and are not offically sanctioned by the corporate design guide.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co"># Retrieve all available colors</span>
-<span class="no">RUB_colors</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Retrieve all available colors</span>
+<span class="va">RUB_colors</span>
 <span class="co">#&gt;      green   green_80   green_60   green_40   green_20       blue    blue_80 </span>
 <span class="co">#&gt;  "#8DAE10"  "#A4BE40"  "#BBCE70"  "#D1DF9F"  "#E8EFCF"  "#003560"  "#335D80" </span>
 <span class="co">#&gt;    blue_60    blue_40    blue_20 light grey        red   dark red     orange </span>
 <span class="co">#&gt;  "#6686A0"  "#99AEBF"  "#CCD7DF"  "#E7E7E7"  "#E6332A"  "#B61E3E"  "#ED7102" </span>
 <span class="co">#&gt;       gold      brown        tan dark brown  asparagus </span>
 <span class="co">#&gt;  "#FFCC00"  "#9C5516"  "#C1BAA3"  "#59201B"  "#8C8751"</span>
-
 <span class="co"># ... access individual color by index</span>
-<span class="no">RUB_colors</span>[<span class="fl">1</span>]
+<span class="va">RUB_colors</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>
 <span class="co">#&gt;     green </span>
 <span class="co">#&gt; "#8DAE10"</span>
-
 <span class="co"># ... or by name</span>
-<span class="no">RUB_colors</span>[<span class="st">"dark red"</span>]
+<span class="va">RUB_colors</span><span class="op">[</span><span class="st">"dark red"</span><span class="op">]</span>
 <span class="co">#&gt;  dark red </span>
-<span class="co">#&gt; "#B61E3E"</span></pre></body></html></div>
+<span class="co">#&gt; "#B61E3E"</span></code></pre></div>
 <p>To retrieve several colors at once, use the getter function <code><a href="../reference/get_RUB_colors.html">get_RUB_colors()</a></code>.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co"># Retrieve several colors by name</span>
-<span class="fu"><a href="../reference/get_RUB_colors.html">get_RUB_colors</a></span>(<span class="st">"green"</span>, <span class="st">"blue"</span>, <span class="st">"orange"</span>)
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Retrieve several colors by name</span>
+<span class="fu"><a href="../reference/get_RUB_colors.html">get_RUB_colors</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"blue"</span>, <span class="st">"orange"</span><span class="op">)</span>
 <span class="co">#&gt;     green      blue    orange </span>
 <span class="co">#&gt; "#8DAE10" "#003560" "#ED7102"</span>
-
 <span class="co"># Retrieve several colors by index</span>
-<span class="fu"><a href="../reference/get_RUB_colors.html">get_RUB_colors</a></span>(<span class="fl">4</span>:<span class="fl">6</span>, <span class="fl">9</span>)
+<span class="fu"><a href="../reference/get_RUB_colors.html">get_RUB_colors</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">6</span>, <span class="fl">9</span><span class="op">)</span>
 <span class="co">#&gt;  green_40  green_20      blue   blue_40 </span>
-<span class="co">#&gt; "#D1DF9F" "#E8EFCF" "#003560" "#99AEBF"</span></pre></body></html></div>
+<span class="co">#&gt; "#D1DF9F" "#E8EFCF" "#003560" "#99AEBF"</span></code></pre></div>
 </div>
 <div id="palettes" class="section level1">
 <h1 class="hasAnchor">
 <a href="#palettes" class="anchor"></a>Palettes</h1>
 <p>The colors are combined in several palettes. To retrieve all available palettes, use <code>RUB_palettes</code>. To retrieve a particular palette by name, use the function <code>get_RUB_palettes</code> plus the number of required colors in round brackets like so <code>get_RUB_palettes(palette = "discrete_5")(5)</code>. If the palette contains less elements than requested, additional colors will automatically be extrapolated.</p>
 <p>Note that the RUB colors as defined by the corporate design were not designed with data visualization in mind. The palettes presented here are ad-hoc and rather informal, until the corporate design is offically extended to include visualization design.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r">
-<span class="co"># All availabble palettes</span>
-<span class="no">RUB_palettes</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># All availabble palettes</span>
+<span class="va">RUB_palettes</span>
 <span class="co">#&gt; $discrete</span>
 <span class="co">#&gt;     green      blue       red  dark red    orange      gold     brown </span>
 <span class="co">#&gt; "#8DAE10" "#003560" "#E6332A" "#B61E3E" "#ED7102" "#FFCC00" "#9C5516" </span>
@@ -194,60 +190,69 @@
 <span class="co">#&gt; $continuous_diverging</span>
 <span class="co">#&gt;      green light grey       blue </span>
 <span class="co">#&gt;  "#8DAE10"  "#E7E7E7"  "#003560"</span>
-
 <span class="co"># Retrieve five colors from the palette "discrete_5"</span>
-<span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span>(<span class="kw">palette</span> <span class="kw">=</span> <span class="st">"discrete_5"</span>)(<span class="fl">5</span>)
+<span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"discrete_5"</span><span class="op">)</span><span class="op">(</span><span class="fl">5</span><span class="op">)</span>
 <span class="co">#&gt; [1] "#8DAE10" "#BBCE70" "#E7E7E7" "#99AEBF" "#003560"</span>
-
 <span class="co"># Retrieve ten colors, five of which are extrapolated, from the palette </span>
 <span class="co"># "discrete_5".</span>
-<span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span>(<span class="kw">palette</span> <span class="kw">=</span> <span class="st">"discrete_5"</span>)(<span class="fl">10</span>)
+<span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"discrete_5"</span><span class="op">)</span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>
 <span class="co">#&gt;  [1] "#8DAE10" "#A1BC3A" "#B5CA65" "#C9D697" "#DDE1CC" "#D5DADE" "#B3C1CC"</span>
-<span class="co">#&gt;  [8] "#88A0B4" "#446A8A" "#003560"</span></pre></body></html></div>
+<span class="co">#&gt;  [8] "#88A0B4" "#446A8A" "#003560"</span></code></pre></div>
 <p>We can visualize all palettes using Emil Hvitfeldt’s excellent <code>prismatic</code> package.</p>
 <div id="plots-for-the-continuous-palettes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#plots-for-the-continuous-palettes" class="anchor"></a>Plots for the continuous palettes</h2>
 <p>First off, we have the two continuous palettes, “continuous” and “continuous_diverging”.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="kw pkg">prismatic</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/prismatic/man/color.html">color</a></span>(<span class="kw pkg">RUBer</span><span class="kw ns">::</span><span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span>(<span class="kw">palette</span> <span class="kw">=</span> <span class="st">"continuous"</span>)(<span class="fl">100</span>)))</pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu">prismatic</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/prismatic/man/color.html">color</a></span><span class="op">(</span><span class="fu">RUBer</span><span class="fu">::</span><span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"continuous"</span><span class="op">)</span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="RUB_colors_files/figure-html/plot-continuous-1.png" width="700.0000032"></p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r">
-<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="kw pkg">prismatic</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/prismatic/man/color.html">color</a></span>(<span class="kw pkg">RUBer</span><span class="kw ns">::</span><span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span>(<span class="kw">palette</span> <span class="kw">=</span> <span class="st">"continuous_diverging"</span>)(<span class="fl">100</span>)))</pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu">prismatic</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/prismatic/man/color.html">color</a></span><span class="op">(</span><span class="fu">RUBer</span><span class="fu">::</span><span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"continuous_diverging"</span><span class="op">)</span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="RUB_colors_files/figure-html/plot-continuous-2.png" width="700.0000032"></p>
 </div>
 <div id="plots-for-the-numbered-discrete-palettes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#plots-for-the-numbered-discrete-palettes" class="anchor"></a>Plots for the numbered discrete palettes</h2>
 <p>Second, we have all the numbered discrete palettes, which, for example, were used to display the distribution of answers for the survey items. numbered discrete palettes are pre-defined up to a total of eight separate colors, after, it is necessary to rely on extrapolation.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="kw pkg">prismatic</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/prismatic/man/color.html">color</a></span>(<span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span>(<span class="kw">palette</span> <span class="kw">=</span> <span class="st">"discrete_1"</span>)(<span class="fl">1</span>)))</pre></body></html></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu">prismatic</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/prismatic/man/color.html">color</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"discrete_1"</span><span class="op">)</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="RUB_colors_files/figure-html/plot-discrete-numbered-1.png" width="700.0000032"></p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="kw pkg">prismatic</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/prismatic/man/color.html">color</a></span>(<span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span>(<span class="kw">palette</span> <span class="kw">=</span> <span class="st">"discrete_2"</span>)(<span class="fl">2</span>)))</pre></body></html></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu">prismatic</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/prismatic/man/color.html">color</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"discrete_2"</span><span class="op">)</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="RUB_colors_files/figure-html/plot-discrete-numbered-2.png" width="700.0000032"></p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="kw pkg">prismatic</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/prismatic/man/color.html">color</a></span>(<span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span>(<span class="kw">palette</span> <span class="kw">=</span> <span class="st">"discrete_3"</span>)(<span class="fl">3</span>)))</pre></body></html></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu">prismatic</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/prismatic/man/color.html">color</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"discrete_3"</span><span class="op">)</span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="RUB_colors_files/figure-html/plot-discrete-numbered-3.png" width="700.0000032"></p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="kw pkg">prismatic</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/prismatic/man/color.html">color</a></span>(<span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span>(<span class="kw">palette</span> <span class="kw">=</span> <span class="st">"discrete_4"</span>)(<span class="fl">4</span>)))</pre></body></html></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu">prismatic</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/prismatic/man/color.html">color</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"discrete_4"</span><span class="op">)</span><span class="op">(</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="RUB_colors_files/figure-html/plot-discrete-numbered-4.png" width="700.0000032"></p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="kw pkg">prismatic</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/prismatic/man/color.html">color</a></span>(<span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span>(<span class="kw">palette</span> <span class="kw">=</span> <span class="st">"discrete_5"</span>)(<span class="fl">5</span>)))</pre></body></html></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu">prismatic</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/prismatic/man/color.html">color</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"discrete_5"</span><span class="op">)</span><span class="op">(</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="RUB_colors_files/figure-html/plot-discrete-numbered-5.png" width="700.0000032"></p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="kw pkg">prismatic</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/prismatic/man/color.html">color</a></span>(<span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span>(<span class="kw">palette</span> <span class="kw">=</span> <span class="st">"discrete_6"</span>)(<span class="fl">6</span>)))</pre></body></html></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu">prismatic</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/prismatic/man/color.html">color</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"discrete_6"</span><span class="op">)</span><span class="op">(</span><span class="fl">6</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="RUB_colors_files/figure-html/plot-discrete-numbered-6.png" width="700.0000032"></p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="kw pkg">prismatic</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/prismatic/man/color.html">color</a></span>(<span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span>(<span class="kw">palette</span> <span class="kw">=</span> <span class="st">"discrete_7"</span>)(<span class="fl">7</span>)))</pre></body></html></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu">prismatic</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/prismatic/man/color.html">color</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"discrete_7"</span><span class="op">)</span><span class="op">(</span><span class="fl">7</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="RUB_colors_files/figure-html/plot-discrete-numbered-7.png" width="700.0000032"></p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="kw pkg">prismatic</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/prismatic/man/color.html">color</a></span>(<span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span>(<span class="kw">palette</span> <span class="kw">=</span> <span class="st">"discrete_8"</span>)(<span class="fl">8</span>)))</pre></body></html></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu">prismatic</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/prismatic/man/color.html">color</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"discrete_8"</span><span class="op">)</span><span class="op">(</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="RUB_colors_files/figure-html/plot-discrete-numbered-8.png" width="700.0000032"></p>
-<div class="sourceCode" id="cb14"><html><body><pre class="r">
-<span class="co"># If you need more than eight unique colors, simply increase the number of</span>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># If you need more than eight unique colors, simply increase the number of</span>
 <span class="co"># requested colors in the function call like this:</span>
-<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="kw pkg">prismatic</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/prismatic/man/color.html">color</a></span>(<span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span>(<span class="kw">palette</span> <span class="kw">=</span> <span class="st">"discrete_8"</span>)(<span class="fl">16</span>)))</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu">prismatic</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/prismatic/man/color.html">color</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"discrete_8"</span><span class="op">)</span><span class="op">(</span><span class="fl">16</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="RUB_colors_files/figure-html/plot-discrete-numbered-9.png" width="700.0000032"></p>
 </div>
 <div id="plots-for-the-discrete-palettes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#plots-for-the-discrete-palettes" class="anchor"></a>Plots for the discrete palettes</h2>
 <p>Last, I turned most of the unqiue colors in the RUB corporate design guide into one awfully looking palette simply called “discrete”. Avert your eyes, if at all possible! The second palette, “discrete_contrast” has four colors that form a nice contrast to the base RUB colors, i.e. the Green and Blue.</p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="kw pkg">prismatic</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/prismatic/man/color.html">color</a></span>(<span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span>(<span class="kw">palette</span> <span class="kw">=</span> <span class="st">"discrete"</span>)(<span class="fl">7</span>)))</pre></body></html></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu">prismatic</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/prismatic/man/color.html">color</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"discrete"</span><span class="op">)</span><span class="op">(</span><span class="fl">7</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="RUB_colors_files/figure-html/plot-discrete-1.png" width="700.0000032"></p>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="kw pkg">prismatic</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/prismatic/man/color.html">color</a></span>(<span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span>(<span class="kw">palette</span> <span class="kw">=</span> <span class="st">"discrete_contrast"</span>)(<span class="fl">4</span>)))</pre></body></html></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu">prismatic</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/prismatic/man/color.html">color</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"discrete_contrast"</span><span class="op">)</span><span class="op">(</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="RUB_colors_files/figure-html/plot-discrete-2.png" width="700.0000032"></p>
 </div>
 </div>
@@ -280,7 +285,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

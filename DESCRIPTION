@@ -52,7 +52,7 @@ VignetteBuilder:
 Encoding: UTF-8
 Language: en
 LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 BugReports: https://github.com/RichardMeyer-Eppler/RUBer/issues
 Depends: 
     R (>= 3.5.0)

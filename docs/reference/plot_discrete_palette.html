@@ -89,7 +89,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -112,16 +112,13 @@
     <li>
       <a href="../articles/RUB_plot.html">Using the RUB plotting functions</a>
     </li>
-    <li>
-      <a href="../articles/wiesbaden.html">Retrieving Destatis data</a>
-    </li>
   </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/RichardMeyer-Eppler/RUBer/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -148,7 +145,7 @@
     colors. Above that number, colors are interpolated.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plot_discrete_palette</span>(<span class='no'>colors_n</span>)</pre>
+    <pre class="usage"><span class='fu'>plot_discrete_palette</span><span class='op'>(</span><span class='va'>colors_n</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -165,7 +162,8 @@ palette.</p></td>
     <p>Name of the appropriate discrete palette from RUB_palettes</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>plot_discrete_palette</span>(<span class='fl'>12</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot_discrete_palette(12): konnte Funktion "plot_discrete_palette" nicht finden</span></div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>plot_discrete_palette</span><span class='op'>(</span><span class='fl'>12</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in plot_discrete_palette(12): could not find function "plot_discrete_palette"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -181,7 +179,7 @@ palette.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

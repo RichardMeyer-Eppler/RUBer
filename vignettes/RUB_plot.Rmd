@@ -14,11 +14,18 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+
+library(extrafont)
+
+# This registers fonts so that they can be used with the pdf, postscript, or Windows bitmap output device. It must be run once in each R session.
+extrafont::loadfonts(
+  device = "win",
+  quiet = TRUE
+)
 ```
 
 ```{r setup}
 library(RUBer)
-library(extrafont)
 ```
 
 The plotting functions in RUBer do not in any way extend the functionality 

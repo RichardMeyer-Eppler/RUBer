@@ -25,22 +25,22 @@ colors available.
 
 ## Main features
 
-  - An R Markdown template for use with `rmarkdown::draft`. The template
+-   An R Markdown template for use with `rmarkdown::draft`. The template
     uses `knitr::knit_expand()` to dynamically create code chunks
     containing figures, captions and subcaptions based on the data frame
     passed on as a parameter. Figure captions are automatically numbered
     via `bookdown` and a table of figures is inserted via `officedown`.
-  - Vectorized figures in Microsoft’s Enhanced Metafile format using the
+-   Vectorized figures in Microsoft’s Enhanced Metafile format using the
     `devEMF` package.
-  - Five preconfigured `ggplot2` plotting functions.
-  - A custom `ggplot2` theme, `theme_rub`.
-  - A custom `flextable` theme.
-  - Word reference document in the RUB corporate design for use with the
+-   Five preconfigured `ggplot2` plotting functions.
+-   A custom `ggplot2` theme, `theme_rub`.
+-   A custom `flextable` theme.
+-   Word reference document in the RUB corporate design for use with the
     R Markdown template.
-  - Functions to access the RUB color palette.
-  - Scale functions to make the RUB color palettes available in
+-   Functions to access the RUB color palette.
+-   Scale functions to make the RUB color palettes available in
     `ggplot2`.
-  - A dataset with 249,492 rows, `df_fake`, that illustrates how we used
+-   A dataset with 249,492 rows, `df_fake`, that illustrates how we used
     this package in 2018 to create 64 reports with a total of 3,024
     unique figures. All values in the dataset are fake and
     algorithmically generated, all other columns, though, are identical

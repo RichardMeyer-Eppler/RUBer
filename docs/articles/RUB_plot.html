@@ -46,7 +46,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -69,16 +69,13 @@
     <li>
       <a href="../articles/RUB_plot.html">Using the RUB plotting functions</a>
     </li>
-    <li>
-      <a href="../articles/wiesbaden.html">Retrieving Destatis data</a>
-    </li>
   </ul>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/RichardMeyer-Eppler/RUBer/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -92,7 +89,7 @@
 
       
 
-      </header><script src="RUB_plot_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="RUB_plot_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Using the RUB plotting functions</h1>
@@ -105,9 +102,15 @@
 
     
     
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">RUBer</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">extrafont</span>)
-<span class="co">#&gt; Registering fonts with R</span></pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RichardMeyer-Eppler/RUBer">RUBer</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/wch/extrafont">extrafont</a></span><span class="op">)</span>
+<span class="co">#&gt; Registering fonts with R</span>
+<span class="co"># This registers fonts so that they can be used with the pdf, postscript, or Windows bitmap output device. It must be run once in each R session.</span>
+<span class="fu">extrafont</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/extrafont/man/loadfonts.html">loadfonts</a></span><span class="op">(</span>
+  device <span class="op">=</span> <span class="st">"win"</span>,
+  quiet <span class="op">=</span> <span class="cn">TRUE</span>
+<span class="op">)</span></code></pre></div>
 <p>The plotting functions in RUBer do not in any way extend the functionality provided by <code>ggplot2</code> itself. By preconfiguring a lot of the parameters, though, RUBer’s plotting functions are meant to be more accessible and easier to use. One of the inspirations for this was the <code>bbplot</code> package used by the data team at BBC News.</p>
 <div id="figure-types" class="section level1">
 <h1 class="hasAnchor">
@@ -124,9 +127,10 @@
 <h2 class="hasAnchor">
 <a href="#figure-type-1---vertical-stacked-bar-charts" class="anchor"></a>Figure Type 1 - Vertical stacked bar charts</h2>
 <p>For plotting vertical stacked bar charts, we use <code><a href="../reference/rub_plot_type_1.html">RUBer::rub_plot_type_1</a></code>. Three variable names are mandatory: <code>x_var</code> for the x-coordinate, <code>y_var</code> for the y-coordinate and <code>fill_var</code> for the fill variable, which determines the groups to be stacked. Consider this example:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co"># Create test values for all three mandatory variables (x_var, y_var, fill_var).</span>
-<span class="no">df_t1_ex1</span> <span class="kw">&lt;-</span> <span class="kw pkg">tibble</span><span class="kw ns">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span>(
-   ~<span class="no">term</span>, ~<span class="no">students</span>, ~<span class="no">degree</span>,
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Create test values for all three mandatory variables (x_var, y_var, fill_var).</span>
+<span class="va">df_t1_ex1</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span>
+   <span class="op">~</span><span class="va">term</span>, <span class="op">~</span><span class="va">students</span>, <span class="op">~</span><span class="va">degree</span>,
    <span class="st">"Spring '13"</span>, <span class="fl">120</span>, <span class="st">"Bachelor 1-Subject"</span>,
    <span class="st">"Spring '14"</span>, <span class="fl">105</span>, <span class="st">"Bachelor 1-Subject"</span>,
    <span class="st">"Spring '15"</span>, <span class="fl">124</span>, <span class="st">"Bachelor 1-Subject"</span>,
@@ -137,23 +141,24 @@
    <span class="st">"Spring '15"</span>, <span class="fl">122</span>, <span class="st">"Master 1-Subject"</span>,
    <span class="st">"Spring '16"</span>, <span class="fl">168</span>, <span class="st">"Master 1-Subject"</span>,
    <span class="st">"Spring '17"</span>, <span class="fl">7</span>, <span class="st">"Master 1-Subject"</span>,
-)
+<span class="op">)</span>
 
 <span class="co"># The data source is df_t1_ex1, x_var is mapped to term, y_var to students, and</span>
 <span class="co"># the fill_var to degree.</span>
-<span class="fu"><a href="../reference/rub_plot_type_1.html">rub_plot_type_1</a></span>(
-  <span class="kw">df</span> <span class="kw">=</span> <span class="no">df_t1_ex1</span>,
-  <span class="kw">x_var</span> <span class="kw">=</span> <span class="no">term</span>,
-  <span class="kw">y_var</span> <span class="kw">=</span> <span class="no">students</span>,
-  <span class="kw">fill_var</span> <span class="kw">=</span> <span class="no">degree</span>
+<span class="fu"><a href="../reference/rub_plot_type_1.html">rub_plot_type_1</a></span><span class="op">(</span>
+  df <span class="op">=</span> <span class="va">df_t1_ex1</span>,
+  x_var <span class="op">=</span> <span class="va">term</span>,
+  y_var <span class="op">=</span> <span class="va">students</span>,
+  fill_var <span class="op">=</span> <span class="va">degree</span>
 <span class="co">#  ,fill_reverse = TRUE</span>
 <span class="co">#  ,palette_reverse = TRUE</span>
-)</pre></body></html></div>
+<span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/type-1-example-1-1.png" width="700.0000032"></p>
 <p>Next a more complex example, in which we additionally provide the label for the y-axis, <code>y_label</code> and a caption indicating the source of the data, <code>caption</code>. By default, the caption has the prefix “<em>Quelle:</em>”, which we change from German to English using the parameter <code>caption_prefix</code>. We also want to suppress the value label for Master students in the spring term of 2017, because the value is so small. By default, labels for values accounting for less than 4% of the total value are suppressed. In this case, the seven students account for 7/(7+122) = 5.4% of the total value, so we increase the value for <code>filter_cutoff</code> from the default of 0.04 to 0.06.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co"># Create test values for all three mandatory variables (x_var, y_var, fill_var).</span>
-<span class="no">df_t1_ex2</span> <span class="kw">&lt;-</span> <span class="kw pkg">tibble</span><span class="kw ns">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span>(
-   ~<span class="no">term</span>, ~<span class="no">students</span>, ~<span class="no">degree</span>,
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Create test values for all three mandatory variables (x_var, y_var, fill_var).</span>
+<span class="va">df_t1_ex2</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span>
+   <span class="op">~</span><span class="va">term</span>, <span class="op">~</span><span class="va">students</span>, <span class="op">~</span><span class="va">degree</span>,
    <span class="st">"Spring '13"</span>, <span class="fl">120</span>, <span class="st">"Bachelor 1-Subject"</span>,
    <span class="st">"Spring '14"</span>, <span class="fl">105</span>, <span class="st">"Bachelor 1-Subject"</span>,
    <span class="st">"Spring '15"</span>, <span class="fl">124</span>, <span class="st">"Bachelor 1-Subject"</span>,
@@ -164,28 +169,29 @@
    <span class="st">"Spring '15"</span>, <span class="fl">122</span>, <span class="st">"Master 1-Subject"</span>,
    <span class="st">"Spring '16"</span>, <span class="fl">168</span>, <span class="st">"Master 1-Subject"</span>,
    <span class="st">"Spring '17"</span>, <span class="fl">7</span>, <span class="st">"Master 1-Subject"</span>
-)
+<span class="op">)</span>
 
 <span class="co"># Set values for parameters setting the y-axis title, captioning the source data</span>
 <span class="co"># and filtering small value labels (all labels below 6% of the stacked total).</span>
-<span class="fu"><a href="../reference/rub_plot_type_1.html">rub_plot_type_1</a></span>(
-  <span class="kw">df</span> <span class="kw">=</span> <span class="no">df_t1_ex2</span>,
-  <span class="kw">x_var</span> <span class="kw">=</span> <span class="no">term</span>,
-  <span class="kw">y_var</span> <span class="kw">=</span> <span class="no">students</span>,
-  <span class="kw">fill_var</span> <span class="kw">=</span> <span class="no">degree</span>,
-  <span class="kw">y_axis_label</span> <span class="kw">=</span> <span class="st">"Students (1st degree program, 1st and 2nd field of study)"</span>,
-  <span class="kw">caption</span> <span class="kw">=</span> <span class="st">"Information management system of the University of Bochum"</span>,
-  <span class="kw">caption_prefix</span> <span class="kw">=</span> <span class="st">"Source:"</span>,
-  <span class="kw">filter_cutoff</span> <span class="kw">=</span> <span class="fl">0.06</span>
+<span class="fu"><a href="../reference/rub_plot_type_1.html">rub_plot_type_1</a></span><span class="op">(</span>
+  df <span class="op">=</span> <span class="va">df_t1_ex2</span>,
+  x_var <span class="op">=</span> <span class="va">term</span>,
+  y_var <span class="op">=</span> <span class="va">students</span>,
+  fill_var <span class="op">=</span> <span class="va">degree</span>,
+  y_axis_label <span class="op">=</span> <span class="st">"Students (1st degree program, 1st and 2nd field of study)"</span>,
+  caption <span class="op">=</span> <span class="st">"Information management system of the University of Bochum"</span>,
+  caption_prefix <span class="op">=</span> <span class="st">"Source:"</span>,
+  filter_cutoff <span class="op">=</span> <span class="fl">0.06</span>
 <span class="co">#  ,fill_reverse = TRUE</span>
 <span class="co">#  ,palette_reverse = TRUE</span>
-)</pre></body></html></div>
+<span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/type-1-example-2-1.png" width="700.0000032"></p>
 <p>The third example adds even more parameters. You can facet the figure by a discrete variable, <code>facet_var</code>, in order to make direct comparisons between groups, e.g. different departments. You can also change a figure’s default color with <code>color</code>, the default font with <code>base_family</code>, and the size of all text elements with <code>base_size</code> (see the documentation for <code><a href="../reference/theme_rub.html">RUBer::theme_rub()</a></code>).</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="co"># Create test values for all three mandatory variables (x_var, y_var, fill_var)</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Create test values for all three mandatory variables (x_var, y_var, fill_var)</span>
 <span class="co"># and the optional facet variable (facet_var).</span>
-<span class="no">df_t1_ex3</span> <span class="kw">&lt;-</span> <span class="kw pkg">tibble</span><span class="kw ns">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span>(
-   ~<span class="no">term</span>, ~<span class="no">students</span>, ~<span class="no">degree</span>, ~<span class="no">department</span>,
+<span class="va">df_t1_ex3</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span>
+   <span class="op">~</span><span class="va">term</span>, <span class="op">~</span><span class="va">students</span>, <span class="op">~</span><span class="va">degree</span>, <span class="op">~</span><span class="va">department</span>, 
    <span class="st">"Spring '13"</span>, <span class="fl">120</span>, <span class="st">"Bachelor 1-Subject"</span>, <span class="st">"Department of Mathematics and Statistics"</span>,
    <span class="st">"Spring '14"</span>, <span class="fl">105</span>, <span class="st">"Bachelor 1-Subject"</span>, <span class="st">"Department of Mathematics and Statistics"</span>,
    <span class="st">"Spring '15"</span>, <span class="fl">124</span>, <span class="st">"Bachelor 1-Subject"</span>, <span class="st">"Department of Mathematics and Statistics"</span>,
@@ -206,36 +212,37 @@
    <span class="st">"Spring '15"</span>, <span class="fl">88</span>, <span class="st">"Master 1-Subject"</span>, <span class="st">"Department of Philosophy"</span>,
    <span class="st">"Spring '16"</span>, <span class="fl">85</span>, <span class="st">"Master 1-Subject"</span>, <span class="st">"Department of Philosophy"</span>,
    <span class="st">"Spring '17"</span>, <span class="fl">92</span>, <span class="st">"Master 1-Subject"</span>, <span class="st">"Department of Philosophy"</span>
-)
+<span class="op">)</span>
 
 <span class="co"># Facet by department, which effectively leads to two plots in one figure. The</span>
 <span class="co"># default font is changed to RUB Scala TZ, the main color is changed from</span>
 <span class="co"># RUB blue to dark red, and the size is increased from 11 to 14.</span>
-<span class="fu"><a href="../reference/rub_plot_type_1.html">rub_plot_type_1</a></span>(
-  <span class="kw">df</span> <span class="kw">=</span> <span class="no">df_t1_ex3</span>,
-  <span class="kw">x_var</span> <span class="kw">=</span> <span class="no">term</span>,
-  <span class="kw">y_var</span> <span class="kw">=</span> <span class="no">students</span>,
-  <span class="kw">fill_var</span> <span class="kw">=</span> <span class="no">degree</span>,
-  <span class="kw">y_axis_label</span> <span class="kw">=</span> <span class="st">"Students (1st degree program, 1st and 2nd field of study)"</span>,
-  <span class="kw">caption</span> <span class="kw">=</span> <span class="st">"Information management system of the University of Bochum"</span>,
-  <span class="kw">caption_prefix</span> <span class="kw">=</span> <span class="st">"Source:"</span>,
-  <span class="kw">filter_cutoff</span> <span class="kw">=</span> <span class="fl">0.06</span>,
-  <span class="kw">facet_var</span> <span class="kw">=</span> <span class="no">department</span>,
-  <span class="kw">color</span> <span class="kw">=</span> <span class="no">RUB_colors</span>[<span class="st">"dark red"</span>],
-  <span class="kw">base_family</span> <span class="kw">=</span> <span class="st">"RUB Scala TZ"</span>,
-  <span class="kw">base_size</span> <span class="kw">=</span> <span class="fl">14</span>
+<span class="fu"><a href="../reference/rub_plot_type_1.html">rub_plot_type_1</a></span><span class="op">(</span>
+  df <span class="op">=</span> <span class="va">df_t1_ex3</span>,
+  x_var <span class="op">=</span> <span class="va">term</span>,
+  y_var <span class="op">=</span> <span class="va">students</span>,
+  fill_var <span class="op">=</span> <span class="va">degree</span>,
+  y_axis_label <span class="op">=</span> <span class="st">"Students (1st degree program, 1st and 2nd field of study)"</span>,
+  caption <span class="op">=</span> <span class="st">"Information management system of the University of Bochum"</span>,
+  caption_prefix <span class="op">=</span> <span class="st">"Source:"</span>,
+  filter_cutoff <span class="op">=</span> <span class="fl">0.06</span>,
+  facet_var <span class="op">=</span> <span class="va">department</span>,
+  color <span class="op">=</span> <span class="va">RUB_colors</span><span class="op">[</span><span class="st">"dark red"</span><span class="op">]</span>,
+  base_family <span class="op">=</span> <span class="st">"RUB Scala TZ"</span>,
+  base_size <span class="op">=</span> <span class="fl">14</span>
 <span class="co">#  ,fill_reverse = TRUE</span>
 <span class="co">#  ,palette_reverse = TRUE</span>
-)</pre></body></html></div>
+<span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/type-1-example-3-1.png" width="700.0000032"></p>
 </div>
 <div id="figure-type-2---vertical-stacked-bar-charts-scaled-to-100" class="section level2">
 <h2 class="hasAnchor">
 <a href="#figure-type-2---vertical-stacked-bar-charts-scaled-to-100" class="anchor"></a>Figure Type 2 - Vertical stacked bar charts scaled to 100%</h2>
 <p>Figure type 2, plotted with <code><a href="../reference/rub_plot_type_2.html">RUBer::rub_plot_type_2</a></code>, is very similar to type 1. The main differences are that the y-axis uses a percentage scale rather than an absolute one and that all stacked bars are scaled to 100%. Like for figure type 1, three variable names are mandatory: <code>x_var</code> for the x-coordinate, <code>y_var</code> for the y-coordinate and <code>fill_var</code> for the fill variable, which determines the groups to be stacked.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="co"># Create test values for all three mandatory variables (x_var, y_var, fill_var)</span>
-<span class="no">df_t2_ex1</span> <span class="kw">&lt;-</span> <span class="kw pkg">tibble</span><span class="kw ns">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span>(
-   ~<span class="no">cohort_term</span>, ~<span class="no">status_percentage</span>, ~<span class="no">cohort_status</span>,
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Create test values for all three mandatory variables (x_var, y_var, fill_var)</span>
+<span class="va">df_t2_ex1</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span>
+   <span class="op">~</span><span class="va">cohort_term</span>, <span class="op">~</span><span class="va">status_percentage</span>, <span class="op">~</span><span class="va">cohort_status</span>, 
    <span class="st">"2. cohort term"</span>, <span class="fl">0.9513551740</span>, <span class="st">"Studying"</span>,
    <span class="st">"2. cohort term"</span>, <span class="fl">0.0029748098</span>, <span class="st">"Changed subject"</span>,
    <span class="st">"2. cohort term"</span>, <span class="fl">0.0004673679</span>, <span class="st">"Graduated"</span>,
@@ -256,20 +263,21 @@
    <span class="st">"8. cohort term"</span>, <span class="fl">0.0104080044</span>, <span class="st">"Graduated"</span>,
    <span class="st">"8. cohort term"</span>, <span class="fl">0.0274549015</span>, <span class="st">"Disenrolled without degree"</span>,
    <span class="st">"8. cohort term"</span>, <span class="fl">0.0544029593</span>, <span class="st">"Dropped subject"</span>,
-)
+<span class="op">)</span>
 
-<span class="fu"><a href="../reference/rub_plot_type_2.html">rub_plot_type_2</a></span>(
-  <span class="kw">df</span> <span class="kw">=</span> <span class="no">df_t2_ex1</span>,
-  <span class="kw">x_var</span> <span class="kw">=</span> <span class="no">cohort_term</span>,
-  <span class="kw">y_var</span> <span class="kw">=</span> <span class="no">status_percentage</span>,
-  <span class="kw">fill_var</span> <span class="kw">=</span> <span class="no">cohort_status</span>
+<span class="fu"><a href="../reference/rub_plot_type_2.html">rub_plot_type_2</a></span><span class="op">(</span>
+  df <span class="op">=</span> <span class="va">df_t2_ex1</span>,
+  x_var <span class="op">=</span> <span class="va">cohort_term</span>,
+  y_var <span class="op">=</span> <span class="va">status_percentage</span>,
+  fill_var <span class="op">=</span> <span class="va">cohort_status</span>
   <span class="co"># ,fill_reverse = TRUE</span>
   <span class="co"># ,palette_reverse = TRUE</span>
-)</pre></body></html></div>
+<span class="op">)</span> </code></pre></div>
 <p><img src="RUB_plot_files/figure-html/type-2-example-1-1.png" width="700.0000032"></p>
 <p>Now let us say we are unhappy with the default ordering of the stacked bars, because we want the largest cohort group, those still studying, on top. We can use the boolean parameter <code>fill_reverse</code> to do just that. We also provide a discrete facetting variable, <code>facet_var</code>, a text for <code>caption</code> and <code>caption_prefix</code>, and a lower threshhold for the <code>filter_cutoff</code>, leading to more labels being displayed.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">df_t2_ex2</span> <span class="kw">&lt;-</span> <span class="kw pkg">tibble</span><span class="kw ns">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span>(
-   ~<span class="no">cohort_term</span>, ~<span class="no">status_percentage</span>, ~<span class="no">cohort_status</span>, ~<span class="no">cohort_label</span>,
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df_t2_ex2</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span>
+   <span class="op">~</span><span class="va">cohort_term</span>, <span class="op">~</span><span class="va">status_percentage</span>, <span class="op">~</span><span class="va">cohort_status</span>, <span class="op">~</span><span class="va">cohort_label</span>, 
    <span class="st">"2. cohort term"</span>, <span class="fl">0.9513551740</span>, <span class="st">"Studying"</span>, <span class="st">"Bachelor 1-Subject: Starting cohort fall 2011 (n=222)"</span>,
    <span class="st">"2. cohort term"</span>, <span class="fl">0.0029748098</span>, <span class="st">"Changed subject"</span>, <span class="st">"Bachelor 1-Subject: Starting cohort fall 2011 (n=222)"</span>,
    <span class="st">"2. cohort term"</span>, <span class="fl">0.0004673679</span>, <span class="st">"Graduated"</span>, <span class="st">"Bachelor 1-Subject: Starting cohort fall 2011 (n=222)"</span>,
@@ -310,45 +318,47 @@
    <span class="st">"8. cohort term"</span>, <span class="fl">0.073315208</span>, <span class="st">"Graduated"</span>, <span class="st">"Bachelor 1-Subject: Starting cohort fall 2012 (n=240)"</span>,
    <span class="st">"8. cohort term"</span>, <span class="fl">0.026374195</span>, <span class="st">"Disenrolled without degree"</span>, <span class="st">"Bachelor 1-Subject: Starting cohort fall 2012 (n=240)"</span>,
    <span class="st">"8. cohort term"</span>, <span class="fl">0.036068576</span>, <span class="st">"Dropped subject"</span>, <span class="st">"Bachelor 1-Subject: Starting cohort fall 2012 (n=240)"</span>,
-)
+<span class="op">)</span>
 
-<span class="fu"><a href="../reference/rub_plot_type_2.html">rub_plot_type_2</a></span>(
-  <span class="kw">df</span> <span class="kw">=</span> <span class="no">df_t2_ex2</span>,
-  <span class="kw">x_var</span> <span class="kw">=</span> <span class="no">cohort_term</span>,
-  <span class="kw">y_var</span> <span class="kw">=</span> <span class="no">status_percentage</span>,
-  <span class="kw">fill_var</span> <span class="kw">=</span> <span class="no">cohort_status</span>,
-  <span class="kw">facet_var</span> <span class="kw">=</span> <span class="no">cohort_label</span>,
-  <span class="kw">filter_cutoff</span> <span class="kw">=</span> <span class="fl">0.05</span>,
-  <span class="kw">caption</span> <span class="kw">=</span> <span class="st">"Comparison of two fictitious cohorts"</span>,
-  <span class="kw">caption_prefix</span> <span class="kw">=</span> <span class="st">"Source:"</span>
-  ,<span class="kw">fill_reverse</span> <span class="kw">=</span> <span class="fl">TRUE</span>
-)</pre></body></html></div>
+<span class="fu"><a href="../reference/rub_plot_type_2.html">rub_plot_type_2</a></span><span class="op">(</span>
+  df <span class="op">=</span> <span class="va">df_t2_ex2</span>,
+  x_var <span class="op">=</span> <span class="va">cohort_term</span>,
+  y_var <span class="op">=</span> <span class="va">status_percentage</span>,
+  fill_var <span class="op">=</span> <span class="va">cohort_status</span>,
+  facet_var <span class="op">=</span> <span class="va">cohort_label</span>,
+  filter_cutoff <span class="op">=</span> <span class="fl">0.05</span>,
+  caption <span class="op">=</span> <span class="st">"Comparison of two fictitious cohorts"</span>,
+  caption_prefix <span class="op">=</span> <span class="st">"Source:"</span>
+  ,fill_reverse <span class="op">=</span> <span class="cn">TRUE</span>
+<span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/type-2-example-2-1.png" width="700.0000032"></p>
 </div>
 <div id="figure-type-3---horizontal-stacked-bar-charts-scaled-to-100" class="section level2">
 <h2 class="hasAnchor">
 <a href="#figure-type-3---horizontal-stacked-bar-charts-scaled-to-100" class="anchor"></a>Figure Type 3 - Horizontal stacked bar charts scaled to 100%</h2>
 <p>Figure type 3, plotted with <code><a href="../reference/rub_plot_type_3.html">RUBer::rub_plot_type_3</a></code>, is very similar to figure type 2, with the exception that the stacked bar charts are plotted horizontally. As with the first two figure types, three variable names are mandatory: <code>x_var</code> for the x-coordinate, <code>y_var</code> for the y-coordinate and <code>fill_var</code> for the fill variable, which determines the groups to be stacked.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="co"># Create test values for all three mandatory variables (x_var, y_var, fill_var)</span>
-<span class="no">df_t3_ex1</span> <span class="kw">&lt;-</span> <span class="kw pkg">tibble</span><span class="kw ns">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span>(
-   ~<span class="no">survey_group</span>, ~<span class="no">item_value</span>, ~<span class="no">item_value_percentage</span>,
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Create test values for all three mandatory variables (x_var, y_var, fill_var)</span>
+<span class="va">df_t3_ex1</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span>
+   <span class="op">~</span><span class="va">survey_group</span>, <span class="op">~</span><span class="va">item_value</span>, <span class="op">~</span><span class="va">item_value_percentage</span>,
    <span class="st">"Bachelor 1-Subject (n=400)"</span>, <span class="st">"Exceeded prescribed period of study"</span>, <span class="fl">0.3070448</span>,
    <span class="st">"Bachelor 1-Subject (n=400)"</span>, <span class="st">"Within prescribed period of study"</span>, <span class="fl">0.6929552</span>,
    <span class="st">"SG Bachelor 1-Subject (n=669)"</span>, <span class="st">"Exceeded prescribed period of study"</span>, <span class="fl">0.1122486</span>,
    <span class="st">"SG Bachelor 1-Subject (n=669)"</span>, <span class="st">"Within prescribed period of study"</span>, <span class="fl">0.8877514</span>
-)
+<span class="op">)</span>
 
-<span class="fu"><a href="../reference/rub_plot_type_3.html">rub_plot_type_3</a></span>(
-   <span class="kw">df</span> <span class="kw">=</span> <span class="no">df_t3_ex1</span>,
-   <span class="kw">x_var</span> <span class="kw">=</span> <span class="no">item_value_percentage</span>,
-   <span class="kw">y_var</span> <span class="kw">=</span> <span class="no">survey_group</span>,
-   <span class="kw">fill_var</span> <span class="kw">=</span> <span class="no">item_value</span>
+<span class="fu"><a href="../reference/rub_plot_type_3.html">rub_plot_type_3</a></span><span class="op">(</span>
+   df <span class="op">=</span> <span class="va">df_t3_ex1</span>,
+   x_var <span class="op">=</span> <span class="va">item_value_percentage</span>,
+   y_var <span class="op">=</span> <span class="va">survey_group</span>,
+   fill_var <span class="op">=</span> <span class="va">item_value</span>
  <span class="co"># ,fill_reverse = TRUE</span>
-)</pre></body></html></div>
+<span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/type-3-example-1-1.png" width="700.0000032"></p>
 <p>The second example once again adds a facetting variable, <code>fill_var</code>, for plotting direct comparisons between groups. We also use <code>caption</code>, <code>caption_prefix</code>, a <code>filter_cutoff</code> that suppresses all values below 20%, and increase the text size to 12.</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">df_t3_ex2</span> <span class="kw">&lt;-</span> <span class="kw pkg">tibble</span><span class="kw ns">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span>(
-   ~<span class="no">survey_group</span>, ~<span class="no">item_value</span>, ~<span class="no">item_value_percentage</span>, ~<span class="no">degree</span>,
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df_t3_ex2</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span>
+   <span class="op">~</span><span class="va">survey_group</span>, <span class="op">~</span><span class="va">item_value</span>, <span class="op">~</span><span class="va">item_value_percentage</span>, <span class="op">~</span><span class="va">degree</span>,
    <span class="st">"Bachelor 1-Subject (n=400)"</span>, <span class="st">"Exceeded prescribed period of study"</span>, <span class="fl">0.30</span>, <span class="st">"Bachelor 1-Subject"</span>,
    <span class="st">"Bachelor 1-Subject (n=400)"</span>, <span class="st">"Within prescribed period of study"</span>, <span class="fl">0.60</span>, <span class="st">"Bachelor 1-Subject"</span>,
    <span class="st">"SG Bachelor 1-Subject (n=726)"</span>, <span class="st">"Exceeded prescribed period of study"</span>, <span class="fl">0.1122486</span>, <span class="st">"Bachelor 1-Subject"</span>,
@@ -357,56 +367,59 @@
    <span class="st">"Master 1-Subject (n=369)"</span>, <span class="st">"Within prescribed period of study"</span>, <span class="fl">0.8583991</span>, <span class="st">"Master 1-Subject"</span>,
    <span class="st">"SG Master 1-Subject (n=669)"</span>, <span class="st">"Exceeded prescribed period of study"</span>, <span class="fl">0.4417682</span>, <span class="st">"Master 1-Subject"</span>,
    <span class="st">"SG Master 1-Subject (n=669)"</span>, <span class="st">"Within prescribed period of study"</span>, <span class="fl">0.5582318</span>, <span class="st">"Master 1-Subject"</span>
-)
+<span class="op">)</span>
 
-<span class="fu"><a href="../reference/rub_plot_type_3.html">rub_plot_type_3</a></span>(
-   <span class="kw">df</span> <span class="kw">=</span> <span class="no">df_t3_ex2</span>,
-   <span class="kw">x_var</span> <span class="kw">=</span> <span class="no">item_value_percentage</span>,
-   <span class="kw">y_var</span> <span class="kw">=</span> <span class="no">survey_group</span>,
-   <span class="kw">fill_var</span> <span class="kw">=</span> <span class="no">item_value</span>,
-   <span class="kw">facet_var</span> <span class="kw">=</span> <span class="no">degree</span>,
-   <span class="kw">caption</span> <span class="kw">=</span> <span class="st">"Graduate survey 2017/18"</span>,
-   <span class="kw">caption_prefix</span> <span class="kw">=</span> <span class="st">"Source:"</span>,
-   <span class="kw">filter_cutoff</span> <span class="kw">=</span> <span class="fl">0.20</span>,
-   <span class="kw">base_size</span> <span class="kw">=</span> <span class="fl">12</span>
-)</pre></body></html></div>
+<span class="fu"><a href="../reference/rub_plot_type_3.html">rub_plot_type_3</a></span><span class="op">(</span>
+   df <span class="op">=</span> <span class="va">df_t3_ex2</span>,
+   x_var <span class="op">=</span> <span class="va">item_value_percentage</span>,
+   y_var <span class="op">=</span> <span class="va">survey_group</span>,
+   fill_var <span class="op">=</span> <span class="va">item_value</span>,
+   facet_var <span class="op">=</span> <span class="va">degree</span>,
+   caption <span class="op">=</span> <span class="st">"Graduate survey 2017/18"</span>,
+   caption_prefix <span class="op">=</span> <span class="st">"Source:"</span>,
+   filter_cutoff <span class="op">=</span> <span class="fl">0.20</span>,
+   base_size <span class="op">=</span> <span class="fl">12</span>
+<span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/type-3-example-2-1.png" width="700.0000032"></p>
 <div id="changing-ordering" class="section level3">
 <h3 class="hasAnchor">
 <a href="#changing-ordering" class="anchor"></a>Changing ordering</h3>
 <p>In the last example above, the ordering of the fill variable, item_value, is going from bad (“Exceeded prescribed period of study”) to good (“Within prescribed period of study”). This is because, by default, the fill variable will be ordered alphabetically if not a factor. So what if we want the fill variable ordered the other way? We can use the optional boolean parameter <code>fill_reverse</code> to change the ordering of the the fill variable and of the legend.</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="co"># Reversed fill, reversed legend</span>
-<span class="fu"><a href="../reference/rub_plot_type_3.html">rub_plot_type_3</a></span>(
-   <span class="kw">df</span> <span class="kw">=</span> <span class="no">df_t3_ex2</span>,
-   <span class="kw">x_var</span> <span class="kw">=</span> <span class="no">item_value_percentage</span>,
-   <span class="kw">y_var</span> <span class="kw">=</span> <span class="no">survey_group</span>,
-   <span class="kw">fill_var</span> <span class="kw">=</span> <span class="no">item_value</span>,
-   <span class="kw">facet_var</span> <span class="kw">=</span> <span class="no">degree</span>,
-   <span class="kw">caption</span> <span class="kw">=</span> <span class="st">"Graduate survey 2017/18"</span>,
-   <span class="kw">caption_prefix</span> <span class="kw">=</span> <span class="st">"Source:"</span>,
-   <span class="kw">filter_cutoff</span> <span class="kw">=</span> <span class="fl">0.20</span>,
-   <span class="kw">base_size</span> <span class="kw">=</span> <span class="fl">12</span>,
-   <span class="kw">fill_reverse</span> <span class="kw">=</span> <span class="fl">TRUE</span>
-)</pre></body></html></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Reversed fill, reversed legend</span>
+<span class="fu"><a href="../reference/rub_plot_type_3.html">rub_plot_type_3</a></span><span class="op">(</span>
+   df <span class="op">=</span> <span class="va">df_t3_ex2</span>,
+   x_var <span class="op">=</span> <span class="va">item_value_percentage</span>,
+   y_var <span class="op">=</span> <span class="va">survey_group</span>,
+   fill_var <span class="op">=</span> <span class="va">item_value</span>,
+   facet_var <span class="op">=</span> <span class="va">degree</span>,
+   caption <span class="op">=</span> <span class="st">"Graduate survey 2017/18"</span>,
+   caption_prefix <span class="op">=</span> <span class="st">"Source:"</span>,
+   filter_cutoff <span class="op">=</span> <span class="fl">0.20</span>,
+   base_size <span class="op">=</span> <span class="fl">12</span>,
+   fill_reverse <span class="op">=</span> <span class="cn">TRUE</span>
+<span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/type-3-example-3-1.png" width="700.0000032"></p>
 <p>If we simply want to reverse the order of the legend items, without actually reversing the order of the stacked bar segments, we can use the optional parameter <code>legend_reverse</code> instead.</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="co"># Reversed legend</span>
-<span class="fu"><a href="../reference/rub_plot_type_3.html">rub_plot_type_3</a></span>(
-   <span class="kw">df</span> <span class="kw">=</span> <span class="no">df_t3_ex2</span>,
-   <span class="kw">x_var</span> <span class="kw">=</span> <span class="no">item_value_percentage</span>,
-   <span class="kw">y_var</span> <span class="kw">=</span> <span class="no">survey_group</span>,
-   <span class="kw">fill_var</span> <span class="kw">=</span> <span class="no">item_value</span>,
-   <span class="kw">facet_var</span> <span class="kw">=</span> <span class="no">degree</span>,
-   <span class="kw">caption</span> <span class="kw">=</span> <span class="st">"Graduate survey 2017/18"</span>,
-   <span class="kw">caption_prefix</span> <span class="kw">=</span> <span class="st">"Source:"</span>,
-   <span class="kw">filter_cutoff</span> <span class="kw">=</span> <span class="fl">0.20</span>,
-   <span class="kw">base_size</span> <span class="kw">=</span> <span class="fl">12</span>,
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Reversed legend</span>
+<span class="fu"><a href="../reference/rub_plot_type_3.html">rub_plot_type_3</a></span><span class="op">(</span>
+   df <span class="op">=</span> <span class="va">df_t3_ex2</span>,
+   x_var <span class="op">=</span> <span class="va">item_value_percentage</span>,
+   y_var <span class="op">=</span> <span class="va">survey_group</span>,
+   fill_var <span class="op">=</span> <span class="va">item_value</span>,
+   facet_var <span class="op">=</span> <span class="va">degree</span>,
+   caption <span class="op">=</span> <span class="st">"Graduate survey 2017/18"</span>,
+   caption_prefix <span class="op">=</span> <span class="st">"Source:"</span>,
+   filter_cutoff <span class="op">=</span> <span class="fl">0.20</span>,
+   base_size <span class="op">=</span> <span class="fl">12</span>,
 <span class="co">#  legend_reverse = TRUE</span>
-)</pre></body></html></div>
+<span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/type-3-example-4-1.png" width="700.0000032"></p>
 <p>What if we want to use a custom ordering of the fill variable? Consider the following example:</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">df_t3_ex4</span> <span class="kw">&lt;-</span> <span class="kw pkg">tibble</span><span class="kw ns">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span>(
-   ~<span class="no">survey_group</span>, ~<span class="no">item_value</span>, ~<span class="no">item_value_percentage</span>, ~<span class="no">degree</span>,
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df_t3_ex4</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span>
+   <span class="op">~</span><span class="va">survey_group</span>, <span class="op">~</span><span class="va">item_value</span>, <span class="op">~</span><span class="va">item_value_percentage</span>, <span class="op">~</span><span class="va">degree</span>,
    <span class="st">"Bachelor 1-Subject (n=400)"</span>, <span class="st">"Exceeded prescribed period of study"</span>, <span class="fl">0.30</span>, <span class="st">"Bachelor 1-Subject"</span>,
    <span class="st">"Bachelor 1-Subject (n=400)"</span>, <span class="st">"Within prescribed period of study"</span>, <span class="fl">0.60</span>, <span class="st">"Bachelor 1-Subject"</span>,
       <span class="st">"Bachelor 1-Subject (n=400)"</span>, <span class="st">"Unknown"</span>, <span class="fl">0.10</span>, <span class="st">"Bachelor 1-Subject"</span>,
@@ -419,110 +432,111 @@
    <span class="st">"SG Master 1-Subject (n=669)"</span>, <span class="st">"Exceeded prescribed period of study"</span>, <span class="fl">0.44</span>, <span class="st">"Master 1-Subject"</span>,
    <span class="st">"SG Master 1-Subject (n=669)"</span>, <span class="st">"Within prescribed period of study"</span>, <span class="fl">0.50</span>, <span class="st">"Master 1-Subject"</span>,
    <span class="st">"SG Master 1-Subject (n=669)"</span>, <span class="st">"Unknown"</span>, <span class="fl">0.05</span>, <span class="st">"Master 1-Subject"</span>
-)
+<span class="op">)</span>
 
-<span class="fu"><a href="../reference/rub_plot_type_3.html">rub_plot_type_3</a></span>(
-   <span class="kw">df</span> <span class="kw">=</span> <span class="no">df_t3_ex4</span>,
-   <span class="kw">x_var</span> <span class="kw">=</span> <span class="no">item_value_percentage</span>,
-   <span class="kw">y_var</span> <span class="kw">=</span> <span class="no">survey_group</span>,
-   <span class="kw">fill_var</span> <span class="kw">=</span> <span class="no">item_value</span>,
-   <span class="kw">facet_var</span> <span class="kw">=</span> <span class="no">degree</span>,
-   <span class="kw">caption</span> <span class="kw">=</span> <span class="st">"Graduate survey 2017/18"</span>,
-   <span class="kw">caption_prefix</span> <span class="kw">=</span> <span class="st">"Source:"</span>,
+<span class="fu"><a href="../reference/rub_plot_type_3.html">rub_plot_type_3</a></span><span class="op">(</span>
+   df <span class="op">=</span> <span class="va">df_t3_ex4</span>,
+   x_var <span class="op">=</span> <span class="va">item_value_percentage</span>,
+   y_var <span class="op">=</span> <span class="va">survey_group</span>,
+   fill_var <span class="op">=</span> <span class="va">item_value</span>,
+   facet_var <span class="op">=</span> <span class="va">degree</span>,
+   caption <span class="op">=</span> <span class="st">"Graduate survey 2017/18"</span>,
+   caption_prefix <span class="op">=</span> <span class="st">"Source:"</span>,
 <span class="co">#   ,fill_reverse = TRUE</span>
-)</pre></body></html></div>
+<span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/type-3-example-5-1.png" width="700.0000032"></p>
 <p>Here, we neither want alphabetic ordering, nor its reverse. Instead, we would prefer an alphabetic ordering with the item_value “Unknown” always coming last. For this, we can explicitly turn the <code>fill_var</code> into a factor with a predetermined ordering. The plotting function will respect this ordering.</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="co"># Take the data from previous example</span>
-<span class="no">df_t3_ex5</span> <span class="kw">&lt;-</span> <span class="no">df_t3_ex4</span>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Take the data from previous example</span>
+<span class="va">df_t3_ex5</span> <span class="op">&lt;-</span> <span class="va">df_t3_ex4</span>
 
 <span class="co"># Turn the column "item_value" into a factor</span>
-<span class="no">df_t3_ex5</span><span class="kw">[[</span><span class="st">"item_value"</span>]] <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="no">df_t3_ex5</span><span class="kw">[[</span><span class="st">"item_value"</span>]])
+<span class="va">df_t3_ex5</span><span class="op">[[</span><span class="st">"item_value"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">df_t3_ex5</span><span class="op">[[</span><span class="st">"item_value"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
 
 <span class="co"># Examine the levels, default is alphabetic ordering</span>
-<span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span>(<span class="no">df_t3_ex5</span><span class="kw">[[</span><span class="st">"item_value"</span>]])
+<span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">df_t3_ex5</span><span class="op">[[</span><span class="st">"item_value"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Exceeded prescribed period of study" "Unknown"                            </span>
 <span class="co">#&gt; [3] "Within prescribed period of study"</span>
-
 <span class="co"># Make sure that level unknown always comes last</span>
-<span class="no">df_t3_ex5</span><span class="kw">[[</span><span class="st">"item_value"</span>]] <span class="kw">&lt;-</span> <span class="kw pkg">forcats</span><span class="kw ns">::</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_relevel.html">fct_relevel</a></span>(
-   <span class="no">df_t3_ex5</span><span class="kw">[[</span><span class="st">"item_value"</span>]],
-   <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Unknown"</span>),
-   <span class="kw">after</span> <span class="kw">=</span> <span class="fl">Inf</span>
-)
+<span class="va">df_t3_ex5</span><span class="op">[[</span><span class="st">"item_value"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu">forcats</span><span class="fu">::</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_relevel.html">fct_relevel</a></span><span class="op">(</span>
+   <span class="va">df_t3_ex5</span><span class="op">[[</span><span class="st">"item_value"</span><span class="op">]</span><span class="op">]</span>,
+   <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Unknown"</span><span class="op">)</span>,
+   after <span class="op">=</span> <span class="cn">Inf</span>
+<span class="op">)</span>
 
 <span class="co"># Check new ordering</span>
-<span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span>(<span class="no">df_t3_ex5</span><span class="kw">[[</span><span class="st">"item_value"</span>]])
+<span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">df_t3_ex5</span><span class="op">[[</span><span class="st">"item_value"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Exceeded prescribed period of study" "Within prescribed period of study"  </span>
 <span class="co">#&gt; [3] "Unknown"</span>
-
 <span class="co"># Plot</span>
-<span class="fu"><a href="../reference/rub_plot_type_3.html">rub_plot_type_3</a></span>(
-   <span class="kw">df</span> <span class="kw">=</span> <span class="no">df_t3_ex5</span>,
-   <span class="kw">x_var</span> <span class="kw">=</span> <span class="no">item_value_percentage</span>,
-   <span class="kw">y_var</span> <span class="kw">=</span> <span class="no">survey_group</span>,
-   <span class="kw">fill_var</span> <span class="kw">=</span> <span class="no">item_value</span>,
-   <span class="kw">facet_var</span> <span class="kw">=</span> <span class="no">degree</span>,
-   <span class="kw">caption</span> <span class="kw">=</span> <span class="st">"Graduate survey 2017/18"</span>,
-   <span class="kw">caption_prefix</span> <span class="kw">=</span> <span class="st">"Source:"</span>
-)</pre></body></html></div>
+<span class="fu"><a href="../reference/rub_plot_type_3.html">rub_plot_type_3</a></span><span class="op">(</span>
+   df <span class="op">=</span> <span class="va">df_t3_ex5</span>,
+   x_var <span class="op">=</span> <span class="va">item_value_percentage</span>,
+   y_var <span class="op">=</span> <span class="va">survey_group</span>,
+   fill_var <span class="op">=</span> <span class="va">item_value</span>,
+   facet_var <span class="op">=</span> <span class="va">degree</span>,
+   caption <span class="op">=</span> <span class="st">"Graduate survey 2017/18"</span>,
+   caption_prefix <span class="op">=</span> <span class="st">"Source:"</span>
+<span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/type-3-example-6-1.png" width="700.0000032"></p>
 </div>
 </div>
 <div id="figure-type-4---line-charts" class="section level2">
 <h2 class="hasAnchor">
 <a href="#figure-type-4---line-charts" class="anchor"></a>Figure Type 4 - Line Charts</h2>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="../reference/rub_plot_type_4.html">rub_plot_type_4</a></span>(
-  <span class="kw">df</span> <span class="kw">=</span> <span class="no">df_t1_ex1</span>,
-  <span class="kw">x_var</span> <span class="kw">=</span> <span class="no">term</span>,
-  <span class="kw">y_var</span> <span class="kw">=</span> <span class="no">students</span>,
-  <span class="kw">group_var</span> <span class="kw">=</span> <span class="no">degree</span>,
-  <span class="kw">y_axis_label</span> <span class="kw">=</span> <span class="st">"Students (1st degree program, 1st and 2nd field of study)"</span>,
-  <span class="kw">caption</span> <span class="kw">=</span> <span class="st">"Information management system of the University of Bochum"</span>,
-  <span class="kw">caption_prefix</span> <span class="kw">=</span> <span class="st">"Source:"</span>,
-  <span class="kw">filter_cutoff</span> <span class="kw">=</span> <span class="fl">10</span>,
-  <span class="kw">base_size</span> <span class="kw">=</span> <span class="fl">14</span>
-)</pre></body></html></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/rub_plot_type_4.html">rub_plot_type_4</a></span><span class="op">(</span>
+  df <span class="op">=</span> <span class="va">df_t1_ex1</span>,
+  x_var <span class="op">=</span> <span class="va">term</span>,
+  y_var <span class="op">=</span> <span class="va">students</span>,
+  group_var <span class="op">=</span> <span class="va">degree</span>,
+  y_axis_label <span class="op">=</span> <span class="st">"Students (1st degree program, 1st and 2nd field of study)"</span>,
+  caption <span class="op">=</span> <span class="st">"Information management system of the University of Bochum"</span>,
+  caption_prefix <span class="op">=</span> <span class="st">"Source:"</span>,
+  filter_cutoff <span class="op">=</span> <span class="fl">10</span>,
+  base_size <span class="op">=</span> <span class="fl">14</span>
+<span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/type-4-example-1-1.png" width="700.0000032"></p>
-<div class="sourceCode" id="cb14"><html><body><pre class="r">
-<span class="fu"><a href="../reference/rub_plot_type_4.html">rub_plot_type_4</a></span>(
-  <span class="kw">df</span> <span class="kw">=</span> <span class="no">df_t1_ex3</span>,
-  <span class="kw">x_var</span> <span class="kw">=</span> <span class="no">term</span>,
-  <span class="kw">y_var</span> <span class="kw">=</span> <span class="no">students</span>,
-  <span class="kw">group_var</span> <span class="kw">=</span> <span class="no">degree</span>,
-  <span class="kw">facet_var</span> <span class="kw">=</span> <span class="no">department</span>,
-  <span class="kw">y_axis_label</span> <span class="kw">=</span> <span class="st">"Students (1st degree program, 1st and 2nd field of study)"</span>,
-  <span class="kw">caption</span> <span class="kw">=</span> <span class="st">"Information management system of the University of Bochum"</span>,
-  <span class="kw">caption_prefix</span> <span class="kw">=</span> <span class="st">"Source:"</span>,
-  <span class="kw">filter_cutoff</span> <span class="kw">=</span> <span class="fl">5</span>
-)</pre></body></html></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/rub_plot_type_4.html">rub_plot_type_4</a></span><span class="op">(</span>
+  df <span class="op">=</span> <span class="va">df_t1_ex3</span>,
+  x_var <span class="op">=</span> <span class="va">term</span>,
+  y_var <span class="op">=</span> <span class="va">students</span>,
+  group_var <span class="op">=</span> <span class="va">degree</span>,
+  facet_var <span class="op">=</span> <span class="va">department</span>,
+  y_axis_label <span class="op">=</span> <span class="st">"Students (1st degree program, 1st and 2nd field of study)"</span>,
+  caption <span class="op">=</span> <span class="st">"Information management system of the University of Bochum"</span>,
+  caption_prefix <span class="op">=</span> <span class="st">"Source:"</span>,
+  filter_cutoff <span class="op">=</span> <span class="fl">5</span>
+<span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/type-4-example-1-2.png" width="700.0000032"></p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="no">df_t5_ex1</span> <span class="kw">&lt;-</span> <span class="kw pkg">tibble</span><span class="kw ns">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span>(
-   ~<span class="no">term</span>, ~<span class="no">students</span>, ~<span class="no">degree</span>, ~<span class="no">group</span>, ~<span class="no">figure_type_id</span>,
-   <span class="st">"Spring '13"</span>, <span class="fl">120</span>, <span class="st">"Bachelor 1-Subject"</span>, <span class="fl">NA_character_</span>, <span class="fl">1L</span>,
-   <span class="st">"Spring '14"</span>, <span class="fl">105</span>, <span class="st">"Bachelor 1-Subject"</span>, <span class="fl">NA_character_</span>, <span class="fl">1L</span>,
-   <span class="st">"Spring '15"</span>, <span class="fl">124</span>, <span class="st">"Bachelor 1-Subject"</span>, <span class="fl">NA_character_</span>, <span class="fl">1L</span>,
-   <span class="st">"Spring '16"</span>, <span class="fl">114</span>, <span class="st">"Bachelor 1-Subject"</span>, <span class="fl">NA_character_</span>, <span class="fl">1L</span>,
-   <span class="st">"Spring '17"</span>, <span class="fl">122</span>, <span class="st">"Bachelor 1-Subject"</span>, <span class="fl">NA_character_</span>, <span class="fl">1L</span>,
-   <span class="st">"Spring '13"</span>, <span class="fl">121</span>, <span class="st">"Master 1-Subject"</span>, <span class="fl">NA_character_</span>, <span class="fl">1L</span>,
-   <span class="st">"Spring '14"</span>, <span class="fl">129</span>, <span class="st">"Master 1-Subject"</span>, <span class="fl">NA_character_</span>, <span class="fl">1L</span>,
-   <span class="st">"Spring '15"</span>, <span class="fl">122</span>, <span class="st">"Master 1-Subject"</span>, <span class="fl">NA_character_</span>, <span class="fl">1L</span>,
-   <span class="st">"Spring '16"</span>, <span class="fl">168</span>, <span class="st">"Master 1-Subject"</span>, <span class="fl">NA_character_</span>, <span class="fl">1L</span>,
-   <span class="st">"Spring '17"</span>, <span class="fl">7</span>, <span class="st">"Master 1-Subject"</span>, <span class="fl">NA_character_</span>, <span class="fl">1L</span>,
-   <span class="st">"Spring '13"</span>, <span class="fl">20</span>, <span class="fl">NA_character_</span>, <span class="st">"Freshman students"</span>, <span class="fl">4L</span>,
-   <span class="st">"Spring '14"</span>, <span class="fl">30</span>, <span class="fl">NA_character_</span>, <span class="st">"Freshman students"</span>, <span class="fl">4L</span>,
-   <span class="st">"Spring '15"</span>, <span class="fl">41</span>, <span class="fl">NA_character_</span>, <span class="st">"Freshman students"</span>, <span class="fl">4L</span>,
-   <span class="st">"Spring '16"</span>, <span class="fl">27</span>, <span class="fl">NA_character_</span>, <span class="st">"Freshman students"</span>, <span class="fl">4L</span>,
-   <span class="st">"Spring '17"</span>, <span class="fl">35</span>, <span class="fl">NA_character_</span>, <span class="st">"Freshman students"</span>, <span class="fl">4L</span>
-)
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df_t5_ex1</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span>
+   <span class="op">~</span><span class="va">term</span>, <span class="op">~</span><span class="va">students</span>, <span class="op">~</span><span class="va">degree</span>, <span class="op">~</span><span class="va">group</span>, <span class="op">~</span><span class="va">figure_type_id</span>,
+   <span class="st">"Spring '13"</span>, <span class="fl">120</span>, <span class="st">"Bachelor 1-Subject"</span>, <span class="cn">NA_character_</span>, <span class="fl">1L</span>,
+   <span class="st">"Spring '14"</span>, <span class="fl">105</span>, <span class="st">"Bachelor 1-Subject"</span>, <span class="cn">NA_character_</span>, <span class="fl">1L</span>,
+   <span class="st">"Spring '15"</span>, <span class="fl">124</span>, <span class="st">"Bachelor 1-Subject"</span>, <span class="cn">NA_character_</span>, <span class="fl">1L</span>,
+   <span class="st">"Spring '16"</span>, <span class="fl">114</span>, <span class="st">"Bachelor 1-Subject"</span>, <span class="cn">NA_character_</span>, <span class="fl">1L</span>,
+   <span class="st">"Spring '17"</span>, <span class="fl">122</span>, <span class="st">"Bachelor 1-Subject"</span>, <span class="cn">NA_character_</span>, <span class="fl">1L</span>,
+   <span class="st">"Spring '13"</span>, <span class="fl">121</span>, <span class="st">"Master 1-Subject"</span>, <span class="cn">NA_character_</span>, <span class="fl">1L</span>,
+   <span class="st">"Spring '14"</span>, <span class="fl">129</span>, <span class="st">"Master 1-Subject"</span>, <span class="cn">NA_character_</span>, <span class="fl">1L</span>,
+   <span class="st">"Spring '15"</span>, <span class="fl">122</span>, <span class="st">"Master 1-Subject"</span>, <span class="cn">NA_character_</span>, <span class="fl">1L</span>,
+   <span class="st">"Spring '16"</span>, <span class="fl">168</span>, <span class="st">"Master 1-Subject"</span>, <span class="cn">NA_character_</span>, <span class="fl">1L</span>,
+   <span class="st">"Spring '17"</span>, <span class="fl">7</span>, <span class="st">"Master 1-Subject"</span>, <span class="cn">NA_character_</span>, <span class="fl">1L</span>,
+   <span class="st">"Spring '13"</span>, <span class="fl">20</span>, <span class="cn">NA_character_</span>, <span class="st">"Freshman students"</span>, <span class="fl">4L</span>,
+   <span class="st">"Spring '14"</span>, <span class="fl">30</span>, <span class="cn">NA_character_</span>, <span class="st">"Freshman students"</span>, <span class="fl">4L</span>,
+   <span class="st">"Spring '15"</span>, <span class="fl">41</span>, <span class="cn">NA_character_</span>, <span class="st">"Freshman students"</span>, <span class="fl">4L</span>,
+   <span class="st">"Spring '16"</span>, <span class="fl">27</span>, <span class="cn">NA_character_</span>, <span class="st">"Freshman students"</span>, <span class="fl">4L</span>,
+   <span class="st">"Spring '17"</span>, <span class="fl">35</span>, <span class="cn">NA_character_</span>, <span class="st">"Freshman students"</span>, <span class="fl">4L</span>
+<span class="op">)</span>
 
-<span class="fu"><a href="../reference/rub_plot_type_1_and_4.html">rub_plot_type_1_and_4</a></span>(
-   <span class="kw">df</span> <span class="kw">=</span> <span class="no">df_t5_ex1</span>,
-   <span class="kw">x_var</span> <span class="kw">=</span> <span class="no">term</span>,
-   <span class="kw">y_var</span> <span class="kw">=</span> <span class="no">students</span>,
-   <span class="kw">fill_var</span> <span class="kw">=</span> <span class="no">degree</span>,
-   <span class="kw">group_var</span> <span class="kw">=</span> <span class="no">group</span>
-)</pre></body></html></div>
+<span class="fu"><a href="../reference/rub_plot_type_1_and_4.html">rub_plot_type_1_and_4</a></span><span class="op">(</span>
+   df <span class="op">=</span> <span class="va">df_t5_ex1</span>,
+   x_var <span class="op">=</span> <span class="va">term</span>,
+   y_var <span class="op">=</span> <span class="va">students</span>,
+   fill_var <span class="op">=</span> <span class="va">degree</span>,
+   group_var <span class="op">=</span> <span class="va">group</span>
+<span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/type-5-example-3-1.png" width="700.0000032"></p>
 </div>
 </div>
@@ -534,156 +548,160 @@
 <h2 class="hasAnchor">
 <a href="#applying-the-rub-theme" class="anchor"></a>Applying the RUB Theme</h2>
 <p>The function <code>theme_rub</code> is a normal <code><a href="https://ggplot2.tidyverse.org/reference/theme.html">ggplot2::theme()</a></code> function based on <code><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">ggplot2::theme_minimal()</a></code>. You can use it for any ggplot object:</p>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="co"># Base plot</span>
-<span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(
-   <span class="kw">data</span> <span class="kw">=</span> <span class="no">mtcars</span>,
-   <span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(
-      <span class="kw">x</span> <span class="kw">=</span> <span class="no">mpg</span>,
-      <span class="kw">y</span> <span class="kw">=</span> <span class="no">disp</span>,
-      <span class="kw">color</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span>(<span class="no">carb</span>)
-   )
-) +
-   <span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() +
-   <span class="fu"><a href="../reference/theme_rub.html">theme_rub</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Base plot</span>
+<span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>
+   data <span class="op">=</span> <span class="va">mtcars</span>,
+   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>
+      x <span class="op">=</span> <span class="va">mpg</span>,
+      y <span class="op">=</span> <span class="va">disp</span>,
+      color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">carb</span><span class="op">)</span>
+   <span class="op">)</span>
+<span class="op">)</span> <span class="op">+</span> 
+   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="../reference/theme_rub.html">theme_rub</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/theme-rub-1.png" width="700.0000032"></p>
 </div>
 <div id="scale-functions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#scale-functions" class="anchor"></a>Scale Functions</h2>
 <p>The RUB palettes are used through corresponding scale functions. Currently, (1) <code>scale_color_rub</code> (a wrapper for <code><a href="https://ggplot2.tidyverse.org/reference/discrete_scale.html">ggplot2::discrete_scale()</a></code> if discrete, or for <code><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">ggplot2::scale_color_gradientn()</a></code> if continuous) and (2) <code>scale_fill_rub</code> (a wrapper for <code><a href="https://ggplot2.tidyverse.org/reference/discrete_scale.html">ggplot2::discrete_scale()</a></code> if discrete, or for <code><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">ggplot2::scale_fill_gradientn()</a></code> if continuous) are implemented. Use these scale functions to ensure that appropriate RUB palettes and colors are used.</p>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="co"># Basic themed plot with discrete scale function</span>
-<span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(
-   <span class="kw">data</span> <span class="kw">=</span> <span class="no">mtcars</span>,
-   <span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(
-      <span class="kw">x</span> <span class="kw">=</span> <span class="no">mpg</span>,
-      <span class="kw">y</span> <span class="kw">=</span> <span class="no">disp</span>,
-      <span class="kw">color</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span>(<span class="no">carb</span>)
-      )
-   ) +
-   <span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() +
-   <span class="fu"><a href="../reference/scale_color_rub.html">scale_color_rub</a></span>(
-      <span class="kw">palette</span> <span class="kw">=</span> <span class="st">"discrete"</span>
-   ) +
-   <span class="fu"><a href="../reference/theme_rub.html">theme_rub</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Basic themed plot with discrete scale function</span>
+<span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>
+   data <span class="op">=</span> <span class="va">mtcars</span>,
+   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>
+      x <span class="op">=</span> <span class="va">mpg</span>,
+      y <span class="op">=</span> <span class="va">disp</span>,
+      color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">carb</span><span class="op">)</span>
+      <span class="op">)</span>
+   <span class="op">)</span> <span class="op">+</span> 
+   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="../reference/scale_color_rub.html">scale_color_rub</a></span><span class="op">(</span>
+      palette <span class="op">=</span> <span class="st">"discrete"</span>
+   <span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="../reference/theme_rub.html">theme_rub</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/theme-rub-color-discrete-1.png" width="700.0000032"></p>
-<div class="sourceCode" id="cb18"><html><body><pre class="r">
-<span class="co"># By default, the theme shows no axis labels and no legend title. Use the </span>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># By default, the theme shows no axis labels and no legend title. Use the </span>
 <span class="co"># boolean parameters x_axis_label, y_axis_label and legend_title to activate </span>
 <span class="co"># them.</span>
-<span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(
-   <span class="kw">data</span> <span class="kw">=</span> <span class="no">mtcars</span>,
-   <span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(
-      <span class="kw">x</span> <span class="kw">=</span> <span class="no">mpg</span>,
-      <span class="kw">y</span> <span class="kw">=</span> <span class="no">disp</span>,
-      <span class="kw">color</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span>(<span class="no">carb</span>)
-   )
-) +
-   <span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() +
-   <span class="fu"><a href="../reference/scale_color_rub.html">scale_color_rub</a></span>(
-      <span class="kw">palette</span> <span class="kw">=</span> <span class="st">"discrete"</span>
-   ) +
-   <span class="fu"><a href="../reference/theme_rub.html">theme_rub</a></span>(
-      <span class="kw">x_axis_label</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-      <span class="kw">y_axis_label</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-      <span class="kw">legend_title</span> <span class="kw">=</span> <span class="fl">FALSE</span>
-   )</pre></body></html></div>
+<span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>
+   data <span class="op">=</span> <span class="va">mtcars</span>,
+   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>
+      x <span class="op">=</span> <span class="va">mpg</span>,
+      y <span class="op">=</span> <span class="va">disp</span>,
+      color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">carb</span><span class="op">)</span>
+   <span class="op">)</span>
+<span class="op">)</span> <span class="op">+</span> 
+   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="../reference/scale_color_rub.html">scale_color_rub</a></span><span class="op">(</span>
+      palette <span class="op">=</span> <span class="st">"discrete"</span>
+   <span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="../reference/theme_rub.html">theme_rub</a></span><span class="op">(</span>
+      x_axis_label <span class="op">=</span> <span class="cn">TRUE</span>,
+      y_axis_label <span class="op">=</span> <span class="cn">TRUE</span>,
+      legend_title <span class="op">=</span> <span class="cn">FALSE</span>
+   <span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/theme-rub-color-discrete-2.png" width="700.0000032"></p>
-<div class="sourceCode" id="cb19"><html><body><pre class="r">
-<span class="co"># Reverse the color palette by setting reverse to TRUE in the scale function</span>
-<span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(
-   <span class="kw">data</span> <span class="kw">=</span> <span class="no">mtcars</span>,
-   <span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(
-      <span class="kw">x</span> <span class="kw">=</span> <span class="no">mpg</span>,
-      <span class="kw">y</span> <span class="kw">=</span> <span class="no">disp</span>,
-      <span class="kw">color</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span>(<span class="no">carb</span>)
-   )
-) +
-   <span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() +
-   <span class="fu"><a href="../reference/scale_color_rub.html">scale_color_rub</a></span>(
-      <span class="kw">palette</span> <span class="kw">=</span> <span class="st">"discrete"</span>,
-      <span class="kw">reverse</span> <span class="kw">=</span> <span class="fl">TRUE</span>
-   ) +
-   <span class="fu"><a href="../reference/theme_rub.html">theme_rub</a></span>(
-      <span class="kw">x_axis_label</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-      <span class="kw">y_axis_label</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-      <span class="kw">legend_title</span> <span class="kw">=</span> <span class="fl">FALSE</span>
-   )</pre></body></html></div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Reverse the color palette by setting reverse to TRUE in the scale function</span>
+<span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>
+   data <span class="op">=</span> <span class="va">mtcars</span>,
+   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>
+      x <span class="op">=</span> <span class="va">mpg</span>,
+      y <span class="op">=</span> <span class="va">disp</span>,
+      color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">carb</span><span class="op">)</span>
+   <span class="op">)</span>
+<span class="op">)</span> <span class="op">+</span> 
+   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="../reference/scale_color_rub.html">scale_color_rub</a></span><span class="op">(</span>
+      palette <span class="op">=</span> <span class="st">"discrete"</span>,
+      reverse <span class="op">=</span> <span class="cn">TRUE</span>
+   <span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="../reference/theme_rub.html">theme_rub</a></span><span class="op">(</span>
+      x_axis_label <span class="op">=</span> <span class="cn">TRUE</span>,
+      y_axis_label <span class="op">=</span> <span class="cn">TRUE</span>,
+      legend_title <span class="op">=</span> <span class="cn">FALSE</span>
+   <span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/theme-rub-color-discrete-3.png" width="700.0000032"></p>
 <p>Continuous scales are used by setting <code>discrete</code> to <code>FALSE</code> and by providing the name of a continuous palette to <code>palette</code> (see <code><a href="../articles/RUB_colors.html">vignette("RUB_colors")</a></code>).</p>
-<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="co"># Basic plot with continuous scale function</span>
-<span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(
-   <span class="kw">data</span> <span class="kw">=</span> <span class="no">mtcars</span>,
-   <span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(
-      <span class="kw">x</span> <span class="kw">=</span> <span class="no">mpg</span>,
-      <span class="kw">y</span> <span class="kw">=</span> <span class="no">disp</span>,
-      <span class="kw">color</span> <span class="kw">=</span> <span class="no">disp</span>
-   )
-) +
-   <span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() +
-   <span class="fu"><a href="../reference/scale_color_rub.html">scale_color_rub</a></span>(
-      <span class="kw">palette</span> <span class="kw">=</span> <span class="st">"continuous"</span>,
-      <span class="kw">discrete</span> <span class="kw">=</span> <span class="fl">FALSE</span>
-   ) +
-   <span class="fu"><a href="../reference/theme_rub.html">theme_rub</a></span>(
-      <span class="kw">x_axis_label</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-      <span class="kw">y_axis_label</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-      <span class="kw">legend_title</span> <span class="kw">=</span> <span class="fl">TRUE</span>
-   )</pre></body></html></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Basic plot with continuous scale function</span>
+<span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>
+   data <span class="op">=</span> <span class="va">mtcars</span>,
+   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>
+      x <span class="op">=</span> <span class="va">mpg</span>,
+      y <span class="op">=</span> <span class="va">disp</span>,
+      color <span class="op">=</span> <span class="va">disp</span>
+   <span class="op">)</span>
+<span class="op">)</span> <span class="op">+</span> 
+   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="../reference/scale_color_rub.html">scale_color_rub</a></span><span class="op">(</span>
+      palette <span class="op">=</span> <span class="st">"continuous"</span>,
+      discrete <span class="op">=</span> <span class="cn">FALSE</span>
+   <span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="../reference/theme_rub.html">theme_rub</a></span><span class="op">(</span>
+      x_axis_label <span class="op">=</span> <span class="cn">TRUE</span>,
+      y_axis_label <span class="op">=</span> <span class="cn">TRUE</span>,
+      legend_title <span class="op">=</span> <span class="cn">TRUE</span>
+   <span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/theme-rub-color-continuous-1.png" width="700.0000032"></p>
-<div class="sourceCode" id="cb21"><html><body><pre class="r">
-<span class="co"># Reverse the color palette by setting reverse to TRUE in the scale function</span>
-<span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(
-   <span class="kw">data</span> <span class="kw">=</span> <span class="no">mtcars</span>,
-   <span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(
-      <span class="kw">x</span> <span class="kw">=</span> <span class="no">mpg</span>,
-      <span class="kw">y</span> <span class="kw">=</span> <span class="no">disp</span>,
-      <span class="kw">color</span> <span class="kw">=</span> <span class="no">disp</span>
-   )
-) +
-   <span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() +
-   <span class="fu"><a href="../reference/scale_color_rub.html">scale_color_rub</a></span>(
-      <span class="kw">palette</span> <span class="kw">=</span> <span class="st">"continuous"</span>,
-      <span class="kw">discrete</span> <span class="kw">=</span> <span class="fl">FALSE</span>,
-      <span class="kw">reverse</span> <span class="kw">=</span> <span class="fl">TRUE</span>
-   ) +
-   <span class="fu"><a href="../reference/theme_rub.html">theme_rub</a></span>(
-      <span class="kw">x_axis_label</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-      <span class="kw">y_axis_label</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-      <span class="kw">legend_title</span> <span class="kw">=</span> <span class="fl">TRUE</span>
-   )</pre></body></html></div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Reverse the color palette by setting reverse to TRUE in the scale function</span>
+<span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>
+   data <span class="op">=</span> <span class="va">mtcars</span>,
+   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>
+      x <span class="op">=</span> <span class="va">mpg</span>,
+      y <span class="op">=</span> <span class="va">disp</span>,
+      color <span class="op">=</span> <span class="va">disp</span>
+   <span class="op">)</span>
+<span class="op">)</span> <span class="op">+</span> 
+   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="../reference/scale_color_rub.html">scale_color_rub</a></span><span class="op">(</span>
+      palette <span class="op">=</span> <span class="st">"continuous"</span>,
+      discrete <span class="op">=</span> <span class="cn">FALSE</span>,
+      reverse <span class="op">=</span> <span class="cn">TRUE</span>
+   <span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="../reference/theme_rub.html">theme_rub</a></span><span class="op">(</span>
+      x_axis_label <span class="op">=</span> <span class="cn">TRUE</span>,
+      y_axis_label <span class="op">=</span> <span class="cn">TRUE</span>,
+      legend_title <span class="op">=</span> <span class="cn">TRUE</span>
+   <span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/theme-rub-color-continuous-2.png" width="700.0000032"></p>
-<div class="sourceCode" id="cb22"><html><body><pre class="r">
-<span class="co"># Example of continuous_diverging palette</span>
-<span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(
-   <span class="kw">data</span> <span class="kw">=</span> <span class="no">mtcars</span>,
-   <span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(
-      <span class="kw">x</span> <span class="kw">=</span> <span class="no">mpg</span>,
-      <span class="kw">y</span> <span class="kw">=</span> <span class="no">disp</span>,
-      <span class="kw">color</span> <span class="kw">=</span> <span class="no">disp</span>
-   )
-) +
-   <span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() +
-   <span class="fu"><a href="../reference/scale_color_rub.html">scale_color_rub</a></span>(
-      <span class="kw">palette</span> <span class="kw">=</span> <span class="st">"continuous_diverging"</span>,
-      <span class="kw">discrete</span> <span class="kw">=</span> <span class="fl">FALSE</span>
-   ) +
-   <span class="fu"><a href="../reference/theme_rub.html">theme_rub</a></span>(
-      <span class="kw">x_axis_label</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-      <span class="kw">y_axis_label</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-      <span class="kw">legend_title</span> <span class="kw">=</span> <span class="fl">TRUE</span>
-   )</pre></body></html></div>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Example of continuous_diverging palette</span>
+<span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>
+   data <span class="op">=</span> <span class="va">mtcars</span>,
+   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>
+      x <span class="op">=</span> <span class="va">mpg</span>,
+      y <span class="op">=</span> <span class="va">disp</span>,
+      color <span class="op">=</span> <span class="va">disp</span>
+   <span class="op">)</span>
+<span class="op">)</span> <span class="op">+</span> 
+   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="../reference/scale_color_rub.html">scale_color_rub</a></span><span class="op">(</span>
+      palette <span class="op">=</span> <span class="st">"continuous_diverging"</span>,
+      discrete <span class="op">=</span> <span class="cn">FALSE</span>
+   <span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="../reference/theme_rub.html">theme_rub</a></span><span class="op">(</span>
+      x_axis_label <span class="op">=</span> <span class="cn">TRUE</span>,
+      y_axis_label <span class="op">=</span> <span class="cn">TRUE</span>,
+      legend_title <span class="op">=</span> <span class="cn">TRUE</span>
+   <span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/theme-rub-color-continuous-3.png" width="700.0000032"></p>
-<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(
-   <span class="kw">data</span> <span class="kw">=</span> <span class="no">mtcars</span>,
-   <span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(
-      <span class="kw">x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span>(<span class="no">gear</span>),
-      <span class="kw">fill</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span>(<span class="no">vs</span>)
-      )
-   ) +
-   <span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span>() +
-   <span class="fu"><a href="../reference/scale_fill_rub.html">scale_fill_rub</a></span>(
-      <span class="kw">palette</span> <span class="kw">=</span> <span class="st">"discrete_2"</span>
-   )</pre></body></html></div>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>
+   data <span class="op">=</span> <span class="va">mtcars</span>,
+   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>
+      x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">gear</span><span class="op">)</span>,
+      fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">vs</span><span class="op">)</span>
+      <span class="op">)</span>
+   <span class="op">)</span> <span class="op">+</span> 
+   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="../reference/scale_fill_rub.html">scale_fill_rub</a></span><span class="op">(</span>
+      palette <span class="op">=</span> <span class="st">"discrete_2"</span>
+   <span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/theme-rub-scale-1.png" width="700.0000032"></p>
 </div>
 </div>
@@ -751,7 +769,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

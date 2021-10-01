@@ -54,7 +54,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -77,16 +77,13 @@
     <li>
       <a href="articles/RUB_plot.html">Using the RUB plotting functions</a>
     </li>
-    <li>
-      <a href="articles/wiesbaden.html">Retrieving Destatis data</a>
-    </li>
   </ul>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/RichardMeyer-Eppler/RUBer/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -117,7 +114,7 @@
 <h2 class="hasAnchor">
 <a href="#main-features" class="anchor"></a>Main features</h2>
 <ul>
-<li>An R Markdown template for use with <code><a href="https://rdrr.io/pkg/rmarkdown/man/draft.html">rmarkdown::draft</a></code>. The template uses <code><a href="https://rdrr.io/pkg/knitr/man/knit_expand.html">knitr::knit_expand()</a></code> to dynamically create code chunks containing figures, captions and subcaptions based on the data frame passed on as a parameter. Figure captions are automatically numbered via <code>bookdown</code> and a table of figures is inserted via <code>officedown</code>.</li>
+<li>An R Markdown template for use with <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/draft.html">rmarkdown::draft</a></code>. The template uses <code><a href="https://rdrr.io/pkg/knitr/man/knit_expand.html">knitr::knit_expand()</a></code> to dynamically create code chunks containing figures, captions and subcaptions based on the data frame passed on as a parameter. Figure captions are automatically numbered via <code>bookdown</code> and a table of figures is inserted via <code>officedown</code>.</li>
 <li>Vectorized figures in Microsoft’s Enhanced Metafile format using the <code>devEMF</code> package.</li>
 <li>Five preconfigured <code>ggplot2</code> plotting functions.</li>
 <li>A custom <code>ggplot2</code> theme, <code>theme_rub</code>.</li>
@@ -146,14 +143,15 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Install the development version from GitHub with:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="co"># If package "remotes" is not installed, install it first:</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># If package "remotes" is not installed, install it first:</span>
 <span class="co"># install.packages("remotes")</span>
 
 <span class="co"># Install RUBer from Github</span>
-<span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(
-  <span class="kw">repo</span> <span class="kw">=</span> <span class="st">"RichardMeyer-Eppler/RUBer"</span>,
-  <span class="kw">build_vignettes</span> <span class="kw">=</span> <span class="fl">TRUE</span>
-  )</pre></div>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span>
+  repo <span class="op">=</span> <span class="st">"RichardMeyer-Eppler/RUBer"</span>,
+  build_vignettes <span class="op">=</span> <span class="cn">TRUE</span>
+  <span class="op">)</span></code></pre></div>
 </div>
 </div>
   </div>
@@ -198,7 +196,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
