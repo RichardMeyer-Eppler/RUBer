@@ -16,6 +16,7 @@
 #'     y-axis, defaults to FALSE.
 #' @param legend_title Boolean indicating whether there is a label for the
 #'     legend, defaults to FALSE.
+#' @param plot_width Width of the plot in inches, defaults to 6.8
 #' @keywords theme_rub
 #' @export
 #' @examples
@@ -38,7 +39,13 @@ theme_rub <- function(base_size = 11,
                       has_facet = FALSE,
                       x_axis_label = FALSE,
                       y_axis_label = FALSE,
-                      legend_title = FALSE) {
+                      legend_title = FALSE,
+                      plot_width = 6.8) {
+
+  legend_key_size <- plot_width / 100
+  legend_key_width <- legend_key_size
+  legend_key_height <- legend_key_size * 0.8
+  legend_key_spacing <- plot_width / 100
 
   if(has_facet) {
     facet_text <- ggplot2::element_text(
@@ -95,12 +102,14 @@ theme_rub <- function(base_size = 11,
     ),
     # This sets the font, size, type and colour of text for the chart's title
     plot.title = ggplot2::element_text(
-      size = ggplot2::rel(2.5),
+      size = ggplot2::rel(1),
       face = "bold"
     ),
+    # https://stackoverflow.com/questions/25401111/left-adjust-title-in-ggplot2-or-absolute-position-for-ggtitle
+    plot.title.position = "plot",
     # This sets the font, size, type and colour of text for the chart's subtitle
     plot.subtitle = ggplot2::element_text(
-      size = ggplot2::rel(2)
+      size = ggplot2::rel(1)
     ),
     plot.caption = ggplot2::element_text(
       size = ggplot2::rel(0.67),
@@ -117,7 +126,11 @@ theme_rub <- function(base_size = 11,
     legend.title = legend_title_text,
 #    legend.text = ggplot2::element_blank(),
     legend.key = ggplot2::element_blank(),
-    legend.key.size =  ggplot2::unit(0.25, "cm"),
+#    legend.key.size =  ggplot2::unit(0.25, "cm"),
+    legend.spacing.x = grid::unit(legend_key_spacing, "inch"),
+    legend.key.size = grid::unit(legend_key_size, "inch"),
+    legend.key.height = grid::unit(legend_key_height, "inch"),
+    legend.key.width = grid::unit(legend_key_width, "inch"),
 
     ## Axis
     # axis.text.x = ggplot2::element_text(margin = ggplot2::margin(5, b = 10)),

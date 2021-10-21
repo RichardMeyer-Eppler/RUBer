@@ -44,6 +44,14 @@ plot_figure <- function(df) {
           fill_reverse = .[[1, "fill_reverse"]],
           facet_var = facet,
 #          group = group,
+          title = stringr::str_wrap(
+            paste0(
+              "Frage: ",
+              .[[1, "question_txt"]]
+            ),
+            width = 90,
+            exdent = 13
+          ),
           caption = .[[1, "source_caption"]]
         )
     }
@@ -471,6 +479,9 @@ rub_plot_type_2 <- function(df, x_var,
 #'     string.
 #' @param legend_reverse Optional boolean indicating whether the legend should
 #'     be reverted, defaults to FALSE.
+#' @param title Optional plot title
+#' @param max_label_width Optional maximum width for the facet label passed to
+#'     ggplot2::label_wrap_gen.
 #' @inheritParams rub_plot_type_1
 #' @inheritParams theme_rub
 #'
@@ -498,10 +509,12 @@ rub_plot_type_3 <- function(df, x_var,
                            y_var, x_axis_label = "",
                            fill_var, fill_label = NULL,
                            fill_reverse = FALSE, legend_reverse = FALSE,
-                           facet_var = NULL, caption = "",
+                           facet_var = NULL,
+                           title = "", caption = "",
                            caption_prefix = "Quelle:", filter_cutoff = 0.04,
                            color = RUB_colors["blue"], palette_reverse = FALSE,
-                           base_family = "RubFlama", base_size = 11) {
+                           base_family = "RubFlama", base_size = 11,
+                           max_label_width = 80, plot_width = 6.8) {
 
   # Defuse R expressions
   y_var_sym <- rlang::ensym(y_var)
@@ -534,6 +547,14 @@ rub_plot_type_3 <- function(df, x_var,
     var = {{fill_var}},
     var_label = {{fill_label}},
     reverse = !fill_reverse
+  )
+
+  legend_columns <- get_legend_columns(
+    legend_text = levels(
+      df[[fill_var_sym]]
+    ),
+    plot_width = plot_width,
+    base_size = base_size
   )
 
   caption <- ifelse(
@@ -573,6 +594,9 @@ rub_plot_type_3 <- function(df, x_var,
     facet <- ggforce::facet_col(
       ggplot2::vars(
         !!facet_var
+      ),
+      labeller = ggplot2::label_wrap_gen(
+        width = max_label_width
       ),
       scales = "free_y",
       space = "free"
@@ -626,10 +650,12 @@ rub_plot_type_3 <- function(df, x_var,
     ggplot2::guides(
       fill = ggplot2::guide_legend(
         reverse = !legend_reverse,
-        byrow = TRUE
+        byrow = TRUE,
+        ncol = legend_columns
       )
     ) +
     ggplot2::labs(
+      title = title,
       caption = caption,
       x = x_axis_label[1]
     ) +
@@ -638,7 +664,8 @@ rub_plot_type_3 <- function(df, x_var,
       base_size = base_size,
       color = color,
       has_facet = has_facet,
-      x_axis_label = has_x_axis_label
+      x_axis_label = has_x_axis_label,
+      plot_width = plot_width
     ) +
     ggplot2::theme(
       axis.ticks.y = ggplot2::element_blank(),
@@ -1159,4 +1186,49 @@ add_label_position <- function(df, x_var,
       }
 
   return(df_label_formatted)
+}
+
+
+#' Gets number of legend columns based on the plot width and the text base size
+#'
+#' @param legend_text Vector with the legend text
+#' @param legend_key_width Legend key width
+#' @param legend_key_spacing Legend key spacing
+#' @param plot_width Width of the plot in inches
+#' @param base_size Text base size (in points)
+#'
+#' @return Numeric with the number of columns for the legend
+#' @export
+#'
+#' @examples
+#' get_legend_columns(
+#'   legend_text = c(
+#'     "1 - eigener Verdienst",
+#'     "2 - Mittel der Eltern/Verwandten",
+#'     "3 - Förderung nach BAföG",
+#'     "4 - Stipendium",
+#'     "5 - Sonstiges"
+#'   )
+#' )
+get_legend_columns <- function(
+  legend_text,
+  legend_key_width = plot_width / 100,
+  legend_key_spacing = plot_width / 100,
+  plot_width = 6.8,
+  base_size = 11
+) {
+
+  txt_width <- strwidth(
+    legend_text,
+    units = "inches",
+    ps = par(ps = base_size * 0.8)
+  )
+
+  col_width <- max(
+    txt_width + legend_key_width + 2 * legend_key_spacing
+  )
+
+  legend_columns <- plot_width %/% col_width
+
+  return(legend_columns)
 }

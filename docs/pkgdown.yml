@@ -1,9 +1,0 @@
-pandoc: 2.14.0.3
-pkgdown: 1.6.1
-pkgdown_sha: ~
-articles:
-  reference_docx: reference_docx.html
-  RUB_colors: RUB_colors.html
-  RUB_plot: RUB_plot.html
-last_built: 2021-10-01T11:28Z
-

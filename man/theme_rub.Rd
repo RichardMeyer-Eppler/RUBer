@@ -13,7 +13,8 @@ theme_rub(
   has_facet = FALSE,
   x_axis_label = FALSE,
   y_axis_label = FALSE,
-  legend_title = FALSE
+  legend_title = FALSE,
+  plot_width = 6.8
 )
 }
 \arguments{
@@ -39,6 +40,8 @@ y-axis, defaults to FALSE.}
 
 \item{legend_title}{Boolean indicating whether there is a label for the
 legend, defaults to FALSE.}
+
+\item{plot_width}{Width of the plot in inches, defaults to 6.8}
 }
 \description{
 This function allows you to add the RUB theme to your ggplot charts.

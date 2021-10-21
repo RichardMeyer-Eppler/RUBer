@@ -76,7 +76,7 @@ get_file_name <- function(param_list) {
     )
   }
 
-  file_name <- RUBer::clean_file_name(file_name)
+  file_name <- clean_file_name(file_name)
   file_name <- paste0(file_name, ".docx")
 
   return(file_name)
@@ -184,6 +184,18 @@ render_report <- function(p_df, report_nr,
   author <- df[[1, "report_author"]]
   file_name <- df[[1, "file_name"]]
   file_path <- get_file_path(file_name)
+  directory <- fs::path_dir(file_path)
+
+  # Check if direcotry exists, if not create it
+	if(
+	    !fs::dir_exists(
+		    path = directory
+		  )
+	  ) {
+	    fs::dir_create(
+		    path = directory
+	  )
+	}
 
   rmarkdown::render(
     rmd_template,

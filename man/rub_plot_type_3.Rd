@@ -14,13 +14,16 @@ rub_plot_type_3(
   fill_reverse = FALSE,
   legend_reverse = FALSE,
   facet_var = NULL,
+  title = "",
   caption = "",
   caption_prefix = "Quelle:",
   filter_cutoff = 0.04,
   color = RUB_colors["blue"],
   palette_reverse = FALSE,
   base_family = "RubFlama",
-  base_size = 11
+  base_size = 11,
+  max_label_width = 80,
+  plot_width = 6.8
 )
 }
 \arguments{
@@ -50,6 +53,8 @@ be reverted, defaults to FALSE.}
 \item{facet_var}{Optional variable name for the discrete variable to facet
 by, defaults to NULL.}
 
+\item{title}{Optional plot title}
+
 \item{caption}{Optional character containing the data source for the figure
 (prefix 'Quelle:' is automatically added).}
 
@@ -69,6 +74,11 @@ palette should be reversed, defaults to FALSE.}
 \item{base_family}{base font family, defaults to RubFlama}
 
 \item{base_size}{base font size, defaults to 11}
+
+\item{max_label_width}{Optional maximum width for the facet label passed to
+ggplot2::label_wrap_gen.}
+
+\item{plot_width}{Width of the plot in inches, defaults to 6.8}
 }
 \value{
 A ggplot object

@@ -1,8 +1,6 @@
 ---
 title: "Using the RUB plotting functions"
-output:
-    bookdown::html_document2:
-      base_format: rmarkdown::html_vignette
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Using the RUB plotting functions}
   %\VignetteEngine{knitr::rmarkdown}
@@ -15,13 +13,18 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
-library(extrafont)
+# Maybe this isn't working!?
+# output:
+#     bookdown::html_document2:
+#       base_format: rmarkdown::html_vignette
+
+# library(extrafont)
 
 # This registers fonts so that they can be used with the pdf, postscript, or Windows bitmap output device. It must be run once in each R session.
-extrafont::loadfonts(
-  device = "win",
-  quiet = TRUE
-)
+# extrafont::loadfonts(
+#   device = "win",
+#   quiet = TRUE
+# )
 ```
 
 ```{r setup}
