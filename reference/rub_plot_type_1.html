@@ -246,31 +246,32 @@ palette should be reversed, defaults to FALSE.</p></td>
     <p>A ggplot object</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Create test values for all three mandatory variables (x_var, y_var,</span>
-<span class='co'># fill_var).</span>
-<span class='va'>df_t1_ex1</span> <span class='op'>&lt;-</span> <span class='fu'>tibble</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tribble.html'>tribble</a></span><span class='op'>(</span>
-   <span class='op'>~</span><span class='va'>term</span>, <span class='op'>~</span><span class='va'>students</span>, <span class='op'>~</span><span class='va'>degree</span>,
-   <span class='st'>"Spring '13"</span>, <span class='fl'>120</span>, <span class='st'>"Bachelor 1-Subject"</span>,
-   <span class='st'>"Spring '14"</span>, <span class='fl'>105</span>, <span class='st'>"Bachelor 1-Subject"</span>,
-   <span class='st'>"Spring '15"</span>, <span class='fl'>124</span>, <span class='st'>"Bachelor 1-Subject"</span>,
-   <span class='st'>"Spring '16"</span>, <span class='fl'>114</span>, <span class='st'>"Bachelor 1-Subject"</span>,
-   <span class='st'>"Spring '17"</span>, <span class='fl'>122</span>, <span class='st'>"Bachelor 1-Subject"</span>,
-   <span class='st'>"Spring '13"</span>, <span class='fl'>121</span>, <span class='st'>"Master 1-Subject"</span>,
-   <span class='st'>"Spring '14"</span>, <span class='fl'>129</span>, <span class='st'>"Master 1-Subject"</span>,
-   <span class='st'>"Spring '15"</span>, <span class='fl'>122</span>, <span class='st'>"Master 1-Subject"</span>,
-   <span class='st'>"Spring '16"</span>, <span class='fl'>168</span>, <span class='st'>"Master 1-Subject"</span>,
-   <span class='st'>"Spring '17"</span>, <span class='fl'>7</span>, <span class='st'>"Master 1-Subject"</span>,
-<span class='op'>)</span>
-
-<span class='co'># The data source is df_t1_ex1, x_var is mapped to term, y_var to students,</span>
-<span class='co'># and the fill_var to degree.</span>
-<span class='fu'>rub_plot_type_1</span><span class='op'>(</span>
-   df <span class='op'>=</span> <span class='va'>df_t1_ex1</span>,
-   x_var <span class='op'>=</span> <span class='va'>term</span>,
-   y_var <span class='op'>=</span> <span class='va'>students</span>,
-   fill_var <span class='op'>=</span> <span class='va'>degree</span>
-<span class='op'>)</span>
-</div><div class='img'><img src='rub_plot_type_1-1.png' alt='' width='700' height='1133' /></div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># Create test values for all three mandatory variables (x_var, y_var,</span></span>
+<span class='r-in'><span class='co'># fill_var).</span></span>
+<span class='r-in'><span class='va'>df_t1_ex1</span> <span class='op'>&lt;-</span> <span class='fu'>tibble</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tribble.html'>tribble</a></span><span class='op'>(</span></span>
+<span class='r-in'>   <span class='op'>~</span><span class='va'>term</span>, <span class='op'>~</span><span class='va'>students</span>, <span class='op'>~</span><span class='va'>degree</span>,</span>
+<span class='r-in'>   <span class='st'>"Spring '13"</span>, <span class='fl'>120</span>, <span class='st'>"Bachelor 1-Subject"</span>,</span>
+<span class='r-in'>   <span class='st'>"Spring '14"</span>, <span class='fl'>105</span>, <span class='st'>"Bachelor 1-Subject"</span>,</span>
+<span class='r-in'>   <span class='st'>"Spring '15"</span>, <span class='fl'>124</span>, <span class='st'>"Bachelor 1-Subject"</span>,</span>
+<span class='r-in'>   <span class='st'>"Spring '16"</span>, <span class='fl'>114</span>, <span class='st'>"Bachelor 1-Subject"</span>,</span>
+<span class='r-in'>   <span class='st'>"Spring '17"</span>, <span class='fl'>122</span>, <span class='st'>"Bachelor 1-Subject"</span>,</span>
+<span class='r-in'>   <span class='st'>"Spring '13"</span>, <span class='fl'>121</span>, <span class='st'>"Master 1-Subject"</span>,</span>
+<span class='r-in'>   <span class='st'>"Spring '14"</span>, <span class='fl'>129</span>, <span class='st'>"Master 1-Subject"</span>,</span>
+<span class='r-in'>   <span class='st'>"Spring '15"</span>, <span class='fl'>122</span>, <span class='st'>"Master 1-Subject"</span>,</span>
+<span class='r-in'>   <span class='st'>"Spring '16"</span>, <span class='fl'>168</span>, <span class='st'>"Master 1-Subject"</span>,</span>
+<span class='r-in'>   <span class='st'>"Spring '17"</span>, <span class='fl'>7</span>, <span class='st'>"Master 1-Subject"</span>,</span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># The data source is df_t1_ex1, x_var is mapped to term, y_var to students,</span></span>
+<span class='r-in'><span class='co'># and the fill_var to degree.</span></span>
+<span class='r-in'><span class='fu'>rub_plot_type_1</span><span class='op'>(</span></span>
+<span class='r-in'>   df <span class='op'>=</span> <span class='va'>df_t1_ex1</span>,</span>
+<span class='r-in'>   x_var <span class='op'>=</span> <span class='va'>term</span>,</span>
+<span class='r-in'>   y_var <span class='op'>=</span> <span class='va'>students</span>,</span>
+<span class='r-in'>   fill_var <span class='op'>=</span> <span class='va'>degree</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-plt img'><img src='rub_plot_type_1-1.png' alt='' width='700' height='1133' /></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
