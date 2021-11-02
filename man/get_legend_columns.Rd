@@ -6,22 +6,28 @@
 \usage{
 get_legend_columns(
   legend_text,
+  y_axis_text,
   legend_key_width = plot_width/100,
   legend_key_spacing = plot_width/100,
   plot_width = 6.8,
-  base_size = 11
+  base_size = 11,
+  base_family = "RubFlama"
 )
 }
 \arguments{
 \item{legend_text}{Vector with the legend text}
 
+\item{y_axis_text}{Vector with the text labels of the y axis}
+
 \item{legend_key_width}{Legend key width}
 
 \item{legend_key_spacing}{Legend key spacing}
 
-\item{plot_width}{Width of the plot in inches}
+\item{plot_width}{Width of the plot in inches, defaults to 6.8}
 
-\item{base_size}{Text base size (in points)}
+\item{base_size}{base font size, defaults to 11}
+
+\item{base_family}{base font family, defaults to RubFlama}
 }
 \value{
 Numeric with the number of columns for the legend
@@ -37,6 +43,10 @@ get_legend_columns(
     "3 - Förderung nach BAföG",
     "4 - Stipendium",
     "5 - Sonstiges"
+  ),
+  y_axis_text = c(
+    "Bachelor 2-Fächer (n=251)",
+    "FG Bachelor 2-Fächer (n=1.310)"
   )
 )
 }

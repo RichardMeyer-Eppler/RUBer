@@ -53,7 +53,12 @@ theme_rub <- function(base_size = 11,
       family = base_family,
       color = color,
       hjust = 0,
-      face = "bold"
+      face = "bold",
+      margin = ggplot2::margin(
+        t = 0.1, r = 0, b = 0.1, l = 0,
+        unit = "cm"
+      )
+     # ,debug = TRUE
     )
   } else {
     facet_text <- ggplot2::element_blank()
@@ -145,6 +150,7 @@ theme_rub <- function(base_size = 11,
     panel.grid.major.y = ggplot2::element_blank(),
     panel.grid.major.x = ggplot2::element_blank(),
     panel.background = ggplot2::element_blank(),
+    panel.spacing.y = ggplot2::unit(0, "cm"),
 
     # Facet
     strip.background = ggplot2::element_blank(),

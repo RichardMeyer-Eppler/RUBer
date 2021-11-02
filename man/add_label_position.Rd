@@ -10,7 +10,7 @@ add_label_position(
   y_var,
   facet_var = NULL,
   fill_var,
-  filter_cutoff = 0.04,
+  filter_cutoff = 0.05,
   fill_reverse = FALSE,
   is_percentage = FALSE
 )

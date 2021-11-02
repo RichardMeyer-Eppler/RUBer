@@ -480,8 +480,10 @@ rub_plot_type_2 <- function(df, x_var,
 #' @param legend_reverse Optional boolean indicating whether the legend should
 #'     be reverted, defaults to FALSE.
 #' @param title Optional plot title
-#' @param max_label_width Optional maximum width for the facet label passed to
-#'     ggplot2::label_wrap_gen.
+#' @param max_width_axis_text_y Optional maximum width in characters for the
+#'     text of the y axis.
+#' @param max_width_strip_label Optional maximum width in characters for the facet
+#'     label passed to ggplot2::label_wrap_gen.
 #' @inheritParams rub_plot_type_1
 #' @inheritParams theme_rub
 #'
@@ -511,10 +513,11 @@ rub_plot_type_3 <- function(df, x_var,
                            fill_reverse = FALSE, legend_reverse = FALSE,
                            facet_var = NULL,
                            title = "", caption = "",
-                           caption_prefix = "Quelle:", filter_cutoff = 0.04,
+                           caption_prefix = "Quelle:", filter_cutoff = 0.05,
                            color = RUB_colors["blue"], palette_reverse = FALSE,
                            base_family = "RubFlama", base_size = 11,
-                           max_label_width = 80, plot_width = 6.8) {
+                           max_width_axis_text_y = 30,
+                           max_width_strip_label = 80, plot_width = 6.8) {
 
   # Defuse R expressions
   y_var_sym <- rlang::ensym(y_var)
@@ -540,6 +543,12 @@ rub_plot_type_3 <- function(df, x_var,
     df[[y_var_sym]] <- forcats::fct_rev(df[[y_var_sym]])
   }
 
+  # Levels of y-factor should not exceed character limit
+  levels(df[[y_var_sym]]) <- stringr::str_wrap(
+    levels(df[[y_var_sym]]),
+    width = max_width_axis_text_y
+  )
+
   # Make sure that the fill variable is plotted in the correct order and with
   # the appropriate labels.
   df <- set_factor_var(
@@ -549,12 +558,18 @@ rub_plot_type_3 <- function(df, x_var,
     reverse = !fill_reverse
   )
 
+  # Determines the number of columns to be used for the fill labels in the
+  # legend.
   legend_columns <- get_legend_columns(
     legend_text = levels(
       df[[fill_var_sym]]
     ),
+    y_axis_text = levels(
+      df[[y_var_sym]]
+    ),
     plot_width = plot_width,
-    base_size = base_size
+    base_size = base_size,
+    base_family = base_family
   )
 
   caption <- ifelse(
@@ -596,7 +611,7 @@ rub_plot_type_3 <- function(df, x_var,
         !!facet_var
       ),
       labeller = ggplot2::label_wrap_gen(
-        width = max_label_width
+        width = max_width_strip_label
       ),
       scales = "free_y",
       space = "free"
@@ -613,9 +628,9 @@ rub_plot_type_3 <- function(df, x_var,
     )
   ) +
     ggplot2::geom_bar(
-      position = "fill",
-      stat = "identity"
-      ) +
+        position = "fill",
+        stat = "identity"
+    ) +
     ggplot2::geom_label(
       data = df_label,
       ggplot2::aes(
@@ -623,7 +638,7 @@ rub_plot_type_3 <- function(df, x_var,
         group = {{fill_var}},
         label = {{x_var}}
       ),
-      size = base_size / 5,
+      size = base_size / 4,
       family = base_family,
       colour = color,
       fill = "white",
@@ -1101,7 +1116,7 @@ get_label_formula <- function(label_var,
 #' }
 add_label_position <- function(df, x_var,
                                y_var, facet_var = NULL,
-                               fill_var, filter_cutoff = 0.04,
+                               fill_var, filter_cutoff = 0.05,
                                fill_reverse = FALSE, is_percentage = FALSE) {
 
   has_facet <- !rlang::quo_is_null(
@@ -1194,8 +1209,8 @@ add_label_position <- function(df, x_var,
 #' @param legend_text Vector with the legend text
 #' @param legend_key_width Legend key width
 #' @param legend_key_spacing Legend key spacing
-#' @param plot_width Width of the plot in inches
-#' @param base_size Text base size (in points)
+#' @param y_axis_text Vector with the text labels of the y axis
+#' @inheritParams rub_plot_type_3
 #'
 #' @return Numeric with the number of columns for the legend
 #' @export
@@ -1208,27 +1223,60 @@ add_label_position <- function(df, x_var,
 #'     "3 - Förderung nach BAföG",
 #'     "4 - Stipendium",
 #'     "5 - Sonstiges"
+#'   ),
+#'   y_axis_text = c(
+#'     "Bachelor 2-Fächer (n=251)",
+#'     "FG Bachelor 2-Fächer (n=1.310)"
 #'   )
 #' )
 get_legend_columns <- function(
   legend_text,
+  y_axis_text,
   legend_key_width = plot_width / 100,
   legend_key_spacing = plot_width / 100,
   plot_width = 6.8,
-  base_size = 11
+  base_size = 11,
+  base_family = "RubFlama"
 ) {
+
+  # If total legend text has fewer than 50 characters, return as many columns
+  # as there are elements in the legend text vector
+  if(
+    sum(
+      stringr::str_length(legend_text)
+    ) < 50
+  ) {
+    return(length(legend_text))
+  }
+
+  y_axis_text_max <- y_axis_text[which.max(
+    stringr::str_length(y_axis_text)
+    )]
+
+  y_axis_text_width <- strwidth(
+    y_axis_text_max,
+    units = "inches",
+    family = base_family,
+    cex = 0.9
+  )
 
   txt_width <- strwidth(
     legend_text,
     units = "inches",
-    ps = par(ps = base_size * 0.8)
+    family = base_family,
+    cex = 0.9
   )
 
-  col_width <- max(
-    txt_width + legend_key_width + 2 * legend_key_spacing
-  )
+  col_width <- max(txt_width) +
+    legend_key_width +
+    2 * legend_key_spacing
 
-  legend_columns <- plot_width %/% col_width
+  legend_columns <- (plot_width - y_axis_text_width) %/% col_width
+
+  legend_columns <- max(
+    legend_columns,
+    1
+  )
 
   return(legend_columns)
 }

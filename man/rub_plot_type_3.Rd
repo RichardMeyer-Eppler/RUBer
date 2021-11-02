@@ -17,12 +17,13 @@ rub_plot_type_3(
   title = "",
   caption = "",
   caption_prefix = "Quelle:",
-  filter_cutoff = 0.04,
+  filter_cutoff = 0.05,
   color = RUB_colors["blue"],
   palette_reverse = FALSE,
   base_family = "RubFlama",
   base_size = 11,
-  max_label_width = 80,
+  max_width_axis_text_y = 30,
+  max_width_strip_label = 80,
   plot_width = 6.8
 )
 }
@@ -75,8 +76,11 @@ palette should be reversed, defaults to FALSE.}
 
 \item{base_size}{base font size, defaults to 11}
 
-\item{max_label_width}{Optional maximum width for the facet label passed to
-ggplot2::label_wrap_gen.}
+\item{max_width_axis_text_y}{Optional maximum width in characters for the
+text of the y axis.}
+
+\item{max_width_strip_label}{Optional maximum width in characters for the facet
+label passed to ggplot2::label_wrap_gen.}
 
 \item{plot_width}{Width of the plot in inches, defaults to 6.8}
 }
