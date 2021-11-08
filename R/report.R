@@ -116,9 +116,11 @@ clean_file_name <- function(file_name, char_limit = 85L) {
 #' @examples
 #' filter_report(df_fake, report_nr = 12)
 filter_report <- function(df, report_nr) {
+  p_report_nr <- report_nr
+
   filtered_df <- df %>%
     dplyr::filter(
-      report_nr == {{ report_nr }} &
+      report_nr == p_report_nr &
         !figure_filter_flag
     )
 
