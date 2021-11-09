@@ -936,6 +936,7 @@ rub_plot_type_1_and_4 <- function(df, x_var, x_axis_label = "",
       palette_reverse = palette_reverse
     )
 
+
   plot_t1_t4 <- plot_t1 +
     rlang::eval_tidy(
       plot_t4_additions[[1]]
@@ -1001,7 +1002,8 @@ add_rub_plot_type_4 <- function(df_t4, x_var,
         color = {{group_var}}
       ),
       stat = "identity",
-      size = base_size / 10
+      size = base_size / 10,
+      inherit.aes = FALSE
     #  ,show.legend = FALSE
     )
   )
