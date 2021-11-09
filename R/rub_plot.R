@@ -172,7 +172,8 @@ rub_plot_type_1 <- function(df, x_var,
                            caption = "", caption_prefix = "Quelle:",
                            filter_cutoff = 0.04, facet_var = NULL,
                            color = RUB_colors["blue"], palette_reverse = FALSE,
-                           base_family = "RubFlama", base_size = 11) {
+                           base_family = "RubFlama", base_size = 11,
+                           plot_width = 6.8) {
   # Defuse R expressions
   fill_var_sym <- rlang::ensym(fill_var)
   y_var_quo <-  rlang::enquo(y_var)
@@ -196,6 +197,18 @@ rub_plot_type_1 <- function(df, x_var,
     var_label = {{fill_label}},
     reverse = fill_reverse
     )
+
+  # Determines the number of columns to be used for the fill labels in the
+  # legend.
+  legend_columns <- get_legend_columns(
+    legend_text = levels(
+      df[[fill_var_sym]]
+    ),
+    y_axis_text = "",
+    plot_width = plot_width,
+    base_size = base_size,
+    base_family = base_family
+  )
 
   caption <- ifelse(
     caption[1] == "",
@@ -258,7 +271,7 @@ rub_plot_type_1 <- function(df, x_var,
         fill = {{fill_var}},
         label = {{y_var}}
       ),
-      size = base_size / 5,
+      size = base_size / 4,
       family = base_family,
       color = color,
       fill = "white",
@@ -283,7 +296,8 @@ rub_plot_type_1 <- function(df, x_var,
     ggplot2::guides(
       fill = ggplot2::guide_legend(
         reverse = FALSE,
-        byrow = TRUE
+        byrow = TRUE,
+        ncol = legend_columns
       )
     ) +
     ggplot2::labs(
@@ -435,7 +449,7 @@ rub_plot_type_2 <- function(df, x_var,
         group = {{fill_var}},
         label = {{y_var}}
       ),
-      size = base_size / 5,
+      size = base_size / 4,
       family = base_family,
       color = color,
       fill = "white",
@@ -788,7 +802,7 @@ rub_plot_type_4 <- function(df, x_var, x_axis_label = "",
     ) +
     ggplot2::geom_label(
       data = df_label,
-      size = base_size / 5,
+      size = base_size / 4,
       family = base_family,
       colour = color,
       fill = "white",
@@ -854,7 +868,8 @@ rub_plot_type_1_and_4 <- function(df, x_var, x_axis_label = "",
                                   color = RUB_colors["blue"],
                                   palette_reverse = FALSE,
                                   base_family = "RubFlama",
-                                  base_size = 11)  {
+                                  base_size = 11,
+                                  plot_width = 6.8)  {
   plot_t1 <- df %>%
     dplyr::filter(
       figure_type_id == 1L
@@ -876,6 +891,19 @@ rub_plot_type_1_and_4 <- function(df, x_var, x_axis_label = "",
       base_size = base_size
       )
 
+
+  # Determines the number of columns to be used for the fill labels in the
+  # legend.
+  legend_columns <- get_legend_columns(
+    legend_text = levels(
+      df[[rlang::ensym(fill_label)]]
+    ),
+    y_axis_text = "PLATZHALTERTEXT",
+    plot_width = plot_width,
+    base_size = base_size,
+    base_family = base_family
+  )
+
   plot_t4_additions <- df %>%
     dplyr::filter(
       figure_type_id == 4L
@@ -885,6 +913,7 @@ rub_plot_type_1_and_4 <- function(df, x_var, x_axis_label = "",
       y_var = {{y_var}},
       group_var = {{group_var}},
       group_label = {{group_label}},
+      legend_columns = legend_columns,
       base_size = base_size,
       base_family = base_family,
       color = color,
@@ -923,7 +952,8 @@ add_rub_plot_type_4 <- function(df_t4, x_var,
                                group_label = NULL, base_size = 11,
                                base_family = "RubFlama",
                                color = RUB_colors["blue"],
-                               palette_reverse = FALSE) {
+                               palette_reverse = FALSE,
+                               legend_columns = 5) {
 
   # Defuse R expressions
   group_label_quo <- rlang::enquo(group_label)
@@ -970,7 +1000,7 @@ add_rub_plot_type_4 <- function(df_t4, x_var,
         color = {{group_var}},
         label = {{y_var}}
       ),
-      size = base_size / 5,
+      size = base_size / 4,
       family = base_family,
       colour = color,
       fill = "white",
@@ -995,7 +1025,8 @@ add_rub_plot_type_4 <- function(df_t4, x_var,
       fill = ggplot2::guide_legend(
         order = 1,
         reverse = FALSE,
-        byrow = TRUE
+        byrow = TRUE,
+        ncol = legend_columns
         ),
       color = ggplot2::guide_legend(
         order = 2
