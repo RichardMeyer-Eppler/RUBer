@@ -269,7 +269,12 @@ rub_plot_type_1 <- function(df, x_var,
         x = {{x_var}},
         y = .data[[label_var]],
         fill = {{fill_var}},
-        label = {{y_var}}
+        label = format(
+          {{y_var}},
+          big.mark = ".",
+          decimal.mark = ",",
+          trim = TRUE
+        )
       ),
       size = base_size / 4,
       family = base_family,
@@ -447,7 +452,12 @@ rub_plot_type_2 <- function(df, x_var,
         x = {{x_var}},
         y = .data[[label_var]],
         group = {{fill_var}},
-        label = {{y_var}}
+        label = format(
+          {{y_var}},
+          big.mark = ".",
+          decimal.mark = ",",
+          trim = TRUE
+        )
       ),
       size = base_size / 4,
       family = base_family,
@@ -793,7 +803,12 @@ rub_plot_type_4 <- function(df, x_var, x_axis_label = "",
       y = {{y_var}},
       group = {{group_var}},
       color = {{group_var}},
-      label = {{y_var}}
+      label = format(
+        {{y_var}},
+        big.mark = ".",
+        decimal.mark = ",",
+        trim = TRUE
+      )
     )
   ) +
     ggplot2::geom_line(
@@ -825,7 +840,8 @@ rub_plot_type_4 <- function(df, x_var, x_axis_label = "",
           {{y_var}},
           big.mark = ".",
           decimal.mark = ",",
-          scientific = FALSE
+          scientific = FALSE,
+          trim = TRUE
         ),
       limits = c(0, max_y) * 1.1
     ) +
@@ -998,7 +1014,12 @@ add_rub_plot_type_4 <- function(df_t4, x_var,
         y = {{y_var}},
         group = {{group_var}},
         color = {{group_var}},
-        label = {{y_var}}
+        label = format(
+          {{y_var}},
+          big.mark = ".",
+          decimal.mark = ",",
+          trim = TRUE
+        )
       ),
       size = base_size / 4,
       family = base_family,
