@@ -67,7 +67,8 @@ plot_figure <- function(df) {
           fill_label = fill_label,
           fill_reverse = .[[1, "fill_reverse"]],
           group_var = group,
-          group_label = group_label
+          group_label = group_label,
+          caption = .[[1, "source_caption"]]
         )
     }
   }
