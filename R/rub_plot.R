@@ -44,14 +44,7 @@ plot_figure <- function(df) {
           fill_reverse = .[[1, "fill_reverse"]],
           facet_var = facet,
 #          group = group,
-          title = stringr::str_wrap(
-            paste0(
-              "Frage: ",
-              .[[1, "question_txt"]]
-            ),
-            width = 90,
-            exdent = 13
-          ),
+          title = .[[1, "question_txt"]],
           caption = .[[1, "source_caption"]]
         )
     }
@@ -605,6 +598,27 @@ rub_plot_type_3 <- function(df, x_var,
       caption[1]
       )
     )
+
+  # Set title for the plot
+  get_title <- function(title)
+  {
+    if(is.na(title[1])) {
+      title <- NULL
+    } else {
+      title <- stringr::str_wrap(
+        paste0(
+          "Frage: ",
+          title[1]
+        ),
+        width = 90,
+        exdent = 13
+      )
+    }
+
+    return(title)
+  }
+
+  title <- get_title(title)
 
   # Get data frame containing position and values for (filtered) value labels.
   # The function assumes a vertical plot orientation. As figure type 3 is
