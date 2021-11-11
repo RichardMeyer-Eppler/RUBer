@@ -526,11 +526,11 @@ rub_plot_type_2 <- function(df, x_var,
 #'    fill_var = item_value,
 #' )
 rub_plot_type_3 <- function(df, x_var,
-                           y_var, x_axis_label = "",
+                           y_var, x_axis_label = NA_character_,
                            fill_var, fill_label = NULL,
                            fill_reverse = FALSE, legend_reverse = FALSE,
                            facet_var = NULL,
-                           title = "", caption = "",
+                           title = NA_character_, caption = "",
                            caption_prefix = "Quelle:", filter_cutoff = 0.05,
                            color = RUB_colors["blue"], palette_reverse = FALSE,
                            base_family = "RubFlama", base_size = 11,
@@ -544,7 +544,7 @@ rub_plot_type_3 <- function(df, x_var,
   facet_var <- rlang::enquo(facet_var)
 
   # Booleans
-  has_x_axis_label <- x_axis_label != ""
+  has_x_axis_label <- !is.na(x_axis_label)
   has_facet <- !rlang::quo_is_null(facet_var)
 
   # Determine required number of discrete colors and get appropriate palette
@@ -922,13 +922,20 @@ rub_plot_type_1_and_4 <- function(df, x_var, x_axis_label = "",
       base_size = base_size
       )
 
+  if(is.null(fill_label)) {
+    legend_text <- unique(
+      df[[rlang::ensym(fill_var)]]
+    )
+  } else {
+    legend_text <- unique(
+      df[[rlang::ensym(fill_label)]]
+    )
+  }
 
   # Determines the number of columns to be used for the fill labels in the
   # legend.
   legend_columns <- get_legend_columns(
-    legend_text = levels(
-      df[[rlang::ensym(fill_label)]]
-    ),
+    legend_text = legend_text,
     y_axis_text = "PLATZHALTERTEXT",
     plot_width = plot_width,
     base_size = base_size,
@@ -1312,10 +1319,12 @@ get_legend_columns <- function(
   # as there are elements in the legend text vector
   if(
     sum(
-      stringr::str_length(legend_text)
+      stringr::str_length(legend_text),
+      na.rm = TRUE
     ) < 50
   ) {
-    return(length(legend_text))
+    test <- length(legend_text)
+    return(test)
   }
 
   y_axis_text_max <- y_axis_text[which.max(
