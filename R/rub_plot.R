@@ -901,6 +901,7 @@ rub_plot_type_1_and_4 <- function(df, x_var, x_axis_label = "",
                                   base_family = "RubFlama",
                                   base_size = 11,
                                   plot_width = 6.8)  {
+
   plot_t1 <- df %>%
     dplyr::filter(
       figure_type_id == 1L
@@ -922,10 +923,20 @@ rub_plot_type_1_and_4 <- function(df, x_var, x_axis_label = "",
       base_size = base_size
       )
 
-  if(is.null(fill_label)) {
-    legend_text <- unique(
-      df[[rlang::ensym(fill_var)]]
-    )
+  # Checking if quosures are missing or null
+  # https://rpubs.com/tjmahr/quo_is_missing
+  fill_label_quo <- rlang::enquo(
+    fill_label
+  )
+
+  if(
+      rlang::quo_is_null(
+        fill_label_quo
+      )
+    ) {
+      legend_text <- unique(
+        df[[rlang::ensym(fill_var)]]
+      )
   } else {
     legend_text <- unique(
       df[[rlang::ensym(fill_label)]]
