@@ -43,7 +43,6 @@ reference:
   desc: Included data sets
   contents:
   - df_fake
-  - db_nrw_213
 
 figures:
   dev: grDevices::png
