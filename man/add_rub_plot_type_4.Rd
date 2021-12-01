@@ -13,7 +13,8 @@ add_rub_plot_type_4(
   base_size = 11,
   base_family = "RubFlama",
   color = RUB_colors["blue"],
-  palette_reverse = FALSE
+  palette_reverse = FALSE,
+  legend_columns = 5
 )
 }
 \arguments{

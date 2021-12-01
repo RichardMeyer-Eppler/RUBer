@@ -4,9 +4,11 @@
 \alias{get_file_path}
 \title{Get file path for automatic report generation}
 \usage{
-get_file_path(file_name)
+get_file_path(file_directory, file_name)
 }
 \arguments{
+\item{file_directory}{String directory}
+
 \item{file_name}{Required string containing file name with file extension}
 }
 \value{

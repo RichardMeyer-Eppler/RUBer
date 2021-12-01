@@ -8,6 +8,8 @@ render_report(
   p_df,
   report_nr,
   rmd_template = here::here("datenreport_new.Rmd"),
+  output_directory = NULL,
+  output_filename = NULL,
   date = format(Sys.Date(), format = "\%B \%Y")
 )
 }
@@ -18,6 +20,12 @@ render_report(
 
 \item{rmd_template}{Path to the R Markdown File for that report, defaults to
 \code{here::here("datenreport_new.Rmd")}}
+
+\item{output_directory}{Output directory for the rendered report, defaults to
+\code{here::here("output")}}
+
+\item{output_filename}{Output filename for the rendered report, defaults to
+\code{p_df[[1, "file_name"]]}}
 
 \item{date}{Date of the report displayed on the title page, defaults to
 \code{format(Sys.Date(), format= "\%B \%Y")}.}

@@ -22,7 +22,8 @@ rub_plot_type_1_and_4(
   color = RUB_colors["blue"],
   palette_reverse = FALSE,
   base_family = "RubFlama",
-  base_size = 11
+  base_size = 11,
+  plot_width = 6.8
 )
 }
 \arguments{
@@ -77,6 +78,8 @@ palette should be reversed, defaults to FALSE.}
 \item{base_family}{base font family, defaults to RubFlama}
 
 \item{base_size}{base font size, defaults to 11}
+
+\item{plot_width}{Width of the plot in inches, defaults to 6.8}
 }
 \value{
 A ggplot object

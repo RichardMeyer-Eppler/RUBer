@@ -130,15 +130,19 @@ filter_report <- function(df, report_nr) {
 #' Get file path for automatic report generation
 #'
 #' @param file_name Required string containing file name with file extension
+#' @param file_directory String directory
 #'
 #' @return String file path
 #' @export
 #'
 #' @examples
 #' get_file_path(file_name = "test")
-get_file_path <- function(file_name)  {
+get_file_path <- function(
+  file_directory,
+  file_name
+)  {
   here::here(
-    "output",
+    file_directory,
     file_name
   )
 }
@@ -170,6 +174,10 @@ get_title <- function(report_nr) {
 #'     \code{here::here("datenreport_new.Rmd")}
 #' @param date Date of the report displayed on the title page, defaults to
 #'     \code{format(Sys.Date(), format= "\%B \%Y")}.
+#' @param output_directory Output directory for the rendered report, defaults to
+#'     \code{here::here("output")}
+#' @param output_filename Output filename for the rendered report, defaults to
+#'     \code{p_df[[1, "file_name"]]}
 #'
 #' @export
 #'
@@ -179,23 +187,45 @@ get_title <- function(report_nr) {
 #' }
 render_report <- function(p_df, report_nr,
                           rmd_template = here::here("datenreport_new.Rmd"),
+                          output_directory = NULL,
+                          output_filename = NULL,
                           date = format(Sys.Date(), format= "%B %Y")
                           ) {
   df <- filter_report(p_df, report_nr)
   title <- df[[1, "report_title"]]
   author <- df[[1, "report_author"]]
-  file_name <- df[[1, "file_name"]]
-  file_path <- get_file_path(file_name)
-  directory <- fs::path_dir(file_path)
 
-  # Check if direcotry exists, if not create it
+  if(
+    is.null(
+      output_filename
+    )
+  ) {
+    output_filename <- df[[1, "file_name"]]
+  }
+
+  if(
+    is.null(
+      output_directory
+    )
+  ) {
+    output_directory <-   here::here(
+      "output"
+    )
+  }
+
+  file_path <- get_file_path(
+    file_directory = output_directory,
+    file_name = output_filename
+  )
+
+  # Create output directory, if it does not exist
 	if(
 	    !fs::dir_exists(
-		    path = directory
+		    path = output_directory
 		  )
 	  ) {
 	    fs::dir_create(
-		    path = directory
+		    path = output_directory
 	  )
 	}
 
