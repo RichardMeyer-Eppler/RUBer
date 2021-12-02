@@ -1,22 +1,23 @@
 Package: RUBer
-Title: Parameterized Microsoft Word reports in the RUB corporate
-    design
+Title: Parameterized Microsoft Word reports in the RUB corporate design
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Richard",
            family = "Meyer-Eppler",
            role = c("aut", "cre"),
            email = "richard.meyer-eppler@uv.ruhr-uni-bochum.de")
-Description: RUBer is an R package created for parameterized
-    reporting according to the requirements at the Ruhr-Universität Bochum
-    (RUB). The package provides a large example dataset containing fake
-    values, an R Markdown template in the RUB corporate design,
-    preconfigured ggplot2 plotting functions, custom themes for ggplot2
-    and flextable, as well as functions making the RUB corporate design
-    colors available.
+Description: RUBer is an R package created for parameterized reporting
+    according to the requirements at the Ruhr-Universität Bochum (RUB).
+    The package provides a large example dataset containing fake values,
+    an R Markdown template in the RUB corporate design, preconfigured
+    ggplot2 plotting functions, custom themes for ggplot2 and flextable,
+    as well as functions making the RUB corporate design colors available.
 License: MIT + file LICENSE
 URL: https://github.com/RichardMeyer-Eppler/RUBer
-     https://richardmeyer-eppler.github.io/RUBer/
+    https://richardmeyer-eppler.github.io/RUBer/
+BugReports: https://github.com/RichardMeyer-Eppler/RUBer/issues
+Depends: 
+    R (>= 3.5.0)
 Imports: 
     bookdown (>= 0.11),
     devEMF (>= 3.7),
@@ -26,6 +27,8 @@ Imports:
     forcats (>= 0.4.0),
     ggforce (>= 0.3.0),
     ggplot2 (>= 3.2.1),
+    glue,
+    gtsummary (>= 1.5.0),
     here (>= 0.1),
     knitr (>= 1.26),
     magrittr (>= 1.5),
@@ -36,23 +39,18 @@ Imports:
     readxl (>= 1.3.1),
     rlang (>= 0.4.0),
     rmarkdown (>= 1.15),
+    scales,
     stringi (>= 1.4.6),
     stringr (>= 1.4.0),
     tibble (>= 3.0.0),
-    tidyr (>= 1.0.0),
-    glue,
-    scales
+    tidyr (>= 1.0.0)
 Suggests: 
     janitor (>= 1.2.1),
     prismatic (>= 0.2.0),
-    tidyselect (>= 1.0.0),
-    wiesbaden (>= 1.2.2)
+    tidyselect (>= 1.0.0)
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
 Language: en
 LazyData: true
 RoxygenNote: 7.1.2
-BugReports: https://github.com/RichardMeyer-Eppler/RUBer/issues
-Depends: 
-    R (>= 3.5.0)
