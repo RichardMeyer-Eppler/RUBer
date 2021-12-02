@@ -169,6 +169,7 @@ get_title <- function(report_nr) {
 #' Render report
 #'
 #' @param p_df Data frame containing the data for all reports
+#' @param p_df_stg Optional data frame with information on cases
 #' @param report_nr Report number of the report
 #' @param rmd_template Path to the R Markdown File for that report, defaults to
 #'     \code{here::here("datenreport_new.Rmd")}
@@ -185,12 +186,18 @@ get_title <- function(report_nr) {
 #' \dontrun{
 #' render_report(df, 12)
 #' }
-render_report <- function(p_df, report_nr,
-                          rmd_template = here::here("datenreport_new.Rmd"),
-                          output_directory = NULL,
-                          output_filename = NULL,
-                          date = format(Sys.Date(), format= "%B %Y")
-                          ) {
+render_report <- function(
+  p_df,
+  p_df_stg = NULL,
+  report_nr,
+  rmd_template = here::here("datenreport_new.Rmd"),
+  output_directory = NULL,
+  output_filename = NULL,
+  date = format(
+    Sys.Date(),
+    format= "%B %Y"
+  )
+) {
   df <- filter_report(p_df, report_nr)
   title <- df[[1, "report_title"]]
   author <- df[[1, "report_author"]]
@@ -235,7 +242,8 @@ render_report <- function(p_df, report_nr,
       p_title = title,
       p_author = author,
       p_date = date,
-      p_df = df
+      p_df = df,
+      p_df_stg = p_df_stg
     ),
     encoding = "UTF-8",
     output_file = file_path

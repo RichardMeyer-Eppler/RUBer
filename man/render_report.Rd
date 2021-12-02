@@ -6,6 +6,7 @@
 \usage{
 render_report(
   p_df,
+  p_df_stg = NULL,
   report_nr,
   rmd_template = here::here("datenreport_new.Rmd"),
   output_directory = NULL,
@@ -15,6 +16,8 @@ render_report(
 }
 \arguments{
 \item{p_df}{Data frame containing the data for all reports}
+
+\item{p_df_stg}{Optional data frame with information on cases}
 
 \item{report_nr}{Report number of the report}
 
