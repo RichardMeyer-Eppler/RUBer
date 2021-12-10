@@ -236,14 +236,29 @@ render_report <- function(
 	  )
 	}
 
+  # Apply transformation to data frame with student cases
+  df_stg <- p_df_stg
+
+  if(
+    !is.null(
+      p_df_stg
+    )
+  ) {
+    df_stg <- Datenreport2022::get_stg_df(
+      p_df_stg,
+      report_nr = report_nr
+    )
+  }
+
   rmarkdown::render(
     rmd_template,
     params = list(
+      p_report_nr = report_nr,
       p_title = title,
       p_author = author,
       p_date = date,
       p_df = df,
-      p_df_stg = p_df_stg
+      p_df_stg = df_stg
     ),
     encoding = "UTF-8",
     output_file = file_path

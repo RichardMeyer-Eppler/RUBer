@@ -32,7 +32,8 @@ plot_figure <- function(df) {
           fill_label = fill_label,
           fill_reverse = .[[1, "fill_reverse"]],
           facet_var = facet,
-          caption = .[[1, "source_caption"]]
+          caption = .[[1, "source_caption"]],
+          filter_cutoff = 0.05
         )
     } else if (figure_type_id == 3) {
       p <- df %>%
@@ -43,7 +44,6 @@ plot_figure <- function(df) {
           fill_label = fill_label,
           fill_reverse = .[[1, "fill_reverse"]],
           facet_var = facet,
-#          group = group,
           title = .[[1, "question_txt"]],
           caption = .[[1, "source_caption"]]
         )
@@ -429,15 +429,17 @@ rub_plot_type_2 <- function(df, x_var,
 
   # Plotting function
   ggplot2::ggplot() +
-    ggplot2::geom_bar(
+    # Works better than geom_col() for devEMF format
+    ggplot2::stat_summary(
       data = df,
-      ggplot2::aes(
+      mapping = ggplot2::aes(
         x = {{x_var}},
         y = {{y_var}},
         fill = {{fill_var}}
       ),
+      fun = "sum",
+      geom = "bar",
       position = "fill",
-      stat = "identity",
       width = 0.55
     ) +
     ggplot2::geom_label(
