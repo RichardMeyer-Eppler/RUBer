@@ -1162,7 +1162,6 @@ set_factor_var <- function(df, var, var_label = NULL, reverse = FALSE)  {
 #' @inheritParams add_label_position
 #'
 #' @return A defused expression for calculating the position of the y-label
-#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -1302,7 +1301,6 @@ add_label_position <- function(df, x_var,
 #' @inheritParams rub_plot_type_3
 #'
 #' @return Numeric with the number of columns for the legend
-#' @export
 #'
 #' @examples
 #' get_legend_columns(

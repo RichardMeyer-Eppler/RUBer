@@ -26,11 +26,7 @@ reference:
 - title: Reporting
   desc: Wrappers for
   contents:
-  - get_author
-  - get_file_name
   - get_file_path
-  - get_title
-  - filter_destatis_code
   - filter_report
   - render_report
 
@@ -41,6 +37,11 @@ reference:
   - theme_rub
   - rub_format_mixed
   - rub_format_percent
+
+- title: Tables
+  desc: Wrappers for
+  contents:
+  - rub_table_stg
 
 - title: Data
   desc: Included data sets
