@@ -4,10 +4,12 @@
 \alias{rub_table_stg}
 \title{Get formatted flextable of cases}
 \usage{
-rub_table_stg(df)
+rub_table_stg(df, label)
 }
 \arguments{
 \item{df}{Data frame with columns Befragung_Typ_DTXT, Studienfachzaehler, Studiengang}
+
+\item{label}{Label for the first column}
 }
 \value{
 Formatted Flextable
