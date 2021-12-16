@@ -18,8 +18,8 @@ RUBer is an R package created for parameterized reporting
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/RichardMeyer-Eppler/RUBer
-    https://richardmeyer-eppler.github.io/RUBer/}
+  \item \url{https://richardmeyer-eppler.github.io/RUBer}
+  \item \url{https://github.com/RichardMeyer-Eppler/RUBer}
   \item Report bugs at \url{https://github.com/RichardMeyer-Eppler/RUBer/issues}
 }
 
