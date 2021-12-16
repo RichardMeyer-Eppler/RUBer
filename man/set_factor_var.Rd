@@ -32,3 +32,4 @@ them into factors
 set_factor_var(df, var, TRUE)
 }
 }
+\keyword{internal}

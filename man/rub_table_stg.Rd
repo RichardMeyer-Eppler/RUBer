@@ -2,7 +2,7 @@
 % Please edit documentation in R/rub_tables.R
 \name{rub_table_stg}
 \alias{rub_table_stg}
-\title{Get formatted flextable of cases}
+\title{Get formatted flextable of student cases}
 \usage{
 rub_table_stg(df, label)
 }
@@ -15,5 +15,5 @@ rub_table_stg(df, label)
 Formatted Flextable
 }
 \description{
-Get formatted flextable of cases
+Get formatted flextable of student cases
 }

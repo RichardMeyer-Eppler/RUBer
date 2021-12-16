@@ -4,10 +4,13 @@
 \alias{get_file_path}
 \title{Get file path for automatic report generation}
 \usage{
-get_file_path(file_directory, file_name)
+get_file_path(
+  file_directory = "output",
+  file_name = fs::path_file(tempfile(fileext = ".docx"))
+)
 }
 \arguments{
-\item{file_directory}{String directory}
+\item{file_directory}{Optional string directory relative to the project folder}
 
 \item{file_name}{Required string containing file name with file extension}
 }

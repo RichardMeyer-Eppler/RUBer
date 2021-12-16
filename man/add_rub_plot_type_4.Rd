@@ -53,3 +53,4 @@ Helper Function
 add_rub_plot_type_4(df, x, y, group, group_label)
 }
 }
+\keyword{internal}

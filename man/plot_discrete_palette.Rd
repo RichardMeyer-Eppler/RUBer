@@ -20,3 +20,4 @@ At the moment, RUB_palettes has discrete palettes for up to eight unique
 \examples{
 plot_discrete_palette(12)
 }
+\keyword{internal}

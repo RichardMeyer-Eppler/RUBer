@@ -66,7 +66,7 @@ palette should be reversed, defaults to FALSE.}
 \item{base_size}{base font size, defaults to 11}
 }
 \value{
-Ein ggplot Objekt
+A ggplot2 object
 }
 \description{
 Plot grouped line chart (figure type 4)

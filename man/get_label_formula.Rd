@@ -23,3 +23,4 @@ Get formula for calculating position of value labels
 get_label_formula(y_var = cyl, label_reverse = TRUE, is_percentage = FALSE)
 }
 }
+\keyword{internal}

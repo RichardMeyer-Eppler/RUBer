@@ -20,3 +20,4 @@ Returns all unique values for a specified column in a data frame
 \examples{
 get_unique(df, report_nr)
 }
+\keyword{internal}

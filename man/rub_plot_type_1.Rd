@@ -73,7 +73,7 @@ palette should be reversed, defaults to FALSE.}
 A ggplot object
 }
 \description{
-vertical stacked bar chart in the RUB corporate design. The variables x_var,
+Vertical stacked bar chart in the RUB corporate design. The variables x_var,
 y_var and fill_var are required, all others are optional.
 }
 \examples{

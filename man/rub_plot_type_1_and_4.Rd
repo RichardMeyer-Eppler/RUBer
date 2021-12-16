@@ -2,7 +2,7 @@
 % Please edit documentation in R/rub_plot.R
 \name{rub_plot_type_1_and_4}
 \alias{rub_plot_type_1_and_4}
-\title{Plot grouped line chart on top of vertical stacked bar chart (figure type 5)}
+\title{Plot grouped line chart on top of vertical stacked bar chart (combination chart of figure types 1 and 4)}
 \usage{
 rub_plot_type_1_and_4(
   df,
@@ -85,7 +85,7 @@ palette should be reversed, defaults to FALSE.}
 A ggplot object
 }
 \description{
-Plot grouped line chart on top of vertical stacked bar chart (figure type 5)
+Plot grouped line chart on top of vertical stacked bar chart (combination chart of figure types 1 and 4)
 }
 \examples{
 \dontrun{

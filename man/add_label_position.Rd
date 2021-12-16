@@ -54,3 +54,4 @@ Calculates the y-coordinates for stacked bar charts, centered for
 add_label_position(df, x_var, y_var, fill)
 }
 }
+\keyword{internal}

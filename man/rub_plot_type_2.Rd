@@ -19,7 +19,8 @@ rub_plot_type_2(
   color = RUB_colors["blue"],
   palette_reverse = FALSE,
   base_family = "RubFlama",
-  base_size = 11
+  base_size = 11,
+  max_width_strip_label = 80
 )
 }
 \arguments{
@@ -65,6 +66,9 @@ palette should be reversed, defaults to FALSE.}
 \item{base_family}{base font family, defaults to RubFlama}
 
 \item{base_size}{base font size, defaults to 11}
+
+\item{max_width_strip_label}{Optional maximum width in characters for the facet
+label passed to ggplot2::label_wrap_gen.}
 }
 \value{
 A ggplot object
