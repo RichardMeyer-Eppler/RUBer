@@ -4,6 +4,7 @@
 #' @param column Column name
 #'
 #' @return Vector with unique values in that column, excluding NA
+#' @keywords internal
 #'
 #' @examples
 #' get_unique(df, report_nr)
