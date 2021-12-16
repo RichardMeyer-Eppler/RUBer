@@ -13,8 +13,8 @@ Description: RUBer is an R package created for parameterized reporting
     ggplot2 plotting functions, custom themes for ggplot2 and flextable,
     as well as functions making the RUB corporate design colors available.
 License: MIT + file LICENSE
-URL: https://github.com/RichardMeyer-Eppler/RUBer
-    https://richardmeyer-eppler.github.io/RUBer/
+URL: https://richardmeyer-eppler.github.io/RUBer,
+    https://github.com/RichardMeyer-Eppler/RUBer
 BugReports: https://github.com/RichardMeyer-Eppler/RUBer/issues
 Depends: 
     R (>= 3.5.0)
