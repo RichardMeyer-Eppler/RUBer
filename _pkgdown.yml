@@ -9,6 +9,7 @@ reference:
   contents:
   - plot_figure
   - starts_with("rub_plot_")
+  - get_legend_columns
 
 - title: Scaling
   desc: Wrappers for
@@ -30,18 +31,25 @@ reference:
   - filter_report
   - render_report
 
-- title: Theming
-  desc: Wrappers for
+- title: Theming functions
+  desc: >
+    These are theming functions for ggplot2 objects, flextable objects
+    and flextable cells.
   contents:
   - rub_style_flextable
   - theme_rub
   - rub_format_mixed
   - rub_format_percent
 
-- title: Tables
-  desc: Wrappers for
+- title: Table functions
+  desc: >
+    These functions return formatted flextable objects.
   contents:
   - rub_table_stg
+  - rub_table_eb
+  - rub_table_vb
+  - rub_table_ab
+  - rub_table_programs
 
 - title: Data
   desc: Included data sets
@@ -49,7 +57,7 @@ reference:
   - df_fake
 
 figures:
-  dev: grDevices::png
+  dev: ragg::agg_png
   dpi: 96
   dev.args: []
   fig.ext: png
@@ -57,3 +65,5 @@ figures:
   fig.height: ~
   fig.retina: 2
   fig.asp: 1.618
+  bg: NA
+  other.parameters: []
