@@ -25,7 +25,7 @@ filter_report <- function(df, report_nr) {
 #' Get file path for automatic report generation
 #'
 #' @param file_name Required string containing file name with file extension
-#' @param file_directory String directory
+#' @param file_directory Optional string directory relative to the project folder
 #'
 #' @return String file path
 #' @export
@@ -33,8 +33,8 @@ filter_report <- function(df, report_nr) {
 #' @examples
 #' get_file_path(file_name = "test")
 get_file_path <- function(
-  file_directory,
-  file_name
+  file_directory = "output",
+  file_name = fs::path_file(tempfile(fileext = ".docx"))
 )  {
   here::here(
     file_directory,
@@ -138,5 +138,75 @@ render_report <- function(
     ),
     encoding = "UTF-8",
     output_file = file_path
+  )
+
+  file_path_replaced <- get_file_path(
+    file_directory = file.path(
+      output_directory,
+      "replaced"
+    ),
+    file_name = output_filename
+  )
+
+  replace_placeholder(
+    path = file_path,
+    new_path = file_path_replaced
+  )
+
+}
+
+#' Replace placeholder strings in docx document
+#'
+#' @param path Character with path to docx document
+#' @param new_path Character with new path to docx document after replacement
+#' @param placeholder_text Character with the placeholder to be replaced, defaults to "PLACEHOLDER_TAB"
+#' @param replacement_text Character with replacement text, defaults to "\\t"
+#'
+#' @return Side effects
+#' @keywords internal
+#'
+#' @examples
+#' \dontrun{
+#' replace_placeholder(
+#'    path = "test.docx",
+#'    new_path = "test_replaced.docx"
+#' )
+#' }
+replace_placeholder <- function(
+  path,
+  new_path,
+  placeholder_text = "PLACEHOLDER_TAB",
+  replacement_text = "\t"
+) {
+  report_docx <- officer::read_docx(
+    path = path
+  )
+
+  report_replaced <- officer::body_replace_all_text(
+    report_docx,
+    placeholder_text,
+    replacement_text,
+    only_at_cursor = FALSE,
+    ignore.case = TRUE
+  )
+
+  output_directory <- fs::path_dir(
+    new_path
+  )
+
+  # Create output directory, if it does not exist
+  if(
+    !fs::dir_exists(
+      path = output_directory
     )
+  ) {
+    fs::dir_create(
+      path = output_directory
+    )
+  }
+
+  print(
+    report_replaced,
+    target = new_path
+  )
 }
