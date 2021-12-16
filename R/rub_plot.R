@@ -78,6 +78,7 @@ plot_figure <- function(df) {
 #'     palette.
 #'
 #' @return Name of the appropriate discrete palette from RUB_palettes
+#' @keywords internal
 #'
 #' @examples
 #' plot_discrete_palette(12)
@@ -91,9 +92,11 @@ plot_discrete_palette <- function(colors_n)  {
     )
 
   if(colors_n > 8)  {
-    warning("Number of requested colors for discrete palette exceeds eight.
-            No predefined palette for more than eight discrete colors exists
-            in RUB_palettes. Additional colors will be interpolated.")
+    warning(
+      "Number of requested colors for discrete palette exceeds eight.
+      No predefined palette for more than eight discrete colors exists
+      in RUB_palettes. Additional colors will be interpolated."
+    )
   }
 
   return(palette)
@@ -101,7 +104,7 @@ plot_discrete_palette <- function(colors_n)  {
 
 #' Plot vertical stacked bar chart (figure type 1)
 #'
-#' vertical stacked bar chart in the RUB corporate design. The variables x_var,
+#' Vertical stacked bar chart in the RUB corporate design. The variables x_var,
 #' y_var and fill_var are required, all others are optional.
 #'
 #' @param df Data frame
@@ -316,6 +319,8 @@ rub_plot_type_1 <- function(df, x_var,
 #'
 #' @inheritParams rub_plot_type_1
 #' @inheritParams theme_rub
+#' @param max_width_strip_label Optional maximum width in characters for the facet
+#'     label passed to ggplot2::label_wrap_gen.
 #'
 #' @return A ggplot object
 #' @export
@@ -360,7 +365,8 @@ rub_plot_type_2 <- function(df, x_var,
                            facet_var = NULL, caption = "",
                            caption_prefix = "Quelle:", filter_cutoff = 0.04,
                            color = RUB_colors["blue"], palette_reverse = FALSE,
-                           base_family = "RubFlama", base_size = 11) {
+                           base_family = "RubFlama", base_size = 11,
+                           max_width_strip_label = 80) {
 
   # Defuse R expressions
   fill_var_sym <- rlang::ensym(fill_var)
@@ -421,6 +427,9 @@ rub_plot_type_2 <- function(df, x_var,
     facet <- ggplot2::facet_wrap(
       ggplot2::vars(
         !!facet_var
+      ),
+      labeller = ggplot2::label_wrap_gen(
+        width = max_width_strip_label
       ),
       ncol = 1,
       scales = "free_y"
@@ -741,7 +750,7 @@ rub_plot_type_3 <- function(df, x_var,
 #'     value labels are suppressed, defaults to 5.
 #' @inheritParams theme_rub
 #'
-#' @return Ein ggplot Objekt
+#' @return A ggplot2 object
 #' @export
 #' @importFrom rlang .data
 #'
@@ -878,7 +887,7 @@ rub_plot_type_4 <- function(df, x_var, x_axis_label = "",
 }
 
 
-#' Plot grouped line chart on top of vertical stacked bar chart (figure type 5)
+#' Plot grouped line chart on top of vertical stacked bar chart (combination chart of figure types 1 and 4)
 #'
 #' @inheritParams rub_plot_type_1
 #' @inheritParams rub_plot_type_4
@@ -994,6 +1003,7 @@ rub_plot_type_1_and_4 <- function(df, x_var, x_axis_label = "",
 #' @inheritParams rub_plot_type_1_and_4
 #'
 #' @return List of ggplot2 expressions
+#' @keywords internal
 #'
 #' @examples
 #' \dontrun{
@@ -1108,6 +1118,7 @@ add_rub_plot_type_4 <- function(df_t4, x_var,
 #'     to FALSE.
 #'
 #' @return Data frame with factor column.
+#' @keywords internal
 #'
 #' @examples
 #' \dontrun{
@@ -1162,6 +1173,7 @@ set_factor_var <- function(df, var, var_label = NULL, reverse = FALSE)  {
 #' @inheritParams add_label_position
 #'
 #' @return A defused expression for calculating the position of the y-label
+#' @keywords internal
 #'
 #' @examples
 #' \dontrun{
@@ -1197,6 +1209,7 @@ get_label_formula <- function(label_var,
 #'
 #' @return Data frame with additional column "label_" + the name of the
 #'    y-coordinate variable
+#' @keywords internal
 #'
 #' @examples
 #' \dontrun{
@@ -1301,6 +1314,7 @@ add_label_position <- function(df, x_var,
 #' @inheritParams rub_plot_type_3
 #'
 #' @return Numeric with the number of columns for the legend
+#' @export
 #'
 #' @examples
 #' get_legend_columns(
