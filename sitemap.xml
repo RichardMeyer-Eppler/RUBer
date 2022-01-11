@@ -79,10 +79,19 @@
     <loc>/reference/plot_figure.html</loc>
   </url>
   <url>
+    <loc>/reference/post_process.html</loc>
+  </url>
+  <url>
     <loc>/reference/render_report.html</loc>
   </url>
   <url>
+    <loc>/reference/replace_first_page_header.html</loc>
+  </url>
+  <url>
     <loc>/reference/replace_placeholder.html</loc>
+  </url>
+  <url>
+    <loc>/reference/replace_toc.html</loc>
   </url>
   <url>
     <loc>/reference/rub_format_mixed.html</loc>
@@ -113,6 +122,12 @@
   </url>
   <url>
     <loc>/reference/rub_table_eb.html</loc>
+  </url>
+  <url>
+    <loc>/reference/rub_table_item.html</loc>
+  </url>
+  <url>
+    <loc>/reference/rub_table_metrics.html</loc>
   </url>
   <url>
     <loc>/reference/rub_table_programs.html</loc>
