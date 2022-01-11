@@ -15,21 +15,24 @@ status](https://www.r-pkg.org/badges/version/RUBer)](https://cran.r-project.org/
 
 RUBer is an R package created for parameterized reporting according to
 the requirements at the Ruhr-Universität Bochum (RUB). So far, the
-package was primarily used for the eigth reporting cycle for teaching
-([*Lehrberichterstattung*](http://www.uv.ruhr-uni-bochum.de/dezernat1/aufgaben/abteilung1/qmp/instrumente/inst_lehrberichterstattung.html))
-in 2018-19. The package provides a large example dataset containing fake
-values, an R Markdown template in the RUB corporate design,
-preconfigured `ggplot2` plotting functions, custom themes for `ggplot2`
-and `flextable`, as well as functions making the RUB corporate design
-colors available.
+package was primarily used for the eigth (2018-19) and ninth (2019-20)
+reporting cycle for teaching
+([*Lehrberichterstattung*](https://einrichtungen.ruhr-uni-bochum.de/de/lehrberichterstattung)).
+The package provides a large example dataset containing fake values, an
+R Markdown template in the RUB corporate design, preconfigured `ggplot2`
+plotting functions, custom themes for `ggplot2` and `flextable`, as well
+as functions making the RUB corporate design colors available.
 
 ## Main features
 
 -   An R Markdown template for use with `rmarkdown::draft`. The template
-    uses `knitr::knit_expand()` to dynamically create code chunks
+    uses `knitr::knit_expand` to dynamically create code chunks
     containing figures, captions and subcaptions based on the data frame
-    passed on as a parameter. Figure captions are automatically numbered
-    via `bookdown` and a table of figures is inserted via `officedown`.
+    passed on as a parameter.
+-   The packages `officedown` and `officer` enable the automatic
+    numbering of figures and tables, the insertion of corresponding
+    table of contents, as well as various other helpers and
+    post-processing features.
 -   Vectorized figures in Microsoft’s Enhanced Metafile format using the
     `devEMF` package.
 -   Five preconfigured `ggplot2` plotting functions.
@@ -56,16 +59,17 @@ colors available.
 3.  As far as possible, the data manipulation is done independently of
     all the reporting steps. The idea is that the data passed to the R
     Markdown template can come from any source, not just R. While the
-    data wrangling for the 2018 reports *was* done in R, this is not a
-    requirement. If there is a need to create or alter datasets using
-    Microsoft Excel, it is possible to use these datasets as basis for
-    all reporting functions of `RUBer`.
+    data wrangling for the eigth (2018-19) and ninth (2019-20) reporting
+    cycle for teaching *was* done in R, this is not a requirement. If
+    there is a need to create or alter datasets using Microsoft Excel,
+    it is possible to use these datasets as basis for all reporting
+    functions of `RUBer`.
 
 ## Project background
 
 Every three years, the teaching and program quality of all degree
 programs at the University of Bochum is assessed
-([*Lehrberichterstattung*](http://www.uv.ruhr-uni-bochum.de/dezernat1/aufgaben/abteilung1/qmp/instrumente/inst_lehrberichterstattung.html)).
+([*Lehrberichterstattung*](https://einrichtungen.ruhr-uni-bochum.de/de/lehrberichterstattung)).
 The university administration assists this process by providing data
 reports that combine descriptive higher education statistics with survey
 data. The University of Bochum regularly collects survey data in the
