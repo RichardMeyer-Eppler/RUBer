@@ -510,7 +510,11 @@ rub_table_ab <- function(
 #' @return Formatted Flextable
 #' @export
 #'
-#' @examples
+#' @section Illustrations:
+#'
+#' \if{html}{\figure{rub_table_programs.png}{options: width=100\%}}
+#'
+#' @example inst/examples/rub_table_programs.R
 rub_table_programs <- function(
   df
 ) {

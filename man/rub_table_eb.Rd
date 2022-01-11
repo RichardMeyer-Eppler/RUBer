@@ -19,6 +19,12 @@ Formatted Flextable
 \description{
 Get formatted flextable of response rates for the Eingangsbefragung
 }
+\section{Illustrations}{
+
+
+\if{html}{\figure{rub_table_eb.png}{options: width=100\%}}
+}
+
 \examples{
 # Generate example data
 df_example <- structure(
