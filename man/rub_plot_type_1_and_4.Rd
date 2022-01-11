@@ -54,7 +54,8 @@ containing the names of the fill variable, defaults to NULL.}
 groups forming one line, e.g. degree_id.}
 
 \item{group_label}{Optional variable name for the character variable
-containing the names of the group variable (e.g. degree_txt), defaults to #'     NULL.}
+containing the names of the group variable (e.g. degree_txt), defaults to
+NULL.}
 
 \item{caption}{Optional character containing the data source for the figure
 (prefix 'Quelle:' is automatically added).}

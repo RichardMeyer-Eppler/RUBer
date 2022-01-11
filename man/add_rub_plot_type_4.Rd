@@ -30,7 +30,8 @@ continuous y-coordinates.}
 groups forming one line, e.g. degree_id.}
 
 \item{group_label}{Optional variable name for the character variable
-containing the names of the group variable (e.g. degree_txt), defaults to #'     NULL.}
+containing the names of the group variable (e.g. degree_txt), defaults to
+NULL.}
 
 \item{base_size}{base font size, defaults to 11}
 

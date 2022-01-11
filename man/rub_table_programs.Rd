@@ -31,7 +31,6 @@ example_data <- data.frame(
   antragsteller_innen_verantwortliche_personen = c("N. N.","N. N.","N. N.","N. N.","N. N.","N. N."),
   forderzeitraum_von = c("2021-10-01","2019-10-01","2021-04-01","2021-04-01","2020-06-01","2022-02-01"),
   forderzeitraum_bis = c("2022-03-31","2020-07-31","2021-12-31","2022-03-31","2021-09-30","2022-07-31"),
-  rn = c(1L, 2L, 3L, 4L, 5L, 6L),
   is_last_row = c(FALSE,FALSE,TRUE,TRUE,TRUE,TRUE)
 )
 

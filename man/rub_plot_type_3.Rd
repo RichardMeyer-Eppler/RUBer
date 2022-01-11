@@ -2,7 +2,7 @@
 % Please edit documentation in R/rub_plot.R
 \name{rub_plot_type_3}
 \alias{rub_plot_type_3}
-\title{Plot horizontal stacked bar charts that are scaled to 100\\% (figure type 3)}
+\title{Plot horizontal stacked bar charts that are scaled to 100\% (figure type 3)}
 \usage{
 rub_plot_type_3(
   df,
@@ -88,7 +88,7 @@ label passed to ggplot2::label_wrap_gen.}
 A ggplot object
 }
 \description{
-Plot horizontal stacked bar charts that are scaled to 100\\% (figure type 3)
+Plot horizontal stacked bar charts that are scaled to 100\% (figure type 3)
 }
 \examples{
 # Create test values for all three mandatory variables (x_var, y_var,

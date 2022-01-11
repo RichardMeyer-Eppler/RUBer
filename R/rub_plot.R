@@ -315,7 +315,7 @@ rub_plot_type_1 <- function(df, x_var,
       )
 }
 
-#' Plot vertical stacked bar charts that are scaled to 100\% (figure type 2)
+#' Plot vertical stacked bar charts that are scaled to 100% (figure type 2)
 #'
 #' @inheritParams rub_plot_type_1
 #' @inheritParams theme_rub
@@ -502,7 +502,7 @@ rub_plot_type_2 <- function(df, x_var,
     )
 }
 
-#' Plot horizontal stacked bar charts that are scaled to 100\% (figure type 3)
+#' Plot horizontal stacked bar charts that are scaled to 100% (figure type 3)
 #'
 #' @param x_axis_label Optional label for the x-axis, defaults to an empty
 #'     string.
@@ -745,7 +745,8 @@ rub_plot_type_3 <- function(df, x_var,
 #' @param group_var Variable name for the discrete variable which determines the
 #'     groups forming one line, e.g. degree_id.
 #' @param group_label Optional variable name for the character variable
-#'     containing the names of the group variable (e.g. degree_txt), defaults to #'     NULL.
+#'     containing the names of the group variable (e.g. degree_txt), defaults to
+#'     NULL.
 #' @param filter_cutoff Optional integer marking the cutoff below which all
 #'     value labels are suppressed, defaults to 5.
 #' @inheritParams theme_rub
