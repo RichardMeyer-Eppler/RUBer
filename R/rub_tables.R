@@ -1,6 +1,6 @@
 #' Get formatted flextable of student cases
 #'
-#' @param df Data frame with columns Befragung_Typ_DTXT, Studienfachzaehler, Studiengang
+#' @param df Data frame with columns `studiengang`, `studienfachzaehler`, `faelle`
 #' @param label Label for the first column
 #'
 #' @return Formatted Flextable
@@ -94,6 +94,10 @@ rub_table_stg <- function(
 #'
 #' @return Formatted Flextable
 #' @export
+#'
+#' @section Illustrations:
+#'
+#' \if{html}{\figure{rub_table_eb.png}{options: width=100\%}}
 #'
 #' @example inst/examples/rub_table_eb.R
 rub_table_eb <- function(
