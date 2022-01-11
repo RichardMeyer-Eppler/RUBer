@@ -5,16 +5,13 @@
 \title{Replace placeholder strings in docx document}
 \usage{
 replace_placeholder(
-  path,
-  new_path,
+  doc,
   placeholder_text = "PLACEHOLDER_TAB",
   replacement_text = "\\t"
 )
 }
 \arguments{
-\item{path}{Character with path to docx document}
-
-\item{new_path}{Character with new path to docx document after replacement}
+\item{doc}{an rdocx object}
 
 \item{placeholder_text}{Character with the placeholder to be replaced, defaults to "PLACEHOLDER_TAB"}
 

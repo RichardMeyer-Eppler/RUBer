@@ -2,7 +2,7 @@
 % Please edit documentation in R/rub_styles.R
 \name{rub_style_flextable}
 \alias{rub_style_flextable}
-\title{Applies RUB-Style to Flextable object}
+\title{Applies RUB theme to flextable object}
 \usage{
 rub_style_flextable(table, font = "RUB Scala TZ", font_size = 9)
 }
@@ -17,7 +17,7 @@ rub_style_flextable(table, font = "RUB Scala TZ", font_size = 9)
 Styled Flextable object
 }
 \description{
-Applies RUB-Style to Flextable object
+Applies RUB theme to flextable object
 }
 \examples{
 table_mtcars <- flextable::flextable(mtcars)

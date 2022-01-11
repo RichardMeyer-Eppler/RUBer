@@ -2,7 +2,7 @@
 % Please edit documentation in R/rub_styles.R
 \name{theme_rub}
 \alias{theme_rub}
-\title{Add RUB theme to ggplot chart}
+\title{Add RUB theme to ggplot object}
 \usage{
 theme_rub(
   base_size = 11,
