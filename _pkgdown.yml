@@ -5,27 +5,32 @@ destination: docs
 
 reference:
 - title: Plotting
-  desc: Plotting functions for each `figure_type_id`
+  desc: Plotting functions for each `figure_type_id`.
   contents:
   - plot_figure
   - starts_with("rub_plot_")
   - get_legend_columns
 
 - title: Scaling
-  desc: Wrappers for
+  desc: >
+    Scale functions for use with `ggplot2`.
   contents:
   - starts_with("scale_")
 
 - title: Colors and palettes
-  desc: Wrappers for
+  desc: >
+    Functions for retrieving the palettes and colors of the RUB corporate
+    design, see the vignette on `Using RUB colors` for details.
   contents:
   - get_RUB_colors
   - get_RUB_palettes
   - RUB_colors
   - RUB_palettes
 
-- title: Reporting
-  desc: Wrappers for
+- title: Reporting funcitons
+  desc: >
+    Functions for creating the parametric reports and associated helper
+    functions, such as filter and file path functions.
   contents:
   - get_file_path
   - filter_report
@@ -33,8 +38,8 @@ reference:
 
 - title: Theming functions
   desc: >
-    These are theming functions for ggplot2 objects, flextable objects
-    and flextable cells.
+    Theming functions for ggplot2 objects, flextable objects and flextable
+    cells.
   contents:
   - rub_style_flextable
   - theme_rub
@@ -43,13 +48,16 @@ reference:
 
 - title: Table functions
   desc: >
-    These functions return formatted flextable objects.
+    These functions take data frames as input and return formatted flextable
+    objects.
   contents:
   - rub_table_stg
   - rub_table_eb
   - rub_table_vb
   - rub_table_ab
   - rub_table_programs
+  - rub_table_item
+  - rub_table_metrics
 
 - title: Data
   desc: Included data sets
