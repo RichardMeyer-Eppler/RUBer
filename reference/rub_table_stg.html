@@ -71,6 +71,27 @@
     <p>Formatted Flextable</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">RUBer</span><span class="fu">::</span><span class="fu">rub_table_stg</span><span class="op">(</span></span>
+<span class="r-in">  df <span class="op">=</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="op">~</span><span class="va">studiengang</span>, <span class="op">~</span><span class="va">studienfachzaehler</span>, <span class="op">~</span><span class="va">faelle</span>,</span>
+<span class="r-in">    <span class="st">"Studiengang A"</span>, <span class="st">"1. Fach"</span>, <span class="fl">1</span>,</span>
+<span class="r-in">    <span class="st">"Studiengang B"</span>, <span class="st">"2. Fach"</span>, <span class="fl">1</span></span>
+<span class="r-in">  <span class="op">)</span>,</span>
+<span class="r-in">  label <span class="op">=</span> <span class="st">"Beispieltabelle"</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> a flextable object.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> col_keys: `label`, `stat_1`, `stat_2`, `stat_0` </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> header has 1 row(s) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> body has 3 row(s) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> original dataset sample: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           label   stat_1   stat_2   stat_0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   Studiengang     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 Studiengang A 1 (100%)   0 (0%) 1 (100%)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 Studiengang B   0 (0%) 1 (100%) 1 (100%)</span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
