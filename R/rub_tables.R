@@ -621,3 +621,230 @@ rub_table_programs <- function(
 
   return(ft)
 }
+
+#' Get formatted flextable of items with largest deviation from comparison group
+#'
+#' @param df Data frame
+#'
+#' @return Formatted Flextable
+#' @export
+#'
+#' @examples
+rub_table_item <- function(
+  df
+) {
+
+  typology <- tibble::tribble(
+    ~col_keys,          ~colB,                  ~colA,
+    "y",                "Abschluss",            "Abschluss",
+    "figure_caption",   "Abbildung",            "Abbildung",
+    "facet",            "Item",                 "Item",
+    "mean",             "Mittelwert (μ)",       "Studiengang",
+    "mean_fgr",         "Mittelwert (μ)",       "Fächergruppe",
+    "distance",         "Abweichung",           "in SD (\u03C3)"
+  )
+
+  # https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference/10116#10116
+  eq <- "\\color{#003560}{\\frac{|\\mu^{faechergruppe}-\\mu^{studiengang}|}{ \\sigma^{faechergruppe}}}"
+
+  ft <- df %>%
+    dplyr::select(
+      y,
+      figure_caption,
+      facet,
+      mean,
+      mean_fgr,
+      distance
+    ) %>%
+    flextable::flextable() %>%
+    flextable::set_header_df(
+      mapping = typology,
+      key = "col_keys"
+    ) %>%
+    flextable::merge_h(
+      part = "header"
+    ) %>%
+    flextable::merge_v(
+      part = "header"
+    ) %>%
+    flextable::theme_zebra(
+      even_body = "#ECECEC",
+      odd_body = "transparent"
+    ) %>%
+    flextable::footnote(
+      i = 1,
+      j = flextable::ncol_keys(
+        .
+      ),
+      value = flextable::as_paragraph(
+        ""
+      ),
+      ref_symbols = "*",
+      part = "header"
+    ) %>%
+    RUBer::rub_style_flextable() %>%
+    flextable::merge_v(
+      j = 1
+    ) %>%
+    flextable::align(
+      j = flextable::ncol_keys(
+        .
+      ) - 2,
+      align = "center",
+      part = "header"
+    ) %>%
+    flextable::valign(
+      valign = "top",
+      part = "all"
+    ) %>%
+    flextable::colformat_double(
+      big.mark = ".",
+      digits = 2,
+      decimal.mark = ","
+    ) %>%
+    flextable::border_remove() %>%
+    flextable::bg(
+      j = 1,
+      bg = "transparent",
+      part = "body"
+    ) %>%
+    flextable::bold(
+      j = 1,
+      part ="body"
+    ) %>%
+    flextable::compose(
+      value = flextable::as_paragraph(
+        "* Die Formel zur Berechnung der Abweichung verwendet neben den ausgewiesenen Mittelwerten noch die Standardabweichung der Fächergruppe, die in der Tabelle aus Platzgründen nicht ausgegeben wird. Die exakte Berechnung ist: ",
+        flextable::as_equation(
+          x = eq
+        ),
+        "."
+      ),
+      part = "footer"
+    ) %>%
+    flextable::width(
+      j = 1,
+      width = 2,
+      unit = "cm"
+    ) %>%
+    flextable::width(
+      j = 2,
+      width = 3.6,
+      unit = "cm"
+    ) %>%
+    flextable::width(
+      j = 3,
+      width = 5.1,
+      unit = "cm"
+    ) %>%
+    flextable::width(
+      j = 4:6,
+      width = 2.3,
+      unit = "cm"
+    )
+
+  return(ft)
+
+}
+
+#' Get formatted flextable of metrics
+#'
+#' @param df Data frame
+#'
+#' @return Formatted flextable
+#' @export
+#'
+#' @examples
+rub_table_metrics <- function(
+  df
+) {
+
+  ft <- df %>%
+    flextable::flextable() %>%
+    flextable::colformat_image(
+      j = "col1",
+      i = 1,
+      width = .5,
+      height = .5
+    ) %>%
+    flextable::colformat_image(
+      j = "col6",
+      i = 2,
+      width = .5,
+      height = .5
+    ) %>%
+    flextable::colformat_image(
+      j = "col1",
+      i = 3,
+      width = .5,
+      height = .5
+    ) %>%
+    flextable::colformat_image(
+      j = "col6",
+      i = 4,
+      width = .5,
+      height = .5
+    ) %>%
+    flextable::colformat_image(
+      j = "col1",
+      i = 5,
+      width = .5,
+      height = .5
+    ) %>%
+    flextable::colformat_image(
+      j = "col6",
+      i = 6,
+      width = .5,
+      height = .5
+    ) %>%
+    RUBer::rub_style_flextable() %>%
+    flextable::delete_part(
+      part = "header"
+    ) %>%
+    flextable::align(
+      j = "col1",
+      i = c(1, 3, 5),
+      align = "right"
+    ) %>%
+    flextable::align(
+      j = "col1",
+      i = c(2),
+      align = "right"
+    ) %>%
+    flextable::align(
+      j = "col3",
+      i = c(4),
+      align = "right"
+    ) %>%
+    flextable::align(
+      j = "col2",
+      i = c(6),
+      align = "right"
+    ) %>%
+    flextable::border_remove() %>%
+    flextable::merge_h() %>%
+    flextable::hrule(
+      rule = "exact"
+    ) %>%
+    flextable::height_all(
+      height = 3.5,
+      unit = "cm",
+      part = "body"
+    ) %>%
+    flextable::width(
+      width = 2.85,
+      unit = "cm"
+    ) %>%
+    flextable::fontsize(
+      size = 14
+    ) %>%
+    flextable::bold() %>%
+    flextable::bg(
+      bg = RUBer::get_RUB_colors("blue")
+    ) %>%
+    flextable::color(
+      color = "white"
+    )
+
+  return(ft)
+}
