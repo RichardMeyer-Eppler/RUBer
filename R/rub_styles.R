@@ -1,4 +1,4 @@
-#' Add RUB theme to ggplot chart
+#' Add RUB theme to ggplot object
 #'
 #' This function allows you to add the RUB theme to your ggplot charts.
 #'
@@ -160,7 +160,7 @@ theme_rub <- function(base_size = 11,
   return(rub_theme)
 }
 
-#' Applies RUB-Style to Flextable object
+#' Applies RUB theme to flextable object
 #'
 #' @param table Flextable object
 #' @param font Font for the Flextable theme, defaults to RUB Scala TZ
