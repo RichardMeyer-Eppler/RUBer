@@ -7,6 +7,14 @@
 #' @export
 #'
 #' @examples
+#' RUBer::rub_table_stg(
+#'   df = tibble::tribble(
+#'     ~studiengang, ~studienfachzaehler, ~faelle,
+#'     "Studiengang A", "1. Fach", 1,
+#'     "Studiengang B", "2. Fach", 1
+#'   ),
+#'   label = "Beispieltabelle"
+#' )
 rub_table_stg <- function(
   df,
   label
@@ -87,7 +95,7 @@ rub_table_stg <- function(
 #' @return Formatted Flextable
 #' @export
 #'
-#' @examples
+#' @example inst/examples/rub_table_eb.R
 rub_table_eb <- function(
   df,
   typology,
