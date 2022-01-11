@@ -140,54 +140,66 @@ render_report <- function(
     output_file = file_path
   )
 
-  file_path_replaced <- get_file_path(
-    file_directory = file.path(
-      output_directory,
-      "replaced"
-    ),
-    file_name = output_filename
-  )
+  # file_path_replaced <- get_file_path(
+  #   file_directory = file.path(
+  #     output_directory,
+  #     "replaced"
+  #   ),
+  #   file_name = output_filename
+  # )
 
-  replace_placeholder(
-    path = file_path,
-    new_path = file_path_replaced
+  post_process(
+    old_path = file_path,
+  #  new_path = file_path_replaced,
+    new_path = file_path,
+    overwrite = TRUE
   )
 
 }
 
-#' Replace placeholder strings in docx document
+#' Post process Word file created with officedown
 #'
-#' @param path Character with path to docx document
-#' @param new_path Character with new path to docx document after replacement
-#' @param placeholder_text Character with the placeholder to be replaced, defaults to "PLACEHOLDER_TAB"
-#' @param replacement_text Character with replacement text, defaults to "\\t"
+#' @param old_path String with path to Word file created by officedown
+#' @param new_path New path for edited Word file
+#' @param overwrite Boolean, overwrite files if they exist. If this is `FALSE`
+#'     and the file exists an error will be thrown.
 #'
-#' @return Side effects
+#' @return side effects
 #' @keywords internal
 #'
 #' @examples
-#' \dontrun{
-#' replace_placeholder(
-#'    path = "test.docx",
-#'    new_path = "test_replaced.docx"
-#' )
-#' }
-replace_placeholder <- function(
-  path,
+post_process <- function(
+  old_path,
   new_path,
-  placeholder_text = "PLACEHOLDER_TAB",
-  replacement_text = "\t"
+  overwrite = FALSE
 ) {
-  report_docx <- officer::read_docx(
-    path = path
+
+  doc <- officer::read_docx(
+    old_path
   )
 
-  report_replaced <- officer::body_replace_all_text(
-    report_docx,
-    placeholder_text,
-    replacement_text,
-    only_at_cursor = FALSE,
-    ignore.case = TRUE
+  # Insert tabs in all captions
+  doc_placeholder <- replace_placeholder(
+    doc = doc
+  )
+
+  # Replace toc levels for list of figures
+  doc_img <- replace_toc(
+    doc = doc_placeholder,
+    style = 'Image Caption',
+    new_level = 5
+  )
+
+  # Replace toc levels for list of figures
+  doc_tbl <- replace_toc(
+    doc = doc_img,
+    style = 'Table Caption',
+    new_level = 6
+  )
+
+  # Create first page header
+  doc_header <- replace_first_page_header(
+    doc_tbl
   )
 
   output_directory <- fs::path_dir(
@@ -205,8 +217,174 @@ replace_placeholder <- function(
     )
   }
 
-  print(
-    report_replaced,
-    target = new_path
+  if(
+    fs::file_exists(
+      new_path
+    ) &
+    !overwrite
+  ) {
+    rlang::abort(
+      message = glue::glue("{new_path} already exists and overwrite = FALSE")
+    )
+  } else {
+    print(
+      doc_header,
+      target = new_path
+    )
+  }
+}
+
+#' Replace placeholder strings in docx document
+#'
+#' @param doc an rdocx object
+#' @param placeholder_text Character with the placeholder to be replaced, defaults to "PLACEHOLDER_TAB"
+#' @param replacement_text Character with replacement text, defaults to "\\t"
+#'
+#' @return Side effects
+#' @keywords internal
+#'
+#' @examples
+#' \dontrun{
+#' replace_placeholder(
+#'    path = "test.docx",
+#'    new_path = "test_replaced.docx"
+#' )
+#' }
+replace_placeholder <- function(
+  doc,
+  placeholder_text = "PLACEHOLDER_TAB",
+  replacement_text = "\t"
+) {
+
+  report_replaced <- officer::body_replace_all_text(
+    x = doc,
+    old_value = placeholder_text,
+    new_value = replacement_text,
+    only_at_cursor = FALSE,
+    ignore.case = TRUE
   )
+
+  return(report_replaced)
+
+}
+
+#' Replace level of TOC field
+#'
+#' @param doc an rdocx object
+#' @param style text, the style referenced by the TOC field
+#' @param new_level numeric, the new level for the TOC field
+#'
+#' @return A modified rdocx object
+#' @keywords internal
+#'
+#' @examples
+replace_toc <- function(
+  doc,
+  style,
+  new_level
+) {
+
+  xml <- officer::docx_body_xml(
+    doc
+  )
+
+  search_txt <- glue::glue(
+    '//w:instrText[contains(.,"{style}")]'
+  )
+
+  toc_node <- xml2::xml_find_first(
+    xml,
+    search_txt
+  )
+
+  replacement_txt <- glue::glue(
+    'TOC \\h \\z \\t \"{style};{new_level}\"'
+  )
+
+  xml2::xml_set_text(
+    toc_node,
+    replacement_txt
+  )
+
+  return(doc)
+
+}
+
+#' Create header with option "different first page" enabled
+#'
+#' @param doc an rdocx object
+#'
+#' @return A modified rdocx object
+#' @keywords internal
+#'
+#' @examples
+replace_first_page_header <- function(
+  doc
+) {
+
+  relationships <- officer::docx_body_relationship(
+    doc
+  )
+
+  df_relationships <- relationships$get_data()
+
+  default_header_id <- df_relationships %>%
+    dplyr::filter(
+      target == "header2.xml"
+    ) %>%
+    dplyr::pull(
+      id
+    )
+
+  default_footer_id <- df_relationships %>%
+    dplyr::filter(
+      target == "footer2.xml"
+    ) %>%
+    dplyr::pull(
+      id
+    )
+
+  first_page_header_id <- df_relationships %>%
+    dplyr::filter(
+      target == "header3.xml"
+    ) %>%
+    dplyr::pull(
+      id
+    )
+
+  generate_xml <- function(
+    default_header_id,
+    default_footer_id,
+    first_page_header_id
+  ) {
+
+    node_txt <- glue::glue(
+      '<w:sectPr w:rsidR="009C0CC2" w:rsidSect="002C6CD0"><w:headerReference w:type="default" r:id="{default_header_id}"/><w:footerReference w:type="default" r:id="{default_footer_id}"/><w:headerReference w:type="first" r:id="{first_page_header_id}"/><w:type w:val="continuous"/><w:pgSz w:w="11952" w:h="16848"/><w:pgMar w:top="1417" w:right="1134" w:bottom="1134" w:left="850" w:header="720" w:footer="720" w:gutter="0"/><w:cols w:space="720"/><w:titlePg/><w:docGrid w:linePitch="326"/></w:sectPr>'
+    )
+
+    node_xml <- xml2::read_xml(
+      node_txt
+    )
+
+    return(node_xml)
+  }
+
+  old_node <- xml2::xml_find_first(
+    officer::docx_body_xml(
+      doc
+    ),
+    "w:body/w:sectPr"
+  )
+
+  xml2::xml_replace(
+    old_node,
+    generate_xml(
+      default_header_id,
+      default_footer_id,
+      first_page_header_id
+    )
+  )
+
+  return(doc)
+
 }
