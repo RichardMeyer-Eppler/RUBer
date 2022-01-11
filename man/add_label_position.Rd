@@ -42,12 +42,12 @@ expressed in absolute numbers or as a percentage, defaults to false}
 }
 \value{
 Data frame with additional column "label_" + the name of the
-   y-coordinate variable
+y-coordinate variable
 }
 \description{
 Calculates the y-coordinates for stacked bar charts, centered for
-   each group. The default function does not work if some labels are
-   filtered.
+each group. The default function does not work if some labels are
+filtered.
 }
 \examples{
 \dontrun{

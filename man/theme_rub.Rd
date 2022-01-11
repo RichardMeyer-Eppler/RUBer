@@ -26,7 +26,7 @@ theme_rub(
 
 \item{base_rect_size}{base size for rect elements, defaults to base_size/22}
 
-\item{color}{Color for font and borders, defaults to `RUB_colors["blue"]`,
+\item{color}{Color for font and borders, defaults to \code{RUB_colors["blue"]},
 i.e. #003560.}
 
 \item{has_facet}{Boolean indicating whether facet headings are required,

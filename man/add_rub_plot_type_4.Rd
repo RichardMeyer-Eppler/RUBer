@@ -36,7 +36,7 @@ containing the names of the group variable (e.g. degree_txt), defaults to #'    
 
 \item{base_family}{base font family, defaults to RubFlama}
 
-\item{color}{Color for font and borders, defaults to `RUB_colors["blue"]`,
+\item{color}{Color for font and borders, defaults to \code{RUB_colors["blue"]},
 i.e. #003560.}
 
 \item{palette_reverse}{Optional boolean indicating whether the colors in the

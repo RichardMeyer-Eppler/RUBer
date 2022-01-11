@@ -530,6 +530,9 @@ rub_table_programs <- function(
   )
 
   rows <- df %>%
+    dplyr::mutate(
+      rn = dplyr::row_number()
+    ) %>%
     dplyr::filter(
       is_last_row
     ) %>%

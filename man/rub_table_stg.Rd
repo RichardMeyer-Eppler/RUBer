@@ -7,7 +7,7 @@
 rub_table_stg(df, label)
 }
 \arguments{
-\item{df}{Data frame with columns `studiengang`, `studienfachzaehler`, `faelle`}
+\item{df}{Data frame with columns \code{studiengang}, \code{studienfachzaehler}, \code{faelle}}
 
 \item{label}{Label for the first column}
 }

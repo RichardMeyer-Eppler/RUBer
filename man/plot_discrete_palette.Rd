@@ -15,7 +15,7 @@ Name of the appropriate discrete palette from RUB_palettes
 }
 \description{
 At the moment, RUB_palettes has discrete palettes for up to eight unique
-    colors. Above that number, colors are interpolated.
+colors. Above that number, colors are interpolated.
 }
 \examples{
 plot_discrete_palette(12)

@@ -11,7 +11,7 @@ post_process(old_path, new_path, overwrite = FALSE)
 
 \item{new_path}{New path for edited Word file}
 
-\item{overwrite}{Boolean, overwrite files if they exist. If this is `FALSE`
+\item{overwrite}{Boolean, overwrite files if they exist. If this is \code{FALSE}
 and the file exists an error will be thrown.}
 }
 \value{

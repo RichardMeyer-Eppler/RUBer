@@ -55,7 +55,7 @@ value labels are suppressed, defaults to 5.}
 \item{facet_var}{Optional variable name for the discrete variable to facet
 by, defaults to NULL.}
 
-\item{color}{Color for font and borders, defaults to `RUB_colors["blue"]`,
+\item{color}{Color for font and borders, defaults to \code{RUB_colors["blue"]},
 i.e. #003560.}
 
 \item{palette_reverse}{Optional boolean indicating whether the colors in the
