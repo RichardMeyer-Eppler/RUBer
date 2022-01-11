@@ -68,7 +68,64 @@
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>Formatted Flextable</p>
     </div>
+    <div class="section level2">
+    <h2 id="illustrations">Illustrations<a class="anchor" aria-label="anchor" href="#illustrations"></a></h2>
+    
 
+
+<p><img src="figures/rub_table_programs.png" width="100%"></p>
+    </div>
+
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Create example data</span></span>
+<span class="r-in"><span class="va">example_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span class="r-in">  stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span class="r-in">  report_nr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span class="r-in">  programm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Forschendes Lernen"</span>,<span class="st">"Forschendes Lernen"</span>,<span class="st">"Forschendes Lernen"</span>,<span class="st">"Innovative Praxisprojekte"</span>,<span class="st">"interLECTURE"</span>,<span class="st">"UNIC@RUB"</span><span class="op">)</span>,</span>
+<span class="r-in">  projekttitel <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Interkulturelle Bibelhermeneutiken. Kontextuelle Exegese im theologisch-interdisziplinären Diskurs"</span>, <span class="st">"Migration lokal denken. Begegnungen mit religiösen Gemeinschaften in NRW"</span>,<span class="st">"Traumatheologie: Kritische Bibellektüre anhand von Leiderfahrungen.  Entwicklung eines Tagungs- und Seminarkonzepts mit Studierenden zur angewandten wissenschaftlichen Exegese von Bibeltexten."</span>,<span class="st">"Religiöse Pluralität entdecken, reflektieren und diskutierend sichtbar machen"</span>,<span class="st">"Globale Christentümer: Theologische und religionswissenschaftliche Perspektiven"</span>,<span class="st">"Design of a Virtual Exchange program for the Summer Semester 2022 between the Protestant Faculty of RUB and the Faculty of Theology of the University of Deusto in the frame of the UNIC cooperation“"</span><span class="op">)</span>,</span>
+<span class="r-in">  antragsteller_innen_verantwortliche_personen <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"N. N."</span>,<span class="st">"N. N."</span>,<span class="st">"N. N."</span>,<span class="st">"N. N."</span>,<span class="st">"N. N."</span>,<span class="st">"N. N."</span><span class="op">)</span>,</span>
+<span class="r-in">  forderzeitraum_von <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2021-10-01"</span>,<span class="st">"2019-10-01"</span>,<span class="st">"2021-04-01"</span>,<span class="st">"2021-04-01"</span>,<span class="st">"2020-06-01"</span>,<span class="st">"2022-02-01"</span><span class="op">)</span>,</span>
+<span class="r-in">  forderzeitraum_bis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2022-03-31"</span>,<span class="st">"2020-07-31"</span>,<span class="st">"2021-12-31"</span>,<span class="st">"2022-03-31"</span>,<span class="st">"2021-09-30"</span>,<span class="st">"2022-07-31"</span><span class="op">)</span>,</span>
+<span class="r-in">  rn <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="fl">2L</span>, <span class="fl">3L</span>, <span class="fl">4L</span>, <span class="fl">5L</span>, <span class="fl">6L</span><span class="op">)</span>,</span>
+<span class="r-in">  is_last_row <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span>,<span class="cn">TRUE</span>,<span class="cn">TRUE</span>,<span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Function call</span></span>
+<span class="r-in"><span class="fu">RUBer</span><span class="fu">::</span><span class="fu">rub_table_programs</span><span class="op">(</span></span>
+<span class="r-in">  df <span class="op">=</span> <span class="va">example_data</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> a flextable object.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> col_keys: `programm`, `projekttitel`, `antragsteller_innen_verantwortliche_personen`, `forderzeitraum_von`, `forderzeitraum_bis` </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> header has 2 row(s) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> body has 6 row(s) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> original dataset sample: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   report_nr                  programm</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1         1        Forschendes Lernen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2         1        Forschendes Lernen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3         1        Forschendes Lernen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4         1 Innovative Praxisprojekte</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5         1              interLECTURE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                                                                                       projekttitel</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                                                                               Interkulturelle Bibelhermeneutiken. Kontextuelle Exegese im theologisch-interdisziplinären Diskurs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                                                                                                                         Migration lokal denken. Begegnungen mit religiösen Gemeinschaften in NRW</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 Traumatheologie: Kritische Bibellektüre anhand von Leiderfahrungen.  Entwicklung eines Tagungs- und Seminarkonzepts mit Studierenden zur angewandten wissenschaftlichen Exegese von Bibeltexten.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                                                                                                                    Religiöse Pluralität entdecken, reflektieren und diskutierend sichtbar machen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                                                                                                                  Globale Christentümer: Theologische und religionswissenschaftliche Perspektiven</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   antragsteller_innen_verantwortliche_personen forderzeitraum_von</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                        N. N.         2021-10-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                                        N. N.         2019-10-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                                        N. N.         2021-04-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                                        N. N.         2021-04-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                                        N. N.         2020-06-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   forderzeitraum_bis rn is_last_row</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1         2022-03-31  1       FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2         2020-07-31  2       FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3         2021-12-31  3        TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4         2022-03-31  4        TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5         2021-09-30  5        TRUE</span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
