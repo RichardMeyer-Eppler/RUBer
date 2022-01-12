@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r libraries}
+```{r libraries, message=FALSE}
 library(dplyr)
 library(officer)
 ```
@@ -41,9 +41,8 @@ x <- officer::read_docx(
   reference_docx
 )
 
-officer::styles_info(
-  x
-) %>% 
+x %>% 
+officer::styles_info() %>% 
   dplyr::filter(
     is_custom
   ) %>% 
@@ -51,9 +50,7 @@ officer::styles_info(
     style_type,
     style_name
   ) %>% 
-  head(
-    50L
-  )
+  head(50L)
 
 ```
 
