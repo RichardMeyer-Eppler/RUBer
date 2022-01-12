@@ -21,5 +21,5 @@ String file path
 Get file path for automatic report generation
 }
 \examples{
-get_file_path(file_name = "test")
+get_file_path(file_name = "test.docx")
 }
