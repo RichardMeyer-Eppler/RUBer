@@ -7,7 +7,7 @@
 #' @keywords internal
 #'
 #' @examples
-#' get_unique(df, report_nr)
+#' get_unique(df_fake, report_nr)
 get_unique <- function(df, column) {
   unique_values <- df %>%
     dplyr::filter(!is.na({{ column }})) %>%
