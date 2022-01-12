@@ -102,7 +102,7 @@ rub_table_eb <- function(
   headings
 ) {
 
-  footnote_text <- "Fragebögen werden als gültig kategorisiert, wenn mindestens eine Frage beantwortet wurde."
+  footnote_text <- "Frageb\u00F6gen werden als g\u00FCltig kategorisiert, wenn mindestens eine Frage beantwortet wurde."
 
   rows_heading <- df %>%
     dplyr::filter(
@@ -239,7 +239,7 @@ rub_table_vb <- function(
   headings
 ) {
 
-  footnote_text <- "Fragebögen werden als gültig kategorisiert, wenn mindestens eine Frage beantwortet wurde."
+  footnote_text <- "Frageb\u00F6gen werden als g\u00FCltig kategorisiert, wenn mindestens eine Frage beantwortet wurde."
 
   rows_heading <- df %>%
     dplyr::filter(
@@ -384,7 +384,7 @@ rub_table_ab <- function(
   headings
 ) {
 
-  footnote_text <- "Fragebögen werden als gültig kategorisiert, wenn mindestens eine Frage beantwortet wurde. Bei der Absolvent:innenbefragung werden nach Abschluss der Befragung Studienfälle aus den Datensätzen gelöscht, wenn nur sehr wenige Fragen beantwortet wurden. Diese ausgeschlossenen Fälle sind in dieser Rücklauftabelle noch enthalten, obwohl sie bei den eigentlichen Auswertungen nicht mehr berücksichtigt wurden."
+  footnote_text <- "Frageb\u00F6gen werden als g\u00FCltig kategorisiert, wenn mindestens eine Frage beantwortet wurde. Bei der Absolvent:innenbefragung werden nach Abschluss der Befragung Studienf\u00E4lle aus den Datens\u00E4tzen gel\u00F6scht, wenn nur sehr wenige Fragen beantwortet wurden. Diese ausgeschlossenen F\u00E4lle sind in dieser R\u00FCcklauftabelle noch enthalten, obwohl sie bei den eigentlichen Auswertungen nicht mehr ber\u00FCcksichtigt wurden."
 
   rows_heading <- df %>%
     dplyr::filter(
@@ -522,8 +522,8 @@ rub_table_programs <- function(
     "programm",                                     "Programm",                                         "Programm",
     "projekttitel",                                 "Projekttitel",                                     "Projekttitel",
     "antragsteller_innen_verantwortliche_personen", "Antragsteller*innen / Verantwortliche Personen",   "Antragsteller*innen / Verantwortliche Personen",
-    "forderzeitraum_von",                           "Förderzeitraum",                                   "von",
-    "forderzeitraum_bis",                           "Förderzeitraum",                                   "bis"
+    "forderzeitraum_von",                           "F\u00F6rderzeitraum",                              "von",
+    "forderzeitraum_bis",                           "F\u00F6rderzeitraum",                              "bis"
   )
 
   rows <- df %>%
@@ -659,8 +659,8 @@ rub_table_item <- function(
     "y",                "Abschluss",            "Abschluss",
     "figure_caption",   "Abbildung",            "Abbildung",
     "facet",            "Item",                 "Item",
-    "mean",             "Mittelwert (μ)",       "Studiengang",
-    "mean_fgr",         "Mittelwert (μ)",       "Fächergruppe",
+    "mean",             "Mittelwert (\u03BC)",  "Studiengang",
+    "mean_fgr",         "Mittelwert (\u03BC)",  "F\u00E4chergruppe",
     "distance",         "Abweichung",           "in SD (\u03C3)"
   )
 
@@ -734,7 +734,7 @@ rub_table_item <- function(
     ) %>%
     flextable::compose(
       value = flextable::as_paragraph(
-        "* Die Formel zur Berechnung der Abweichung verwendet neben den ausgewiesenen Mittelwerten noch die Standardabweichung der Fächergruppe, die in der Tabelle aus Platzgründen nicht ausgegeben wird. Die exakte Berechnung ist: ",
+        "* Die Formel zur Berechnung der Abweichung verwendet neben den ausgewiesenen Mittelwerten noch die Standardabweichung der F\u00E4chergruppe, die in der Tabelle aus Platzgr\u00FCnden nicht ausgegeben wird. Die exakte Berechnung ist: ",
         flextable::as_equation(
           x = eq
         ),
