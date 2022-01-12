@@ -10,7 +10,8 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  fig.height = 4
 )
 
 # Maybe this isn't working!?
@@ -31,10 +32,7 @@ knitr::opts_chunk$set(
 library(RUBer)
 ```
 
-The plotting functions in RUBer do not in any way extend the functionality 
-provided by `ggplot2` itself. By preconfiguring a lot of the parameters, though, 
-RUBer's plotting functions are meant to be more accessible and easier to use. 
-One of the inspirations for this was the `bbplot` package used by the data team at BBC News.
+The plotting functions in RUBer do not in any way extend the functionality  provided by `{ggplot2}` itself. By preconfiguring a lot of the parameters, though,  RUBer's plotting functions are meant to be more accessible and easier to use. One of the inspirations for this was the `{bbplot}` package used by the data team at BBC News.
 
 ## Figure Types
 Available figure types:
@@ -128,7 +126,7 @@ groups, e.g. different departments. You can also change a figure's default color
 with `color`, the default font with `base_family`, and the size of all text 
 elements with `base_size` (see the documentation for `RUBer::theme_rub()`).
 
-```{r type-1-example-3, fig.height=10}
+```{r type-1-example-3, fig.height = 8}
 # Create test values for all three mandatory variables (x_var, y_var, fill_var)
 # and the optional facet variable (facet_var).
 df_t1_ex3 <- tibble::tribble(
