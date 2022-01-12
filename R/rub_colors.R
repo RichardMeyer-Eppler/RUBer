@@ -18,6 +18,7 @@ RUB_colors <- c(
   `blue_60`       = "#6686A0",
   `blue_40`       = "#99AEBF",
   `blue_20`       = "#CCD7DF",
+  `lighter grey`  = "#ECECEC",
   `light grey`    = "#E7E7E7",
   `red`           = "#E6332A",
   `dark red`      = "#B61E3E",
