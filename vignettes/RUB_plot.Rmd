@@ -431,8 +431,24 @@ rub_plot_type_3(
 
 ### Figure Type 4 - Line Charts
 ```{r type-4-example-1}
+
+# Temporary, until example is moved to seperate file
+df_t4_ex1 <- tibble::tribble(
+  ~term, ~students, ~degree,
+  "Spring '13", 120, "Bachelor 1-Subject",
+  "Spring '14", 105, "Bachelor 1-Subject",
+  "Spring '15", 124, "Bachelor 1-Subject",
+  "Spring '16", 114, "Bachelor 1-Subject",
+  "Spring '17", 122, "Bachelor 1-Subject",
+  "Spring '13", 121, "Master 1-Subject",
+  "Spring '14", 129, "Master 1-Subject",
+  "Spring '15", 122, "Master 1-Subject",
+  "Spring '16", 168, "Master 1-Subject",
+  "Spring '17", 7, "Master 1-Subject",
+)
+
 rub_plot_type_4(
-  df = df_t1_ex1,
+  df = df_t4_ex1,
   x_var = term,
   y_var = students,
   group_var = degree,
