@@ -50,32 +50,7 @@ variable names are mandatory: `x_var` for the x-coordinate, `y_var` for the
 y-coordinate and `fill_var` for the fill variable, which determines the groups 
 to be stacked. Consider this example:
 
-```{r type-1-example-1}
-# Create test values for all three mandatory variables (x_var, y_var, fill_var).
-df_t1_ex1 <- tibble::tribble(
-   ~term, ~students, ~degree,
-   "Spring '13", 120, "Bachelor 1-Subject",
-   "Spring '14", 105, "Bachelor 1-Subject",
-   "Spring '15", 124, "Bachelor 1-Subject",
-   "Spring '16", 114, "Bachelor 1-Subject",
-   "Spring '17", 122, "Bachelor 1-Subject",
-   "Spring '13", 121, "Master 1-Subject",
-   "Spring '14", 129, "Master 1-Subject",
-   "Spring '15", 122, "Master 1-Subject",
-   "Spring '16", 168, "Master 1-Subject",
-   "Spring '17", 7, "Master 1-Subject",
-)
-
-# The data source is df_t1_ex1, x_var is mapped to term, y_var to students, and
-# the fill_var to degree.
-rub_plot_type_1(
-  df = df_t1_ex1,
-  x_var = term,
-  y_var = students,
-  fill_var = degree
-#  ,fill_reverse = TRUE
-#  ,palette_reverse = TRUE
-)
+```{r type-1-example-1, child = system.file("examples", "rub_plot_type_1.R", package = "RUBer")}
 ```
 
 Next a more complex example, in which we additionally provide the label
