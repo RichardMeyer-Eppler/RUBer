@@ -18,6 +18,6 @@ Vector with unique values in that column, excluding NA
 Returns all unique values for a specified column in a data frame
 }
 \examples{
-get_unique(df, report_nr)
+get_unique(df_fake, report_nr)
 }
 \keyword{internal}
