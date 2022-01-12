@@ -14,6 +14,12 @@ knitr::opts_chunk$set(
 )
 ```
 
+```{r libraries}
+library(dplyr)
+library(officer)
+```
+
+
 # The docx reference document
 As explained in [section 3.4 of R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/word-document.html), the first step in creating a reference document is to produce a .docx file using rmarkdown or Pandoc. The formatting and layout of this document can then be edited and saved.  The resulting reference document is then used in the YAML metadata of each R Markdown file.
 
