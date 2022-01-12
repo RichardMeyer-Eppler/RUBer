@@ -19,6 +19,38 @@ As explained in [section 3.4 of R Markdown: The Definitive Guide](https://bookdo
 
 This vignette is intended to track all the changes made to the rub_reference.docx file, so that these changes are reproducible and documented.
 
+We can use `officer::styles_info` to extract all custom styles defined in the reference document:
+
+```{r styles-info}
+reference_docx <- system.file(
+  "rmarkdown",
+  "templates",
+  "datenreport-2018",
+  "skeleton",
+  "rub_reference.docx",
+  package = "RUBer"
+)
+
+x <- officer::read_docx(
+  reference_docx
+)
+
+officer::styles_info(
+  x
+) %>% 
+  dplyr::filter(
+    is_custom
+  ) %>% 
+  dplyr::arrange(
+    style_type,
+    style_name
+  ) %>% 
+  head(
+    50L
+  )
+
+```
+
 ## Page Layout
 ### Margins
 - Top: 2,5 cm
