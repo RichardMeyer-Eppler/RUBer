@@ -6,15 +6,11 @@
 #' @return Formatted Flextable
 #' @export
 #'
-#' @examples
-#' RUBer::rub_table_stg(
-#'   df = tibble::tribble(
-#'     ~studiengang, ~studienfachzaehler, ~faelle,
-#'     "Studiengang A", "1. Fach", 1,
-#'     "Studiengang B", "2. Fach", 1
-#'   ),
-#'   label = "Beispieltabelle"
-#' )
+#' @section Illustrations:
+#'
+#' \if{html}{\figure{rub_table_stg.png}{options: width=100\%}}
+#'
+#' @example inst/examples/rub_table_stg.R
 rub_table_stg <- function(
   df,
   label
@@ -106,8 +102,6 @@ rub_table_eb <- function(
   headings
 ) {
 
-  grey_fill <- "#ECECEC"
-
   footnote_text <- "Fragebögen werden als gültig kategorisiert, wenn mindestens eine Frage beantwortet wurde."
 
   rows_heading <- df %>%
@@ -171,7 +165,7 @@ rub_table_eb <- function(
     ) %>%
     flextable::bg(
       i = rows_heading,
-      bg = grey_fill,
+      bg = get_RUB_colors("lighter grey"),
       part = "body"
     ) %>%
     flextable::set_formatter(
@@ -234,14 +228,16 @@ rub_table_eb <- function(
 #' @return Formatted Flextable
 #' @export
 #'
-#' @examples
+#' @section Illustrations:
+#'
+#' \if{html}{\figure{rub_table_vb.png}{options: width=100\%}}
+#'
+#' @example inst/examples/rub_table_vb.R
 rub_table_vb <- function(
   df,
   typology,
   headings
 ) {
-
-  grey_fill <- "#ECECEC"
 
   footnote_text <- "Fragebögen werden als gültig kategorisiert, wenn mindestens eine Frage beantwortet wurde."
 
@@ -310,7 +306,7 @@ rub_table_vb <- function(
     ) %>%
     flextable::bg(
       i = rows_heading,
-      bg = grey_fill,
+      bg = get_RUB_colors("lighter grey"),
       part = "body"
     ) %>%
     flextable::set_formatter(
@@ -377,14 +373,16 @@ rub_table_vb <- function(
 #' @return Formatted Flextable
 #' @export
 #'
-#' @examples
+#' @section Illustrations:
+#'
+#' \if{html}{\figure{rub_table_ab.png}{options: width=100\%}}
+#'
+#' @example inst/examples/rub_table_ab.R
 rub_table_ab <- function(
   df,
   typology,
   headings
 ) {
-
-  grey_fill <- "#ECECEC"
 
   footnote_text <- "Fragebögen werden als gültig kategorisiert, wenn mindestens eine Frage beantwortet wurde. Bei der Absolvent:innenbefragung werden nach Abschluss der Befragung Studienfälle aus den Datensätzen gelöscht, wenn nur sehr wenige Fragen beantwortet wurden. Diese ausgeschlossenen Fälle sind in dieser Rücklauftabelle noch enthalten, obwohl sie bei den eigentlichen Auswertungen nicht mehr berücksichtigt wurden."
 
@@ -449,7 +447,7 @@ rub_table_ab <- function(
     ) %>%
     flextable::bg(
       i = rows_heading,
-      bg = grey_fill,
+      bg = get_RUB_colors("lighter grey"),
       part = "body"
     ) %>%
     flextable::set_formatter(
@@ -518,7 +516,6 @@ rub_table_ab <- function(
 rub_table_programs <- function(
   df
 ) {
-  grey_fill <- "#ECECEC"
 
   typology <- tibble::tribble(
     ~col_keys,                                      ~colB,                                              ~colA,
@@ -562,7 +559,7 @@ rub_table_programs <- function(
       fmt_date = "%d.%m.%Y"
     ) %>%
     flextable::theme_zebra(
-      even_body = grey_fill,
+      even_body = get_RUB_colors("lighter grey"),
       odd_body = "transparent"
     ) %>%
     RUBer::rub_style_flextable() %>%
@@ -859,7 +856,7 @@ rub_table_metrics <- function(
     ) %>%
     flextable::bold() %>%
     flextable::bg(
-      bg = RUBer::get_RUB_colors("blue")
+      bg = get_RUB_colors("blue")
     ) %>%
     flextable::color(
       color = "white"

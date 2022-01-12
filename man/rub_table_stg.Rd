@@ -17,8 +17,14 @@ Formatted Flextable
 \description{
 Get formatted flextable of student cases
 }
+\section{Illustrations}{
+
+
+\if{html}{\figure{rub_table_stg.png}{options: width=100\%}}
+}
+
 \examples{
-RUBer::rub_table_stg(
+rub_table_stg(
   df = tibble::tribble(
     ~studiengang, ~studienfachzaehler, ~faelle,
     "Studiengang A", "1. Fach", 1,
