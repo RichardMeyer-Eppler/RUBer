@@ -31,10 +31,14 @@ filter_report <- function(df, report_nr) {
 #' @export
 #'
 #' @examples
-#' get_file_path(file_name = "test")
+#' get_file_path(file_name = "test.docx")
 get_file_path <- function(
   file_directory = "output",
-  file_name = fs::path_file(tempfile(fileext = ".docx"))
+  file_name = fs::path_file(
+    tempfile(
+      fileext = ".docx"
+    )
+  )
 )  {
   here::here(
     file_directory,
