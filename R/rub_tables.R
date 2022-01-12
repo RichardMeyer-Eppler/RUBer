@@ -645,7 +645,11 @@ rub_table_programs <- function(
 #' @return Formatted Flextable
 #' @export
 #'
-#' @examples
+#' @section Illustrations:
+#'
+#' \if{html}{\figure{rub_table_item.png}{options: width=100\%}}
+#'
+#' @example inst/examples/rub_table_item.R
 rub_table_item <- function(
   df
 ) {
@@ -770,7 +774,11 @@ rub_table_item <- function(
 #' @return Formatted flextable
 #' @export
 #'
-#' @examples
+#' @section Illustrations:
+#'
+#' \if{html}{\figure{rub_table_metrics.png}{options: width=100\%}}
+#'
+#' @example inst/examples/rub_table_metrics.R
 rub_table_metrics <- function(
   df
 ) {
