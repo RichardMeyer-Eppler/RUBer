@@ -36,7 +36,7 @@ provided by `ggplot2` itself. By preconfiguring a lot of the parameters, though,
 RUBer's plotting functions are meant to be more accessible and easier to use. 
 One of the inspirations for this was the `bbplot` package used by the data team at BBC News.
 
-# Figure Types
+## Figure Types
 Available figure types:
 
 1. Vertical stacked bar charts
@@ -46,7 +46,7 @@ Available figure types:
 1. A combination of vertical stacked bar charts (type 1) with line charts 
     (type 4)
 
-## Figure Type 1 - Vertical stacked bar charts
+### Figure Type 1 - Vertical stacked bar charts
 For plotting vertical stacked bar charts, we use `RUBer::rub_plot_type_1`. Three 
 variable names are mandatory: `x_var` for the x-coordinate, `y_var` for the 
 y-coordinate and `fill_var` for the fill variable, which determines the groups 
@@ -176,7 +176,7 @@ rub_plot_type_1(
 )
 ```
 
-## Figure Type 2 - Vertical stacked bar charts scaled to 100%
+### Figure Type 2 - Vertical stacked bar charts scaled to 100%
 Figure type 2, plotted with `RUBer::rub_plot_type_2`, is very similar to type 1. 
 The main differences are that the y-axis uses a percentage scale rather than an 
 absolute one and that all stacked bars are scaled to 100%. Like for figure type 
@@ -285,7 +285,7 @@ rub_plot_type_2(
 )
 ```
 
-## Figure Type 3 - Horizontal stacked bar charts scaled to 100%
+### Figure Type 3 - Horizontal stacked bar charts scaled to 100%
 Figure type 3, plotted with `RUBer::rub_plot_type_3`, is very similar to figure 
 type 2, with the exception that the stacked bar charts are plotted horizontally. 
 As with the first two figure types, three variable names are mandatory: `x_var` 
@@ -342,7 +342,7 @@ rub_plot_type_3(
 )
 ```
 
-### Changing ordering
+#### Changing ordering
 In the last example above, the ordering of the fill variable, item_value, is
 going from bad ("Exceeded prescribed period of study") to good ("Within
 prescribed period of study"). This is because, by default, the fill variable
@@ -456,7 +456,7 @@ rub_plot_type_3(
 )
 ```
 
-## Figure Type 4 - Line Charts
+### Figure Type 4 - Line Charts
 ```{r type-4-example-1}
 rub_plot_type_4(
   df = df_t1_ex1,
@@ -513,13 +513,13 @@ rub_plot_type_1_and_4(
 ```
 
 
-# For experienced ggplot2 users
+## For experienced ggplot2 users
 The level of flexibility and customizability achievable through the plotting 
 functions of RUBer are limited. At some point, it makes more sense to properly
 learn `ggplot2` and to use the individual components directly (scales, colors, 
 etc.). See the [resources section](#resources) for help on getting started with `ggplot2`.
 
-## Applying the RUB Theme
+### Applying the RUB Theme
 The function `theme_rub` is a normal `ggplot2::theme()` function based on 
 `ggplot2::theme_minimal()`. You can use it for any ggplot object:
 
@@ -537,7 +537,7 @@ ggplot2::ggplot(
    theme_rub()
 ```
 
-## Scale Functions
+### Scale Functions
 The RUB palettes are used through corresponding scale functions. Currently, (1)
 `scale_color_rub` (a wrapper for `ggplot2::discrete_scale()` if discrete, or for
 `ggplot2::scale_color_gradientn()` if continuous) and (2) `scale_fill_rub` (a
@@ -683,8 +683,8 @@ ggplot2::ggplot(
    )
 ```
 
-# Resources for learning ggplot2 {#resources}
-## Books
+## Resources for learning ggplot2 {#resources}
+### Books
 1. The [Data visualisation][r4ds-vis] and [Graphics for communication][r4ds-comm] 
    chapters in [R for Data Science][r4ds] by Garrett Grolemund and Hadley 
    Wickham,
@@ -693,7 +693,7 @@ ggplot2::ggplot(
 1. [ggplot2 - Elegant Graphics for Data Analysis, 3rd Edition][ggplot2-book] by
    Hadley Wickham.
 
-## Presentations and tutorials
+### Presentations and tutorials
 1. [Designing ggplots - making clear figures that communicate][barett] by 
    Malcolm Barrett,
 1. [A ggplot2 Tutorial for Beautiful Plotting in R][scherer] by Cédric Scherer,
@@ -702,10 +702,10 @@ ggplot2::ggplot(
 1. [A Gentle Guide to the Grammar of Graphics with ggplot2][aden-buie] by 
    Garrick Aden-Buie.
 
-## Interactive courses
+### Interactive courses
 1. The [R Studio Cloud Primer on ggplot2][ggplot-primer].
 
-# Further Reading
+## Further Reading
 * [BBC - bbplot package](https://github.com/bbc/bbplot)
 * [BBC Visual and Data Journalism cookbook for R graphics](https://bbc.github.io/rcookbook/)
 * [Dewey Dunnington at rstudio::conf 2020 - Best practices for programming with ggplot2](https://resources.rstudio.com/rstudio-conf-2020/best-practices-for-programming-with-ggplot2-dewey-dunnington)
