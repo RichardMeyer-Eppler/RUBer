@@ -82,11 +82,100 @@
 
     
     
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attaching package: 'dplyr'</span>
+<span class="co">#&gt; The following objects are masked from 'package:stats':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     filter, lag</span>
+<span class="co">#&gt; The following objects are masked from 'package:base':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     intersect, setdiff, setequal, union</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ardata-fr.github.io/officeverse/" class="external-link">officer</a></span><span class="op">)</span></code></pre></div>
 <div class="section level1">
 <h1 id="the-docx-reference-document">The docx reference document<a class="anchor" aria-label="anchor" href="#the-docx-reference-document"></a>
 </h1>
 <p>As explained in <a href="https://bookdown.org/yihui/rmarkdown/word-document.html" class="external-link">section 3.4 of R Markdown: The Definitive Guide</a>, the first step in creating a reference document is to produce a .docx file using rmarkdown or Pandoc. The formatting and layout of this document can then be edited and saved. The resulting reference document is then used in the YAML metadata of each R Markdown file.</p>
 <p>This vignette is intended to track all the changes made to the rub_reference.docx file, so that these changes are reproducible and documented.</p>
+<p>We can use <code><a href="https://davidgohel.github.io/officer/reference/styles_info.html" class="external-link">officer::styles_info</a></code> to extract all custom styles defined in the reference document:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">reference_docx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span>
+  <span class="st">"rmarkdown"</span>,
+  <span class="st">"templates"</span>,
+  <span class="st">"datenreport-2018"</span>,
+  <span class="st">"skeleton"</span>,
+  <span class="st">"rub_reference.docx"</span>,
+  package <span class="op">=</span> <span class="st">"RUBer"</span>
+<span class="op">)</span>
+
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">officer</span><span class="fu">::</span><span class="fu"><a href="https://davidgohel.github.io/officer/reference/read_docx.html" class="external-link">read_docx</a></span><span class="op">(</span>
+  <span class="va">reference_docx</span>
+<span class="op">)</span>
+
+<span class="fu">officer</span><span class="fu">::</span><span class="fu"><a href="https://davidgohel.github.io/officer/reference/styles_info.html" class="external-link">styles_info</a></span><span class="op">(</span>
+  <span class="va">x</span>
+<span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span>
+    <span class="va">is_custom</span>
+  <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span>
+    <span class="va">style_type</span>,
+    <span class="va">style_name</span>
+  <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span>
+    <span class="fl">50L</span>
+  <span class="op">)</span>
+<span class="co">#&gt;    style_type             style_id            style_name is_custom is_default</span>
+<span class="co">#&gt; 1   character             AlertTok              AlertTok      TRUE      FALSE</span>
+<span class="co">#&gt; 2   character        AnnotationTok         AnnotationTok      TRUE      FALSE</span>
+<span class="co">#&gt; 3   character         AttributeTok          AttributeTok      TRUE      FALSE</span>
+<span class="co">#&gt; 4   character             BaseNTok              BaseNTok      TRUE      FALSE</span>
+<span class="co">#&gt; 5   character     BeschriftungZchn     Beschriftung Zchn      TRUE      FALSE</span>
+<span class="co">#&gt; 6   character           BuiltInTok            BuiltInTok      TRUE      FALSE</span>
+<span class="co">#&gt; 7   character              CharTok               CharTok      TRUE      FALSE</span>
+<span class="co">#&gt; 8   character           CommentTok            CommentTok      TRUE      FALSE</span>
+<span class="co">#&gt; 9   character        CommentVarTok         CommentVarTok      TRUE      FALSE</span>
+<span class="co">#&gt; 10  character          ConstantTok           ConstantTok      TRUE      FALSE</span>
+<span class="co">#&gt; 11  character       ControlFlowTok        ControlFlowTok      TRUE      FALSE</span>
+<span class="co">#&gt; 12  character          DataTypeTok           DataTypeTok      TRUE      FALSE</span>
+<span class="co">#&gt; 13  character            DecValTok             DecValTok      TRUE      FALSE</span>
+<span class="co">#&gt; 14  character     DocumentationTok      DocumentationTok      TRUE      FALSE</span>
+<span class="co">#&gt; 15  character             ErrorTok              ErrorTok      TRUE      FALSE</span>
+<span class="co">#&gt; 16  character         ExtensionTok          ExtensionTok      TRUE      FALSE</span>
+<span class="co">#&gt; 17  character             FloatTok              FloatTok      TRUE      FALSE</span>
+<span class="co">#&gt; 18  character          FunctionTok           FunctionTok      TRUE      FALSE</span>
+<span class="co">#&gt; 19  character          FuzeileZchn         Fußzeile Zchn      TRUE      FALSE</span>
+<span class="co">#&gt; 20  character            ImportTok             ImportTok      TRUE      FALSE</span>
+<span class="co">#&gt; 21  character       InformationTok        InformationTok      TRUE      FALSE</span>
+<span class="co">#&gt; 22  character           KeywordTok            KeywordTok      TRUE      FALSE</span>
+<span class="co">#&gt; 23  character        KopfzeileZchn        Kopfzeile Zchn      TRUE      FALSE</span>
+<span class="co">#&gt; 24  character            NormalTok             NormalTok      TRUE      FALSE</span>
+<span class="co">#&gt; 25  character          OperatorTok           OperatorTok      TRUE      FALSE</span>
+<span class="co">#&gt; 26  character             OtherTok              OtherTok      TRUE      FALSE</span>
+<span class="co">#&gt; 27  character      PreprocessorTok       PreprocessorTok      TRUE      FALSE</span>
+<span class="co">#&gt; 28  character      RegionMarkerTok       RegionMarkerTok      TRUE      FALSE</span>
+<span class="co">#&gt; 29  character       SpecialCharTok        SpecialCharTok      TRUE      FALSE</span>
+<span class="co">#&gt; 30  character     SpecialStringTok      SpecialStringTok      TRUE      FALSE</span>
+<span class="co">#&gt; 31  character SprechblasentextZchn Sprechblasentext Zchn      TRUE      FALSE</span>
+<span class="co">#&gt; 32  character            StringTok             StringTok      TRUE      FALSE</span>
+<span class="co">#&gt; 33  character        TextkrperZchn       Textkörper Zchn      TRUE      FALSE</span>
+<span class="co">#&gt; 34  character          VariableTok           VariableTok      TRUE      FALSE</span>
+<span class="co">#&gt; 35  character         VerbatimChar         Verbatim Char      TRUE      FALSE</span>
+<span class="co">#&gt; 36  character    VerbatimStringTok     VerbatimStringTok      TRUE      FALSE</span>
+<span class="co">#&gt; 37  character           WarningTok            WarningTok      TRUE      FALSE</span>
+<span class="co">#&gt; 38  paragraph             Abstract              Abstract      TRUE      FALSE</span>
+<span class="co">#&gt; 39  paragraph               Author                Author      TRUE      FALSE</span>
+<span class="co">#&gt; 40  paragraph      CaptionedFigure      Captioned Figure      TRUE      FALSE</span>
+<span class="co">#&gt; 41  paragraph              Compact               Compact      TRUE      FALSE</span>
+<span class="co">#&gt; 42  paragraph           Definition            Definition      TRUE      FALSE</span>
+<span class="co">#&gt; 43  paragraph       DefinitionTerm       Definition Term      TRUE      FALSE</span>
+<span class="co">#&gt; 44  paragraph               Figure                Figure      TRUE      FALSE</span>
+<span class="co">#&gt; 45  paragraph       FirstParagraph       First Paragraph      TRUE      FALSE</span>
+<span class="co">#&gt; 46  paragraph         ImageCaption         Image Caption      TRUE      FALSE</span>
+<span class="co">#&gt; 47  paragraph           SourceCode           Source Code      TRUE      FALSE</span>
+<span class="co">#&gt; 48  paragraph         TableCaption         Table Caption      TRUE      FALSE</span>
+<span class="co">#&gt; 49      table                Table                 Table      TRUE      FALSE</span></code></pre></div>
 <div class="section level2">
 <h2 id="page-layout">Page Layout<a class="anchor" aria-label="anchor" href="#page-layout"></a>
 </h2>
