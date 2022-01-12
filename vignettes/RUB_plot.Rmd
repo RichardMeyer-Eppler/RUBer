@@ -11,7 +11,7 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.height = 4
+  fig.height = 6
 )
 
 # Maybe this isn't working!?
@@ -32,7 +32,7 @@ knitr::opts_chunk$set(
 library(RUBer)
 ```
 
-The plotting functions in RUBer do not in any way extend the functionality  provided by `{ggplot2}` itself. By preconfiguring a lot of the parameters, though,  RUBer's plotting functions are meant to be more accessible and easier to use. One of the inspirations for this was the `{bbplot}` package used by the data team at BBC News.
+The plotting functions in RUBer do not in any way extend the functionality  provided by `{ggplot2}` itself. By preconfiguring a lot of the parameters, though,  RUBer's plotting functions are meant to be more accessible and easier to use. One of the inspirations for this was the `bbplot` package used by the data team at BBC News.
 
 ## Figure Types
 Available figure types:
