@@ -68,7 +68,86 @@
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>Formatted Flextable</p>
     </div>
+    <div class="section level2">
+    <h2 id="illustrations">Illustrations<a class="anchor" aria-label="anchor" href="#illustrations"></a></h2>
+    
 
+
+<p><img src="figures/rub_table_item.png" width="100%"></p>
+    </div>
+
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Example data</span></span>
+<span class="r-in"><span class="va">df_item</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span class="r-in">  stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span class="r-in">  figure_caption <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="st">"Beurteilung der Studienangebote und -bedingungen - Kontakte"</span>,<span class="st">"Fachbezogene Englischkenntnisse"</span>,<span class="st">"Fachbezogene Englischkenntnisse"</span>,<span class="st">"Auslandsaufenthalt während des Studiums"</span>,<span class="st">"Beurteilung der Prüfungssituation"</span>,<span class="st">"Beurteilung der Studienangebote und -bedingungen - Kontakte"</span>,<span class="st">"Beurteilung der Studienangebote und -bedingungen - Struktur des Studiums"</span>,<span class="st">"Beurteilung der Studienangebote und -bedingungen - Kontakte"</span></span>
+<span class="r-in">  <span class="op">)</span>,</span>
+<span class="r-in">  facet <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="st">"Kontakte zu Lehrenden"</span>,<span class="st">"Vorbereitung auf englischsprachige Fachkommunikation"</span>,<span class="st">"Vorbereitung auf den Umgang mit englischsprachiger Literatur"</span>,<span class="st">"Auslandsaufenthalt während des Studiums"</span>,<span class="st">"Ausgewogenheit der Prüfungsformen (Klausur, Hausarbeit, Projekte, mündliche Prüfungen etc.)."</span>,<span class="st">"Kontakte zu Mitstudierenden"</span>,<span class="st">"Zugang zu erforderlichen Lehrveranstaltungen (z. B. Seminare, Übungen)"</span>,<span class="st">"Kontakte zu Lehrenden"</span></span>
+<span class="r-in">  <span class="op">)</span>,</span>
+<span class="r-in">  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="st">"Bachelor 2-Fächer"</span>,<span class="st">"Bachelor 2-Fächer"</span>,<span class="st">"Bachelor 2-Fächer"</span>,<span class="st">"Bachelor 2-Fächer"</span>,<span class="st">"Master of Education"</span>,<span class="st">"Master of Education"</span>,<span class="st">"Master of Education"</span>,<span class="st">"Master of Education"</span></span>
+<span class="r-in">  <span class="op">)</span>,</span>
+<span class="r-in">  aggregation_sort_1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">55</span>, <span class="fl">55</span>, <span class="fl">55</span>, <span class="fl">55</span></span>
+<span class="r-in">  <span class="op">)</span>,</span>
+<span class="r-in">  mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="fl">1.71428571428571</span>,<span class="fl">4.19148936170213</span>,<span class="fl">3.9375</span>,<span class="fl">1.78</span>,<span class="fl">1.65</span>,<span class="fl">1.38095238095238</span>,<span class="fl">1.76190476190476</span>,<span class="fl">1.85714285714286</span></span>
+<span class="r-in">  <span class="op">)</span>,</span>
+<span class="r-in">  sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="fl">0.816496580927726</span>,<span class="fl">0.924034110803191</span>,<span class="fl">1.13748977082144</span>,<span class="fl">0.41845195759648</span>,<span class="fl">0.875093979915421</span>,<span class="fl">0.669043382464133</span>,<span class="fl">0.830948969838817</span>,<span class="fl">0.963624111659432</span></span>
+<span class="r-in">  <span class="op">)</span>,</span>
+<span class="r-in">  mean_fgr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="fl">2.34067207415991</span>,<span class="fl">3.4128157732594</span>,<span class="fl">3.15811965811966</span>,<span class="fl">1.5090395480226</span>,<span class="fl">2.69263157894737</span>,<span class="fl">2.29400386847195</span>,<span class="fl">2.67251461988304</span>,<span class="fl">2.56031128404669</span></span>
+<span class="r-in">  <span class="op">)</span>,</span>
+<span class="r-in">  sd_fgr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="fl">1.08899230654153</span>,<span class="fl">1.38010646489644</span>,<span class="fl">1.43054364002476</span>,<span class="fl">0.500059559613556</span>,<span class="fl">1.08996594469921</span>,<span class="fl">1.07770878477964</span>,<span class="fl">1.07799587645275</span>,<span class="fl">1.12444948643891</span></span>
+<span class="r-in">  <span class="op">)</span>,</span>
+<span class="r-in">  mean_delta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="fl">0.626386359874193</span>,<span class="fl">0.778673588442731</span>,<span class="fl">0.779380341880342</span>,<span class="fl">0.270960451977401</span>,<span class="fl">1.04263157894737</span>,<span class="fl">0.913051487519573</span>,<span class="fl">0.910609857978279</span>,<span class="fl">0.703168426903835</span></span>
+<span class="r-in">  <span class="op">)</span>,</span>
+<span class="r-in">  distance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="fl">0.575198149804654</span>,<span class="fl">0.564212695359818</span>,<span class="fl">0.544814097294407</span>,<span class="fl">0.541856358444179</span>,<span class="fl">0.956572619555646</span>,<span class="fl">0.84721540773769</span>,<span class="fl">0.844724806345951</span>,<span class="fl">0.625344611193467</span></span>
+<span class="r-in">  <span class="op">)</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Function call</span></span>
+<span class="r-in"><span class="fu">rub_table_item</span><span class="op">(</span></span>
+<span class="r-in">  df <span class="op">=</span> <span class="va">df_item</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> a flextable object.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> col_keys: `y`, `figure_caption`, `facet`, `mean`, `mean_fgr`, `distance` </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> header has 2 row(s) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> body has 8 row(s) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> original dataset sample: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     y</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   Bachelor 2-Fächer</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   Bachelor 2-Fächer</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3   Bachelor 2-Fächer</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4   Bachelor 2-Fächer</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 Master of Education</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                figure_caption</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Beurteilung der Studienangebote und -bedingungen - Kontakte</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                             Fachbezogene Englischkenntnisse</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                             Fachbezogene Englischkenntnisse</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                     Auslandsaufenthalt während des Studiums</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                           Beurteilung der Prüfungssituation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                          facet</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                                                        Kontakte zu Lehrenden</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                                         Vorbereitung auf englischsprachige Fachkommunikation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                                 Vorbereitung auf den Umgang mit englischsprachiger Literatur</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                                                      Auslandsaufenthalt während des Studiums</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 Ausgewogenheit der Prüfungsformen (Klausur, Hausarbeit, Projekte, mündliche Prüfungen etc.).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       mean mean_fgr  distance</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 1.714286 2.340672 0.5751981</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 4.191489 3.412816 0.5642127</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 3.937500 3.158120 0.5448141</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 1.780000 1.509040 0.5418564</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 1.650000 2.692632 0.9565726</span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
