@@ -72,7 +72,106 @@
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>Formatted Flextable</p>
     </div>
+    <div class="section level2">
+    <h2 id="illustrations">Illustrations<a class="anchor" aria-label="anchor" href="#illustrations"></a></h2>
+    
 
+
+<p><img src="figures/rub_table_vb.png" width="100%"></p>
+    </div>
+
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Create example data</span></span>
+<span class="r-in"><span class="va">studienverlauf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span class="r-in">  stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span class="r-in">  studienverlauf <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="st">"Geschlecht"</span>, <span class="st">"weiblich"</span>, <span class="st">"männlich"</span>, <span class="st">"Abschlussart"</span>, <span class="st">"Bachelor 1-Fach"</span>, <span class="st">"Bachelor 2-Fächer"</span>, <span class="st">"Magister Theologiae"</span>, <span class="st">"Staatsexamen"</span>, <span class="st">"Master 1-Fach"</span>, <span class="st">"Master 2-Fächer"</span>, <span class="st">"Master of Education"</span>, <span class="st">"Fächergruppe (erstes Studienfach)"</span>, <span class="st">"Geisteswissenschaften"</span>, <span class="st">"Humanmedizin / Gesundheitswissenschaften"</span>, <span class="st">"Ingenieurwissenschaften"</span>, <span class="st">"Kunst, Kunstwissenschaft"</span>, <span class="st">"Mathematik, Naturwissenschaften"</span>, <span class="st">"Rechts-, Wirtschafts- und Sozialwissenschaften"</span>, <span class="st">"Sport"</span>, <span class="st">"Gesamtzahl angeschriebene Studierende / gültige Fragebögen"</span>, <span class="st">"Rücklaufquote Studienverlaufsbefragungen"</span></span>
+<span class="r-in">  <span class="op">)</span>,</span>
+<span class="r-in">  koepfe_2fs_rub <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="cn">NA</span>,<span class="fl">2449</span>,<span class="fl">2450</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="fl">3993</span>,<span class="fl">160</span>,<span class="fl">746</span>,<span class="cn">NA</span>,<span class="fl">1560</span>,<span class="fl">43</span>,<span class="fl">1086</span>,<span class="fl">68</span>,<span class="fl">1302</span>,<span class="fl">700</span>,<span class="fl">140</span>,<span class="fl">4899</span>,<span class="fl">0.33</span></span>
+<span class="r-in">  <span class="op">)</span>,</span>
+<span class="r-in">  koepfe_2fs_rub_perc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="cn">NA</span>,<span class="fl">0.5</span>,<span class="fl">0.5</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="fl">0.82</span>,<span class="fl">0.03</span>,<span class="fl">0.15</span>,<span class="cn">NA</span>,<span class="fl">0.32</span>,<span class="fl">0.01</span>,<span class="fl">0.22</span>,<span class="fl">0.01</span>,<span class="fl">0.27</span>,<span class="fl">0.14</span>,<span class="fl">0.03</span>,<span class="fl">1</span>,<span class="fl">0.33</span></span>
+<span class="r-in">  <span class="op">)</span>,</span>
+<span class="r-in">  koepfe_2fs_bef <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="cn">NA</span>,<span class="fl">880</span>,<span class="fl">747</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="fl">1289</span>,<span class="fl">66</span>,<span class="fl">272</span>,<span class="cn">NA</span>,<span class="fl">516</span>,<span class="fl">17</span>,<span class="fl">297</span>,<span class="fl">25</span>,<span class="fl">506</span>,<span class="fl">223</span>,<span class="fl">43</span>,<span class="fl">1627</span>,<span class="fl">0.33</span></span>
+<span class="r-in">  <span class="op">)</span>,</span>
+<span class="r-in">  koepfe_2fs_bef_perc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="cn">NA</span>,<span class="fl">0.54</span>,<span class="fl">0.46</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="fl">0.79</span>,<span class="fl">0.04</span>,<span class="fl">0.17</span>,<span class="cn">NA</span>,<span class="fl">0.32</span>,<span class="fl">0.01</span>,<span class="fl">0.18</span>,<span class="fl">0.02</span>,<span class="fl">0.31</span>,<span class="fl">0.14</span>,<span class="fl">0.03</span>,<span class="fl">1</span>,<span class="fl">0.33</span></span>
+<span class="r-in">  <span class="op">)</span>,</span>
+<span class="r-in">  koepfe_5fs_rub <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="cn">NA</span>,<span class="fl">5846</span>,<span class="fl">5832</span>,<span class="cn">NA</span>,<span class="fl">6181</span>,<span class="fl">3320</span>,<span class="fl">73</span>,<span class="fl">2102</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="fl">3542</span>,<span class="fl">942</span>,<span class="fl">1691</span>,<span class="fl">178</span>,<span class="fl">2477</span>,<span class="fl">2550</span>,<span class="fl">298</span>,<span class="fl">11678</span>,<span class="fl">0.32</span></span>
+<span class="r-in">  <span class="op">)</span>,</span>
+<span class="r-in">  koepfe_5fs_rub_perc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="cn">NA</span>,<span class="fl">0.5</span>,<span class="fl">0.5</span>,<span class="cn">NA</span>,<span class="fl">0.53</span>,<span class="fl">0.28</span>,<span class="fl">0.01</span>,<span class="fl">0.18</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="fl">0.3</span>,<span class="fl">0.08</span>,<span class="fl">0.14</span>,<span class="fl">0.02</span>,<span class="fl">0.21</span>,<span class="fl">0.22</span>,<span class="fl">0.03</span>,<span class="fl">1</span>,<span class="fl">0.32</span></span>
+<span class="r-in">  <span class="op">)</span>,</span>
+<span class="r-in">  koepfe_5fs_bef <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="cn">NA</span>,<span class="fl">1564</span>,<span class="fl">2172</span>,<span class="cn">NA</span>,<span class="fl">1848</span>,<span class="fl">1141</span>,<span class="fl">24</span>,<span class="fl">723</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="fl">1203</span>,<span class="fl">332</span>,<span class="fl">457</span>,<span class="fl">49</span>,<span class="fl">842</span>,<span class="fl">774</span>,<span class="fl">79</span>,<span class="fl">3736</span>,<span class="fl">0.32</span></span>
+<span class="r-in">  <span class="op">)</span>,</span>
+<span class="r-in">  koepfe_5fs_bef_perc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="cn">NA</span>,<span class="fl">0.58</span>,<span class="fl">0.42</span>,<span class="cn">NA</span>,<span class="fl">0.49</span>,<span class="fl">0.31</span>,<span class="fl">0.01</span>,<span class="fl">0.19</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="fl">0.32</span>,<span class="fl">0.09</span>,<span class="fl">0.12</span>,<span class="fl">0.01</span>,<span class="fl">0.23</span>,<span class="fl">0.21</span>,<span class="fl">0.02</span>,<span class="fl">1</span>,<span class="fl">0.32</span></span>
+<span class="r-in">  <span class="op">)</span>,</span>
+<span class="r-in">  row_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">8</span>,<span class="fl">9</span>,<span class="fl">10</span>,<span class="fl">11</span>,<span class="fl">12</span>,<span class="fl">13</span>,<span class="fl">14</span>,<span class="fl">15</span>,<span class="fl">16</span>,<span class="fl">17</span>,<span class="fl">18</span>,<span class="fl">19</span>,<span class="fl">20</span>,<span class="fl">21</span></span>
+<span class="r-in">  <span class="op">)</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="va">typology</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span class="r-in">  stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span class="r-in">  <span class="cn">NA</span>,</span>
+<span class="r-in">  col_keys <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="st">"studienverlauf"</span>,<span class="st">"koepfe_2fs_rub"</span>,<span class="st">"koepfe_2fs_rub_perc"</span>,<span class="st">"koepfe_2fs_bef"</span>,<span class="st">"koepfe_2fs_bef_perc"</span>,<span class="st">"koepfe_5fs_rub"</span>,<span class="st">"koepfe_5fs_rub_perc"</span>,<span class="st">"koepfe_5fs_bef"</span>,<span class="st">"koepfe_5fs_bef_perc"</span></span>
+<span class="r-in">  <span class="op">)</span>,</span>
+<span class="r-in">  colD <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="st">"Studienverlauf"</span>,<span class="st">"Studierende (WiSe 18/19 bis  WiSe 20/21)"</span>,<span class="st">"Studierende (WiSe 18/19 bis  WiSe 20/21)"</span>,<span class="st">"Studierende (WiSe 18/19 bis  WiSe 20/21)"</span>,<span class="st">"Studierende (WiSe 18/19 bis  WiSe 20/21)"</span>,<span class="st">"Studierende (WiSe 18/19 bis  WiSe 20/21)"</span>,<span class="st">"Studierende (WiSe 18/19 bis  WiSe 20/21)"</span>,<span class="st">"Studierende (WiSe 18/19 bis  WiSe 20/21)"</span>,<span class="st">"Studierende (WiSe 18/19 bis  WiSe 20/21)"</span></span>
+<span class="r-in">  <span class="op">)</span>,</span>
+<span class="r-in">  colC <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="st">"Studienverlauf"</span>,<span class="st">"2. Fachsemester"</span>,<span class="st">"2. Fachsemester"</span>,<span class="st">"2. Fachsemester"</span>,<span class="st">"2. Fachsemester"</span>,<span class="st">"5. Fachsemester"</span>,<span class="st">"5. Fachsemester"</span>,<span class="st">"5. Fachsemester"</span>,<span class="st">"5. Fachsemester"</span></span>
+<span class="r-in">  <span class="op">)</span>,</span>
+<span class="r-in">  colB <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="st">"Studienverlauf"</span>,<span class="st">"Angeschrieben"</span>,<span class="st">"Angeschrieben"</span>,<span class="st">"Gültige Fragebögen"</span>,<span class="st">"Gültige Fragebögen"</span>,<span class="st">"Angeschrieben"</span>,<span class="st">"Angeschrieben"</span>,<span class="st">"Gültige Fragebögen"</span>,<span class="st">"Gültige Fragebögen"</span></span>
+<span class="r-in">  <span class="op">)</span>,</span>
+<span class="r-in">  colA <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="st">"Studienverlauf"</span>,<span class="st">"Köpfe"</span>,<span class="st">"(in %)"</span>,<span class="st">"Köpfe"</span>,<span class="st">"(in %)"</span>,<span class="st">"Köpfe"</span>,<span class="st">"(in %)"</span>,<span class="st">"Köpfe"</span>,<span class="st">"(in %)"</span></span>
+<span class="r-in">  <span class="op">)</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="va">headings</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">  <span class="st">"Geschlecht"</span>, <span class="st">"Abschlussart"</span>, <span class="st">"Fächergruppe (erstes Studienfach)"</span>, <span class="st">"Gesamtzahl angeschriebene Studierende / gültige Fragebögen"</span>, <span class="st">"Rücklaufquote Studienverlaufsbefragungen"</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Function call</span></span>
+<span class="r-in"><span class="fu">rub_table_vb</span><span class="op">(</span></span>
+<span class="r-in">  df <span class="op">=</span> <span class="va">studienverlauf</span>,</span>
+<span class="r-in">  typolog <span class="op">=</span> <span class="va">typology</span>,</span>
+<span class="r-in">  headings <span class="op">=</span> <span class="va">headings</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> a flextable object.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> col_keys: `studienverlauf`, `koepfe_2fs_rub`, `koepfe_2fs_rub_perc`, `koepfe_2fs_bef`, `koepfe_2fs_bef_perc`, `koepfe_5fs_rub`, `koepfe_5fs_rub_perc`, `koepfe_5fs_bef`, `koepfe_5fs_bef_perc` </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> header has 5 row(s) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> body has 21 row(s) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> original dataset sample: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    studienverlauf koepfe_2fs_rub koepfe_2fs_rub_perc koepfe_2fs_bef</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1      Geschlecht             NA                  NA             NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2        weiblich           2449                 0.5            880</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3        männlich           2450                 0.5            747</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4    Abschlussart             NA                  NA             NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 Bachelor 1-Fach             NA                  NA             NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   koepfe_2fs_bef_perc koepfe_5fs_rub koepfe_5fs_rub_perc koepfe_5fs_bef</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                  NA             NA                  NA             NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                0.54           5846                0.50           1564</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                0.46           5832                0.50           2172</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                  NA             NA                  NA             NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                  NA           6181                0.53           1848</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   koepfe_5fs_bef_perc row_id</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                  NA      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                0.58      2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                0.42      3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                  NA      4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                0.49      5</span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
