@@ -128,7 +128,7 @@ groups, e.g. different departments. You can also change a figure's default color
 with `color`, the default font with `base_family`, and the size of all text 
 elements with `base_size` (see the documentation for `RUBer::theme_rub()`).
 
-```{r type-1-example-3}
+```{r type-1-example-3, fig.height=10}
 # Create test values for all three mandatory variables (x_var, y_var, fill_var)
 # and the optional facet variable (facet_var).
 df_t1_ex3 <- tibble::tribble(
