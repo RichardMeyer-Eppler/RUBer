@@ -128,7 +128,7 @@
   x_var <span class="op">=</span> <span class="va">term</span>,
   y_var <span class="op">=</span> <span class="va">students</span>,
   fill_var <span class="op">=</span> <span class="va">degree</span>,
-  base_size <span class="op">=</span> <span class="fl">13</span>
+  base_size <span class="op">=</span> <span class="fl">14</span>
 <span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/chunk_name-1.png"><!-- --></p>
 <p>Next a more complex example, in which we additionally provide the label for the y-axis, <code>y_label</code> and a caption indicating the source of the data, <code>caption</code>. By default, the caption has the prefix “<em>Quelle:</em>”, which we change from German to English using the parameter <code>caption_prefix</code>. We also want to suppress the value label for Master students in the spring term of 2017, because the value is so small. By default, labels for values accounting for less than 4% of the total value are suppressed. In this case, the seven students account for 7/(7+122) = 5.4% of the total value, so we increase the value for <code>filter_cutoff</code> from the default of 0.04 to 0.06.</p>
@@ -157,12 +157,12 @@
   fill_var <span class="op">=</span> <span class="va">degree</span>,
   y_axis_label <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_wrap.html" class="external-link">str_wrap</a></span><span class="op">(</span>
     <span class="st">"Students (1st degree program, 1st and 2nd field of study)"</span>,
-    width <span class="op">=</span> <span class="fl">40</span>
+    width <span class="op">=</span> <span class="fl">35</span>
   <span class="op">)</span>,
   caption <span class="op">=</span> <span class="st">"Information management system of the University of Bochum"</span>,
   caption_prefix <span class="op">=</span> <span class="st">"Source:"</span>,
   filter_cutoff <span class="op">=</span> <span class="fl">0.06</span>,
-  base_size <span class="op">=</span> <span class="fl">13</span>
+  base_size <span class="op">=</span> <span class="fl">14</span>
 <span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/type-1-example-2-1.png"><!-- --></p>
 <p>The third example adds even more parameters. You can facet the figure by a discrete variable, <code>facet_var</code>, in order to make direct comparisons between groups, e.g. different departments. You can also change a figure’s default color with <code>color</code>, the default font with <code>base_family</code>, and the size of all text elements with <code>base_size</code> (see the documentation for <code><a href="../reference/theme_rub.html">RUBer::theme_rub()</a></code>).</p>
@@ -203,7 +203,7 @@
   fill_var <span class="op">=</span> <span class="va">degree</span>,
   y_axis_label <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_wrap.html" class="external-link">str_wrap</a></span><span class="op">(</span>
     string <span class="op">=</span> <span class="st">"Students (1st degree program, 1st and 2nd field of study)"</span>,
-    width <span class="op">=</span> <span class="fl">40</span>
+    width <span class="op">=</span> <span class="fl">35</span>
   <span class="op">)</span>,
   caption <span class="op">=</span> <span class="st">"Information management system of the University of Bochum"</span>,
   caption_prefix <span class="op">=</span> <span class="st">"Source:"</span>,
@@ -252,7 +252,7 @@
   x_var <span class="op">=</span> <span class="va">cohort_term</span>,
   y_var <span class="op">=</span> <span class="va">status_percentage</span>,
   fill_var <span class="op">=</span> <span class="va">cohort_status</span>,
-  base_size <span class="op">=</span> <span class="fl">13</span>
+  base_size <span class="op">=</span> <span class="fl">14</span>
 <span class="op">)</span> </code></pre></div>
 <p><img src="RUB_plot_files/figure-html/type-2-example-1-1.png"><!-- --></p>
 <p>Now let us say we are unhappy with the default ordering of the stacked bars, because we want the largest cohort group, those still studying, on top. We can use the boolean parameter <code>fill_reverse</code> to do just that. We also provide a discrete facetting variable, <code>facet_var</code>, a text for <code>caption</code> and <code>caption_prefix</code>, and a lower threshhold for the <code>filter_cutoff</code>, leading to more labels being displayed.</p>
@@ -311,7 +311,7 @@
   caption <span class="op">=</span> <span class="st">"Comparison of two fictitious cohorts"</span>,
   caption_prefix <span class="op">=</span> <span class="st">"Source:"</span>,
   fill_reverse <span class="op">=</span> <span class="cn">TRUE</span>,
-  base_size <span class="op">=</span> <span class="fl">13</span>
+  base_size <span class="op">=</span> <span class="fl">14</span>
 <span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/type-2-example-2-1.png"><!-- --></p>
 </div>
@@ -334,7 +334,7 @@
    x_var <span class="op">=</span> <span class="va">item_value_percentage</span>,
    y_var <span class="op">=</span> <span class="va">survey_group</span>,
    fill_var <span class="op">=</span> <span class="va">item_value</span>,
-   base_size <span class="op">=</span> <span class="fl">13</span>
+   base_size <span class="op">=</span> <span class="fl">14</span>
 <span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/type-3-example-1-1.png"><!-- --></p>
 <p>The second example once again adds a facetting variable, <code>fill_var</code>, for plotting direct comparisons between groups. We also use <code>caption</code>, <code>caption_prefix</code>, a <code>filter_cutoff</code> that suppresses all values below 20%, and increase the text size to 14.</p>
@@ -378,7 +378,7 @@
    caption <span class="op">=</span> <span class="st">"Graduate survey 2017/18"</span>,
    caption_prefix <span class="op">=</span> <span class="st">"Source:"</span>,
    filter_cutoff <span class="op">=</span> <span class="fl">0.20</span>,
-   base_size <span class="op">=</span> <span class="fl">13</span>,
+   base_size <span class="op">=</span> <span class="fl">14</span>,
    fill_reverse <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/type-3-example-3-1.png"><!-- --></p>
@@ -394,7 +394,7 @@
    caption <span class="op">=</span> <span class="st">"Graduate survey 2017/18"</span>,
    caption_prefix <span class="op">=</span> <span class="st">"Source:"</span>,
    filter_cutoff <span class="op">=</span> <span class="fl">0.20</span>,
-   base_size <span class="op">=</span> <span class="fl">13</span>
+   base_size <span class="op">=</span> <span class="fl">14</span>
 <span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/type-3-example-4-1.png"><!-- --></p>
 <p>What if we want to use a custom ordering of the fill variable? Consider the following example:</p>
@@ -423,7 +423,7 @@
    facet_var <span class="op">=</span> <span class="va">degree</span>,
    caption <span class="op">=</span> <span class="st">"Graduate survey 2017/18"</span>,
    caption_prefix <span class="op">=</span> <span class="st">"Source:"</span>,
-   base_size <span class="op">=</span> <span class="fl">13</span>
+   base_size <span class="op">=</span> <span class="fl">14</span>
 <span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/type-3-example-5-1.png"><!-- --></p>
 <p>Here, we neither want alphabetic ordering, nor its reverse. Instead, we would prefer an alphabetic ordering with the item_value “Unknown” always coming last. For this, we can explicitly turn the <code>fill_var</code> into a factor with a predetermined ordering. The plotting function will respect this ordering.</p>
@@ -460,7 +460,7 @@
    facet_var <span class="op">=</span> <span class="va">degree</span>,
    caption <span class="op">=</span> <span class="st">"Graduate survey 2017/18"</span>,
    caption_prefix <span class="op">=</span> <span class="st">"Source:"</span>,
-   base_size <span class="op">=</span> <span class="fl">13</span>
+   base_size <span class="op">=</span> <span class="fl">14</span>
 <span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/type-3-example-6-1.png"><!-- --></p>
 </div>
@@ -492,12 +492,12 @@
   group_var <span class="op">=</span> <span class="va">degree</span>,
   y_axis_label <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_wrap.html" class="external-link">str_wrap</a></span><span class="op">(</span>
     string <span class="op">=</span> <span class="st">"Students (1st degree program, 1st and 2nd field of study)"</span>,
-    width <span class="op">=</span> <span class="fl">40</span>
+    width <span class="op">=</span> <span class="fl">35</span>
   <span class="op">)</span>,
   caption <span class="op">=</span> <span class="st">"Information management system of the University of Bochum"</span>,
   caption_prefix <span class="op">=</span> <span class="st">"Source:"</span>,
   filter_cutoff <span class="op">=</span> <span class="fl">10</span>,
-  base_size <span class="op">=</span> <span class="fl">13</span>
+  base_size <span class="op">=</span> <span class="fl">14</span>
 <span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/type-4-example-1-1.png"><!-- --></p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
@@ -510,7 +510,7 @@
   facet_var <span class="op">=</span> <span class="va">department</span>,
     y_axis_label <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_wrap.html" class="external-link">str_wrap</a></span><span class="op">(</span>
     string <span class="op">=</span> <span class="st">"Students (1st degree program, 1st and 2nd field of study)"</span>,
-    width <span class="op">=</span> <span class="fl">40</span>
+    width <span class="op">=</span> <span class="fl">35</span>
   <span class="op">)</span>,
   caption <span class="op">=</span> <span class="st">"Information management system of the University of Bochum"</span>,
   caption_prefix <span class="op">=</span> <span class="st">"Source:"</span>,
@@ -543,7 +543,7 @@
    y_var <span class="op">=</span> <span class="va">students</span>,
    fill_var <span class="op">=</span> <span class="va">degree</span>,
    group_var <span class="op">=</span> <span class="va">group</span>,
-   base_size <span class="op">=</span> <span class="fl">13</span>
+   base_size <span class="op">=</span> <span class="fl">14</span>
 <span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/type-5-example-3-1.png"><!-- --></p>
 </div>
@@ -584,11 +584,15 @@
       color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">carb</span><span class="op">)</span>
       <span class="op">)</span>
    <span class="op">)</span> <span class="op">+</span> 
-   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>
+     size <span class="op">=</span> <span class="fl">3</span>
+   <span class="op">)</span> <span class="op">+</span>
    <span class="fu"><a href="../reference/scale_color_rub.html">scale_color_rub</a></span><span class="op">(</span>
       palette <span class="op">=</span> <span class="st">"discrete"</span>
    <span class="op">)</span> <span class="op">+</span>
-   <span class="fu"><a href="../reference/theme_rub.html">theme_rub</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+   <span class="fu"><a href="../reference/theme_rub.html">theme_rub</a></span><span class="op">(</span>
+     base_size <span class="op">=</span> <span class="fl">14</span>
+   <span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/theme-rub-color-discrete-1.png"><!-- --></p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
@@ -603,11 +607,14 @@
       color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">carb</span><span class="op">)</span>
    <span class="op">)</span>
 <span class="op">)</span> <span class="op">+</span> 
-   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>
+     size <span class="op">=</span> <span class="fl">3</span>
+   <span class="op">)</span> <span class="op">+</span>
    <span class="fu"><a href="../reference/scale_color_rub.html">scale_color_rub</a></span><span class="op">(</span>
       palette <span class="op">=</span> <span class="st">"discrete"</span>
    <span class="op">)</span> <span class="op">+</span>
    <span class="fu"><a href="../reference/theme_rub.html">theme_rub</a></span><span class="op">(</span>
+      base_size <span class="op">=</span> <span class="fl">14</span>,
       x_axis_label <span class="op">=</span> <span class="cn">TRUE</span>,
       y_axis_label <span class="op">=</span> <span class="cn">TRUE</span>,
       legend_title <span class="op">=</span> <span class="cn">FALSE</span>
@@ -624,12 +631,15 @@
       color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">carb</span><span class="op">)</span>
    <span class="op">)</span>
 <span class="op">)</span> <span class="op">+</span> 
-   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>
+     size <span class="op">=</span> <span class="fl">3</span>
+   <span class="op">)</span> <span class="op">+</span>
    <span class="fu"><a href="../reference/scale_color_rub.html">scale_color_rub</a></span><span class="op">(</span>
       palette <span class="op">=</span> <span class="st">"discrete"</span>,
       reverse <span class="op">=</span> <span class="cn">TRUE</span>
    <span class="op">)</span> <span class="op">+</span>
    <span class="fu"><a href="../reference/theme_rub.html">theme_rub</a></span><span class="op">(</span>
+      base_size <span class="op">=</span> <span class="fl">14</span>,
       x_axis_label <span class="op">=</span> <span class="cn">TRUE</span>,
       y_axis_label <span class="op">=</span> <span class="cn">TRUE</span>,
       legend_title <span class="op">=</span> <span class="cn">FALSE</span>
@@ -646,12 +656,15 @@
       color <span class="op">=</span> <span class="va">disp</span>
    <span class="op">)</span>
 <span class="op">)</span> <span class="op">+</span> 
-   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>
+     size <span class="op">=</span> <span class="fl">3</span>
+   <span class="op">)</span> <span class="op">+</span>
    <span class="fu"><a href="../reference/scale_color_rub.html">scale_color_rub</a></span><span class="op">(</span>
       palette <span class="op">=</span> <span class="st">"continuous"</span>,
       discrete <span class="op">=</span> <span class="cn">FALSE</span>
    <span class="op">)</span> <span class="op">+</span>
    <span class="fu"><a href="../reference/theme_rub.html">theme_rub</a></span><span class="op">(</span>
+      base_size <span class="op">=</span> <span class="fl">14</span>, 
       x_axis_label <span class="op">=</span> <span class="cn">TRUE</span>,
       y_axis_label <span class="op">=</span> <span class="cn">TRUE</span>,
       legend_title <span class="op">=</span> <span class="cn">TRUE</span>
@@ -668,13 +681,16 @@
       color <span class="op">=</span> <span class="va">disp</span>
    <span class="op">)</span>
 <span class="op">)</span> <span class="op">+</span> 
-   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>
+     size <span class="op">=</span> <span class="fl">3</span>
+   <span class="op">)</span> <span class="op">+</span>
    <span class="fu"><a href="../reference/scale_color_rub.html">scale_color_rub</a></span><span class="op">(</span>
       palette <span class="op">=</span> <span class="st">"continuous"</span>,
       discrete <span class="op">=</span> <span class="cn">FALSE</span>,
       reverse <span class="op">=</span> <span class="cn">TRUE</span>
    <span class="op">)</span> <span class="op">+</span>
    <span class="fu"><a href="../reference/theme_rub.html">theme_rub</a></span><span class="op">(</span>
+      base_size <span class="op">=</span> <span class="fl">14</span>,
       x_axis_label <span class="op">=</span> <span class="cn">TRUE</span>,
       y_axis_label <span class="op">=</span> <span class="cn">TRUE</span>,
       legend_title <span class="op">=</span> <span class="cn">TRUE</span>
@@ -691,12 +707,15 @@
       color <span class="op">=</span> <span class="va">disp</span>
    <span class="op">)</span>
 <span class="op">)</span> <span class="op">+</span> 
-   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>
+     size <span class="op">=</span> <span class="fl">3</span>
+   <span class="op">)</span> <span class="op">+</span>
    <span class="fu"><a href="../reference/scale_color_rub.html">scale_color_rub</a></span><span class="op">(</span>
       palette <span class="op">=</span> <span class="st">"continuous_diverging"</span>,
       discrete <span class="op">=</span> <span class="cn">FALSE</span>
    <span class="op">)</span> <span class="op">+</span>
    <span class="fu"><a href="../reference/theme_rub.html">theme_rub</a></span><span class="op">(</span>
+      base_size <span class="op">=</span> <span class="fl">14</span>,
       x_axis_label <span class="op">=</span> <span class="cn">TRUE</span>,
       y_axis_label <span class="op">=</span> <span class="cn">TRUE</span>,
       legend_title <span class="op">=</span> <span class="cn">TRUE</span>
@@ -713,6 +732,12 @@
    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_bar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
    <span class="fu"><a href="../reference/scale_fill_rub.html">scale_fill_rub</a></span><span class="op">(</span>
       palette <span class="op">=</span> <span class="st">"discrete_2"</span>
+   <span class="op">)</span> <span class="op">+</span> 
+   <span class="fu"><a href="../reference/theme_rub.html">theme_rub</a></span><span class="op">(</span>
+      base_size <span class="op">=</span> <span class="fl">14</span>,
+      x_axis_label <span class="op">=</span> <span class="cn">TRUE</span>,
+      y_axis_label <span class="op">=</span> <span class="cn">TRUE</span>,
+      legend_title <span class="op">=</span> <span class="cn">TRUE</span>
    <span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/theme-rub-scale-1.png"><!-- --></p>
 </div>
