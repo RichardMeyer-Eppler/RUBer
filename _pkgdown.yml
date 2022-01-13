@@ -71,6 +71,6 @@ figures:
   fig.ext: png
   fig.width: 7.2916667
   fig.height: 7.2916667
-  fig.retina: 2
+  fig.retina: 1
   bg: NA
   other.parameters: []

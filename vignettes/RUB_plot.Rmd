@@ -8,10 +8,22 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
+# https://www.jumpingrivers.com/blog/knitr-rmarkdown-image-size/
+
+# dpi <- 96
+# fig_width <- 7.2916667
+# fig_height <- 4.479167
+# 
+# fig_width * dpi
+# 
+# 430 / dpi
+# 
+# rendered  696 x 430
+  
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.height = 6
+  fig.height = 4.479167
 )
 
 # Maybe this isn't working!?
@@ -136,7 +148,7 @@ groups, e.g. different departments. You can also change a figure's default color
 with `color`, the default font with `base_family`, and the size of all text 
 elements with `base_size` (see the documentation for `RUBer::theme_rub()`).
 
-```{r type-1-example-3, fig.height = 8}
+```{r type-1-example-3}
 # Create test values for all three mandatory variables (x_var, y_var, fill_var)
 # and the optional facet variable (facet_var).
 df_t1_ex3 <- tibble::tribble(
