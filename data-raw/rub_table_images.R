@@ -2,8 +2,14 @@
 
 # Libraries --------------------------------------------------------------------
 
+## Github
+# remotes::install_github("coolbutuseless/optout") # for PNG compression
+# Compression library pngquant needs to be installed separately, add to PATH
+# https://pngquant.org/
+
 library(flextable)
 library(here)
+library(optout)
 library(purrr)
 library(RUBer)
 
@@ -33,6 +39,12 @@ create_image <- function(
       encoding = "UTF8"
     )[[1]],
     path = output_file
+  )
+
+  optout::pngquant(
+    infile = output_file,
+    outfile = output_file,
+    verbosity = 1
   )
 }
 
