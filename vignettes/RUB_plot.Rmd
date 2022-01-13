@@ -32,6 +32,37 @@ knitr::opts_chunk$set(
 library(RUBer)
 ```
 
+```{r run-example-function, echo = FALSE}
+run_example <- function(
+  example_file,
+  chunk_name
+) {
+  src <- c(
+    "```{r chunk_name}\n",
+    readLines(
+      system.file(
+        "examples", example_file, package = "RUBer"
+      )
+    ),
+    "```\n"
+  )
+
+  out <- knitr::knit(
+    text = src,
+    quiet = TRUE
+  )
+  
+  return(out)
+}
+```
+
+```{r run-examples, echo = FALSE, message = FALSE, warning = FALSE}
+rub_plot_type_1 <- run_example(
+  example_file = "rub_plot_type_1.R",
+  chunk_name = "rub-plot-type-1"
+)
+```
+
 The plotting functions in RUBer do not in any way extend the functionality  provided by `{ggplot2}` itself. By preconfiguring a lot of the parameters, though,  RUBer's plotting functions are meant to be more accessible and easier to use. One of the inspirations for this was the `bbplot` package used by the data team at BBC News.
 
 ## Figure Types
@@ -50,7 +81,11 @@ variable names are mandatory: `x_var` for the x-coordinate, `y_var` for the
 y-coordinate and `fill_var` for the fill variable, which determines the groups 
 to be stacked. Consider this example:
 
-```{r type-1-example-1, child = system.file("examples", "rub_plot_type_1.R", package = "RUBer")}
+```{r type-1-example-1, results = "asis", echo = FALSE}
+cat(
+  rub_plot_type_1,
+  sep = "\n"
+)
 ```
 
 Next a more complex example, in which we additionally provide the label
