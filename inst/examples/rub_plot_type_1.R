@@ -18,5 +18,6 @@ rub_plot_type_1(
   df = df_t1_ex1,
   x_var = term,
   y_var = students,
-  fill_var = degree
+  fill_var = degree,
+  base_size = 13
 )

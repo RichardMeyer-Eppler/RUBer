@@ -3,8 +3,8 @@ title: "Using the RUB plotting functions"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Using the RUB plotting functions}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
 ---
 
 ```{r, include = FALSE}
@@ -69,23 +69,37 @@ rub_plot_type_1 <- run_example(
 )
 ```
 
-The plotting functions in RUBer do not in any way extend the functionality  provided by `{ggplot2}` itself. By preconfiguring a lot of the parameters, though,  RUBer's plotting functions are meant to be more accessible and easier to use. One of the inspirations for this was the `bbplot` package used by the data team at BBC News.
+The plotting functions in RUBer do not in any way extend the
+functionality provided by `{ggplot2}` itself. By preconfiguring a lot of
+the parameters, though, RUBer's plotting functions are meant to be more
+accessible and easier to use. One of the inspirations for this was the
+`bbplot` package used by the data team at BBC News.
 
 ## Figure Types
+
 Available figure types:
 
-1. Vertical stacked bar charts
-1. Vertical stacked bar charts scaled to 100%
-1. Horizontal stacked bar charts scaled to 100%
-1. Line Chart
-1. A combination of vertical stacked bar charts (type 1) with line charts 
-    (type 4)
+1.  Vertical stacked bar charts
+1.  Vertical stacked bar charts scaled to 100%
+1.  Horizontal stacked bar charts scaled to 100%
+1.  Line Chart
+1.  A combination of vertical stacked bar charts (type 1) with line
+    charts (type 4)
+
+### Technical note on font sizes and text rendering
+
+The default settings of the RUBer plot functions are optimized for the
+corporate design font, RUB Flama, and [Windows Enhanced Metafile
+(EMF)](https://en.wikipedia.org/wiki/Windows_Metafile) as
+output format. Unfortunately, RUB Flama is not publicly available and cannot be made accessible to Github server rendering this document and creating the example figures. In addition, the images in this document use a raster format, PNG, created by the `{ragg}` device, rather than the EMF vector format created by `{devEMF}`. Practically, all of this means that the default settings of the RUB plot functions do not work well for HTML output, including this document. You are not seeing the intended font, nor do the text sizes match what one would get in Microsoft Word.
 
 ### Figure Type 1 - Vertical stacked bar charts
-For plotting vertical stacked bar charts, we use `RUBer::rub_plot_type_1`. Three 
-variable names are mandatory: `x_var` for the x-coordinate, `y_var` for the 
-y-coordinate and `fill_var` for the fill variable, which determines the groups 
-to be stacked. Consider this example:
+
+For plotting vertical stacked bar charts, we use
+`RUBer::rub_plot_type_1`. Three variable names are mandatory: `x_var`
+for the x-coordinate, `y_var` for the y-coordinate and `fill_var` for
+the fill variable, which determines the groups to be stacked. Consider
+this example:
 
 ```{r type-1-example-1, results = "asis", echo = FALSE}
 cat(
@@ -95,14 +109,15 @@ cat(
 ```
 
 Next a more complex example, in which we additionally provide the label
-for the y-axis, `y_label` and a caption indicating the source of the data, 
-`caption`. By default, the caption has the prefix "*Quelle:*", which we change 
-from German to English using the parameter `caption_prefix`. We also want to 
-suppress the value label for Master students in the spring term of 2017, because 
-the value is so small. By default, labels for values accounting for less than 4% 
-of the total value are suppressed. In this case, the seven students account for 
-7/(7+122) = 5.4% of the total value, so we increase the value for `filter_cutoff`
-from the default of 0.04 to 0.06.
+for the y-axis, `y_label` and a caption indicating the source of the
+data, `caption`. By default, the caption has the prefix "*Quelle:*",
+which we change from German to English using the parameter
+`caption_prefix`. We also want to suppress the value label for Master
+students in the spring term of 2017, because the value is so small. By
+default, labels for values accounting for less than 4% of the total
+value are suppressed. In this case, the seven students account for
+7/(7+122) = 5.4% of the total value, so we increase the value for
+`filter_cutoff` from the default of 0.04 to 0.06.
 
 ```{r type-1-example-2}
 # Create test values for all three mandatory variables (x_var, y_var, fill_var).
@@ -134,17 +149,16 @@ RUBer::rub_plot_type_1(
   caption = "Information management system of the University of Bochum",
   caption_prefix = "Source:",
   filter_cutoff = 0.06,
-  base_size = 12
-#  ,fill_reverse = TRUE
-#  ,palette_reverse = TRUE
+  base_size = 13
 )
 ```
 
-The third example adds even more parameters. You can facet the figure by a
-discrete variable, `facet_var`, in order to make direct comparisons between 
-groups, e.g. different departments. You can also change a figure's default color
-with `color`, the default font with `base_family`, and the size of all text 
-elements with `base_size` (see the documentation for `RUBer::theme_rub()`).
+The third example adds even more parameters. You can facet the figure by
+a discrete variable, `facet_var`, in order to make direct comparisons
+between groups, e.g. different departments. You can also change a
+figure's default color with `color`, the default font with
+`base_family`, and the size of all text elements with `base_size` (see
+the documentation for `RUBer::theme_rub()`).
 
 ```{r type-1-example-3}
 # Create test values for all three mandatory variables (x_var, y_var, fill_var)
@@ -181,7 +195,10 @@ rub_plot_type_1(
   x_var = term,
   y_var = students,
   fill_var = degree,
-  y_axis_label = "Students (1st degree program, 1st and 2nd field of study)",
+  y_axis_label = stringr::str_wrap(
+    string = "Students (1st degree program, 1st and 2nd field of study)",
+    width = 40
+  ),
   caption = "Information management system of the University of Bochum",
   caption_prefix = "Source:",
   filter_cutoff = 0.06,
@@ -195,12 +212,14 @@ rub_plot_type_1(
 ```
 
 ### Figure Type 2 - Vertical stacked bar charts scaled to 100%
-Figure type 2, plotted with `RUBer::rub_plot_type_2`, is very similar to type 1. 
-The main differences are that the y-axis uses a percentage scale rather than an 
-absolute one and that all stacked bars are scaled to 100%. Like for figure type 
-1, three variable names are mandatory: `x_var` for the x-coordinate, `y_var` for 
-the y-coordinate and `fill_var` for the fill variable, which determines the
-groups to be stacked.
+
+Figure type 2, plotted with `RUBer::rub_plot_type_2`, is very similar to
+type 1. The main differences are that the y-axis uses a percentage scale
+rather than an absolute one and that all stacked bars are scaled to
+100%. Like for figure type 1, three variable names are mandatory:
+`x_var` for the x-coordinate, `y_var` for the y-coordinate and
+`fill_var` for the fill variable, which determines the groups to be
+stacked.
 
 ```{r type-2-example-1}
 # Create test values for all three mandatory variables (x_var, y_var, fill_var)
@@ -232,18 +251,17 @@ rub_plot_type_2(
   df = df_t2_ex1,
   x_var = cohort_term,
   y_var = status_percentage,
-  fill_var = cohort_status
-  # ,fill_reverse = TRUE
-  # ,palette_reverse = TRUE
+  fill_var = cohort_status,
+  base_size = 13
 ) 
 ```
 
-Now let us say we are unhappy with the default ordering of the stacked bars,
-because we want the largest cohort group, those still studying, on top. We can
-use the boolean parameter `fill_reverse` to do just that. We also provide a
-discrete facetting variable, `facet_var`, a text for `caption` and
-`caption_prefix`, and a lower threshhold for the `filter_cutoff`, leading to
-more labels being displayed.
+Now let us say we are unhappy with the default ordering of the stacked
+bars, because we want the largest cohort group, those still studying, on
+top. We can use the boolean parameter `fill_reverse` to do just that. We
+also provide a discrete facetting variable, `facet_var`, a text for
+`caption` and `caption_prefix`, and a lower threshhold for the
+`filter_cutoff`, leading to more labels being displayed.
 
 ```{r type-2-example-2}
 df_t2_ex2 <- tibble::tribble(
@@ -298,17 +316,20 @@ rub_plot_type_2(
   facet_var = cohort_label,
   filter_cutoff = 0.05,
   caption = "Comparison of two fictitious cohorts",
-  caption_prefix = "Source:"
-  ,fill_reverse = TRUE
+  caption_prefix = "Source:",
+  fill_reverse = TRUE,
+  base_size = 13
 )
 ```
 
 ### Figure Type 3 - Horizontal stacked bar charts scaled to 100%
-Figure type 3, plotted with `RUBer::rub_plot_type_3`, is very similar to figure 
-type 2, with the exception that the stacked bar charts are plotted horizontally. 
-As with the first two figure types, three variable names are mandatory: `x_var` 
-for the x-coordinate, `y_var` for the y-coordinate and `fill_var` for the fill 
-variable, which determines the groups to be stacked.
+
+Figure type 3, plotted with `RUBer::rub_plot_type_3`, is very similar to
+figure type 2, with the exception that the stacked bar charts are
+plotted horizontally. As with the first two figure types, three variable
+names are mandatory: `x_var` for the x-coordinate, `y_var` for the
+y-coordinate and `fill_var` for the fill variable, which determines the
+groups to be stacked.
 
 ```{r type-3-example-1}
 # Create test values for all three mandatory variables (x_var, y_var, fill_var)
@@ -324,15 +345,15 @@ rub_plot_type_3(
    df = df_t3_ex1,
    x_var = item_value_percentage,
    y_var = survey_group,
-   fill_var = item_value
- # ,fill_reverse = TRUE
+   fill_var = item_value,
+   base_size = 13
 )
 ```
 
-The second example once again adds a facetting variable, `fill_var`, for 
+The second example once again adds a facetting variable, `fill_var`, for
 plotting direct comparisons between groups. We also use `caption`,
-`caption_prefix`, a `filter_cutoff` that suppresses all values below 20%, and 
-increase the text size to 12.
+`caption_prefix`, a `filter_cutoff` that suppresses all values below
+20%, and increase the text size to 14.
 
 ```{r type-3-example-2}
 df_t3_ex2 <- tibble::tribble(
@@ -356,18 +377,19 @@ rub_plot_type_3(
    caption = "Graduate survey 2017/18",
    caption_prefix = "Source:",
    filter_cutoff = 0.20,
-   base_size = 12
+   base_size = 14
 )
 ```
 
 #### Changing ordering
-In the last example above, the ordering of the fill variable, item_value, is
-going from bad ("Exceeded prescribed period of study") to good ("Within
-prescribed period of study"). This is because, by default, the fill variable
-will be ordered alphabetically if not a factor. So what if we want the fill
-variable ordered the other way? We can use the optional boolean parameter
-`fill_reverse` to change the ordering of the the fill variable and of the
-legend.
+
+In the last example above, the ordering of the fill variable,
+item_value, is going from bad ("Exceeded prescribed period of study") to
+good ("Within prescribed period of study"). This is because, by default,
+the fill variable will be ordered alphabetically if not a factor. So
+what if we want the fill variable ordered the other way? We can use the
+optional boolean parameter `fill_reverse` to change the ordering of the
+the fill variable and of the legend.
 
 ```{r type-3-example-3}
 # Reversed fill, reversed legend
@@ -380,14 +402,14 @@ rub_plot_type_3(
    caption = "Graduate survey 2017/18",
    caption_prefix = "Source:",
    filter_cutoff = 0.20,
-   base_size = 12,
+   base_size = 13,
    fill_reverse = TRUE
 )
 ```
 
-If we simply want to reverse the order of the legend items, without actually
-reversing the order of the stacked bar segments, we can use the optional 
-parameter `legend_reverse` instead.
+If we simply want to reverse the order of the legend items, without
+actually reversing the order of the stacked bar segments, we can use the
+optional parameter `legend_reverse` instead.
 
 ```{r type-3-example-4}
 # Reversed legend
@@ -400,13 +422,12 @@ rub_plot_type_3(
    caption = "Graduate survey 2017/18",
    caption_prefix = "Source:",
    filter_cutoff = 0.20,
-   base_size = 12,
-#  legend_reverse = TRUE
+   base_size = 13
 )
 ```
 
-What if we want to use a custom ordering of the fill variable? Consider the 
-following example:
+What if we want to use a custom ordering of the fill variable? Consider
+the following example:
 
 ```{r type-3-example-5}
 df_t3_ex4 <- tibble::tribble(
@@ -433,14 +454,15 @@ rub_plot_type_3(
    facet_var = degree,
    caption = "Graduate survey 2017/18",
    caption_prefix = "Source:",
-#   ,fill_reverse = TRUE
+   base_size = 13
 )
 ```
 
-Here, we neither want alphabetic ordering, nor its reverse. Instead, we would
-prefer an alphabetic ordering with the item_value "Unknown" always coming last.
-For this, we can explicitly turn the `fill_var` into a factor with a
-predetermined ordering. The plotting function will respect this ordering.
+Here, we neither want alphabetic ordering, nor its reverse. Instead, we
+would prefer an alphabetic ordering with the item_value "Unknown" always
+coming last. For this, we can explicitly turn the `fill_var` into a
+factor with a predetermined ordering. The plotting function will respect
+this ordering.
 
 ```{r type-3-example-6}
 # Take the data from previous example
@@ -470,11 +492,13 @@ rub_plot_type_3(
    fill_var = item_value,
    facet_var = degree,
    caption = "Graduate survey 2017/18",
-   caption_prefix = "Source:"
+   caption_prefix = "Source:",
+   base_size = 13
 )
 ```
 
 ### Figure Type 4 - Line Charts
+
 ```{r type-4-example-1}
 
 # Temporary, until example is moved to seperate file
@@ -497,11 +521,14 @@ rub_plot_type_4(
   x_var = term,
   y_var = students,
   group_var = degree,
-  y_axis_label = "Students (1st degree program, 1st and 2nd field of study)",
+  y_axis_label = stringr::str_wrap(
+    string = "Students (1st degree program, 1st and 2nd field of study)",
+    width = 40
+  ),
   caption = "Information management system of the University of Bochum",
   caption_prefix = "Source:",
   filter_cutoff = 10,
-  base_size = 14
+  base_size = 13
 )
 
 rub_plot_type_4(
@@ -510,7 +537,10 @@ rub_plot_type_4(
   y_var = students,
   group_var = degree,
   facet_var = department,
-  y_axis_label = "Students (1st degree program, 1st and 2nd field of study)",
+    y_axis_label = stringr::str_wrap(
+    string = "Students (1st degree program, 1st and 2nd field of study)",
+    width = 40
+  ),
   caption = "Information management system of the University of Bochum",
   caption_prefix = "Source:",
   filter_cutoff = 5
@@ -542,20 +572,23 @@ rub_plot_type_1_and_4(
    x_var = term,
    y_var = students,
    fill_var = degree,
-   group_var = group
+   group_var = group,
+   base_size = 13
 )
 ```
 
-
 ## For experienced ggplot2 users
-The level of flexibility and customizability achievable through the plotting 
-functions of RUBer are limited. At some point, it makes more sense to properly
-learn `ggplot2` and to use the individual components directly (scales, colors, 
-etc.). See the [resources section](#resources) for help on getting started with `ggplot2`.
+
+The level of flexibility and customizability achievable through the
+plotting functions of RUBer are limited. At some point, it makes more
+sense to properly learn `ggplot2` and to use the individual components
+directly (scales, colors, etc.). See the [resources section](#resources)
+for help on getting started with `ggplot2`.
 
 ### Applying the RUB Theme
-The function `theme_rub` is a normal `ggplot2::theme()` function based on 
-`ggplot2::theme_minimal()`. You can use it for any ggplot object:
+
+The function `theme_rub` is a normal `ggplot2::theme()` function based
+on `ggplot2::theme_minimal()`. You can use it for any ggplot object:
 
 ```{r theme-rub}
 # Base plot
@@ -572,12 +605,15 @@ ggplot2::ggplot(
 ```
 
 ### Scale Functions
-The RUB palettes are used through corresponding scale functions. Currently, (1)
-`scale_color_rub` (a wrapper for `ggplot2::discrete_scale()` if discrete, or for
-`ggplot2::scale_color_gradientn()` if continuous) and (2) `scale_fill_rub` (a
-wrapper for `ggplot2::discrete_scale()` if discrete, or for
-`ggplot2::scale_fill_gradientn()` if continuous) are implemented. Use these 
-scale functions to ensure that appropriate RUB palettes and colors are used.
+
+The RUB palettes are used through corresponding scale functions.
+Currently, (1) `scale_color_rub` (a wrapper for
+`ggplot2::discrete_scale()` if discrete, or for
+`ggplot2::scale_color_gradientn()` if continuous) and (2)
+`scale_fill_rub` (a wrapper for `ggplot2::discrete_scale()` if discrete,
+or for `ggplot2::scale_fill_gradientn()` if continuous) are implemented.
+Use these scale functions to ensure that appropriate RUB palettes and
+colors are used.
 
 ```{r theme-rub-color-discrete}
 # Basic themed plot with discrete scale function
@@ -635,10 +671,11 @@ ggplot2::ggplot(
       y_axis_label = TRUE,
       legend_title = FALSE
    )
-``` 
+```
 
-Continuous scales are used by setting `discrete` to `FALSE` and by providing 
-the name of a continuous palette to `palette` (see `vignette("RUB_colors")`).
+Continuous scales are used by setting `discrete` to `FALSE` and by
+providing the name of a continuous palette to `palette` (see
+`vignette("RUB_colors")`).
 
 ```{r theme-rub-color-continuous}
 # Basic plot with continuous scale function
