@@ -144,12 +144,12 @@ RUBer::rub_plot_type_1(
   fill_var = degree,
   y_axis_label = stringr::str_wrap(
     "Students (1st degree program, 1st and 2nd field of study)",
-    width = 40
+    width = 35
   ),
   caption = "Information management system of the University of Bochum",
   caption_prefix = "Source:",
   filter_cutoff = 0.06,
-  base_size = 13
+  base_size = 14
 )
 ```
 
@@ -197,7 +197,7 @@ rub_plot_type_1(
   fill_var = degree,
   y_axis_label = stringr::str_wrap(
     string = "Students (1st degree program, 1st and 2nd field of study)",
-    width = 40
+    width = 35
   ),
   caption = "Information management system of the University of Bochum",
   caption_prefix = "Source:",
@@ -252,7 +252,7 @@ rub_plot_type_2(
   x_var = cohort_term,
   y_var = status_percentage,
   fill_var = cohort_status,
-  base_size = 13
+  base_size = 14
 ) 
 ```
 
@@ -318,7 +318,7 @@ rub_plot_type_2(
   caption = "Comparison of two fictitious cohorts",
   caption_prefix = "Source:",
   fill_reverse = TRUE,
-  base_size = 13
+  base_size = 14
 )
 ```
 
@@ -346,7 +346,7 @@ rub_plot_type_3(
    x_var = item_value_percentage,
    y_var = survey_group,
    fill_var = item_value,
-   base_size = 13
+   base_size = 14
 )
 ```
 
@@ -402,7 +402,7 @@ rub_plot_type_3(
    caption = "Graduate survey 2017/18",
    caption_prefix = "Source:",
    filter_cutoff = 0.20,
-   base_size = 13,
+   base_size = 14,
    fill_reverse = TRUE
 )
 ```
@@ -422,7 +422,7 @@ rub_plot_type_3(
    caption = "Graduate survey 2017/18",
    caption_prefix = "Source:",
    filter_cutoff = 0.20,
-   base_size = 13
+   base_size = 14
 )
 ```
 
@@ -454,7 +454,7 @@ rub_plot_type_3(
    facet_var = degree,
    caption = "Graduate survey 2017/18",
    caption_prefix = "Source:",
-   base_size = 13
+   base_size = 14
 )
 ```
 
@@ -493,7 +493,7 @@ rub_plot_type_3(
    facet_var = degree,
    caption = "Graduate survey 2017/18",
    caption_prefix = "Source:",
-   base_size = 13
+   base_size = 14
 )
 ```
 
@@ -523,12 +523,12 @@ rub_plot_type_4(
   group_var = degree,
   y_axis_label = stringr::str_wrap(
     string = "Students (1st degree program, 1st and 2nd field of study)",
-    width = 40
+    width = 35
   ),
   caption = "Information management system of the University of Bochum",
   caption_prefix = "Source:",
   filter_cutoff = 10,
-  base_size = 13
+  base_size = 14
 )
 
 rub_plot_type_4(
@@ -539,7 +539,7 @@ rub_plot_type_4(
   facet_var = department,
     y_axis_label = stringr::str_wrap(
     string = "Students (1st degree program, 1st and 2nd field of study)",
-    width = 40
+    width = 35
   ),
   caption = "Information management system of the University of Bochum",
   caption_prefix = "Source:",
@@ -573,7 +573,7 @@ rub_plot_type_1_and_4(
    y_var = students,
    fill_var = degree,
    group_var = group,
-   base_size = 13
+   base_size = 14
 )
 ```
 
@@ -625,11 +625,15 @@ ggplot2::ggplot(
       color = as.factor(carb)
       )
    ) + 
-   ggplot2::geom_point() +
+   ggplot2::geom_point(
+     size = 3
+   ) +
    scale_color_rub(
       palette = "discrete"
    ) +
-   theme_rub()
+   theme_rub(
+     base_size = 14
+   )
 
 # By default, the theme shows no axis labels and no legend title. Use the 
 # boolean parameters x_axis_label, y_axis_label and legend_title to activate 
@@ -642,11 +646,14 @@ ggplot2::ggplot(
       color = as.factor(carb)
    )
 ) + 
-   ggplot2::geom_point() +
+   ggplot2::geom_point(
+     size = 3
+   ) +
    scale_color_rub(
       palette = "discrete"
    ) +
    theme_rub(
+      base_size = 14,
       x_axis_label = TRUE,
       y_axis_label = TRUE,
       legend_title = FALSE
@@ -661,12 +668,15 @@ ggplot2::ggplot(
       color = as.factor(carb)
    )
 ) + 
-   ggplot2::geom_point() +
+   ggplot2::geom_point(
+     size = 3
+   ) +
    scale_color_rub(
       palette = "discrete",
       reverse = TRUE
    ) +
    theme_rub(
+      base_size = 14,
       x_axis_label = TRUE,
       y_axis_label = TRUE,
       legend_title = FALSE
@@ -687,12 +697,15 @@ ggplot2::ggplot(
       color = disp
    )
 ) + 
-   ggplot2::geom_point() +
+   ggplot2::geom_point(
+     size = 3
+   ) +
    scale_color_rub(
       palette = "continuous",
       discrete = FALSE
    ) +
    theme_rub(
+      base_size = 14, 
       x_axis_label = TRUE,
       y_axis_label = TRUE,
       legend_title = TRUE
@@ -707,13 +720,16 @@ ggplot2::ggplot(
       color = disp
    )
 ) + 
-   ggplot2::geom_point() +
+   ggplot2::geom_point(
+     size = 3
+   ) +
    scale_color_rub(
       palette = "continuous",
       discrete = FALSE,
       reverse = TRUE
    ) +
    theme_rub(
+      base_size = 14,
       x_axis_label = TRUE,
       y_axis_label = TRUE,
       legend_title = TRUE
@@ -728,12 +744,15 @@ ggplot2::ggplot(
       color = disp
    )
 ) + 
-   ggplot2::geom_point() +
+   ggplot2::geom_point(
+     size = 3
+   ) +
    scale_color_rub(
       palette = "continuous_diverging",
       discrete = FALSE
    ) +
    theme_rub(
+      base_size = 14,
       x_axis_label = TRUE,
       y_axis_label = TRUE,
       legend_title = TRUE
@@ -751,6 +770,12 @@ ggplot2::ggplot(
    ggplot2::geom_bar() +
    scale_fill_rub(
       palette = "discrete_2"
+   ) + 
+   theme_rub(
+      base_size = 14,
+      x_axis_label = TRUE,
+      y_axis_label = TRUE,
+      legend_title = TRUE
    )
 ```
 
