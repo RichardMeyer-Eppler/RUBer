@@ -69,8 +69,8 @@ figures:
   dpi: 96
   dev.args: []
   fig.ext: png
-  fig.width: 7.2916667
-  fig.height: 7.2916667
+  fig.width: 7.25
+  fig.height: 4.479167
   fig.retina: 1
   bg: NA
   other.parameters: []

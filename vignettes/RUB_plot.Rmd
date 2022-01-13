@@ -9,30 +9,24 @@ vignette: >
 
 ```{r, include = FALSE}
 # https://www.jumpingrivers.com/blog/knitr-rmarkdown-image-size/
+# https://github.com/r-lib/pkgdown/issues/920
 
 # dpi <- 96
 # fig_width <- 7.2916667
 # fig_height <- 4.479167
-# 
-# fig_width * dpi
-# 
-# 430 / dpi
-# 
-# rendered  696 x 430
+# Rendered image size 696 x 430
   
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.height = 4.479167
+  dev = "ragg_png",
+  fig.width = 7.25,
+  fig.height = 4.479167,
+  fig.retina = 1,
+  dpi = 96
 )
 
-# Maybe this isn't working!?
-# output:
-#     bookdown::html_document2:
-#       base_format: rmarkdown::html_vignette
-
 # library(extrafont)
-
 # This registers fonts so that they can be used with the pdf, postscript, or Windows bitmap output device. It must be run once in each R session.
 # extrafont::loadfonts(
 #   device = "win",
@@ -128,15 +122,19 @@ df_t1_ex2 <- tibble::tribble(
 
 # Set values for parameters setting the y-axis title, captioning the source data
 # and filtering small value labels (all labels below 6% of the stacked total).
-rub_plot_type_1(
+RUBer::rub_plot_type_1(
   df = df_t1_ex2,
   x_var = term,
   y_var = students,
   fill_var = degree,
-  y_axis_label = "Students (1st degree program, 1st and 2nd field of study)",
+  y_axis_label = stringr::str_wrap(
+    "Students (1st degree program, 1st and 2nd field of study)",
+    width = 40
+  ),
   caption = "Information management system of the University of Bochum",
   caption_prefix = "Source:",
-  filter_cutoff = 0.06
+  filter_cutoff = 0.06,
+  base_size = 12
 #  ,fill_reverse = TRUE
 #  ,palette_reverse = TRUE
 )
