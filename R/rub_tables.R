@@ -34,7 +34,7 @@ rub_table_stg <- function(
       )
     ) %>%
     gtsummary::modify_header(
-      gtsummary::all_stat_cols() ~ "**{level}**\nN =  {n} ({style_percent(p)}%)"
+      gtsummary::all_stat_cols() ~ "**{level}**\nN =  {style_number(n)} ({style_percent(p)}%)"
     ) %>%
     gtsummary::add_overall(
       last = TRUE,
