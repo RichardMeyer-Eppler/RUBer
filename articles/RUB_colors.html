@@ -40,7 +40,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div id="navbar" class="collapse navbar-collapse ms-2">
+    <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
@@ -71,6 +71,9 @@
     
   </div>
 </nav><div class="container template-article">
+
+
+
 <script src="RUB_colors_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <main id="main"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Using RUB colors</h1>
@@ -83,9 +86,9 @@
     
     
 <p>This vignette describes how to display and retrieve the RUB colors and palettes. For details on using these palettes in ggplot2, see the separate vignette XXX.</p>
-<div class="section level1">
-<h1 id="colors">Colors<a class="anchor" aria-label="anchor" href="#colors"></a>
-</h1>
+<div class="section level2">
+<h2 id="colors">Colors<a class="anchor" aria-label="anchor" href="#colors"></a>
+</h2>
 <p><code>RUBer</code> provides easy access to the colors as specified in the <a href="https://www.ruhr-uni-bochum.de/cd/" class="external-link">RUB corporate design</a>. Once the package is loaded, access all available colors by typing <code>RUB_colors</code>. Note that I assigned that the color names were assigned as part of this package and are not offically sanctioned by the corporate design guide.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Retrieve all available colors</span>
@@ -120,9 +123,9 @@
 <span class="co">#&gt;  green_40  green_20      blue   blue_40 </span>
 <span class="co">#&gt; "#D1DF9F" "#E8EFCF" "#003560" "#99AEBF"</span></code></pre></div>
 </div>
-<div class="section level1">
-<h1 id="palettes">Palettes<a class="anchor" aria-label="anchor" href="#palettes"></a>
-</h1>
+<div class="section level2">
+<h2 id="palettes">Palettes<a class="anchor" aria-label="anchor" href="#palettes"></a>
+</h2>
 <p>The colors are combined in several palettes. To retrieve all available palettes, use <code>RUB_palettes</code>. To retrieve a particular palette by name, use the function <code>get_RUB_palettes</code> plus the number of required colors in round brackets like so <code>get_RUB_palettes(palette = "discrete_5")(5)</code>. If the palette contains less elements than requested, additional colors will automatically be extrapolated.</p>
 <p>Note that the RUB colors as defined by the corporate design were not designed with data visualization in mind. The palettes presented here are ad-hoc and rather informal, until the corporate design is offically extended to include visualization design.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -187,9 +190,9 @@
 <span class="co">#&gt;  [1] "#8DAE10" "#A1BC3A" "#B5CA65" "#C9D697" "#DDE1CC" "#D5DADE" "#B3C1CC"</span>
 <span class="co">#&gt;  [8] "#88A0B4" "#446A8A" "#003560"</span></code></pre></div>
 <p>We can visualize all palettes using Emil Hvitfeldt’s excellent <code>prismatic</code> package.</p>
-<div class="section level2">
-<h2 id="plots-for-the-continuous-palettes">Plots for the continuous palettes<a class="anchor" aria-label="anchor" href="#plots-for-the-continuous-palettes"></a>
-</h2>
+<div class="section level3">
+<h3 id="plots-for-the-continuous-palettes">Plots for the continuous palettes<a class="anchor" aria-label="anchor" href="#plots-for-the-continuous-palettes"></a>
+</h3>
 <p>First off, we have the two continuous palettes, “continuous” and “continuous_diverging”.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">prismatic</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/prismatic/man/color.html" class="external-link">color</a></span><span class="op">(</span><span class="fu">RUBer</span><span class="fu">::</span><span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"continuous"</span><span class="op">)</span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -199,9 +202,9 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">prismatic</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/prismatic/man/color.html" class="external-link">color</a></span><span class="op">(</span><span class="fu">RUBer</span><span class="fu">::</span><span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"continuous_diverging"</span><span class="op">)</span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="RUB_colors_files/figure-html/plot-continuous-2.png"><!-- --></p>
 </div>
-<div class="section level2">
-<h2 id="plots-for-the-numbered-discrete-palettes">Plots for the numbered discrete palettes<a class="anchor" aria-label="anchor" href="#plots-for-the-numbered-discrete-palettes"></a>
-</h2>
+<div class="section level3">
+<h3 id="plots-for-the-numbered-discrete-palettes">Plots for the numbered discrete palettes<a class="anchor" aria-label="anchor" href="#plots-for-the-numbered-discrete-palettes"></a>
+</h3>
 <p>Second, we have all the numbered discrete palettes, which, for example, were used to display the distribution of answers for the survey items. numbered discrete palettes are pre-defined up to a total of eight separate colors, after, it is necessary to rely on extrapolation.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">prismatic</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/prismatic/man/color.html" class="external-link">color</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"discrete_1"</span><span class="op">)</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -234,9 +237,9 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">prismatic</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/prismatic/man/color.html" class="external-link">color</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"discrete_8"</span><span class="op">)</span><span class="op">(</span><span class="fl">16</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="RUB_colors_files/figure-html/plot-discrete-numbered-9.png"><!-- --></p>
 </div>
-<div class="section level2">
-<h2 id="plots-for-the-discrete-palettes">Plots for the discrete palettes<a class="anchor" aria-label="anchor" href="#plots-for-the-discrete-palettes"></a>
-</h2>
+<div class="section level3">
+<h3 id="plots-for-the-discrete-palettes">Plots for the discrete palettes<a class="anchor" aria-label="anchor" href="#plots-for-the-discrete-palettes"></a>
+</h3>
 <p>Last, I turned most of the unqiue colors in the RUB corporate design guide into one awfully looking palette simply called “discrete”. Avert your eyes, if at all possible! The second palette, “discrete_contrast” has four colors that form a nice contrast to the base RUB colors, i.e. the Green and Blue.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">prismatic</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/prismatic/man/color.html" class="external-link">color</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_RUB_palettes.html">get_RUB_palettes</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"discrete"</span><span class="op">)</span><span class="op">(</span><span class="fl">7</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -246,9 +249,9 @@
 <p><img src="RUB_colors_files/figure-html/plot-discrete-2.png"><!-- --></p>
 </div>
 </div>
-<div class="section level1">
-<h1 id="further-reading">Further Reading<a class="anchor" aria-label="anchor" href="#further-reading"></a>
-</h1>
+<div class="section level2">
+<h2 id="further-reading">Further Reading<a class="anchor" aria-label="anchor" href="#further-reading"></a>
+</h2>
 <p>The implementation is heavily indebted to Simon Jackson’s great article on color palettes for ggplot2. At the moment, the University of Bochum really does not have anything like a Data Visualization Style Guide.</p>
 <ul>
 <li><a href="https://drsimonj.svbtle.com/creating-corporate-colour-palettes-for-ggplot2" class="external-link">Simon Jackson - Creating corporate colour palettes for ggplot2</a></li>
@@ -271,7 +274,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
     </footer>

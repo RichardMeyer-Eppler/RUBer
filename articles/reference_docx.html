@@ -40,7 +40,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div id="navbar" class="collapse navbar-collapse ms-2">
+    <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
@@ -71,6 +71,9 @@
     
   </div>
 </nav><div class="container template-article">
+
+
+
 <script src="reference_docx_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <main id="main"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Formatting for the reference docx document</h1>
@@ -85,9 +88,9 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ardata-fr.github.io/officeverse/" class="external-link">officer</a></span><span class="op">)</span></code></pre></div>
-<div class="section level1">
-<h1 id="the-docx-reference-document">The docx reference document<a class="anchor" aria-label="anchor" href="#the-docx-reference-document"></a>
-</h1>
+<div class="section level2">
+<h2 id="the-docx-reference-document">The docx reference document<a class="anchor" aria-label="anchor" href="#the-docx-reference-document"></a>
+</h2>
 <p>As explained in <a href="https://bookdown.org/yihui/rmarkdown/word-document.html" class="external-link">section 3.4 of R Markdown: The Definitive Guide</a>, the first step in creating a reference document is to produce a .docx file using rmarkdown or Pandoc. The formatting and layout of this document can then be edited and saved. The resulting reference document is then used in the YAML metadata of each R Markdown file.</p>
 <p>This vignette is intended to track all the changes made to the rub_reference.docx file, so that these changes are reproducible and documented.</p>
 <p>We can use <code><a href="https://davidgohel.github.io/officer/reference/styles_info.html" class="external-link">officer::styles_info</a></code> to extract all custom styles defined in the reference document:</p>
@@ -165,12 +168,12 @@
 <span class="co">#&gt; 47  paragraph           SourceCode           Source Code      TRUE      FALSE</span>
 <span class="co">#&gt; 48  paragraph         TableCaption         Table Caption      TRUE      FALSE</span>
 <span class="co">#&gt; 49      table                Table                 Table      TRUE      FALSE</span></code></pre></div>
-<div class="section level2">
-<h2 id="page-layout">Page Layout<a class="anchor" aria-label="anchor" href="#page-layout"></a>
-</h2>
 <div class="section level3">
-<h3 id="margins">Margins<a class="anchor" aria-label="anchor" href="#margins"></a>
+<h3 id="page-layout">Page Layout<a class="anchor" aria-label="anchor" href="#page-layout"></a>
 </h3>
+<div class="section level4">
+<h4 id="margins">Margins<a class="anchor" aria-label="anchor" href="#margins"></a>
+</h4>
 <ul>
 <li>Top: 2,5 cm</li>
 <li>Left: 1,5 cm</li>
@@ -180,16 +183,16 @@
 <li>Gutter position: Left</li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="paper">Paper<a class="anchor" aria-label="anchor" href="#paper"></a>
-</h3>
+<div class="section level4">
+<h4 id="paper">Paper<a class="anchor" aria-label="anchor" href="#paper"></a>
+</h4>
 <ul>
 <li>Size: A4</li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="layout">Layout<a class="anchor" aria-label="anchor" href="#layout"></a>
-</h3>
+<div class="section level4">
+<h4 id="layout">Layout<a class="anchor" aria-label="anchor" href="#layout"></a>
+</h4>
 <ul>
 <li>Different first page (x)</li>
 <li>From edge: Header: 1 cm</li>
@@ -197,12 +200,12 @@
 </ul>
 </div>
 </div>
-<div class="section level2">
-<h2 id="header-and-footer">Header and Footer<a class="anchor" aria-label="anchor" href="#header-and-footer"></a>
-</h2>
 <div class="section level3">
-<h3 id="header">Header<a class="anchor" aria-label="anchor" href="#header"></a>
+<h3 id="header-and-footer">Header and Footer<a class="anchor" aria-label="anchor" href="#header-and-footer"></a>
 </h3>
+<div class="section level4">
+<h4 id="header">Header<a class="anchor" aria-label="anchor" href="#header"></a>
+</h4>
 <ul>
 <li>The header repeats the report author and title on the top right of every page using the following Word fields:
 <ul>
@@ -212,9 +215,9 @@
 </li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="footer">Footer<a class="anchor" aria-label="anchor" href="#footer"></a>
-</h3>
+<div class="section level4">
+<h4 id="footer">Footer<a class="anchor" aria-label="anchor" href="#footer"></a>
+</h4>
 <ul>
 <li>The footer has the page number on the lower left using the following Word field:
 <ul>
@@ -224,12 +227,12 @@
 </ul>
 </div>
 </div>
-<div class="section level2">
-<h2 id="styles">Styles<a class="anchor" aria-label="anchor" href="#styles"></a>
-</h2>
 <div class="section level3">
-<h3 id="title">Title<a class="anchor" aria-label="anchor" href="#title"></a>
+<h3 id="styles">Styles<a class="anchor" aria-label="anchor" href="#styles"></a>
 </h3>
+<div class="section level4">
+<h4 id="title">Title<a class="anchor" aria-label="anchor" href="#title"></a>
+</h4>
 <ul>
 <li>Style type: Paragraph</li>
 <li>Style based on: Normal</li>
@@ -239,9 +242,9 @@
 <li>Space Before: 256 pt, After: 12pt, Keep with next, Keep lines together</li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a>
-</h3>
+<div class="section level4">
+<h4 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a>
+</h4>
 <ul>
 <li>Style type: Paragraph</li>
 <li>Style based on: (no style)</li>
@@ -252,9 +255,9 @@
 <li>Space After: 10 pt, Widow/Orphan control, Keep with next, Keep lines together</li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="date">Date<a class="anchor" aria-label="anchor" href="#date"></a>
-</h3>
+<div class="section level4">
+<h4 id="date">Date<a class="anchor" aria-label="anchor" href="#date"></a>
+</h4>
 <ul>
 <li>Style type: Paragraph</li>
 <li>Style based on: (no style)</li>
@@ -265,9 +268,9 @@
 <li>Space Before: 256 pt, After: 10 pt, Widow/Orphan control, Keep with next, Keep lines together</li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="toc-heading">TOC Heading<a class="anchor" aria-label="anchor" href="#toc-heading"></a>
-</h3>
+<div class="section level4">
+<h4 id="toc-heading">TOC Heading<a class="anchor" aria-label="anchor" href="#toc-heading"></a>
+</h4>
 <ul>
 <li>Style type: Paragraph</li>
 <li>Style based on: Heading 1</li>
@@ -278,9 +281,9 @@
 <li>Space Before: 12 pt, After: 12 pt, None, No bullets or numbering</li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="toc-1">TOC 1<a class="anchor" aria-label="anchor" href="#toc-1"></a>
-</h3>
+<div class="section level4">
+<h4 id="toc-1">TOC 1<a class="anchor" aria-label="anchor" href="#toc-1"></a>
+</h4>
 <ul>
 <li>Style type: Paragraph</li>
 <li>Style based on: Normal</li>
@@ -290,9 +293,9 @@
 <li>Tab stops: 0,85 cm, Left + 17,48 cm, Right, Leader: …</li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="heading-1">Heading 1<a class="anchor" aria-label="anchor" href="#heading-1"></a>
-</h3>
+<div class="section level4">
+<h4 id="heading-1">Heading 1<a class="anchor" aria-label="anchor" href="#heading-1"></a>
+</h4>
 <ul>
 <li>Style type: Paragraph</li>
 <li>Style based on: Normal</li>
@@ -308,9 +311,9 @@
 <li>Level 1, Outline numbered + Level: 1 + Numbering Style: 1, 2, 3, … + Start at: 1 + Alignment: Left + Aligned at: 0 cm + Indent at: 1,02 cm</li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="heading-2">Heading 2<a class="anchor" aria-label="anchor" href="#heading-2"></a>
-</h3>
+<div class="section level4">
+<h4 id="heading-2">Heading 2<a class="anchor" aria-label="anchor" href="#heading-2"></a>
+</h4>
 <ul>
 <li>Style type: Paragraph</li>
 <li>Style based on: Normal</li>
@@ -325,9 +328,9 @@
 <li>Space Before: 10 pt, After: 0 pt, Keep with next, Keep lines together, Level 2, Outline numbered + Level: 2 + Numbering Style: 1, 2, 3, … + Start at: 1 + Alignment: Left + Aligned at: 0 cm + Indent at: 1,02 cm</li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="heading-3">Heading 3<a class="anchor" aria-label="anchor" href="#heading-3"></a>
-</h3>
+<div class="section level4">
+<h4 id="heading-3">Heading 3<a class="anchor" aria-label="anchor" href="#heading-3"></a>
+</h4>
 <ul>
 <li>Style type: Paragraph</li>
 <li>Style based on: Normal</li>
@@ -337,9 +340,9 @@
 <li>Level 3</li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="heading-4">Heading 4<a class="anchor" aria-label="anchor" href="#heading-4"></a>
-</h3>
+<div class="section level4">
+<h4 id="heading-4">Heading 4<a class="anchor" aria-label="anchor" href="#heading-4"></a>
+</h4>
 <ul>
 <li>Style type: Paragraph</li>
 <li>Style based on: Normal</li>
@@ -349,9 +352,9 @@
 <li>Level 4</li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="heading-6">Heading 6<a class="anchor" aria-label="anchor" href="#heading-6"></a>
-</h3>
+<div class="section level4">
+<h4 id="heading-6">Heading 6<a class="anchor" aria-label="anchor" href="#heading-6"></a>
+</h4>
 <ul>
 <li>Style type: Paragraph</li>
 <li>Style based on: Normal</li>
@@ -359,9 +362,9 @@
 <li>Level 6</li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="image-caption">Image Caption<a class="anchor" aria-label="anchor" href="#image-caption"></a>
-</h3>
+<div class="section level4">
+<h4 id="image-caption">Image Caption<a class="anchor" aria-label="anchor" href="#image-caption"></a>
+</h4>
 <ul>
 <li>Style type: Paragraph</li>
 <li>Style based on: Caption</li>
@@ -370,18 +373,18 @@
 <li>Space After: 0 pt, Keep with next, Keep lines together</li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="first-paragraph">First Paragraph<a class="anchor" aria-label="anchor" href="#first-paragraph"></a>
-</h3>
+<div class="section level4">
+<h4 id="first-paragraph">First Paragraph<a class="anchor" aria-label="anchor" href="#first-paragraph"></a>
+</h4>
 <ul>
 <li>Style type: Paragraph</li>
 <li>Style based on: Body Text</li>
 <li>Style for following paragraphs: Body Text</li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="body-text">Body Text<a class="anchor" aria-label="anchor" href="#body-text"></a>
-</h3>
+<div class="section level4">
+<h4 id="body-text">Body Text<a class="anchor" aria-label="anchor" href="#body-text"></a>
+</h4>
 <ul>
 <li>Style type: Linked (paragraph and character)</li>
 <li>Style based on: Normal</li>
@@ -389,18 +392,18 @@
 <li>Space Before: 9 pt, After: 9 pt</li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="footnote-reference">Footnote Reference<a class="anchor" aria-label="anchor" href="#footnote-reference"></a>
-</h3>
+<div class="section level4">
+<h4 id="footnote-reference">Footnote Reference<a class="anchor" aria-label="anchor" href="#footnote-reference"></a>
+</h4>
 <ul>
 <li>Style type: Character</li>
 <li>Style based on: Caption Char</li>
 <li>Font: RUB Scala TZ, 12 pt, Not Italic, Superscript</li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="footnote-text">Footnote Text<a class="anchor" aria-label="anchor" href="#footnote-text"></a>
-</h3>
+<div class="section level4">
+<h4 id="footnote-text">Footnote Text<a class="anchor" aria-label="anchor" href="#footnote-text"></a>
+</h4>
 <ul>
 <li>Style type: Paragraph</li>
 <li>Style based on: Normal</li>
@@ -409,9 +412,9 @@
 <li>Space After: 6 pt</li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="header-1">Header<a class="anchor" aria-label="anchor" href="#header-1"></a>
-</h3>
+<div class="section level4">
+<h4 id="header-1">Header<a class="anchor" aria-label="anchor" href="#header-1"></a>
+</h4>
 <ul>
 <li>Style type: Linked (paragraph and character)</li>
 <li>Style based on: Normal</li>
@@ -420,9 +423,9 @@
 <li>Tab stops: 16 cm, Right</li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="footer-1">Footer<a class="anchor" aria-label="anchor" href="#footer-1"></a>
-</h3>
+<div class="section level4">
+<h4 id="footer-1">Footer<a class="anchor" aria-label="anchor" href="#footer-1"></a>
+</h4>
 <ul>
 <li>Style type: Linked (paragraph and character)</li>
 <li>Style based on: Normal</li>
@@ -431,18 +434,18 @@
 <li>Tab stops: 16 cm, Right</li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="hyperlink">Hyperlink<a class="anchor" aria-label="anchor" href="#hyperlink"></a>
-</h3>
+<div class="section level4">
+<h4 id="hyperlink">Hyperlink<a class="anchor" aria-label="anchor" href="#hyperlink"></a>
+</h4>
 <ul>
 <li>Style type: Character</li>
 <li>Style based on: Caption Char</li>
 <li>Font: RUB Scala TZ, 12 pt, Not Italic, Font color: Accent 1</li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="compact">Compact<a class="anchor" aria-label="anchor" href="#compact"></a>
-</h3>
+<div class="section level4">
+<h4 id="compact">Compact<a class="anchor" aria-label="anchor" href="#compact"></a>
+</h4>
 <ul>
 <li>Style type: Paragraph</li>
 <li>Style based on: Body Text</li>
@@ -450,9 +453,9 @@
 <li>Space Before: 1,8 pt, After: 1,8 pt</li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="captioned-figure">Captioned Figure<a class="anchor" aria-label="anchor" href="#captioned-figure"></a>
-</h3>
+<div class="section level4">
+<h4 id="captioned-figure">Captioned Figure<a class="anchor" aria-label="anchor" href="#captioned-figure"></a>
+</h4>
 <ul>
 <li>Style type: Paragraph</li>
 <li>Style based on: Figure</li>
@@ -475,7 +478,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
     </footer>
