@@ -93,6 +93,7 @@ df_t1_ex1 <- tibble::tribble(
 )
 
 # x_var is mapped to term, y_var to students, and the fill_var to degree.
+# base_size increases the text sizes from the default, 11, to 14.
 rub_plot_type_1(
   df = df_t1_ex1,
   x_var = term,

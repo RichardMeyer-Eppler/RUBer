@@ -33,6 +33,7 @@ reference:
     functions, such as filter and file path functions.
   contents:
   - get_file_path
+  - get_report_nr_by_id
   - filter_report
   - render_report
 

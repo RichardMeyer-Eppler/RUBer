@@ -46,6 +46,35 @@ get_file_path <- function(
   )
 }
 
+#' Get all values of \code{report_nr} for a \code{report_type_id}
+#'
+#' @param df Data frame with columns \code{report_nr} and \code{report_type_id}
+#' @param report_type_id One of STG, M_ED, MED or FGR
+#'
+#' @return Integer vector
+#' @export
+#'
+#' @examples
+get_report_nr_by_id <- function(
+  df,
+  report_type_id
+) {
+  p_report_type_id <- report_type_id
+
+  report_nr <- df %>%
+    dplyr::filter(
+      report_type_id == p_report_type_id
+    ) %>%
+    dplyr::pull(
+      report_nr
+    ) %>%
+    unique(
+      .
+    )
+
+  return(report_nr)
+}
+
 #' Render report
 #'
 #' @param p_df Data frame containing the data for all reports
