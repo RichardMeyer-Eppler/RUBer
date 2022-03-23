@@ -1,15 +1,36 @@
 # Generate example data
-df_example <- structure(
-  list(
-    studieneingang = c("Geschlecht", "weiblich", "männlich", "Abschlussart", "Bachelor 1-Fach", "Bachelor 2-Fächer", "Magister Theologiae", "Master 1-Fach", "Staatsexamen", "Fächergruppe (erstes Studienfach)", "Geisteswissenschaften", "Humanmedizin / Gesundheitswissenschaften", "Ingenieurwissenschaften", "Kunst, Kunstwissenschaft", "Mathematik, Naturwissenschaften", "Rechts-, Wirtschafts- und Sozialwissenschaften", "Sport", "Gesamtzahl angeschriebene Studierende / gültige Fragebögen", "Rücklaufquote Studieneingangsbefragungen"),
-    koepfe_rub = c(NA, 7513, 7464, NA, 8150, 3615, 54, 889, 2260, NA, 4006, 886, 2864, 243, 3574, 3136, 266, 14975, 0.31),
-    koepfe_rub_perc = c(NA, 0.5, 0.5, NA, 0.54, 0.24, 0, 0.06, 0.15, NA, 0.27, 0.06, 0.19, 0.02, 0.24, 0.21, 0.02, 1, 0.31),
-    koepfe_bef = c(NA, 2826, 1881, NA, 2284, 1234, 18, 303, 864, NA, 1407, 416, 688, 54, 1116, 921, 105, 4707, 0.31),
-    koepfe_bef_perc = c(NA, 0.6, 0.4, NA, 0.49, 0.26, 0, 0.06, 0.18, NA, 0.3, 0.09, 0.15, 0.01, 0.24, 0.2, 0.02, 1, 0.31),
-    row_id = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19)
-  ),
-  class = c("data.frame"),
-  row.names = c(NA,-19L)
+df_example <- data.frame(
+  stringsAsFactors = FALSE,
+  studieneingang = c("Geschlecht","weiblich",
+                     "männlich","Abschlussart","Bachelor 1-Fach",
+                     "Bachelor 2-Fächer","Magister Theologiae","Master 1-Fach",
+                     "Master 2-Fächer","Staatsexamen",
+                     "Master of Education","Fächergruppe (erstes Studienfach)",
+                     "Geisteswissenschaften",
+                     "Humanmedizin / Gesundheitswissenschaften","Ingenieurwissenschaften",
+                     "Kunst, Kunstwissenschaft","Mathematik, Naturwissenschaften",
+                     "Rechts-, Wirtschafts-, Sozialwissenschaften","Sport",
+                     "Gesamtzahl angeschriebene Studierende / gültige Fragebögen",
+                     "Rücklaufquote Studieneingangsbefragungen"),
+  koepfe_rub = c(NA,"7.403","7.416",NA,
+                 "8.006","3.607","54","886","7","2.259",NA,NA,
+                 "3.364","852","3.782","242","2.647","3.668",
+                 "264","14.819","31%"),
+  koepfe_rub_perc = c(NA,"50%","50%",NA,
+                      "54%","24%","0,4%","6,0%","<0,1%","15%",NA,NA,
+                      "23%","5,7%","26%","1,6%","18%","25%","1,8%",
+                      "100%","31%"),
+  koepfe_bef = c(NA,"2.769","1.865",NA,
+                 "2.213","1.232","18","303","4","864",NA,NA,
+                 "1.094","397","941","54","868","1.176","104",
+                 "4.634","31%"),
+  koepfe_bef_perc = c(NA,"60%","40%",NA,
+                      "48%","27%","0,4%","6,5%","<0,1%","19%",NA,NA,
+                      "24%","8,6%","20%","1,2%","19%","25%","2,2%",
+                      "100%","31%"),
+  row_id = c(1L,2L,3L,4L,5L,6L,
+             7L,8L,9L,10L,11L,12L,13L,14L,15L,16L,17L,18L,
+             19L,20L,21L)
 )
 
 # Multi-level headings, see `flextable::set_headers`
@@ -25,7 +46,9 @@ typology_example <- structure(
 )
 
 # Text for rows that receive special formatting
-headings_example <- c("Geschlecht", "Abschlussart", "Fächergruppe (erstes Studienfach)", "Gesamtzahl angeschriebene Studierende / gültige Fragebögen", "Rücklaufquote Studieneingangsbefragungen")
+headings_example <- c(
+  "Geschlecht", "Abschlussart", "F\u00E4chergruppe (erstes Studienfach)", "Gesamtzahl angeschriebene Studierende / g\u00FCltige Frageb\u00F6gen", "R\u00FCcklaufquote Studieneingangsbefragungen"
+)
 
 # Function call
 rub_table_eb(

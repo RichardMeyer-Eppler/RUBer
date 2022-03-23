@@ -168,12 +168,6 @@ rub_table_eb <- function(
       bg = get_RUB_colors("lighter grey"),
       part = "body"
     ) %>%
-    flextable::set_formatter(
-      koepfe_rub = function(x) RUBer::rub_format_mixed(x),
-      koepfe_bef = function(x) RUBer::rub_format_mixed(x),
-      koepfe_rub_perc = function(x) RUBer::rub_format_percent(x),
-      koepfe_bef_perc = function(x) RUBer::rub_format_percent(x)
-    ) %>%
     flextable::align(
       j = 2:flextable::ncol_keys(
         .
@@ -196,6 +190,17 @@ rub_table_eb <- function(
       part = "body"
     ) %>%
     flextable::align(
+      i = 1:flextable::nrow_part(
+        .,
+        part = "body"
+      ),
+      j = 2:flextable::ncol_keys(
+        .
+      ),
+      part = "body",
+      align = "right"
+    ) %>%
+    flextable::align(
       i = flextable::nrow_part(
         .,
         part = "body"
@@ -203,7 +208,12 @@ rub_table_eb <- function(
       j = 2:flextable::ncol_keys(
         .
       ),
+      part ="body",
       align = "center"
+    ) %>%
+    flextable::valign(
+      valign = "top",
+      part = "header"
     ) %>%
     flextable::width(
       j = 1,
@@ -309,16 +319,6 @@ rub_table_vb <- function(
       bg = get_RUB_colors("lighter grey"),
       part = "body"
     ) %>%
-    flextable::set_formatter(
-      koepfe_2fs_rub = function(x) RUBer::rub_format_mixed(x),
-      koepfe_2fs_bef = function(x) RUBer::rub_format_mixed(x),
-      koepfe_5fs_rub = function(x) RUBer::rub_format_mixed(x),
-      koepfe_5fs_bef = function(x) RUBer::rub_format_mixed(x),
-      koepfe_2fs_rub_perc = function(x) RUBer::rub_format_percent(x),
-      koepfe_2fs_bef_perc = function(x) RUBer::rub_format_percent(x),
-      koepfe_5fs_rub_perc = function(x) RUBer::rub_format_percent(x),
-      koepfe_5fs_bef_perc = function(x) RUBer::rub_format_percent(x)
-    ) %>%
     flextable::align(
       j = 2:flextable::ncol_keys(
         .
@@ -341,6 +341,17 @@ rub_table_vb <- function(
       part = "body"
     ) %>%
     flextable::align(
+      i = 1:flextable::nrow_part(
+        .,
+        part = "body"
+      ),
+      j = 2:flextable::ncol_keys(
+        .
+      ),
+      part = "body",
+      align = "right"
+    ) %>%
+    flextable::align(
       i = flextable::nrow_part(
         .,
         part = "body"
@@ -349,6 +360,10 @@ rub_table_vb <- function(
         .
       ),
       align = "center"
+    ) %>%
+    flextable::valign(
+      valign = "top",
+      part = "header"
     ) %>%
     flextable::width(
       j = 1,
@@ -450,12 +465,6 @@ rub_table_ab <- function(
       bg = get_RUB_colors("lighter grey"),
       part = "body"
     ) %>%
-    flextable::set_formatter(
-      koepfe_rub = function(x) RUBer::rub_format_mixed(x),
-      koepfe_bef = function(x) RUBer::rub_format_mixed(x),
-      koepfe_rub_perc = function(x) RUBer::rub_format_percent(x),
-      koepfe_bef_perc = function(x) RUBer::rub_format_percent(x)
-    ) %>%
     flextable::align(
       j = 2:flextable::ncol_keys(
         .
@@ -478,6 +487,17 @@ rub_table_ab <- function(
       part = "body"
     ) %>%
     flextable::align(
+      i = 1:flextable::nrow_part(
+        .,
+        part = "body"
+      ),
+      j = 2:flextable::ncol_keys(
+        .
+      ),
+      part = "body",
+      align = "right"
+    ) %>%
+    flextable::align(
       i = flextable::nrow_part(
         .,
         part = "body"
@@ -486,6 +506,10 @@ rub_table_ab <- function(
         .
       ),
       align = "center"
+    ) %>%
+    flextable::valign(
+      valign = "top",
+      part = "header"
     ) %>%
     flextable::width(
       j = 1,
