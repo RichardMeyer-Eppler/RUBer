@@ -61,9 +61,11 @@ reference:
   - rub_table_metrics
 
 - title: Data
-  desc: Included data sets
+  desc: >
+    Example data set for generating parametric reports with dynamic number
+    of figures and headings.
   contents:
-  - df_fake
+  - df_example
 
 figures:
   dev: ragg::agg_png

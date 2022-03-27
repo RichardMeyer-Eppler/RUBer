@@ -43,11 +43,11 @@ as functions making the RUB corporate design colors available.
 -   Functions to access the RUB color palette.
 -   Scale functions to make the RUB color palettes available in
     `ggplot2`.
--   A dataset with 249,492 rows, `df_fake`, that illustrates how we used
-    this package in 2018 to create 64 reports with a total of 3,024
+-   An example dataset, `df_example`, that illustrates how we used this
+    package in 2022 to create 67 reports with a total of over 5,000
     unique figures. All values in the dataset are fake and
-    algorithmically generated, all other columns, though, are identical
-    to the confidential production dataset.
+    algorithmically generated, the other columns, though, are mostly
+    identical to the confidential production dataset.
 
 ## Guiding design principles
 
