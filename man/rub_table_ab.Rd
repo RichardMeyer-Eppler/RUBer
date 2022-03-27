@@ -29,24 +29,34 @@ Get formatted flextable of response rates for the Absolvent:innenbefragung
 # Create example data
 studienabschluss <- data.frame(
   stringsAsFactors = FALSE,
-  studienabschluss = c(
-    "Geschlecht","weiblich","männlich","Abschlussart","Bachelor 1-Fach","Bachelor 2-Fächer","Magister Theologiae","Master 1-Fach","Master 2-Fächer","Master of Education","Staatsexamen","Fächergruppe (erstes Studienfach)","Geisteswissenschaften","Humanmedizin / Gesundheitswissenschaften","Ingenieurwissenschaften","Kunst, Kunstwissenschaft","Mathematik, Naturwissenschaften","Rechts-, Wirtschafts- und Sozialwissenschaften","Sport","Gesamtzahl angeschriebene Absolvent:innen / gültige Fragebögen","Rücklaufquote Absolvent:innenbefragungen"
-  ),
-  koepfe_rub = c(
-    NA,10073,10042,NA,6763,3164,30,6190,404,1856,1708,NA,5776,933,4035,265,4358,4021,727,20115,0.35
-  ),
-  koepfe_rub_perc = c(
-    NA,0.5,0.5,NA,0.34,0.16,0,0.31,0.02,0.09,0.08,NA,0.29,0.05,0.2,0.01,0.22,0.2,0.04,1,0.35
-  ),
-  koepfe_bef = c(
-    NA,3645,3391,NA,2672,1352,11,1928,162,492,413,NA,2161,201,1321,108,1821,1214,204,7030,0.35
-  ),
-  koepfe_bef_perc = c(
-    NA,0.52,0.48,NA,0.38,0.19,0,0.27,0.02,0.07,0.06,NA,0.31,0.03,0.19,0.02,0.26,0.17,0.03,1,0.35
-  ),
-  row_id = c(
-    1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21
-  )
+  studienabschluss = c("Geschlecht","weiblich",
+                       "männlich","Abschlussart","Bachelor 1-Fach",
+                       "Bachelor 2-Fächer","Staatsexamen","Magister Theologiae",
+                       "Master 1-Fach","Master 2-Fächer","Master of Education",
+                       "Fächergruppe (erstes Studienfach)","Geisteswissenschaften",
+                       "Humanmedizin / Gesundheitswissenschaften",
+                       "Ingenieurwissenschaften","Kunst, Kunstwissenschaft",
+                       "Mathematik, Naturwissenschaften",
+                       "Rechts-, Wirtschafts-, Sozialwissenschaften","Sport",
+                       "Gesamtzahl angeschriebene Absolvent:innen / gültige Fragebögen",
+                       "Rücklaufquote Absolvent:innenbefragungen"),
+  koepfe_rub = c(NA,"9.887","9.969",NA,
+                 "6.673","3.164","1.708","30","6.081","404","1.796",NA,
+                 "4.611","882","4.778","265","3.614","5.086","620",
+                 "19.856","35\%"),
+  koepfe_rub_perc = c(NA,"50\%","50\%",NA,"34\%",
+                      "16\%","8,6\%","0,2\%","31\%","2,0\%","9,0\%",NA,"23\%",
+                      "4,4\%","24\%","1,3\%","18\%","26\%","3,1\%","100\%","35\%"),
+  koepfe_bef = c(NA,"3.594","3.358",NA,
+                 "2.643","1.352","413","11","1.897","162","474",NA,
+                 "1.724","186","1.603","108","1.544","1.613","174",
+                 "6.952","35\%"),
+  koepfe_bef_perc = c(NA,"52\%","48\%",NA,"38\%",
+                      "19\%","5,9\%","0,2\%","27\%","2,3\%","6,8\%",NA,"25\%",
+                      "2,7\%","23\%","1,6\%","22\%","23\%","2,5\%","100\%","35\%"),
+  row_id = c(1L,2L,3L,4L,5L,6L,7L,8L,
+             9L,10L,11L,12L,13L,14L,15L,16L,17L,18L,19L,
+             20L,21L)
 )
 
 typology <- data.frame(
@@ -66,7 +76,7 @@ typology <- data.frame(
 )
 
 headings <- c(
-  "Geschlecht", "Abschlussart", "Fächergruppe (erstes Studienfach)", "Gesamtzahl angeschriebene Absolvent:innen / gültige Fragebögen", "Rücklaufquote Absolvent:innenbefragungen"
+  "Geschlecht", "Abschlussart", "F\u00E4chergruppe (erstes Studienfach)", "Gesamtzahl angeschriebene Absolvent:innen / gültige Frageb\u00F6gen", "R\u00FCcklaufquote Absolvent:innenbefragungen"
 )
 
 # Function call
