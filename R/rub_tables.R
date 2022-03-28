@@ -87,6 +87,7 @@ rub_table_stg <- function(
 #' @param df Data frame
 #' @param typology Data frame with flextable typology
 #' @param headings Character vectors of headings
+#' @param padding Integer, padding in pts (points) passed to `flextable::padding()`
 #'
 #' @return Formatted Flextable
 #' @export
@@ -99,7 +100,8 @@ rub_table_stg <- function(
 rub_table_eb <- function(
   df,
   typology,
-  headings
+  headings,
+  padding = 3L
 ) {
 
   footnote_text <- "Frageb\u00F6gen werden als g\u00FCltig kategorisiert, wenn mindestens eine Frage beantwortet wurde."
@@ -224,6 +226,9 @@ rub_table_eb <- function(
         .
       ),
       width = 1
+    ) %>%
+    flextable::padding(
+      padding = padding
     )
 
   return(ft)
@@ -231,9 +236,7 @@ rub_table_eb <- function(
 
 #' Get formatted flextable of response rates for the Verlaufsbefragung
 #'
-#' @param df Data frame
-#' @param typology Data frame with flextable typology
-#' @param headings Character vectors of headings
+#' @inheritParams rub_table_eb
 #'
 #' @return Formatted Flextable
 #' @export
@@ -246,7 +249,8 @@ rub_table_eb <- function(
 rub_table_vb <- function(
   df,
   typology,
-  headings
+  headings,
+  padding = 3L
 ) {
 
   footnote_text <- "Frageb\u00F6gen werden als g\u00FCltig kategorisiert, wenn mindestens eine Frage beantwortet wurde."
@@ -374,6 +378,9 @@ rub_table_vb <- function(
         .
       ),
       width = 0.5
+    ) %>%
+    flextable::padding(
+      padding = padding
     )
 
   return(ft)
@@ -381,9 +388,7 @@ rub_table_vb <- function(
 
 #' Get formatted flextable of response rates for the Absolvent:innenbefragung
 #'
-#' @param df Data frame
-#' @param typology Data frame with flextable typology
-#' @param headings Character vectors of headings
+#' @inheritParams rub_table_eb
 #'
 #' @return Formatted Flextable
 #' @export
@@ -396,7 +401,8 @@ rub_table_vb <- function(
 rub_table_ab <- function(
   df,
   typology,
-  headings
+  headings,
+  padding = 3L
 ) {
 
   footnote_text <- "Frageb\u00F6gen werden als g\u00FCltig kategorisiert, wenn mindestens eine Frage beantwortet wurde. Bei der Absolvent:innenbefragung werden nach Abschluss der Befragung Studienf\u00E4lle aus den Datens\u00E4tzen gel\u00F6scht, wenn nur sehr wenige Fragen beantwortet wurden. Diese ausgeschlossenen F\u00E4lle sind in dieser R\u00FCcklauftabelle noch enthalten, obwohl sie bei den eigentlichen Auswertungen nicht mehr ber\u00FCcksichtigt wurden."
@@ -520,6 +526,9 @@ rub_table_ab <- function(
         .
       ),
       width = 1
+    ) %>%
+    flextable::padding(
+      padding = padding
     )
 
   return(ft)
