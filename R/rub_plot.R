@@ -261,6 +261,7 @@ rub_plot_type_1 <- function(df, x_var,
     ggplot2::scale_y_continuous(
       expand = c(0, 0),
       labels = scales::label_number(
+        accuracy = 1L,
         big.mark = ".",
         decimal.mark = ","
       )
