@@ -403,7 +403,7 @@ replace_first_page_header <- function(
   ) {
 
     node_txt <- glue::glue(
-      '<w:sectPr w:rsidR="009C0CC2" w:rsidSect="002C6CD0"><w:headerReference w:type="default" r:id="{default_header_id}"/><w:footerReference w:type="default" r:id="{default_footer_id}"/><w:headerReference w:type="first" r:id="{first_page_header_id}"/><w:type w:val="continuous"/><w:pgSz w:w="11952" w:h="16848"/><w:pgMar w:top="1417" w:right="1134" w:bottom="1134" w:left="850" w:header="720" w:footer="720" w:gutter="0"/><w:cols w:space="720"/><w:titlePg/><w:docGrid w:linePitch="326"/></w:sectPr>'
+      '<w:sectPr xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" w:rsidR="009C0CC2" w:rsidSect="002C6CD0"><w:headerReference w:type="default" r:id="{default_header_id}"/><w:footerReference w:type="default" r:id="{default_footer_id}"/><w:headerReference w:type="first" r:id="{first_page_header_id}"/><w:type w:val="continuous"/><w:pgSz w:w="11952" w:h="16848"/><w:pgMar w:top="1417" w:right="1134" w:bottom="1134" w:left="850" w:header="720" w:footer="720" w:gutter="0"/><w:cols w:space="720"/><w:titlePg/><w:docGrid w:linePitch="326"/></w:sectPr>'
     )
 
     node_xml <- xml2::read_xml(
