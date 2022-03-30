@@ -88,6 +88,8 @@ get_report_nr_by_id <- function(
 #'     \code{here::here("output")}
 #' @param output_filename Output filename for the rendered report, defaults to
 #'     \code{p_df[[1, "file_name"]]}
+#' @param post_process Boolean, whether \code{post_process} gets called on the
+#'     output file
 #'
 #' @export
 #'
@@ -105,7 +107,8 @@ render_report <- function(
   date = format(
     Sys.Date(),
     format= "%B %Y"
-  )
+  ),
+  post_process = TRUE
 ) {
   df <- filter_report(p_df, report_nr)
   title <- df[[1, "report_title"]]
@@ -180,12 +183,20 @@ render_report <- function(
   #   ),
   #   file_name = output_filename
   # )
+  if(post_process) {
 
-  post_process(
-    old_path = file_path,
-  #  new_path = file_path_replaced,
-    new_path = file_path,
-    overwrite = TRUE
+    post_process(
+      old_path = file_path,
+    #  new_path = file_path_replaced,
+      new_path = file_path,
+      overwrite = TRUE
+    )
+  }
+
+  return(
+    invisible(
+      p_df
+    )
   )
 
 }
