@@ -4,7 +4,7 @@
 \alias{rub_table_ab}
 \title{Get formatted flextable of response rates for the Absolvent:innenbefragung}
 \usage{
-rub_table_ab(df, typology, headings)
+rub_table_ab(df, typology, headings, padding = 3L)
 }
 \arguments{
 \item{df}{Data frame}
@@ -12,6 +12,8 @@ rub_table_ab(df, typology, headings)
 \item{typology}{Data frame with flextable typology}
 
 \item{headings}{Character vectors of headings}
+
+\item{padding}{Integer, padding in pts (points) passed to \code{flextable::padding()}}
 }
 \value{
 Formatted Flextable

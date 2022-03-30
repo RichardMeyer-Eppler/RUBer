@@ -11,7 +11,8 @@ render_report(
   rmd_template = here::here("datenreport_new.Rmd"),
   output_directory = NULL,
   output_filename = NULL,
-  date = format(Sys.Date(), format = "\%B \%Y")
+  date = format(Sys.Date(), format = "\%B \%Y"),
+  post_process = TRUE
 )
 }
 \arguments{
@@ -32,6 +33,9 @@ render_report(
 
 \item{date}{Date of the report displayed on the title page, defaults to
 \code{format(Sys.Date(), format= "\%B \%Y")}.}
+
+\item{post_process}{Boolean, whether \code{post_process} gets called on the
+output file}
 }
 \description{
 Render report
