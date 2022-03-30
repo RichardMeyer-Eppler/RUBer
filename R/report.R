@@ -9,14 +9,13 @@
 #' @export
 #'
 #' @examples
-#' filter_report(df_fake, report_nr = 12)
+#' filter_report(df_example, report_nr = 12)
 filter_report <- function(df, report_nr) {
-  p_report_nr <- report_nr
 
   filtered_df <- df %>%
     dplyr::filter(
-      report_nr == p_report_nr &
-        !figure_filter_flag
+      report_nr == !!report_nr &
+        !.data[["figure_filter_flag"]]
     )
 
   return(filtered_df)
@@ -59,11 +58,10 @@ get_report_nr_by_id <- function(
   df,
   report_type_id
 ) {
-  p_report_type_id <- report_type_id
 
   report_nr <- df %>%
     dplyr::filter(
-      report_type_id == p_report_type_id
+      report_type_id == !!report_type_id
     ) %>%
     dplyr::pull(
       report_nr
@@ -374,26 +372,26 @@ replace_first_page_header <- function(
 
   default_header_id <- df_relationships %>%
     dplyr::filter(
-      target == "header2.xml"
+      .data[["target"]] == "header2.xml"
     ) %>%
     dplyr::pull(
-      id
+      .data[["id"]]
     )
 
   default_footer_id <- df_relationships %>%
     dplyr::filter(
-      target == "footer2.xml"
+      .data[["target"]] == "footer2.xml"
     ) %>%
     dplyr::pull(
-      id
+      .data[["id"]]
     )
 
   first_page_header_id <- df_relationships %>%
     dplyr::filter(
-      target == "header3.xml"
+      .data[["target"]] == "header3.xml"
     ) %>%
     dplyr::pull(
-      id
+      .data[["id"]]
     )
 
   generate_xml <- function(
