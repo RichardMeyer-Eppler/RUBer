@@ -10,10 +10,14 @@
 #' plot_figure(df)
 #' }
 plot_figure <- function(df) {
-  figure_type_id <- unique(df[["figure_type_id"]])
+  figure_type_id <- sort(
+    unique(
+      df[["figure_type_id"]]
+    )
+  )
 
-  if (length(figure_type_id) == 1) {
-    if (figure_type_id == 1) {
+  if (length(figure_type_id) == 1L) {
+    if (figure_type_id == 1L) {
       p <- df %>%
         rub_plot_type_1(
           x_var = x,
@@ -23,10 +27,11 @@ plot_figure <- function(df) {
           fill_label = fill_label,
           caption = .[[1, "source_caption"]]
         )
-    } else if (figure_type_id == 2) {
+    } else if (figure_type_id == 2L) {
       p <- df %>%
         rub_plot_type_2(
           x_var = x,
+          x_var_label = x_label,
           y_var = y,
           fill_var = fill,
           fill_label = fill_label,
@@ -35,7 +40,7 @@ plot_figure <- function(df) {
           caption = .[[1, "source_caption"]],
           filter_cutoff = 0.05
         )
-    } else if (figure_type_id == 3) {
+    } else if (figure_type_id == 3L) {
       p <- df %>%
         rub_plot_type_3(
           x_var = x,
@@ -49,8 +54,7 @@ plot_figure <- function(df) {
         )
     }
   } else if (length(figure_type_id) > 1) {
-    if (identical(figure_type_id, c(1L, 4L)) |
-        identical(figure_type_id, c(4L, 1L))) {
+    if (identical(figure_type_id, c(1L, 4L))) {
        p <- df %>%
         rub_plot_type_1_and_4(
           x_var = x,
@@ -110,8 +114,10 @@ plot_discrete_palette <- function(colors_n)  {
 #' @param df Data frame
 #' @param x_var Required variable name for the variable containing the discrete
 #'     x-coordinates.
+#' @param x_var_label Optional variable name for the character variable
+#'     containing the names of the x variable, defaults to NULL.
 #' @param y_var Required variable name for the variable containing the
-#'     continuous y-coordinates.
+#'     y-coordinates. Will be coerced to numeric with `as.numeric`.
 #' @param y_axis_label Optional label for the y-axis, defaults to an empty
 #'     string.
 #' @param fill_var Variable name for the discrete variable which determines the
@@ -138,7 +144,8 @@ plot_discrete_palette <- function(colors_n)  {
 #' @importFrom rlang .data
 #'
 #' @example inst/examples/rub_plot_type_1.R
-rub_plot_type_1 <- function(df, x_var,
+rub_plot_type_1 <- function(df,
+                           x_var, x_var_label = NULL,
                            y_var, y_axis_label = "",
                            fill_var, fill_reverse = FALSE,
                            fill_label = NULL,
@@ -155,6 +162,22 @@ rub_plot_type_1 <- function(df, x_var,
   # Booleans
   has_y_axis_label <- y_axis_label != ""
   has_facet <- !rlang::quo_is_null(facet_var)
+
+
+  # x variable is turned into a factor
+  df <- set_factor_var(
+    df = df,
+    var = {{x_var}},
+    var_label = {{x_var_label}}
+  )
+
+  # y variable needs to be numeric
+  df <- df %>%
+    dplyr::mutate(
+      !!y_var_quo := as.numeric(
+        !!y_var_quo
+      )
+    )
 
   # Determine required number of discrete colors and get appropriate palette
   colors_n <- dplyr::n_distinct(df[[fill_var_sym]])
@@ -335,7 +358,8 @@ rub_plot_type_1 <- function(df, x_var,
 #'   y_var = status_percentage,
 #'   fill_var = cohort_status
 #' )
-rub_plot_type_2 <- function(df, x_var,
+rub_plot_type_2 <- function(df,
+                           x_var, x_var_label = "",
                            y_var, y_axis_label = "",
                            fill_var, fill_label = NULL,
                            fill_reverse = FALSE,
@@ -353,6 +377,21 @@ rub_plot_type_2 <- function(df, x_var,
   # Booleans
   has_y_axis_label <- y_axis_label != ""
   has_facet <- !rlang::quo_is_null(facet_var)
+
+  # x variable is turned into a factor
+  df <- set_factor_var(
+    df = df,
+    var = {{x_var}},
+    var_label = {{x_var_label}}
+  )
+
+  # y variable needs to be numeric
+  df <- df %>%
+    dplyr::mutate(
+      !!y_var_quo := as.numeric(
+        !!y_var_quo
+      )
+    )
 
   # Determine required number of discrete colors and get appropriate palette
   colors_n <- dplyr::n_distinct(df[[fill_var_sym]])
@@ -481,6 +520,8 @@ rub_plot_type_2 <- function(df, x_var,
 
 #' Plot horizontal stacked bar charts that are scaled to 100% (figure type 3)
 #'
+#' @param x_var Required variable name for the variable containing the
+#'     x-coordinates. Will be coerced to numeric with `as.numeric`.
 #' @param x_axis_label Optional label for the x-axis, defaults to an empty
 #'     string.
 #' @param legend_reverse Optional boolean indicating whether the legend should
@@ -540,6 +581,14 @@ rub_plot_type_3 <- function(df, x_var,
   palette <- plot_discrete_palette(
     colors_n = colors_n
   )
+
+  # x variable needs to be numeric
+  df <- df %>%
+    dplyr::mutate(
+      !!x_var_quo := as.numeric(
+        !!x_var_quo
+      )
+    )
 
   # y variable is turned into a factor before plotting to preserve ordering.
   # Order of y variable always needs to be reverted for this plot type.
@@ -742,7 +791,8 @@ rub_plot_type_3 <- function(df, x_var,
 #'    group_label = degree_txt
 #' )
 #' }
-rub_plot_type_4 <- function(df, x_var, x_axis_label = "",
+rub_plot_type_4 <- function(df,
+                           x_var, x_var_label = NULL, x_axis_label = "",
                            y_var, y_axis_label = "",
                            group_var, group_label = NULL,
                            caption = "", caption_prefix = "Quelle:",
@@ -760,16 +810,44 @@ rub_plot_type_4 <- function(df, x_var, x_axis_label = "",
   has_x_axis_label <- x_axis_label != ""
   has_y_axis_label <- y_axis_label != ""
   has_facet <- !rlang::quo_is_null(facet_var_quo)
-  has_group_label <- !rlang::quo_is_null(group_label_quo)
+  #has_group_label <- !rlang::quo_is_null(group_label_quo)
 
-  if(has_group_label) {
-    group_label_sym <- rlang::ensym(group_label)
-  } else  {
-    group_label_sym <- rlang::ensym(group_var)
-    }
+  # if(has_group_label) {
+  #   group_label_sym <- rlang::ensym(group_label)
+  # } else  {
+  #   group_label_sym <- rlang::ensym(group_var)
+  #   }
 
   # Plotting variables
-  group_label_unique <- unique(df[[group_label_sym]])
+
+  # x variable is turned into a factor
+  df <- set_factor_var(
+    df = df,
+    var = {{x_var}},
+    var_label = {{x_var_label}}
+  )
+
+  # y variable needs to be numeric
+  df <- df %>%
+    dplyr::mutate(
+      !!y_var_sym := as.numeric(
+        !!y_var_sym
+      )
+    )
+
+  # This function makes sure that the group variable is plotted in the correct
+  # order and with the appropriate labels.
+  df <- set_factor_var(
+    df = df,
+    var = {{group_var}},
+    var_label = {{group_label}},
+    reverse = FALSE
+  )
+
+  group_var_levels <- levels(
+    df[[group_var_sym]]
+  )
+
   max_y <- max(df[[y_var_sym]])
   caption <- ifelse(
     caption[1] == "",
@@ -781,7 +859,9 @@ rub_plot_type_4 <- function(df, x_var, x_axis_label = "",
   )
 
   # Determine required number of discrete colors and get appropriate palette
-  colors_n <- dplyr::n_distinct(df[[group_var_sym]])
+  colors_n <- dplyr::n_distinct(
+    group_var_levels
+  )
 
   # Set facet element
   if(!has_facet)  {
@@ -835,8 +915,8 @@ rub_plot_type_4 <- function(df, x_var, x_axis_label = "",
       discrete = TRUE,
       reverse = palette_reverse,
       name = NULL,
-      labels = group_label_unique
-      ) +
+      labels = group_var_levels
+    ) +
     ggplot2::scale_y_continuous(
       expand = c(0, 0),
       labels = function(y_var)
@@ -987,7 +1067,7 @@ rub_plot_type_1_and_4 <- function(df, x_var, x_axis_label = "",
 #' \dontrun{
 #' add_rub_plot_type_4(df, x, y, group, group_label)
 #' }
-add_rub_plot_type_4 <- function(df_t4, x_var,
+add_rub_plot_type_4 <- function(df_t4, x_var, x_var_label = NULL,
                                y_var, group_var,
                                group_label = NULL, base_size = 11,
                                base_family = "RubFlama",
@@ -996,22 +1076,54 @@ add_rub_plot_type_4 <- function(df_t4, x_var,
                                legend_columns = 5) {
 
   # Defuse R expressions
+  y_var_sym <- rlang::ensym(y_var)
   group_label_quo <- rlang::enquo(group_label)
   group_var_sym <- rlang::ensym(group_var)
 
   # Booleans
-  has_group_label <- !rlang::quo_is_null(group_label_quo)
-
-  if(has_group_label) {
-    group_label_sym <- rlang::ensym(group_label)
-  } else  {
-    group_label_sym <- rlang::ensym(group_var)
-  }
+  # has_group_label <- !rlang::quo_is_null(group_label_quo)
+  #
+  # if(has_group_label) {
+  #   group_label_sym <- rlang::ensym(group_label)
+  # } else  {
+  #   group_label_sym <- rlang::ensym(group_var)
+  # }
 
   # Plotting variables
-  group_label_unique <- unique(df_t4[[group_label_sym]])
+#  group_label_unique <- unique(df_t4[[group_label_sym]])
+
+  # x variable is turned into a factor
+  df_t4 <- set_factor_var(
+    df = df_t4,
+    var = {{x_var}},
+    var_label = {{x_var_label}}
+  )
+
+  # y variable needs to be numeric
+  df_t4 <- df_t4 %>%
+    dplyr::mutate(
+      !!y_var_sym := as.numeric(
+        !!y_var_sym
+      )
+    )
+
+  # This function makes sure that the group variable is plotted in the correct
+  # order and with the appropriate labels.
+  df_t4 <- set_factor_var(
+    df = df_t4,
+    var = {{group_var}},
+    var_label = {{group_label}},
+    reverse = FALSE
+  )
+
+  group_var_levels <- levels(
+    df_t4[[group_var_sym]]
+  )
+
   # Determine required number of discrete colors and get appropriate palette
-  colors_n <- dplyr::n_distinct(df_t4[[group_var_sym]])
+  colors_n <- dplyr::n_distinct(
+    group_var_levels
+  )
 
   expr_list <- vector("list", 4)
 
@@ -1062,7 +1174,7 @@ add_rub_plot_type_4 <- function(df_t4, x_var,
       discrete = TRUE,
       reverse = palette_reverse,
       name = NULL,
-      labels = group_label_unique
+      labels = group_var_levels
     )
   )
 
