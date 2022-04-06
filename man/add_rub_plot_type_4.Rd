@@ -7,6 +7,7 @@
 add_rub_plot_type_4(
   df_t4,
   x_var,
+  x_var_label = NULL,
   y_var,
   group_var,
   group_label = NULL,
@@ -24,7 +25,7 @@ add_rub_plot_type_4(
 x-coordinates.}
 
 \item{y_var}{Required variable name for the variable containing the
-continuous y-coordinates.}
+y-coordinates. Will be coerced to numeric with \code{as.numeric}.}
 
 \item{group_var}{Variable name for the discrete variable which determines the
 groups forming one line, e.g. degree_id.}

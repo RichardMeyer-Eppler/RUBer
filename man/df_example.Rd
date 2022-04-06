@@ -6,7 +6,7 @@
 \title{Example data set illustrating the use of the RUBer parameterized
 reporting package.}
 \format{
-A data frame with 163,616 rows and 29 variables:
+A data frame with 163,618 rows and 29 variables:
 \describe{
 \item{report_nr}{Integer, report number used for filtering and joining}
 \item{figure_count}{Integer, unique identifier for each figure}

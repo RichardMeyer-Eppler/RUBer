@@ -7,6 +7,7 @@
 rub_plot_type_1(
   df,
   x_var,
+  x_var_label = NULL,
   y_var,
   y_axis_label = "",
   fill_var,
@@ -29,8 +30,11 @@ rub_plot_type_1(
 \item{x_var}{Required variable name for the variable containing the discrete
 x-coordinates.}
 
+\item{x_var_label}{Optional variable name for the character variable
+containing the names of the x variable, defaults to NULL.}
+
 \item{y_var}{Required variable name for the variable containing the
-continuous y-coordinates.}
+y-coordinates. Will be coerced to numeric with \code{as.numeric}.}
 
 \item{y_axis_label}{Optional label for the y-axis, defaults to an empty
 string.}

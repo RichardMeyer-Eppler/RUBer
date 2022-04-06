@@ -18,5 +18,5 @@ Filtered data frame with data for the report nr
 Filter data frame based on \code{report_nr} column
 }
 \examples{
-filter_report(df_fake, report_nr = 12)
+filter_report(df_example, report_nr = 12)
 }

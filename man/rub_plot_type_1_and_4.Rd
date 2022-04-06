@@ -36,7 +36,7 @@ x-coordinates.}
 string.}
 
 \item{y_var}{Required variable name for the variable containing the
-continuous y-coordinates.}
+y-coordinates. Will be coerced to numeric with \code{as.numeric}.}
 
 \item{y_axis_label}{Optional label for the y-axis, defaults to an empty
 string.}

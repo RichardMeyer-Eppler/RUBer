@@ -22,7 +22,7 @@ add_label_position(
 x-coordinates.}
 
 \item{y_var}{Required variable name for the variable containing the
-continuous y-coordinates.}
+y-coordinates. Will be coerced to numeric with \code{as.numeric}.}
 
 \item{facet_var}{Optional variable name for the discrete variable to facet
 by, defaults to NULL.}

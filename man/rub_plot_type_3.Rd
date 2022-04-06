@@ -30,11 +30,11 @@ rub_plot_type_3(
 \arguments{
 \item{df}{Data frame}
 
-\item{x_var}{Required variable name for the variable containing the discrete
-x-coordinates.}
+\item{x_var}{Required variable name for the variable containing the
+x-coordinates. Will be coerced to numeric with \code{as.numeric}.}
 
 \item{y_var}{Required variable name for the variable containing the
-continuous y-coordinates.}
+y-coordinates. Will be coerced to numeric with \code{as.numeric}.}
 
 \item{x_axis_label}{Optional label for the x-axis, defaults to an empty
 string.}
