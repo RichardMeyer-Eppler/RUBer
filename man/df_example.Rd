@@ -6,21 +6,23 @@
 \title{Example data set illustrating the use of the RUBer parameterized
 reporting package.}
 \format{
-A data frame with 163,618 rows and 29 variables:
+A data frame with 163,618 rows and 25 variables:
 \describe{
 \item{report_nr}{Integer, report number used for filtering and joining}
 \item{figure_count}{Integer, unique identifier for each figure}
 \item{report_type_id}{Character, one of \code{c("STG", "MED", "M_ED", "FGR")}.
 The ID is used for filtering and conditional logic.}
-\item{x}{Character, x axis value of the figure}
+\item{x}{Character, x axis values. Will only be used for ordering if
+x_label is filled.}
+\item{x_label}{Character, x axis values to be displayed}
 \item{y}{Character, y axis value of the figure}
 \item{y_label}{Character, y axis label of the figure}
-\item{fill}{Double, values used for ordering of the fill}
+\item{fill}{Integer, values used for ordering of the fill}
 \item{fill_label}{Character, values used for the fill labels}
 \item{fill_reverse}{Boolean, if \code{TRUE} the fill ordering will be reversed
 when plotting.}
 \item{facet}{Character, values to facet the figure by}
-\item{group}{Double, values to group the figure by}
+\item{group}{Integer, values to group the figure by}
 \item{group_label}{Character, values to use as group labels}
 \item{source_caption}{Character, the source of the figure's data, displayed
 at the bottom-right of each figure. Used as caption argument in the
@@ -46,12 +48,6 @@ page, on  the header of each page.}
 \item{report_title}{Character, the report title, appearing on the title
 page, on the header of each page.}
 \item{file_name}{Character, the file name for this report}
-\item{figure_filter_flag}{Integer, if one the figure will be suppressed in
-the report output}
-\item{aggregation_id_1}{XXX}
-\item{aggregation_sort_1}{XXX}
-\item{abbildung_map_sort}{XXX}
-\item{wert_sort}{XXX}
 \item{figure_height}{Numeric, height of the figure in inches}
 }
 }
@@ -63,5 +59,60 @@ All data values in this data set are algorithmically generated. With that
 exception, though, the data set closely resembles the confidential data the
 package was developed for. It contains the data to generate 67
 reports with varying numbers of figures each.
+}
+\details{
+Table: Data summary\tabular{ll}{
+    \tab  \cr
+   Name \tab df_example \cr
+   Number of rows \tab 163618 \cr
+   Number of columns \tab 25 \cr
+   _______________________ \tab  \cr
+   Column type frequency: \tab  \cr
+   character \tab 16 \cr
+   logical \tab 3 \cr
+   numeric \tab 6 \cr
+   ________________________ \tab  \cr
+   Group variables \tab None \cr
+}
+
+
+\strong{Variable type: character}\tabular{lrrrrrrr}{
+   skim_variable \tab n_missing \tab complete_rate \tab min \tab max \tab empty \tab n_unique \tab whitespace \cr
+   report_type_id \tab 0 \tab 1.00 \tab 3 \tab 4 \tab 0 \tab 4 \tab 0 \cr
+   x \tab 0 \tab 1.00 \tab 1 \tab 20 \tab 0 \tab 155620 \tab 0 \cr
+   x_label \tab 155600 \tab 0.05 \tab 9 \tab 16 \tab 0 \tab 20 \tab 0 \cr
+   y \tab 0 \tab 1.00 \tab 1 \tab 55 \tab 0 \tab 15226 \tab 0 \cr
+   y_label \tab 160496 \tab 0.02 \tab 30 \tab 45 \tab 0 \tab 2 \tab 0 \cr
+   fill_label \tab 938 \tab 0.99 \tab 1 \tab 58 \tab 0 \tab 108 \tab 0 \cr
+   facet \tab 3122 \tab 0.98 \tab 9 \tab 168 \tab 0 \tab 1415 \tab 0 \cr
+   group_label \tab 162680 \tab 0.01 \tab 24 \tab 25 \tab 0 \tab 2 \tab 0 \cr
+   source_caption \tab 0 \tab 1.00 \tab 46 \tab 76 \tab 0 \tab 8 \tab 0 \cr
+   question_txt \tab 9968 \tab 0.94 \tab 19 \tab 213 \tab 0 \tab 53 \tab 0 \cr
+   figure_caption \tab 0 \tab 1.00 \tab 24 \tab 122 \tab 0 \tab 812 \tab 0 \cr
+   heading \tab 0 \tab 1.00 \tab 20 \tab 57 \tab 0 \tab 5 \tab 0 \cr
+   subheading \tab 32563 \tab 0.80 \tab 15 \tab 46 \tab 0 \tab 9 \tab 0 \cr
+   report_author \tab 0 \tab 1.00 \tab 10 \tab 82 \tab 0 \tab 67 \tab 0 \cr
+   report_title \tab 0 \tab 1.00 \tab 26 \tab 27 \tab 0 \tab 67 \tab 0 \cr
+   file_name \tab 0 \tab 1.00 \tab 29 \tab 30 \tab 0 \tab 67 \tab 0 \cr
+}
+
+
+\strong{Variable type: logical}\tabular{lrrrl}{
+   skim_variable \tab n_missing \tab complete_rate \tab mean \tab count \cr
+   fill_reverse \tab 0 \tab 1 \tab 0.00 \tab FAL: 163618 \cr
+   is_heading \tab 0 \tab 1 \tab 0.05 \tab FAL: 156211, TRU: 7407 \cr
+   is_subheading \tab 0 \tab 1 \tab 0.08 \tab FAL: 150774, TRU: 12844 \cr
+}
+
+
+\strong{Variable type: numeric}\tabular{lrrrrrrrrrl}{
+   skim_variable \tab n_missing \tab complete_rate \tab mean \tab sd \tab p0 \tab p25 \tab p50 \tab p75 \tab p100 \tab hist \cr
+   report_nr \tab 0 \tab 1.00 \tab 35.55 \tab 22.14 \tab 1.0 \tab 16.00 \tab 36.00 \tab 57.00 \tab 67.00 \tab ▇▃▇▂▇ \cr
+   figure_count \tab 0 \tab 1.00 \tab 88.12 \tab 105.33 \tab 1.0 \tab 29.00 \tab 57.00 \tab 93.00 \tab 550.00 \tab ▇▁▁▁▁ \cr
+   fill \tab 938 \tab 0.99 \tab 3.02 \tab 2.18 \tab 0.0 \tab 2.00 \tab 3.00 \tab 4.00 \tab 22.00 \tab ▇▂▁▁▁ \cr
+   group \tab 7080 \tab 0.96 \tab 81.98 \tab 15.54 \tab 8.0 \tab 81.00 \tab 82.00 \tab 88.00 \tab 99.00 \tab ▁▁▁▁▇ \cr
+   figure_type_id \tab 0 \tab 1.00 \tab 2.95 \tab 0.29 \tab 1.0 \tab 3.00 \tab 3.00 \tab 3.00 \tab 4.00 \tab ▁▁▁▇▁ \cr
+   figure_height \tab 0 \tab 1.00 \tab 6.58 \tab 2.13 \tab 1.3 \tab 4.92 \tab 7.28 \tab 8.54 \tab 9.45 \tab ▁▅▃▆▇ \cr
+}
 }
 \keyword{datasets}

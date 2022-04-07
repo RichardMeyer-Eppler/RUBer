@@ -7,7 +7,7 @@
 rub_plot_type_2(
   df,
   x_var,
-  x_var_label = "",
+  x_var_label = NULL,
   y_var,
   y_axis_label = "",
   fill_var,
