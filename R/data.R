@@ -12,15 +12,17 @@
 #'   \item{figure_count}{Integer, unique identifier for each figure}
 #'   \item{report_type_id}{Character, one of `c("STG", "MED", "M_ED", "FGR")`.
 #'           The ID is used for filtering and conditional logic.}
-#'   \item{x}{Character, x axis value of the figure}
+#'   \item{x}{Character, x axis values. Will only be used for ordering if
+#'           x_label is filled.}
+#'   \item{x_label}{Character, x axis values to be displayed}
 #'   \item{y}{Character, y axis value of the figure}
 #'   \item{y_label}{Character, y axis label of the figure}
-#'   \item{fill}{Double, values used for ordering of the fill}
+#'   \item{fill}{Integer, values used for ordering of the fill}
 #'   \item{fill_label}{Character, values used for the fill labels}
 #'   \item{fill_reverse}{Boolean, if `TRUE` the fill ordering will be reversed
 #'          when plotting.}
 #'   \item{facet}{Character, values to facet the figure by}
-#'   \item{group}{Double, values to group the figure by}
+#'   \item{group}{Integer, values to group the figure by}
 #'   \item{group_label}{Character, values to use as group labels}
 #'   \item{source_caption}{Character, the source of the figure's data, displayed
 #'           at the bottom-right of each figure. Used as caption argument in the
@@ -46,14 +48,12 @@
 #'   \item{report_title}{Character, the report title, appearing on the title
 #'           page, on the header of each page.}
 #'   \item{file_name}{Character, the file name for this report}
-#'   \item{figure_filter_flag}{Integer, if one the figure will be suppressed in
-#'           the report output}
-#'   \item{aggregation_id_1}{XXX}
-#'   \item{aggregation_sort_1}{XXX}
-#'   \item{abbildung_map_sort}{XXX}
-#'   \item{wert_sort}{XXX}
 #'   \item{figure_height}{Numeric, height of the figure in inches}
 #' }
+#' @details
+#' ```{r, results = "asis", echo = FALSE}
+#' skimr::skim(df_example)
+#' ```
 "df_example"
 
 
