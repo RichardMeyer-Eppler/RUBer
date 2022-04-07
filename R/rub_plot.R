@@ -361,7 +361,7 @@ rub_plot_type_1 <- function(df,
 #'   fill_var = cohort_status
 #' )
 rub_plot_type_2 <- function(df,
-                           x_var, x_var_label = "",
+                           x_var, x_var_label = NULL,
                            y_var, y_axis_label = "",
                            fill_var, fill_label = NULL,
                            fill_reverse = FALSE,
