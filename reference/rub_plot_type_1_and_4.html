@@ -59,6 +59,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">rub_plot_type_1_and_4</span><span class="op">(</span>
   <span class="va">df</span>,
   <span class="va">x_var</span>,
+  x_var_label <span class="op">=</span> <span class="cn">NULL</span>,
   x_axis_label <span class="op">=</span> <span class="st">""</span>,
   <span class="va">y_var</span>,
   y_axis_label <span class="op">=</span> <span class="st">""</span>,
@@ -86,12 +87,15 @@
 <dt>x_var</dt>
 <dd><p>Required variable name for the variable containing the discrete
 x-coordinates.</p></dd>
+<dt>x_var_label</dt>
+<dd><p>Optional variable name for the character variable
+containing the names of the x variable, defaults to NULL.</p></dd>
 <dt>x_axis_label</dt>
 <dd><p>Optional label for the x-axis, defaults to an empty
 string.</p></dd>
 <dt>y_var</dt>
 <dd><p>Required variable name for the variable containing the
-continuous y-coordinates.</p></dd>
+y-coordinates. Will be coerced to numeric with <code>as.numeric</code>.</p></dd>
 <dt>y_axis_label</dt>
 <dd><p>Optional label for the y-axis, defaults to an empty
 string.</p></dd>

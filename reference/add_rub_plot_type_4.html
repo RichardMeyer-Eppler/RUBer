@@ -59,6 +59,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">add_rub_plot_type_4</span><span class="op">(</span>
   <span class="va">df_t4</span>,
   <span class="va">x_var</span>,
+  x_var_label <span class="op">=</span> <span class="cn">NULL</span>,
   <span class="va">y_var</span>,
   <span class="va">group_var</span>,
   group_label <span class="op">=</span> <span class="cn">NULL</span>,
@@ -77,9 +78,12 @@
 <dt>x_var</dt>
 <dd><p>Required variable name for the variable containing the discrete
 x-coordinates.</p></dd>
+<dt>x_var_label</dt>
+<dd><p>Optional variable name for the character variable
+containing the names of the x variable, defaults to NULL.</p></dd>
 <dt>y_var</dt>
 <dd><p>Required variable name for the variable containing the
-continuous y-coordinates.</p></dd>
+y-coordinates. Will be coerced to numeric with <code>as.numeric</code>.</p></dd>
 <dt>group_var</dt>
 <dd><p>Variable name for the discrete variable which determines the
 groups forming one line, e.g. degree_id.</p></dd>
