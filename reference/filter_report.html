@@ -74,26 +74,10 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">filter_report</span><span class="op">(</span><span class="va">df_example</span>, report_nr <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,656 × 29</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    report_nr figure_count report_type_id x        y     y_label  fill fill_label</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>        12            1 STG            WiSe 15… 896   Studie…     1 Bachelor …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>        12            1 STG            WiSe 16… 701   Studie…     1 Bachelor …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>        12            1 STG            WiSe 17… 867   Studie…     1 Bachelor …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>        12            1 STG            WiSe 18… 890   Studie…     1 Bachelor …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>        12            1 STG            WiSe 19… 830   Studie…     1 Bachelor …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>        12            1 STG            WiSe 20… 824   Studie…     1 Bachelor …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>        12            1 STG            WiSe 21… 805   Studie…     1 Bachelor …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>        12            1 STG            WiSe 15… 180   Studie…    20 Master 1-…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>        12            1 STG            WiSe 16… 180   Studie…    20 Master 1-…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>        12            1 STG            WiSe 17… 180   Studie…    20 Master 1-…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 1,646 more rows, and 21 more variables: fill_reverse &lt;lgl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   facet &lt;chr&gt;, group &lt;dbl&gt;, group_label &lt;chr&gt;, source_caption &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   question_txt &lt;chr&gt;, figure_type_id &lt;int&gt;, figure_caption &lt;glue&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   heading &lt;chr&gt;, subheading &lt;chr&gt;, is_heading &lt;lgl&gt;, is_subheading &lt;lgl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   report_author &lt;chr&gt;, report_title &lt;glue&gt;, file_name &lt;glue&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   figure_filter_flag &lt;int&gt;, aggregation_id_1 &lt;chr&gt;, aggregation_sort_1 &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   abbildung_map_sort &lt;int&gt;, wert_sort &lt;int&gt;, figure_height &lt;dbl&gt;</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in dplyr::filter(., report_nr == !!report_nr &amp; !.data[["figure_filter_flag"]]):</span> Problem while computing `..1 = report_nr == 12 &amp;</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> !.data[["figure_filter_flag"]]`.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error in `.data[["figure_filter_flag"]]`:</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Column `figure_filter_flag` not found in `.data`.</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
