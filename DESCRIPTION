@@ -19,38 +19,31 @@ BugReports: https://github.com/RichardMeyer-Eppler/RUBer/issues
 Depends: 
     R (>= 3.5.0)
 Imports: 
-    bookdown (>= 0.11),
-    devEMF (>= 3.7),
-    dplyr (>= 0.8.4),
+    devEMF (>= 4.0.2),
+    dplyr (>= 1.0.7),
     extrafont (>= 0.17),
-    flextable (>= 0.5.5),
-    forcats (>= 0.4.0),
-    fs,
-    ggforce (>= 0.3.0),
-    ggplot2 (>= 3.2.1),
-    glue,
+    flextable (>= 0.6.8),
+    forcats (>= 0.5.1),
+    fs (>= 1.5.0),
+    ggforce (>= 0.3.3),
+    ggplot2 (>= 3.3.5),
+    glue (>= 1.5.0),
     gtsummary (>= 1.5.0),
-    here (>= 0.1),
-    knitr (>= 1.26),
-    magrittr (>= 1.5),
-    officedown (>= 0.0.5.3),
-    officer (>= 0.3.4),
-    purrr (>= 0.3.3),
-    ragg,
-    readr (>= 1.3.1),
-    readxl (>= 1.3.1),
-    rlang (>= 0.4.0),
-    rmarkdown (>= 1.15),
-    scales,
-    stringi (>= 1.4.6),
+    here (>= 1.0.1),
+    knitr (>= 1.36),
+    magrittr (>= 2.0.1),
+    officedown (>= 0.2.3.2),
+    officer (>= 0.4.0),
+    purrr (>= 0.3.4),
+    rlang (>= 0.4.11),
+    rmarkdown (>= 2.11),
+    scales (>= 1.1.1),
     stringr (>= 1.4.0),
-    tibble (>= 3.0.0),
-    tidyr (>= 1.0.0),
-    xml2
+    tibble (>= 3.1.6),
+    xml2 (>= 1.3.2)
 Suggests: 
-    janitor (>= 1.2.1),
-    prismatic (>= 0.2.0),
-    tidyselect (>= 1.0.0)
+    prismatic (>= 1.0.0),
+    ragg (>= 1.1.3)
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
