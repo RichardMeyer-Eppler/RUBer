@@ -21,6 +21,7 @@ plot_figure <- function(df) {
       p <- df %>%
         rub_plot_type_1(
           x_var = x,
+          x_var_label = x_label,
           y_var = y,
           y_axis_label = .[[1, "y_label"]],
           fill_var = fill,
@@ -58,6 +59,7 @@ plot_figure <- function(df) {
        p <- df %>%
         rub_plot_type_1_and_4(
           x_var = x,
+          x_var_label = x_label,
           y_var = y,
           y_axis_label = .[[1, "y_label"]],
           fill_var = fill,
