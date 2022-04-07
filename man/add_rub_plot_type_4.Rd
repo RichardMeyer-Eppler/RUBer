@@ -24,6 +24,9 @@ add_rub_plot_type_4(
 \item{x_var}{Required variable name for the variable containing the discrete
 x-coordinates.}
 
+\item{x_var_label}{Optional variable name for the character variable
+containing the names of the x variable, defaults to NULL.}
+
 \item{y_var}{Required variable name for the variable containing the
 y-coordinates. Will be coerced to numeric with \code{as.numeric}.}
 

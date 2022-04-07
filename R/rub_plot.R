@@ -960,7 +960,8 @@ rub_plot_type_4 <- function(df,
 #' \dontrun{
 #' rub_plot_type_1_and_4(df = df)
 #' }
-rub_plot_type_1_and_4 <- function(df, x_var, x_axis_label = "",
+rub_plot_type_1_and_4 <- function(df,
+                                  x_var, x_var_label = NULL, x_axis_label = "",
                                   y_var, y_axis_label = "",
                                   fill_var, fill_reverse = FALSE,
                                   fill_label = NULL,
@@ -979,6 +980,7 @@ rub_plot_type_1_and_4 <- function(df, x_var, x_axis_label = "",
       ) %>%
     rub_plot_type_1(
       x_var = {{x_var}},
+      x_var_label = {{x_var_label}},
       y_var = {{y_var}},
       y_axis_label = y_axis_label,
       fill_var = {{fill_var}},
@@ -1030,6 +1032,7 @@ rub_plot_type_1_and_4 <- function(df, x_var, x_axis_label = "",
       ) %>%
     add_rub_plot_type_4(
       x_var = {{x_var}},
+      x_var_label = {{x_var_label}},
       y_var = {{y_var}},
       group_var = {{group_var}},
       group_label = {{group_label}},

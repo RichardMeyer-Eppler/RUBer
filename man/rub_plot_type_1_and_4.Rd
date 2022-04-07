@@ -7,6 +7,7 @@
 rub_plot_type_1_and_4(
   df,
   x_var,
+  x_var_label = NULL,
   x_axis_label = "",
   y_var,
   y_axis_label = "",
@@ -31,6 +32,9 @@ rub_plot_type_1_and_4(
 
 \item{x_var}{Required variable name for the variable containing the discrete
 x-coordinates.}
+
+\item{x_var_label}{Optional variable name for the character variable
+containing the names of the x variable, defaults to NULL.}
 
 \item{x_axis_label}{Optional label for the x-axis, defaults to an empty
 string.}
