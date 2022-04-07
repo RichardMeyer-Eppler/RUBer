@@ -73,7 +73,7 @@ reports with varying numbers of figures each.</p>
 
     <div class="section level2">
     <h2 id="format">Format<a class="anchor" aria-label="anchor" href="#format"></a></h2>
-    <p>A data frame with 163,618 rows and 29 variables:</p><dl><dt>report_nr</dt>
+    <p>A data frame with 163,618 rows and 25 variables:</p><dl><dt>report_nr</dt>
 <dd><p>Integer, report number used for filtering and joining</p></dd>
 
 <dt>figure_count</dt>
@@ -84,7 +84,11 @@ reports with varying numbers of figures each.</p>
 The ID is used for filtering and conditional logic.</p></dd>
 
 <dt>x</dt>
-<dd><p>Character, x axis value of the figure</p></dd>
+<dd><p>Character, x axis values. Will only be used for ordering if
+x_label is filled.</p></dd>
+
+<dt>x_label</dt>
+<dd><p>Character, x axis values to be displayed</p></dd>
 
 <dt>y</dt>
 <dd><p>Character, y axis value of the figure</p></dd>
@@ -93,7 +97,7 @@ The ID is used for filtering and conditional logic.</p></dd>
 <dd><p>Character, y axis label of the figure</p></dd>
 
 <dt>fill</dt>
-<dd><p>Double, values used for ordering of the fill</p></dd>
+<dd><p>Integer, values used for ordering of the fill</p></dd>
 
 <dt>fill_label</dt>
 <dd><p>Character, values used for the fill labels</p></dd>
@@ -106,7 +110,7 @@ when plotting.</p></dd>
 <dd><p>Character, values to facet the figure by</p></dd>
 
 <dt>group</dt>
-<dd><p>Double, values to group the figure by</p></dd>
+<dd><p>Integer, values to group the figure by</p></dd>
 
 <dt>group_label</dt>
 <dd><p>Character, values to use as group labels</p></dd>
@@ -157,27 +161,14 @@ page, on the header of each page.</p></dd>
 <dt>file_name</dt>
 <dd><p>Character, the file name for this report</p></dd>
 
-<dt>figure_filter_flag</dt>
-<dd><p>Integer, if one the figure will be suppressed in
-the report output</p></dd>
-
-<dt>aggregation_id_1</dt>
-<dd><p>XXX</p></dd>
-
-<dt>aggregation_sort_1</dt>
-<dd><p>XXX</p></dd>
-
-<dt>abbildung_map_sort</dt>
-<dd><p>XXX</p></dd>
-
-<dt>wert_sort</dt>
-<dd><p>XXX</p></dd>
-
 <dt>figure_height</dt>
 <dd><p>Numeric, height of the figure in inches</p></dd>
 
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>Table: Data summary</p><table class="table table"><tr><td></td><td></td></tr><tr><td>Name</td><td>df_example</td></tr><tr><td>Number of rows</td><td>163618</td></tr><tr><td>Number of columns</td><td>25</td></tr><tr><td>_______________________</td><td></td></tr><tr><td>Column type frequency:</td><td></td></tr><tr><td>character</td><td>16</td></tr><tr><td>logical</td><td>3</td></tr><tr><td>numeric</td><td>6</td></tr><tr><td>________________________</td><td></td></tr><tr><td>Group variables</td><td>None</td></tr></table><p><strong>Variable type: character</strong></p><table class="table table"><tr><td>skim_variable</td><td>n_missing</td><td>complete_rate</td><td>min</td><td>max</td><td>empty</td><td>n_unique</td><td>whitespace</td></tr><tr><td>report_type_id</td><td>0</td><td>1.00</td><td>3</td><td>4</td><td>0</td><td>4</td><td>0</td></tr><tr><td>x</td><td>0</td><td>1.00</td><td>1</td><td>20</td><td>0</td><td>155620</td><td>0</td></tr><tr><td>x_label</td><td>155600</td><td>0.05</td><td>9</td><td>16</td><td>0</td><td>20</td><td>0</td></tr><tr><td>y</td><td>0</td><td>1.00</td><td>1</td><td>55</td><td>0</td><td>15226</td><td>0</td></tr><tr><td>y_label</td><td>160496</td><td>0.02</td><td>30</td><td>45</td><td>0</td><td>2</td><td>0</td></tr><tr><td>fill_label</td><td>938</td><td>0.99</td><td>1</td><td>58</td><td>0</td><td>108</td><td>0</td></tr><tr><td>facet</td><td>3122</td><td>0.98</td><td>9</td><td>168</td><td>0</td><td>1415</td><td>0</td></tr><tr><td>group_label</td><td>162680</td><td>0.01</td><td>24</td><td>25</td><td>0</td><td>2</td><td>0</td></tr><tr><td>source_caption</td><td>0</td><td>1.00</td><td>46</td><td>76</td><td>0</td><td>8</td><td>0</td></tr><tr><td>question_txt</td><td>9968</td><td>0.94</td><td>19</td><td>213</td><td>0</td><td>53</td><td>0</td></tr><tr><td>figure_caption</td><td>0</td><td>1.00</td><td>24</td><td>122</td><td>0</td><td>812</td><td>0</td></tr><tr><td>heading</td><td>0</td><td>1.00</td><td>20</td><td>57</td><td>0</td><td>5</td><td>0</td></tr><tr><td>subheading</td><td>32563</td><td>0.80</td><td>15</td><td>46</td><td>0</td><td>9</td><td>0</td></tr><tr><td>report_author</td><td>0</td><td>1.00</td><td>10</td><td>82</td><td>0</td><td>67</td><td>0</td></tr><tr><td>report_title</td><td>0</td><td>1.00</td><td>26</td><td>27</td><td>0</td><td>67</td><td>0</td></tr><tr><td>file_name</td><td>0</td><td>1.00</td><td>29</td><td>30</td><td>0</td><td>67</td><td>0</td></tr></table><p><strong>Variable type: logical</strong></p><table class="table table"><tr><td>skim_variable</td><td>n_missing</td><td>complete_rate</td><td>mean</td><td>count</td></tr><tr><td>fill_reverse</td><td>0</td><td>1</td><td>0.00</td><td>FAL: 163618</td></tr><tr><td>is_heading</td><td>0</td><td>1</td><td>0.05</td><td>FAL: 156211, TRU: 7407</td></tr><tr><td>is_subheading</td><td>0</td><td>1</td><td>0.08</td><td>FAL: 150774, TRU: 12844</td></tr></table><p><strong>Variable type: numeric</strong></p><table class="table table"><tr><td>skim_variable</td><td>n_missing</td><td>complete_rate</td><td>mean</td><td>sd</td><td>p0</td><td>p25</td><td>p50</td><td>p75</td><td>p100</td><td>hist</td></tr><tr><td>report_nr</td><td>0</td><td>1.00</td><td>35.55</td><td>22.14</td><td>1.0</td><td>16.00</td><td>36.00</td><td>57.00</td><td>67.00</td><td>▇▃▇▂▇</td></tr><tr><td>figure_count</td><td>0</td><td>1.00</td><td>88.12</td><td>105.33</td><td>1.0</td><td>29.00</td><td>57.00</td><td>93.00</td><td>550.00</td><td>▇▁▁▁▁</td></tr><tr><td>fill</td><td>938</td><td>0.99</td><td>3.02</td><td>2.18</td><td>0.0</td><td>2.00</td><td>3.00</td><td>4.00</td><td>22.00</td><td>▇▂▁▁▁</td></tr><tr><td>group</td><td>7080</td><td>0.96</td><td>81.98</td><td>15.54</td><td>8.0</td><td>81.00</td><td>82.00</td><td>88.00</td><td>99.00</td><td>▁▁▁▁▇</td></tr><tr><td>figure_type_id</td><td>0</td><td>1.00</td><td>2.95</td><td>0.29</td><td>1.0</td><td>3.00</td><td>3.00</td><td>3.00</td><td>4.00</td><td>▁▁▁▇▁</td></tr><tr><td>figure_height</td><td>0</td><td>1.00</td><td>6.58</td><td>2.13</td><td>1.3</td><td>4.92</td><td>7.28</td><td>8.54</td><td>9.45</td><td>▁▅▃▆▇</td></tr></table></div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
