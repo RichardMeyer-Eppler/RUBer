@@ -1,6 +1,6 @@
 
 
-#' Filter data frame based on \code{report_nr} column
+#' Filter data frame based on \code{report_nr}
 #'
 #' @param df Data frame
 #' @param report_nr Required integer indicating the report_nr
@@ -14,8 +14,7 @@ filter_report <- function(df, report_nr) {
 
   filtered_df <- df %>%
     dplyr::filter(
-      report_nr == !!report_nr &
-        !.data[["figure_filter_flag"]]
+      report_nr == !!report_nr
     )
 
   return(filtered_df)
@@ -45,7 +44,7 @@ get_file_path <- function(
   )
 }
 
-#' Get all values of \code{report_nr} for a \code{report_type_id}
+#' Get all unique values of \code{report_nr} for a \code{report_type_id}
 #'
 #' @param df Data frame with columns \code{report_nr} and \code{report_type_id}
 #' @param report_type_id One of STG, M_ED, MED or FGR
@@ -54,6 +53,7 @@ get_file_path <- function(
 #' @export
 #'
 #' @examples
+#' get_report_nr_by_id(df = df_example, report_type_id = "FGR")
 get_report_nr_by_id <- function(
   df,
   report_type_id
@@ -78,8 +78,7 @@ get_report_nr_by_id <- function(
 #' @param p_df Data frame containing the data for all reports
 #' @param p_df_stg Optional data frame with information on cases
 #' @param report_nr Report number of the report
-#' @param rmd_template Path to the R Markdown File for that report, defaults to
-#'     \code{here::here("datenreport_new.Rmd")}
+#' @param rmd_template Path to the R Markdown File for that report, defaults to Datenreport 2022 template from RUBer package
 #' @param date Date of the report displayed on the title page, defaults to
 #'     \code{format(Sys.Date(), format= "\%B \%Y")}.
 #' @param output_directory Output directory for the rendered report, defaults to
@@ -88,47 +87,41 @@ get_report_nr_by_id <- function(
 #'     \code{p_df[[1, "file_name"]]}
 #' @param post_process Boolean, whether \code{post_process} gets called on the
 #'     output file
+#' @param title Character, title for the title page
+#' @param author Character, author for the title page
 #'
 #' @export
 #'
-#' @examples
-#' \dontrun{
-#' render_report(df, 12)
-#' }
+#' @example inst/examples/render_report.R
 render_report <- function(
-  p_df,
+  p_df = filter_report(df_example, 6L),
   p_df_stg = NULL,
-  report_nr,
-  rmd_template = here::here("datenreport_new.Rmd"),
-  output_directory = NULL,
-  output_filename = NULL,
+  report_nr = 6L,
+  rmd_template = system.file(
+    "rmarkdown",
+    "templates",
+    "datenreport-2022",
+    "skeleton",
+    "skeleton.Rmd",
+    package = "RUBer"
+  ),
+  output_directory = fs::path_temp(),
+  output_filename = fs::path_file(
+    fs::file_temp(
+      pattern = "report",
+      ext = ".docx"
+    )
+  ),
+  title = "Title",
+  author = "Author",
   date = format(
     Sys.Date(),
     format= "%B %Y"
   ),
   post_process = TRUE
 ) {
-  df <- filter_report(p_df, report_nr)
-  title <- df[[1, "report_title"]]
-  author <- df[[1, "report_author"]]
 
-  if(
-    is.null(
-      output_filename
-    )
-  ) {
-    output_filename <- df[[1, "file_name"]]
-  }
-
-  if(
-    is.null(
-      output_directory
-    )
-  ) {
-    output_directory <-   here::here(
-      "output"
-    )
-  }
+  df <- p_df
 
   file_path <- get_file_path(
     file_directory = output_directory,
@@ -146,20 +139,6 @@ render_report <- function(
 	  )
 	}
 
-  # Apply transformation to data frame with student cases
-  df_stg <- p_df_stg
-
-  if(
-    !is.null(
-      p_df_stg
-    )
-  ) {
-    df_stg <- Datenreport2022::get_stg_df(
-      p_df_stg,
-      report_nr = report_nr
-    )
-  }
-
   rmarkdown::render(
     rmd_template,
     params = list(
@@ -168,24 +147,16 @@ render_report <- function(
       p_author = author,
       p_date = date,
       p_df = df,
-      p_df_stg = df_stg
+      p_df_stg = p_df_stg
     ),
     encoding = "UTF-8",
     output_file = file_path
   )
 
-  # file_path_replaced <- get_file_path(
-  #   file_directory = file.path(
-  #     output_directory,
-  #     "replaced"
-  #   ),
-  #   file_name = output_filename
-  # )
   if(post_process) {
 
     post_process(
       old_path = file_path,
-    #  new_path = file_path_replaced,
       new_path = file_path,
       overwrite = TRUE
     )
