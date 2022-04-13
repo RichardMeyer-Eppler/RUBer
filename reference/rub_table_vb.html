@@ -88,16 +88,16 @@
 <span class="r-in"><span class="va">studienverlauf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span class="r-in">  stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span class="r-in">  studienverlauf <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Geschlecht"</span>,<span class="st">"weiblich"</span>,</span>
-<span class="r-in">                     <span class="st">"männlich"</span>,<span class="st">"Abschlussart"</span>,<span class="st">"Bachelor 1-Fach"</span>,</span>
-<span class="r-in">                     <span class="st">"Bachelor 2-Fächer"</span>,<span class="st">"Staatsexamen"</span>,<span class="st">"Magister Theologiae"</span>,</span>
-<span class="r-in">                     <span class="st">"Master 1-Fach"</span>,<span class="st">"Master 2-Fächer"</span>,</span>
-<span class="r-in">                     <span class="st">"Master of Education"</span>,<span class="st">"Fächergruppe (erstes Studienfach)"</span>,</span>
+<span class="r-in">                     <span class="st">"m\u00E4nnlich"</span>,<span class="st">"Abschlussart"</span>,<span class="st">"Bachelor 1-Fach"</span>,</span>
+<span class="r-in">                     <span class="st">"Bachelor 2-F\u00E4cher"</span>,<span class="st">"Staatsexamen"</span>,<span class="st">"Magister Theologiae"</span>,</span>
+<span class="r-in">                     <span class="st">"Master 1-Fach"</span>,<span class="st">"Master 2-F\u00E4cher"</span>,</span>
+<span class="r-in">                     <span class="st">"Master of Education"</span>,<span class="st">"F\u00E4chergruppe (erstes Studienfach)"</span>,</span>
 <span class="r-in">                     <span class="st">"Geisteswissenschaften"</span>,</span>
 <span class="r-in">                     <span class="st">"Humanmedizin / Gesundheitswissenschaften"</span>,<span class="st">"Ingenieurwissenschaften"</span>,</span>
 <span class="r-in">                     <span class="st">"Kunst, Kunstwissenschaft"</span>,<span class="st">"Mathematik, Naturwissenschaften"</span>,</span>
 <span class="r-in">                     <span class="st">"Rechts-, Wirtschafts-, Sozialwissenschaften"</span>,<span class="st">"Sport"</span>,</span>
-<span class="r-in">                     <span class="st">"Gesamtzahl angeschriebene Studierende / gültige Fragebögen"</span>,</span>
-<span class="r-in">                     <span class="st">"Rücklaufquote Studienverlaufsbefragungen"</span><span class="op">)</span>,</span>
+<span class="r-in">                     <span class="st">"Gesamtzahl angeschriebene Studierende / g\u00FCltige Frageb\u00F6gen"</span>,</span>
+<span class="r-in">                     <span class="st">"R\u00FCcklaufquote Studienverlaufsbefragungen"</span><span class="op">)</span>,</span>
 <span class="r-in">  koepfe_2fs_rub <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>,<span class="st">"1.597"</span>,<span class="st">"1.576"</span>,<span class="cn">NA</span>,</span>
 <span class="r-in">                     <span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="st">"2.590"</span>,<span class="st">"99"</span>,<span class="st">"484"</span>,<span class="cn">NA</span>,<span class="st">"733"</span>,<span class="cn">NA</span>,</span>
 <span class="r-in">                     <span class="st">"776"</span>,<span class="st">"40"</span>,<span class="st">"718"</span>,<span class="st">"805"</span>,<span class="st">"101"</span>,<span class="st">"3.173"</span>,<span class="st">"38%"</span><span class="op">)</span>,</span>
@@ -142,10 +142,10 @@
 <span class="r-in">    <span class="st">"Studienverlauf"</span>,<span class="st">"2. Fachsemester"</span>,<span class="st">"2. Fachsemester"</span>,<span class="st">"2. Fachsemester"</span>,<span class="st">"2. Fachsemester"</span>,<span class="st">"5. Fachsemester"</span>,<span class="st">"5. Fachsemester"</span>,<span class="st">"5. Fachsemester"</span>,<span class="st">"5. Fachsemester"</span></span>
 <span class="r-in">  <span class="op">)</span>,</span>
 <span class="r-in">  colB <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="st">"Studienverlauf"</span>,<span class="st">"Angeschrieben"</span>,<span class="st">"Angeschrieben"</span>,<span class="st">"Gültige Fragebögen"</span>,<span class="st">"Gültige Fragebögen"</span>,<span class="st">"Angeschrieben"</span>,<span class="st">"Angeschrieben"</span>,<span class="st">"Gültige Fragebögen"</span>,<span class="st">"Gültige Fragebögen"</span></span>
+<span class="r-in">    <span class="st">"Studienverlauf"</span>,<span class="st">"Angeschrieben"</span>,<span class="st">"Angeschrieben"</span>,<span class="st">"G\u00FCltige Frageb\u00F6gen"</span>,<span class="st">"G\u00FCltige Frageb\u00F6gen"</span>,<span class="st">"Angeschrieben"</span>,<span class="st">"Angeschrieben"</span>,<span class="st">"G\u00FCltige Frageb\u00F6gen"</span>,<span class="st">"G\u00FCltige Frageb\u00F6gen"</span></span>
 <span class="r-in">  <span class="op">)</span>,</span>
 <span class="r-in">  colA <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="st">"Studienverlauf"</span>,<span class="st">"Köpfe"</span>,<span class="st">"(in %)"</span>,<span class="st">"Köpfe"</span>,<span class="st">"(in %)"</span>,<span class="st">"Köpfe"</span>,<span class="st">"(in %)"</span>,<span class="st">"Köpfe"</span>,<span class="st">"(in %)"</span></span>
+<span class="r-in">    <span class="st">"Studienverlauf"</span>,<span class="st">"K\u00F6pfe"</span>,<span class="st">"(in %)"</span>,<span class="st">"K\u00F6pfe"</span>,<span class="st">"(in %)"</span>,<span class="st">"K\u00F6pfe"</span>,<span class="st">"(in %)"</span>,<span class="st">"K\u00F6pfe"</span>,<span class="st">"(in %)"</span></span>
 <span class="r-in">  <span class="op">)</span></span>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-in"></span>

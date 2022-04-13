@@ -46,6 +46,9 @@
     <loc>/reference/df_example.html</loc>
   </url>
   <url>
+    <loc>/reference/df_report.html</loc>
+  </url>
+  <url>
     <loc>/reference/filter_report.html</loc>
   </url>
   <url>
@@ -53,6 +56,12 @@
   </url>
   <url>
     <loc>/reference/get_RUB_palettes.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_figure_chunk_df.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_figure_chunk_text.html</loc>
   </url>
   <url>
     <loc>/reference/get_file_path.html</loc>
@@ -127,6 +136,12 @@
     <loc>/reference/rub_table_eb.html</loc>
   </url>
   <url>
+    <loc>/reference/rub_table_excluded_programs.html</loc>
+  </url>
+  <url>
+    <loc>/reference/rub_table_included_programs.html</loc>
+  </url>
+  <url>
     <loc>/reference/rub_table_item.html</loc>
   </url>
   <url>
@@ -142,6 +157,9 @@
     <loc>/reference/rub_table_vb.html</loc>
   </url>
   <url>
+    <loc>/reference/run_example_as_chunk.html</loc>
+  </url>
+  <url>
     <loc>/reference/scale_color_rub.html</loc>
   </url>
   <url>
@@ -152,5 +170,17 @@
   </url>
   <url>
     <loc>/reference/theme_rub.html</loc>
+  </url>
+  <url>
+    <loc>/reference/tpl_get_figure_df.html</loc>
+  </url>
+  <url>
+    <loc>/reference/tpl_heading.html</loc>
+  </url>
+  <url>
+    <loc>/reference/tpl_plot_figure.html</loc>
+  </url>
+  <url>
+    <loc>/reference/tpl_subheading.html</loc>
   </url>
 </urlset>

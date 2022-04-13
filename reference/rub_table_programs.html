@@ -81,13 +81,62 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Create example data</span></span>
 <span class="r-in"><span class="va">example_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span class="r-in">  stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span class="r-in">  report_nr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,</span>
-<span class="r-in">  programm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Forschendes Lernen"</span>,<span class="st">"Forschendes Lernen"</span>,<span class="st">"Forschendes Lernen"</span>,<span class="st">"Innovative Praxisprojekte"</span>,<span class="st">"interLECTURE"</span>,<span class="st">"UNIC@RUB"</span><span class="op">)</span>,</span>
-<span class="r-in">  projekttitel <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Interkulturelle Bibelhermeneutiken. Kontextuelle Exegese im theologisch-interdisziplinären Diskurs"</span>, <span class="st">"Migration lokal denken. Begegnungen mit religiösen Gemeinschaften in NRW"</span>,<span class="st">"Traumatheologie: Kritische Bibellektüre anhand von Leiderfahrungen.  Entwicklung eines Tagungs- und Seminarkonzepts mit Studierenden zur angewandten wissenschaftlichen Exegese von Bibeltexten."</span>,<span class="st">"Religiöse Pluralität entdecken, reflektieren und diskutierend sichtbar machen"</span>,<span class="st">"Globale Christentümer: Theologische und religionswissenschaftliche Perspektiven"</span>,<span class="st">"Design of a Virtual Exchange program for the Summer Semester 2022 between the Protestant Faculty of RUB and the Faculty of Theology of the University of Deusto in the frame of the UNIC cooperation"</span><span class="op">)</span>,</span>
-<span class="r-in">  antragsteller_innen_verantwortliche_personen <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"N. N."</span>,<span class="st">"N. N."</span>,<span class="st">"N. N."</span>,<span class="st">"N. N."</span>,<span class="st">"N. N."</span>,<span class="st">"N. N."</span><span class="op">)</span>,</span>
-<span class="r-in">  forderzeitraum_von <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2021-10-01"</span>,<span class="st">"2019-10-01"</span>,<span class="st">"2021-04-01"</span>,<span class="st">"2021-04-01"</span>,<span class="st">"2020-06-01"</span>,<span class="st">"2022-02-01"</span><span class="op">)</span>,</span>
-<span class="r-in">  forderzeitraum_bis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2022-03-31"</span>,<span class="st">"2020-07-31"</span>,<span class="st">"2021-12-31"</span>,<span class="st">"2022-03-31"</span>,<span class="st">"2021-09-30"</span>,<span class="st">"2022-07-31"</span><span class="op">)</span>,</span>
-<span class="r-in">  is_last_row <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span>,<span class="cn">TRUE</span>,<span class="cn">TRUE</span>,<span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in">  report_nr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="fl">1</span>,</span>
+<span class="r-in">    <span class="fl">1</span>,</span>
+<span class="r-in">    <span class="fl">1</span>,</span>
+<span class="r-in">    <span class="fl">1</span>,</span>
+<span class="r-in">    <span class="fl">1</span>,</span>
+<span class="r-in">    <span class="fl">1</span></span>
+<span class="r-in">  <span class="op">)</span>,</span>
+<span class="r-in">  programm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="st">"Forschendes Lernen"</span>,</span>
+<span class="r-in">    <span class="st">"Forschendes Lernen"</span>,</span>
+<span class="r-in">    <span class="st">"Forschendes Lernen"</span>,</span>
+<span class="r-in">    <span class="st">"Innovative Praxisprojekte"</span>,</span>
+<span class="r-in">    <span class="st">"interLECTURE"</span>,</span>
+<span class="r-in">    <span class="st">"UNIC@RUB"</span></span>
+<span class="r-in">  <span class="op">)</span>,</span>
+<span class="r-in">  projekttitel <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="st">"Interkulturelle Bibelhermeneutiken. Kontextuelle Exegese im theologisch-interdisziplin\u00E4ren Diskurs"</span>,</span>
+<span class="r-in">    <span class="st">"Migration lokal denken. Begegnungen mit religi\u00F6sen Gemeinschaften in NRW"</span>,</span>
+<span class="r-in">    <span class="st">"Traumatheologie: Kritische Bibellekt\u00FCre anhand von Leiderfahrungen.  Entwicklung eines Tagungs- und Seminarkonzepts mit Studierenden zur angewandten wissenschaftlichen Exegese von Bibeltexten."</span>,</span>
+<span class="r-in">    <span class="st">"Religi\u00F6se Pluralit\u00E4t entdecken, reflektieren und diskutierend sichtbar machen"</span>,</span>
+<span class="r-in">    <span class="st">"Globale Christent\u00FCmer: Theologische und religionswissenschaftliche Perspektiven"</span>,</span>
+<span class="r-in">    <span class="st">"Design of a Virtual Exchange program for the Summer Semester 2022 between the Protestant Faculty of RUB and the Faculty of Theology of the University of Deusto in the frame of the UNIC cooperation"</span></span>
+<span class="r-in">  <span class="op">)</span>,</span>
+<span class="r-in">  antragsteller_innen_verantwortliche_personen <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="st">"N. N."</span>,</span>
+<span class="r-in">    <span class="st">"N. N."</span>,</span>
+<span class="r-in">    <span class="st">"N. N."</span>,</span>
+<span class="r-in">    <span class="st">"N. N."</span>,</span>
+<span class="r-in">    <span class="st">"N. N."</span>,</span>
+<span class="r-in">    <span class="st">"N. N."</span></span>
+<span class="r-in">  <span class="op">)</span>,</span>
+<span class="r-in">  forderzeitraum_von <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="st">"2021-10-01"</span>,</span>
+<span class="r-in">    <span class="st">"2019-10-01"</span>,</span>
+<span class="r-in">    <span class="st">"2021-04-01"</span>,</span>
+<span class="r-in">    <span class="st">"2021-04-01"</span>,</span>
+<span class="r-in">    <span class="st">"2020-06-01"</span>,</span>
+<span class="r-in">    <span class="st">"2022-02-01"</span></span>
+<span class="r-in">  <span class="op">)</span>,</span>
+<span class="r-in">  forderzeitraum_bis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="st">"2022-03-31"</span>,</span>
+<span class="r-in">    <span class="st">"2020-07-31"</span>,</span>
+<span class="r-in">    <span class="st">"2021-12-31"</span>,</span>
+<span class="r-in">    <span class="st">"2022-03-31"</span>,</span>
+<span class="r-in">    <span class="st">"2021-09-30"</span>,</span>
+<span class="r-in">    <span class="st">"2022-07-31"</span></span>
+<span class="r-in">  <span class="op">)</span>,</span>
+<span class="r-in">  is_last_row <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="cn">FALSE</span>,</span>
+<span class="r-in">    <span class="cn">FALSE</span>,</span>
+<span class="r-in">    <span class="cn">TRUE</span>,</span>
+<span class="r-in">    <span class="cn">TRUE</span>,</span>
+<span class="r-in">    <span class="cn">TRUE</span>,</span>
+<span class="r-in">    <span class="cn">TRUE</span></span>
+<span class="r-in">  <span class="op">)</span></span>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Function call</span></span>

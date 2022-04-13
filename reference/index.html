@@ -147,7 +147,7 @@
         </dt>
         <dd>RUB color palette</dd>
       </dl></div><div class="section level2">
-      <h2 id="reporting-funcitons">Reporting funcitons<a class="anchor" aria-label="anchor" href="#reporting-funcitons"></a></h2>
+      <h2 id="reporting-functions">Reporting functions<a class="anchor" aria-label="anchor" href="#reporting-functions"></a></h2>
       
       <p class="section-desc"></p><p>Functions for creating the parametric reports and associated helper functions, such as filter and file path functions.</p>
 
@@ -166,17 +166,60 @@
           
           <code><a href="get_report_nr_by_id.html">get_report_nr_by_id()</a></code> 
         </dt>
-        <dd>Get all values of <code>report_nr</code> for a <code>report_type_id</code></dd>
+        <dd>Get all unique values of <code>report_nr</code> for a <code>report_type_id</code></dd>
       </dl><dl><dt>
           
           <code><a href="filter_report.html">filter_report()</a></code> 
         </dt>
-        <dd>Filter data frame based on <code>report_nr</code> column</dd>
+        <dd>Filter data frame based on <code>report_nr</code></dd>
       </dl><dl><dt>
           
           <code><a href="render_report.html">render_report()</a></code> 
         </dt>
         <dd>Render report</dd>
+      </dl></div><div class="section level2">
+      <h2 id="templating-functions">Templating Functions<a class="anchor" aria-label="anchor" href="#templating-functions"></a></h2>
+      
+      <p class="section-desc"></p><p>Functions for creating the code chunks required for the figures and the dynamic placement of headings.</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="get_figure_chunk_df.html">get_figure_chunk_df()</a></code> 
+        </dt>
+        <dd>Get code chunks for plotting all figures</dd>
+      </dl><dl><dt>
+          
+          <code><a href="get_figure_chunk_text.html">get_figure_chunk_text()</a></code> 
+        </dt>
+        <dd>Turn data frame obtained by <code>get_figure_chunk_df</code> into character vector of
+code chunks</dd>
+      </dl><dl><dt>
+          
+          <code><a href="tpl_get_figure_df.html">tpl_get_figure_df()</a></code> 
+        </dt>
+        <dd>Returns a character vector for the code chunk to retrieve the figure data
+frame</dd>
+      </dl><dl><dt>
+          
+          <code><a href="tpl_heading.html">tpl_heading()</a></code> 
+        </dt>
+        <dd>Returns a character vector for the code chunk to insert a heading</dd>
+      </dl><dl><dt>
+          
+          <code><a href="tpl_subheading.html">tpl_subheading()</a></code> 
+        </dt>
+        <dd>Returns a character vector for the code chunk to insert a subheading</dd>
+      </dl><dl><dt>
+          
+          <code><a href="tpl_plot_figure.html">tpl_plot_figure()</a></code> 
+        </dt>
+        <dd>Returns a character vector for the code chunk to plot a figure</dd>
       </dl></div><div class="section level2">
       <h2 id="theming-functions">Theming functions<a class="anchor" aria-label="anchor" href="#theming-functions"></a></h2>
       
@@ -254,10 +297,20 @@
           <code><a href="rub_table_metrics.html">rub_table_metrics()</a></code> 
         </dt>
         <dd>Get formatted flextable of metrics</dd>
+      </dl><dl><dt>
+          
+          <code><a href="rub_table_included_programs.html">rub_table_included_programs()</a></code> 
+        </dt>
+        <dd>Get formatted flextable of included programs</dd>
+      </dl><dl><dt>
+          
+          <code><a href="rub_table_excluded_programs.html">rub_table_excluded_programs()</a></code> 
+        </dt>
+        <dd>Get formatted flextable of excluded programs</dd>
       </dl></div><div class="section level2">
       <h2 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a></h2>
       
-      <p class="section-desc"></p><p>Example data set for generating parametric reports with dynamic number of figures and headings.</p>
+      <p class="section-desc"></p><p>Two data sets: <code>df_example</code> containing algorithmically generated data to produce varying numbers of figures for each report and to place headings and subheadings dynamically. <code>df_report</code> containing the meta data for each report, such as the file name or the report author.</p>
 
       
     </div><div id="" class="section level2">
@@ -270,7 +323,15 @@
           <code><a href="df_example.html">df_example</a></code> 
         </dt>
         <dd>Example data set illustrating the use of the RUBer parameterized
-reporting package.</dd>
+reporting package, containing the data to generate all figures.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="df_report.html">df_report</a></code> 
+        </dt>
+        <dd>Example data set illustrating the use of the RUBer parameterized
+reporting package, containing the metadata for each report. The metadata
+includes the author, the title, the file name, and the subfolder to be used
+in the output path.</dd>
       </dl></div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>

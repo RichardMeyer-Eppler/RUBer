@@ -57,12 +57,15 @@
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">render_report</span><span class="op">(</span>
-  <span class="va">p_df</span>,
+  p_df <span class="op">=</span> <span class="fu"><a href="filter_report.html">filter_report</a></span><span class="op">(</span><span class="va">df_example</span>, <span class="fl">6L</span><span class="op">)</span>,
   p_df_stg <span class="op">=</span> <span class="cn">NULL</span>,
-  <span class="va">report_nr</span>,
-  rmd_template <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"datenreport_new.Rmd"</span><span class="op">)</span>,
-  output_directory <span class="op">=</span> <span class="cn">NULL</span>,
-  output_filename <span class="op">=</span> <span class="cn">NULL</span>,
+  report_nr <span class="op">=</span> <span class="fl">6L</span>,
+  rmd_template <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"rmarkdown"</span>, <span class="st">"templates"</span>, <span class="st">"datenreport-2022"</span>, <span class="st">"skeleton"</span>,
+    <span class="st">"skeleton.Rmd"</span>, package <span class="op">=</span> <span class="st">"RUBer"</span><span class="op">)</span>,
+  output_directory <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/file_temp.html" class="external-link">path_temp</a></span><span class="op">(</span><span class="op">)</span>,
+  output_filename <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path_file.html" class="external-link">path_file</a></span><span class="op">(</span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/file_temp.html" class="external-link">file_temp</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"report"</span>, ext <span class="op">=</span> <span class="st">".docx"</span><span class="op">)</span><span class="op">)</span>,
+  title <span class="op">=</span> <span class="st">"Title"</span>,
+  author <span class="op">=</span> <span class="st">"Author"</span>,
   date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>, format <span class="op">=</span> <span class="st">"%B %Y"</span><span class="op">)</span>,
   post_process <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span></code></pre></div>
@@ -77,14 +80,17 @@
 <dt>report_nr</dt>
 <dd><p>Report number of the report</p></dd>
 <dt>rmd_template</dt>
-<dd><p>Path to the R Markdown File for that report, defaults to
-<code>here::here("datenreport_new.Rmd")</code></p></dd>
+<dd><p>Path to the R Markdown File for that report, defaults to Datenreport 2022 template from RUBer package</p></dd>
 <dt>output_directory</dt>
 <dd><p>Output directory for the rendered report, defaults to
 <code>here::here("output")</code></p></dd>
 <dt>output_filename</dt>
 <dd><p>Output filename for the rendered report, defaults to
 <code>p_df[[1, "file_name"]]</code></p></dd>
+<dt>title</dt>
+<dd><p>Character, title for the title page</p></dd>
+<dt>author</dt>
+<dd><p>Character, author for the title page</p></dd>
 <dt>date</dt>
 <dd><p>Date of the report displayed on the title page, defaults to
 <code>format(Sys.Date(), format= "%B %Y")</code>.</p></dd>
@@ -95,9 +101,462 @@ output file</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu">render_report</span><span class="op">(</span><span class="va">df</span>, <span class="fl">12</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">run_ok</span> <span class="op">&lt;-</span> <span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/rmarkdown/reference/pandoc_available.html" class="external-link">pandoc_available</a></span><span class="op">(</span><span class="op">)</span> <span class="op">&amp;&amp;</span></span>
+<span class="r-in">  <span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/rmarkdown/reference/pandoc_available.html" class="external-link">pandoc_version</a></span><span class="op">(</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric_version.html" class="external-link">numeric_version</a></span><span class="op">(</span><span class="st">"2.0"</span><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="kw">if</span><span class="op">(</span><span class="va">run_ok</span><span class="op">)</span><span class="op">{</span></span>
+<span class="r-in"></span>
+<span class="r-in">  <span class="va">output_directory</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/file_temp.html" class="external-link">path_temp</a></span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in">  <span class="va">output_filename</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path_file.html" class="external-link">path_file</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/file_temp.html" class="external-link">file_temp</a></span><span class="op">(</span></span>
+<span class="r-in">      pattern <span class="op">=</span> <span class="st">"report"</span>,</span>
+<span class="r-in">      ext <span class="op">=</span> <span class="st">".docx"</span></span>
+<span class="r-in">    <span class="op">)</span></span>
+<span class="r-in">  <span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in">  <span class="fu">render_report</span><span class="op">(</span></span>
+<span class="r-in">    output_directory <span class="op">=</span> <span class="va">output_directory</span>,</span>
+<span class="r-in">    output_filename <span class="op">=</span> <span class="va">output_filename</span></span>
+<span class="r-in">  <span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in">  <span class="va">path_report_docx</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_file_path.html">get_file_path</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="va">output_directory</span>,</span>
+<span class="r-in">    <span class="va">output_filename</span></span>
+<span class="r-in">  <span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in">  <span class="kw">if</span><span class="op">(</span></span>
+<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.exists</a></span><span class="op">(</span></span>
+<span class="r-in">      <span class="va">path_report_docx</span></span>
+<span class="r-in">    <span class="op">)</span></span>
+<span class="r-in">  <span class="op">)</span><span class="op">{</span></span>
+<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span></span>
+<span class="r-in">      <span class="st">"File "</span>,</span>
+<span class="r-in">      <span class="va">path_report_docx</span>,</span>
+<span class="r-in">      <span class="st">" was written successfully."</span></span>
+<span class="r-in">    <span class="op">)</span></span>
+<span class="r-in">  <span class="op">}</span></span>
 <span class="r-in"><span class="op">}</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> processing file: skeleton.Rmd</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |                                                                      |   0%  |                                                                              |.                                                                     |   2%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    inline R code fragments</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |...                                                                   |   4%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> label: setup (with options) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> List of 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ include: logi FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |....                                                                  |   6%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ordinary text without R code</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |......                                                                |   8%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> label: data</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |.......                                                               |  10%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ordinary text without R code</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |.........                                                             |  12%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> label: figure_template (with options) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> List of 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ eval: logi TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |..........                                                            |  14%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ordinary text without R code</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |...........                                                           |  16%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> label: pagebreak-metrics-before</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |.............                                                         |  18%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ordinary text without R code</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |..............                                                        |  20%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> label: metrics (with options) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> List of 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ tab.cap : chr "PLACEHOLDER_TABDie Datenreporte der Lehrberichtserstattung 2021/2022 im Gesamtüberblick[^icons]"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ tab.id  : chr "metrics-tab"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ ft.align: chr "left"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |................                                                      |  22%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ordinary text without R code</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |.................                                                     |  24%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> label: stg-cases-eb (with options) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> List of 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ tab.cap : chr "PLACEHOLDER_TABVerteilung der Studienfälle auf das 1. und 2. Studienfach je Studiengang bei der Studieneingangsbefragung"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ tab.id  : chr "stg-cases-tag-eb"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ ft.align: chr "left"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |...................                                                   |  27%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ordinary text without R code</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |....................                                                  |  29%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> label: stg-cases-vb (with options) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> List of 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ tab.cap : chr "PLACEHOLDER_TABVerteilung der Studienfälle auf das 1. und 2. Studienfach je Studiengang bei der Studienverlaufsbefragung"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ tab.id  : chr "stg-cases-tag-vb"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ ft.align: chr "left"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |.....................                                                 |  31%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ordinary text without R code</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |.......................                                               |  33%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> label: stg-cases-ab (with options) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> List of 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ tab.cap : chr "PLACEHOLDER_TABVerteilung der Studienfälle auf das 1. und 2. Studienfach je Studiengang bei der Absolvent:innenbefragung"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ tab.id  : chr "stg-cases-tag-ab"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ ft.align: chr "left"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |........................                                              |  35%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ordinary text without R code</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |..........................                                            |  37%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> label: funded-projects-table (with options) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> List of 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ tab.cap : chr "PLACEHOLDER_TABFörderungen für Weiterentwicklung der Lehre"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ tab.id  : chr "projects-tab"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ ft.align: chr "left"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |...........................                                           |  39%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ordinary text without R code</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |.............................                                         |  41%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> label: create-figures (with options) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> List of 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ include: logi FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>font family 'RubFlama' not found in PostScript font database</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Font metric information not found for family 'RubFlama'; using 'Helvetica' instead</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Font metric information not found for family 'RubFlama'; using 'Helvetica' instead</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Font metric information not found for family 'RubFlama'; using 'Helvetica' instead</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Font metric information not found for family 'RubFlama'; using 'Helvetica' instead</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Multiple pages not available for EMF device</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Quitting from lines 11-12 (skeleton.Rmd) </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Quitting from lines 39-40 (skeleton.Rmd) </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y,     resolveHJust(x$just, x$hjust), resolveVJust(x$just, x$vjust),     x$rot, x$check.overlap):</span> devEMF: font (RubFlama) not found by Xft so can't embed fonts!</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

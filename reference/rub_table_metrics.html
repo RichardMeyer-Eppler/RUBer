@@ -78,28 +78,71 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Example data</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Example data (with icon paths as a placeholder)</span></span>
 <span class="r-in"><span class="va">df_metrics</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span class="r-in">  stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span class="r-in">  col1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="st">"D:/Data/Documents/R/win-library/4.1/Datenreport2022/rmarkdown/templates/datenreport-2022/skeleton/streamline-icon-pie-line-graph@48x48.png"</span>,<span class="st">"Drei Befragungen: Absolvent:innenbefragung (8.297 Fälle), Studieneingangsbefragung (5.283 Fälle) und Studienverlaufsbefragung (5.912 Fälle)"</span>,<span class="st">"D:/Data/Documents/R/win-library/4.1/Datenreport2022/rmarkdown/templates/datenreport-2022/skeleton/streamline-icon-list-numbers@48x48.png"</span>,<span class="cn">NA</span>,<span class="st">"D:/Data/Documents/R/win-library/4.1/Datenreport2022/rmarkdown/templates/datenreport-2022/skeleton/streamline-icon-user-female-teacher-math@48x48.png"</span>,<span class="cn">NA</span></span>
+<span class="r-in">    <span class="st">"PLACEHOLDER_PATH/streamline-icon-pie-line-graph.png"</span>,</span>
+<span class="r-in">    <span class="st">"Drei Befragungen:\nAbsolvent:innenbefragung (8.297 F\u00E4lle), Studieneingangsbefragung (5.283 F\u00E4lle)\nund Studienverlaufsbefragung (5.912 F\u00E4lle)"</span>,</span>
+<span class="r-in">    <span class="st">"PLACEHOLDER_PATH/streamline-icon-list-numbers.png"</span>,<span class="cn">NA</span>,</span>
+<span class="r-in">    <span class="st">"PLACEHOLDER_PATH/streamline-icon-user-female-teacher-math.png"</span>,<span class="cn">NA</span></span>
 <span class="r-in">  <span class="op">)</span>,</span>
 <span class="r-in">  col2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="st">"Insgesamt 66 Datenreporte für 177 Studiengänge"</span>,<span class="st">"Drei Befragungen: Absolvent:innenbefragung (8.297 Fälle), Studieneingangsbefragung (5.283 Fälle) und Studienverlaufsbefragung (5.912 Fälle)"</span>,<span class="st">"Auswertung von 52 Fragen und 251 Items"</span>,<span class="cn">NA</span>,<span class="st">"134 Lehrförderungen verteilt auf 217 Antragssteller:innen"</span>,<span class="st">"Hochschulstatistische Daten und Kohortenanalysen zu 46.516 Studienfällen und 5.684 Absolvent:innen"</span></span>
+<span class="r-in">    <span class="st">"Insgesamt 67 Datenreporte\nf\u00FCr 177 Studieng\u00E4nge"</span>,</span>
+<span class="r-in">    <span class="st">"Drei Befragungen:\nAbsolvent:innenbefragung (8.297 F\u00E4lle), Studieneingangsbefragung (5.283 F\u00E4lle)\nund Studienverlaufsbefragung (5.912 F\u00E4lle)"</span>,</span>
+<span class="r-in">    <span class="st">"Auswertung von 53 Fragen\nund 251 Items"</span>,<span class="cn">NA</span>,</span>
+<span class="r-in">    <span class="st">"143 Lehrf\u00F6rderungen verteilt auf\n222 Antragssteller:innen"</span>,</span>
+<span class="r-in">    <span class="st">"Hochschulstatistische Daten und Kohortenanalysen zu 46.601 Studienf\u00E4llen und 5.537 Absolvent:innen"</span></span>
 <span class="r-in">  <span class="op">)</span>,</span>
 <span class="r-in">  col3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="st">"Insgesamt 66 Datenreporte für 177 Studiengänge"</span>,<span class="st">"Drei Befragungen: Absolvent:innenbefragung (8.297 Fälle), Studieneingangsbefragung (5.283 Fälle) und Studienverlaufsbefragung (5.912 Fälle)"</span>,<span class="st">"Auswertung von 52 Fragen und 251 Items"</span>, <span class="st">"901.433 ausgewertete Antworten visualisiert in 4.995 Abbildungen"</span>,<span class="st">"134 Lehrförderungen verteilt auf 217 Antragssteller:innen"</span>,<span class="st">"Hochschulstatistische Daten und Kohortenanalysen zu 46.516 Studienfällen und 5.684 Absolvent:innen"</span></span>
+<span class="r-in">    <span class="st">"Insgesamt 67 Datenreporte\nf\u00FCr 177 Studieng\u00E4nge"</span>,</span>
+<span class="r-in">    <span class="st">"Drei Befragungen:\nAbsolvent:innenbefragung (8.297 F\u00E4lle), Studieneingangsbefragung (5.283 F\u00E4lle)\nund Studienverlaufsbefragung (5.912 F\u00E4lle)"</span>,</span>
+<span class="r-in">    <span class="st">"Auswertung von 53 Fragen\nund 251 Items"</span>,</span>
+<span class="r-in">    <span class="st">"904.321 ausgewertete Antworten\nvisualisiert in 5.027 Abbildungen"</span>,</span>
+<span class="r-in">    <span class="st">"143 Lehrf\u00F6rderungen verteilt auf\n222 Antragssteller:innen"</span>,</span>
+<span class="r-in">    <span class="st">"Hochschulstatistische Daten und Kohortenanalysen zu 46.601 Studienf\u00E4llen und 5.537 Absolvent:innen"</span></span>
 <span class="r-in">  <span class="op">)</span>,</span>
 <span class="r-in">  col4 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="st">"Insgesamt 66 Datenreporte für 177 Studiengänge"</span>,<span class="st">"Drei Befragungen: Absolvent:innenbefragung (8.297 Fälle), Studieneingangsbefragung (5.283 Fälle) und Studienverlaufsbefragung (5.912 Fälle)"</span>,<span class="st">"Auswertung von 52 Fragen und 251 Items"</span>,<span class="st">"901.433 ausgewertete Antworten visualisiert in 4.995 Abbildungen"</span>,<span class="st">"134 Lehrförderungen verteilt auf 217 Antragssteller:innen"</span>,<span class="st">"Hochschulstatistische Daten und Kohortenanalysen zu 46.516 Studienfällen und 5.684 Absolvent:innen"</span></span>
+<span class="r-in">    <span class="st">"Insgesamt 67 Datenreporte\nf\u00FCr 177 Studieng\u00E4nge"</span>,</span>
+<span class="r-in">    <span class="st">"Drei Befragungen:\nAbsolvent:innenbefragung (8.297 F\u00E4lle), Studieneingangsbefragung (5.283 F\u00E4lle)\nund Studienverlaufsbefragung (5.912 F\u00E4lle)"</span>,</span>
+<span class="r-in">    <span class="st">"Auswertung von 53 Fragen\nund 251 Items"</span>,</span>
+<span class="r-in">    <span class="st">"904.321 ausgewertete Antworten\nvisualisiert in 5.027 Abbildungen"</span>,</span>
+<span class="r-in">    <span class="st">"143 Lehrf\u00F6rderungen verteilt auf\n222 Antragssteller:innen"</span>,</span>
+<span class="r-in">    <span class="st">"Hochschulstatistische Daten und Kohortenanalysen zu 46.601 Studienf\u00E4llen und 5.537 Absolvent:innen"</span></span>
 <span class="r-in">  <span class="op">)</span>,</span>
 <span class="r-in">  col5 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="cn">NA</span>,<span class="st">"Drei Befragungen: Absolvent:innenbefragung (8.297 Fälle), Studieneingangsbefragung (5.283 Fälle) und Studienverlaufsbefragung (5.912 Fälle)"</span>,<span class="cn">NA</span>,<span class="st">"901.433 ausgewertete Antworten visualisiert in 4.995 Abbildungen"</span>,<span class="st">"134 Lehrförderungen verteilt auf 217 Antragssteller:innen"</span>,<span class="st">"Hochschulstatistische Daten und Kohortenanalysen zu 46.516 Studienfällen und 5.684 Absolvent:innen"</span></span>
+<span class="r-in">    <span class="cn">NA</span>,</span>
+<span class="r-in">    <span class="st">"Drei Befragungen:\nAbsolvent:innenbefragung (8.297 F\u00E4lle), Studieneingangsbefragung (5.283 F\u00E4lle)\nund Studienverlaufsbefragung (5.912 F\u00E4lle)"</span>,<span class="cn">NA</span>,</span>
+<span class="r-in">    <span class="st">"904.321 ausgewertete Antworten\nvisualisiert in 5.027 Abbildungen"</span>,</span>
+<span class="r-in">    <span class="st">"143 Lehrf\u00F6rderungen verteilt auf\n222 Antragssteller:innen"</span>,</span>
+<span class="r-in">    <span class="st">"Hochschulstatistische Daten und Kohortenanalysen zu 46.601 Studienf\u00E4llen und 5.537 Absolvent:innen"</span></span>
 <span class="r-in">  <span class="op">)</span>,</span>
 <span class="r-in">  col6 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="cn">NA</span>,<span class="st">"D:/Data/Documents/R/win-library/4.1/Datenreport2022/rmarkdown/templates/datenreport-2022/skeleton/streamline-icon-team-meeting-message-men-question@48x48.png"</span>,<span class="cn">NA</span>,<span class="st">"D:/Data/Documents/R/win-library/4.1/Datenreport2022/rmarkdown/templates/datenreport-2022/skeleton/streamline-icon-analytics-bars-horizontal@48x48.png"</span>,<span class="cn">NA</span>,<span class="st">"D:/Data/Documents/R/win-library/4.1/Datenreport2022/rmarkdown/templates/datenreport-2022/skeleton/streamline-icon-people-man-graduate@48x48.png"</span></span>
+<span class="r-in">    <span class="cn">NA</span>,</span>
+<span class="r-in">    <span class="st">"PLACEHOLDER_PATH/streamline-icon-team-meeting-message-men-question.png"</span>,<span class="cn">NA</span>,</span>
+<span class="r-in">    <span class="st">"PLACEHOLDER_PATH/streamline-icon-analytics-bars-horizontal.png"</span>,<span class="cn">NA</span>,</span>
+<span class="r-in">    <span class="st">"PLACEHOLDER_PATH/streamline-icon-people-man-graduate.png"</span></span>
 <span class="r-in">  <span class="op">)</span></span>
 <span class="r-in"><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># df_metrics needs to be updated with runtime path to the streamline icons</span></span>
+<span class="r-in"><span class="va">skeleton_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span>
+<span class="r-in">  <span class="st">"rmarkdown"</span>,</span>
+<span class="r-in">  <span class="st">"templates"</span>,</span>
+<span class="r-in">  <span class="st">"datenreport-2022"</span>,</span>
+<span class="r-in">  <span class="st">"skeleton"</span>,</span>
+<span class="r-in">  package <span class="op">=</span> <span class="st">"RUBer"</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="va">df_metrics</span> <span class="op">&lt;-</span> <span class="va">df_metrics</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
+<span class="r-in">  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span></span>
+<span class="r-in">      <span class="fu">tidyselect</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span class="r-in">      <span class="fu">stringr</span><span class="fu">::</span><span class="va"><a href="https://stringr.tidyverse.org/reference/str_replace.html" class="external-link">str_replace_all</a></span>,</span>
+<span class="r-in">      pattern <span class="op">=</span> <span class="st">"PLACEHOLDER_PATH"</span>,</span>
+<span class="r-in">      replacement <span class="op">=</span> <span class="va">skeleton_path</span></span>
+<span class="r-in">    <span class="op">)</span></span>
+<span class="r-in">  <span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Function call</span></span>
 <span class="r-in"><span class="fu">rub_table_metrics</span><span class="op">(</span></span>
@@ -110,42 +153,42 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> header has 0 row(s) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> body has 6 row(s) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> original dataset sample: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                                                   col1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1           D:/Data/Documents/R/win-library/4.1/Datenreport2022/rmarkdown/templates/datenreport-2022/skeleton/streamline-icon-pie-line-graph@48x48.png</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2          Drei Befragungen: Absolvent:innenbefragung (8.297 Fälle), Studieneingangsbefragung (5.283 Fälle) und Studienverlaufsbefragung (5.912 Fälle)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3             D:/Data/Documents/R/win-library/4.1/Datenreport2022/rmarkdown/templates/datenreport-2022/skeleton/streamline-icon-list-numbers@48x48.png</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4                                                                                                                                                 &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 D:/Data/Documents/R/win-library/4.1/Datenreport2022/rmarkdown/templates/datenreport-2022/skeleton/streamline-icon-user-female-teacher-math@48x48.png</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                                          col2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                                                                              Insgesamt 66 Datenreporte für 177 Studiengänge</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 Drei Befragungen: Absolvent:innenbefragung (8.297 Fälle), Studieneingangsbefragung (5.283 Fälle) und Studienverlaufsbefragung (5.912 Fälle)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                                                                                                      Auswertung von 52 Fragen und 251 Items</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4                                                                                                                                        &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5                                                                                   134 Lehrförderungen verteilt auf 217 Antragssteller:innen</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                                          col3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                                                                              Insgesamt 66 Datenreporte für 177 Studiengänge</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 Drei Befragungen: Absolvent:innenbefragung (8.297 Fälle), Studieneingangsbefragung (5.283 Fälle) und Studienverlaufsbefragung (5.912 Fälle)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                                                                                                      Auswertung von 52 Fragen und 251 Items</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4                                                                            901.433 ausgewertete Antworten visualisiert in 4.995 Abbildungen</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5                                                                                   134 Lehrförderungen verteilt auf 217 Antragssteller:innen</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                                          col4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                                                                              Insgesamt 66 Datenreporte für 177 Studiengänge</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 Drei Befragungen: Absolvent:innenbefragung (8.297 Fälle), Studieneingangsbefragung (5.283 Fälle) und Studienverlaufsbefragung (5.912 Fälle)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                                                                                                      Auswertung von 52 Fragen und 251 Items</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4                                                                            901.433 ausgewertete Antworten visualisiert in 4.995 Abbildungen</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5                                                                                   134 Lehrförderungen verteilt auf 217 Antragssteller:innen</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                                          col5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                                                                                                                        &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 Drei Befragungen: Absolvent:innenbefragung (8.297 Fälle), Studieneingangsbefragung (5.283 Fälle) und Studienverlaufsbefragung (5.912 Fälle)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                                                                                                                                        &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4                                                                            901.433 ausgewertete Antworten visualisiert in 4.995 Abbildungen</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5                                                                                   134 Lehrförderungen verteilt auf 217 Antragssteller:innen</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                                                            col6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                                                                                                                                          &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 D:/Data/Documents/R/win-library/4.1/Datenreport2022/rmarkdown/templates/datenreport-2022/skeleton/streamline-icon-team-meeting-message-men-question@48x48.png</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                                                                                                                                                          &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4         D:/Data/Documents/R/win-library/4.1/Datenreport2022/rmarkdown/templates/datenreport-2022/skeleton/streamline-icon-analytics-bars-horizontal@48x48.png</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5                                                                                                                                                          &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                                            col1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                        /home/runner/work/_temp/Library/RUBer/rmarkdown/templates/datenreport-2022/skeleton/streamline-icon-pie-line-graph.png</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 Drei Befragungen:\nAbsolvent:innenbefragung (8.297 Fälle), Studieneingangsbefragung (5.283 Fälle)\nund Studienverlaufsbefragung (5.912 Fälle)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                          /home/runner/work/_temp/Library/RUBer/rmarkdown/templates/datenreport-2022/skeleton/streamline-icon-list-numbers.png</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                                                                                                                                          &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5              /home/runner/work/_temp/Library/RUBer/rmarkdown/templates/datenreport-2022/skeleton/streamline-icon-user-female-teacher-math.png</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                                            col2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                                                                               Insgesamt 67 Datenreporte\nfür 177 Studiengänge</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 Drei Befragungen:\nAbsolvent:innenbefragung (8.297 Fälle), Studieneingangsbefragung (5.283 Fälle)\nund Studienverlaufsbefragung (5.912 Fälle)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                                                                                                       Auswertung von 53 Fragen\nund 251 Items</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                                                                                                                                          &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                                                                                    143 Lehrförderungen verteilt auf\n222 Antragssteller:innen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                                            col3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                                                                               Insgesamt 67 Datenreporte\nfür 177 Studiengänge</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 Drei Befragungen:\nAbsolvent:innenbefragung (8.297 Fälle), Studieneingangsbefragung (5.283 Fälle)\nund Studienverlaufsbefragung (5.912 Fälle)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                                                                                                       Auswertung von 53 Fragen\nund 251 Items</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                                                                             904.321 ausgewertete Antworten\nvisualisiert in 5.027 Abbildungen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                                                                                    143 Lehrförderungen verteilt auf\n222 Antragssteller:innen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                                            col4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                                                                               Insgesamt 67 Datenreporte\nfür 177 Studiengänge</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 Drei Befragungen:\nAbsolvent:innenbefragung (8.297 Fälle), Studieneingangsbefragung (5.283 Fälle)\nund Studienverlaufsbefragung (5.912 Fälle)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                                                                                                       Auswertung von 53 Fragen\nund 251 Items</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                                                                             904.321 ausgewertete Antworten\nvisualisiert in 5.027 Abbildungen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                                                                                    143 Lehrförderungen verteilt auf\n222 Antragssteller:innen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                                            col5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                                                                                                                          &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 Drei Befragungen:\nAbsolvent:innenbefragung (8.297 Fälle), Studieneingangsbefragung (5.283 Fälle)\nund Studienverlaufsbefragung (5.912 Fälle)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                                                                                                                                          &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                                                                             904.321 ausgewertete Antworten\nvisualisiert in 5.027 Abbildungen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                                                                                    143 Lehrförderungen verteilt auf\n222 Antragssteller:innen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                                        col6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                                                                                                                      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 /home/runner/work/_temp/Library/RUBer/rmarkdown/templates/datenreport-2022/skeleton/streamline-icon-team-meeting-message-men-question.png</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                                                                                                                                      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4         /home/runner/work/_temp/Library/RUBer/rmarkdown/templates/datenreport-2022/skeleton/streamline-icon-analytics-bars-horizontal.png</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                                                                                                                                      &lt;NA&gt;</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
