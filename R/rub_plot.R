@@ -36,7 +36,6 @@ plot_figure <- function(df) {
           y_var = y,
           fill_var = fill,
           fill_label = fill_label,
-          fill_reverse = .[[1, "fill_reverse"]],
           facet_var = facet,
           caption = .[[1, "source_caption"]],
           filter_cutoff = 0.05
@@ -48,7 +47,6 @@ plot_figure <- function(df) {
           y_var = y,
           fill_var = fill,
           fill_label = fill_label,
-          fill_reverse = .[[1, "fill_reverse"]],
           facet_var = facet,
           title = .[[1, "question_txt"]],
           caption = .[[1, "source_caption"]]
@@ -64,7 +62,6 @@ plot_figure <- function(df) {
           y_axis_label = .[[1, "y_label"]],
           fill_var = fill,
           fill_label = fill_label,
-          fill_reverse = .[[1, "fill_reverse"]],
           group_var = group,
           group_label = group_label,
           caption = .[[1, "source_caption"]]
