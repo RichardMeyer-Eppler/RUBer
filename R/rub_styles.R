@@ -165,19 +165,52 @@ theme_rub <- function(base_size = 11,
 #' @param table Flextable object
 #' @param font Font for the Flextable theme, defaults to RUB Scala TZ
 #' @param font_size Font size, defaults to 9
+#' @param zebra Optional character, one of c("even", "odd"). Applies coloring to
+#'              all even or odd rows, respectively.
 #' @return Styled Flextable object
 #' @export
 #'
 #' @examples
 #' table_mtcars <- flextable::flextable(mtcars)
 #' rub_style_flextable(table_mtcars)
-rub_style_flextable <- function(table,
-                                font = "RUB Scala TZ",
-                                font_size = 9)  {
+rub_style_flextable <- function(
+  table,
+  font = "RUB Scala TZ",
+  font_size = 9,
+  zebra = NULL
+) {
+
   rub_table_font <- font
   header_color <- RUB_colors["green_40"]
   border_green <- RUB_colors["green"]
   border_grey <- "#D7D7D7"
+
+  if(
+    !is.null(
+      zebra
+    )
+  ) {
+    grey_fill <- "#ECECEC"
+
+    if(
+      zebra == "even"
+    ) {
+      table <- table %>%
+        flextable::theme_zebra(
+          even_body = grey_fill,
+          odd_body = "transparent"
+        )
+    }
+    if(
+      zebra == "odd"
+    ) {
+      table <- table %>%
+        flextable::theme_zebra(
+          even_body = "transparent",
+          odd_body = grey_fill
+        )
+    }
+  }
 
   def_text <- officer::fp_text(
     color = RUB_colors["blue"],
