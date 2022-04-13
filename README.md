@@ -15,7 +15,7 @@ status](https://www.r-pkg.org/badges/version/RUBer)](https://cran.r-project.org/
 
 RUBer is an R package created for parameterized reporting according to
 the requirements at the Ruhr-Universität Bochum (RUB). So far, the
-package was primarily used for the eigth (2018-19) and ninth (2019-20)
+package was primarily used for the eigth (2018-19) and ninth (2019-21)
 reporting cycle for teaching
 ([*Lehrberichterstattung*](https://einrichtungen.ruhr-uni-bochum.de/de/lehrberichterstattung)).
 The package provides a large example dataset containing fake values, an
@@ -59,7 +59,7 @@ as functions making the RUB corporate design colors available.
 3.  As far as possible, the data manipulation is done independently of
     all the reporting steps. The idea is that the data passed to the R
     Markdown template can come from any source, not just R. While the
-    data wrangling for the eigth (2018-19) and ninth (2019-20) reporting
+    data wrangling for the eigth (2018-19) and ninth (2019-21) reporting
     cycle for teaching *was* done in R, this is not a requirement. If
     there is a need to create or alter datasets using Microsoft Excel,
     it is possible to use these datasets as basis for all reporting
