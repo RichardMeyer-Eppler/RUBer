@@ -1,0 +1,488 @@
+---
+params: 
+    p_report_nr: 6
+    p_title: "Title"
+    p_author: "Author"
+    p_date: "März 2022"
+    p_path_figure_template: "fig_template.Rmd"
+    p_df:
+    p_df_stg:
+title: "`r params$p_title`"
+author: "`r params$p_author`"
+date: "`r params$p_date`"
+lang: de
+output:
+  officedown::rdocx_document:
+    reference_docx: rub_reference_2021.docx
+    keep_md: false
+    toc: true
+    toc_depth: 2
+    page_size:
+      width: 8.3
+      height: 11.7
+      orient: "portrait"
+    page_margins:
+      bottom: 0.787402
+      top: 0.984252
+      right: 0.787402
+      left: 0.590551
+      header: 0.5
+      footer: 0.5
+      gutter: 0
+    tables:
+      style: Table
+      layout: autofit
+      width: 1.0
+      topcaption: true
+      caption:
+        style: Table Caption
+        pre: 'Tabelle '
+        sep: ': '
+    plots:
+      style: Normal
+      align: left
+      topcaption: true
+      caption:
+        style: Image Caption
+        pre: 'Abbildung '
+        sep: ': '
+    reference_num: false
+bibliography: ["packages.bib", "literature.bib"]
+csl: politische-vierteljahresschrift.csl
+link-citations: false
+toc-title: "Inhaltsverzeichnis"
+---
+
+```{r setup, include=FALSE}
+library(RUBer)
+library(devEMF)
+library(extrafont)
+
+knitr::opts_chunk$set(
+  echo = FALSE,
+  warning = FALSE,
+  message = FALSE,
+  dev = "emf",
+  dev.args = list(
+    emfPlus = TRUE,
+    emfPlusRaster = TRUE,
+    emfPlusFontToPath = TRUE
+  ),
+  fig.width = 6.8,
+  fig.ext = "emf"
+)
+
+extrafont::loadfonts(
+  device = "win",
+  quiet = TRUE
+)
+
+gtsummary::theme_gtsummary_language(
+  language = "de",
+  decimal.mark = ",",
+  big.mark = "."
+)
+```
+
+```{r data}
+
+if(is.null(params$p_df)) {
+  df <- RUBer::df_example %>% 
+  RUBer::filter_report(
+    report_nr = as.integer(
+      params$p_report_nr
+    )
+  )
+} else {
+  df <- params$p_df
+}
+
+figure_chunks <- df %>% 
+  RUBer::get_figure_chunk_df() %>% 
+  RUBer::get_figure_chunk_text()
+
+```
+
+```{r figure_template, eval = !is.null(params$p_path_figure_template)}
+
+# If the p_path_figure_template parameter is defined, the code chunks for the 
+# figures and headings will be written to file.
+con <- file(
+  params$p_path_figure_template,
+  encoding = "UTF-8"
+)
+  
+writeLines(
+  text = figure_chunks,
+  con = con
+)
+  
+close(con)
+
+```
+
+# Einleitung
+
+Der vorliegende Datenreport enthält sowohl hochschulstatistische Daten des Informationsmanagement-Systems als auch Befragungsdaten der Ruhr-Universität Bochum (RUB) und gibt Fakultäten und ZWE, die einen Studiengang verantworten, einen Überblick zu folgenden Themenbereichen:
+
+- Soziodemographische Zusammensetzung der Studierendenschaft
+- Übergang ins Studium
+- Beurteilung von Studienangeboten und -bedingungen
+- Studiendauer und Studienverläufe
+- Finanzierung des Studiums
+- Kompetenzerwerb im Studium
+- Internationalisierung
+- Praxis- und Berufsbezug im Studium
+- Übergang in ein weiteres Studium oder in den Beruf
+- Förderungen für Weiterentwicklung der Lehre
+
+Der Datenreport liefert die Datengrundlage für die Erstellung des Lehrberichts und schließt daher inhaltlich an die Fragestellungen des Lehrberichts an. Weiterführende Informationen zum allgemeinen Prozess der Lehrberichterstattung an der RUB sind in einem Beitrag von @Patsch.2018 veröffentlicht. Grundlegende Informationen zur Lehrberichterstattung sind auf [https://www.rub.de/lehrberichte](https://www.rub.de/lehrberichte) abrufbar. Die Bereitstellung weiterer Daten oder tiefergehende Auswertungen spezifischer Fragestellungen ist auf Anfrage möglich (vgl. [Ansprechpersonen und Kontakt](#Kontakt)).
+
+```{r pagebreak-metrics-before}
+officer::run_pagebreak()
+```
+
+```{r metrics, tab.cap = "PLACEHOLDER_TABDie Datenreporte der Lehrberichtserstattung 2021/2022 im Gesamtüberblick[^icons]", tab.id = "metrics-tab", ft.align = "left"}
+
+ft_metrics <- source(
+  system.file(
+    "examples",
+    "rub_table_metrics.R",
+    package = "RUBer"
+  )
+)
+
+ft_metrics[["value"]]
+
+```
+
+[^icons]: Die freien Icons (Pie Line Graph, Team Meeting Message Men, List Numbers, Analytics Bars Horizontal, User Female Teacher Math, People Man Graduate) wurden von [https://streamlinehq.com](https://streamlinehq.com) mit einer Attributionslizenz heruntergeladen.
+
+## Informationen zu den Befragungsdaten des Datenreports
+
+### Inhalte der Befragungen der RUB in Kürze
+
+#### Studieneingangsbefragung der RUB
+
+Die Studieneingangsbefragung der RUB wird seit dem Wintersemester 2004/2005 jährlich durchgeführt. Befragt werden alle Studierenden im ersten Hochschulsemester. Die Inhalte der Befragung zielen insbesondere auf die soziodemographische Zusammensetzung der Studierenden, auf die Nutzung von Angeboten der RUB vor Studienbeginn und auf die Gründe für die Studienaufnahme.
+
+#### Studienverlaufsbefragung der RUB
+
+Die Studienverlaufsbefragung der RUB wird seit dem Sommersemester 2007 jährlich durchgeführt. Studierende, die die Abschlussarten Staatsexamen oder Magister Theologiae anstreben werden im fünften Fachsemester befragt, Masterstudierende im zweiten Fachsemester. Die Studienverlaufsbefragung beinhaltet Fragen zum Studienverlauf, zur Finanzierung des Studiums sowie zur Beurteilung von Studienangeboten und -bedingungen und Problemen im Studium.
+
+#### Absolvent:innenbefragung der RUB
+
+Die Absolvent:innenbefragung der RUB wird seit dem Wintersemester 2007/2008 jährlich durchgeführt. Befragt werden alle Absolvent:innen, die vor ein- bis zwei Jahren ihr Studium an der RUB abgeschlossen haben. Die Absolvent:innenbefragung der RUB ist ein Kooperationsprojekt, an dem sich bundesweit etwa 60 Hochschulen beteiligen und das vom Institut für angewandte Statistik (istat) in Kassel durchgeführt wird. Neben der retrospektiven Beurteilung der Studienangebote und -bedingungen und der Darstellung der Studienverläufe geben die Ergebnisse der Absolvent:innenbefragung Auskunft über den Übergang in ein weiteres Studium bzw. in den Arbeitsmarkt.
+
+### Hinweise zu den Befragungsdaten im Datenreport
+
+Im Datenreport werden Ergebnisse des Studierendenmonitors der RUB (Studieneingangs- und Studienverlaufsbefragung) und Ergebnisse der Absolvent:innenbefragung der RUB in Abbildungen dargestellt.[^fallzahl] Um möglichst differenzierte Ergebnisse auf Studiengangebene  zu erhalten, werden die Befragungsdaten mehrerer Jahrgänge zusammengefasst, die jeweils der Quellenangabe zu entnehmen sind.[^stichprobe] Die Ergebnisse des Datenreports beziehen solche Studiengänge mit ein, für die ausreichend Fälle in den Befragungsdaten vorliegen. Dabei werden nur dann Auswertungen vorgenommen, wenn zu Faktenfragen mit zwei Antwortmöglichkeiten mindestens Antworten von zehn Befragten vorliegen (z.B.: Abschluss des Studiums in der Regelstudienzeit, Antwort: „ja“ oder „nein“). Bei allen anderen Fragen werden Auswertungen nur dann durchgeführt, wenn mindestens fünfzehn Befragte geantwortet haben. Die Anzahl der jeweiligen Antworten ist den Abbildungen zu entnehmen (z.B.: n=25).[^antworten] 
+
+[^fallzahl]: Sollte der vorliegende Datenreport aus einer oder mehreren Befragungen bzw. zu einigen Themenbereichen keine Auswertungen enthalten, war die Fallzahl zu gering, um Auswertungen auf Fakultäts-/ZWE-Ebene vornehmen zu können.
+[^stichprobe]: Weitere Daten zur Zusammensetzung der Stichprobe sind dem Anhang zu entnehmen.
+[^antworten]: Da nicht immer alle Befragten auf alle Fragen antworten, kann die Anzahl (n) von Frage zu Frage variieren.
+
+In der Lehrberichtserstattung 2021/2022 werden erstmalig Studienfälle statt Köpfe betrachtet. Dies bedeutet, dass die Antworten von Studierenden in Kombinationsstudiengängen (Bachelor 2-Fächer, Master 2-Fächer, Master of Education) in Bezug auf das erste und zweite Studienfach ausgewertet werden. Dadurch ergeben sich für die Kombinationsstudiengänge deutlich höhere Fallzahlen als in der Vergangenheit, wo nur die Antworten im ersten Studienfach berücksichtigt wurden.
+
+Die nachfolgenden Tabellen zeigen je Befragung, wie sich die Studienfälle auf die einzelnen Studiengänge und auf das 1. und 2. Studienfach aufteilen. Dabei werden alle Studienfälle berücksichtigt, die auf mindestens eine Frage eine gültige Antwort gegeben haben.
+
+```{r stg-cases-eb, tab.cap = "PLACEHOLDER_TABVerteilung der Studienfälle auf das 1. und 2. Studienfach je Studiengang bei der Studieneingangsbefragung", tab.id = "stg-cases-tag-eb", ft.align = "left"}
+
+ft_stg_eb <- source(
+  system.file(
+    "examples",
+    "rub_table_stg.R",
+    package = "RUBer"
+  )
+)
+
+ft_stg_eb[["value"]]
+
+```
+
+```{r stg-cases-vb, tab.cap = "PLACEHOLDER_TABVerteilung der Studienfälle auf das 1. und 2. Studienfach je Studiengang bei der Studienverlaufsbefragung", tab.id = "stg-cases-tag-vb", ft.align = "left"}
+
+ft_stg_vb <- source(
+  system.file(
+    "examples",
+    "rub_table_stg.R",
+    package = "RUBer"
+  )
+)
+
+ft_stg_vb[["value"]]
+
+```
+
+```{r stg-cases-ab, tab.cap = "PLACEHOLDER_TABVerteilung der Studienfälle auf das 1. und 2. Studienfach je Studiengang bei der Absolvent:innenbefragung", tab.id = "stg-cases-tag-ab", ft.align = "left"}
+
+ft_stg_ab <- source(
+  system.file(
+    "examples",
+    "rub_table_stg.R",
+    package = "RUBer"
+  )
+)
+
+ft_stg_ab[["value"]]
+
+```
+
+In der Studieneingangsbefragung werden Studierende im ersten Hochschulsemester befragt, so dass hier in gestuften Studiengängen lediglich Auswertungen für das Bachelorstudium vorliegen. Bei der Studienverlaufs- sowie bei der Absolvent:innenbefragung werden bei ausreichend großer Fallzahl auch die Antworten, die sich auf das Master-, Staatsexamens- oder Studium des Magisters Theologie beziehen, ausgewertet.
+
+Als Vergleichswert werden für alle Befragungen die Ergebnisse auf Fächergruppen nach der Gliederung des statistischen Bundesamtes aggregiert.[^faechergruppe] Der jeweilige Fächergruppenwert der RUB wird, differenziert nach Abschlussart in den Abbildungen ausgewiesen (abgekürzt z.B.: „FG Bachelor 1-Fach"). Wenn eine Person zwei Studienfächer in derselben Fächergruppe studiert, werden beide Studienfächer im Fächergruppenwert berücksichtigt  (s.o. Fallzählung).
+
+[^faechergruppe]: Für Studienfächer die eine eigene Fächergruppe bilden (Kunstgeschichte, Medizin, Sportwissenschaft) oder für die keine vergleichbaren Studiengänge an der RUB vorhanden sind (Staatsexamen Rechtswissenschaften und Medizin) entspricht der Vergleichswert dem des Studienfaches.
+
+## Informationen zu den hochschulstatistischen Daten des Informationsmanagement-Systems der RUB
+
+Neben den Befragungsdaten werden in diesem Report auch ausgewählte hochschulstatistische Daten dargestellt., z.B. zu der Entwicklung der Studierendenzahlen und der Absolvent:innen, der Kohortenanalyse, der Einhaltung der Regelstudienzeit und der Geschlechtszusammensetzung. Teilweise werden die abgebildeten Merkmale auch in den Befragungen erfasst. Die Verwendung der hochschulstatistischen Daten ist aber sinnvoller, weil dort Angaben zu allen Studierenden verfügbar sind und nicht nur für die Teilmenge der Befragten mit gültigen Fragebögen. Zwischen den Befragungsdaten und den hochschulstatistischen Daten ist auf Individualebene kein Bezug herstellbar, da die Befragungsdaten anonym erhoben werden.
+
+Angaben zu den Studierenden beziehen sich auf die Stichtagsdaten, Angaben zu den Absolvent:innen auf die amtliche Prüfungsstatistik. Analog zur Auswertung der Befragungsdaten werden Studienfälle und nicht Köpfe betrachtet. Dies bedeutet, dass die Antworten von Studierenden in Kombinationsstudiengängen (Bachelor 2-Fächer, Master 2-Fächer, Master of Education) in Bezug auf das erste und zweite Studienfach ausgewertet werden. Der Quellenangabe jeder Abbildung ist zu entnehmen, ob die Daten aus dem Informationsmanagement-System entstammen und welches Semester bzw. Studienjahr betrachtet wurde.
+
+Abweichend zur Auswertung der Befragungsdaten werden Abbildungen mit hochschulstatistischen Daten immer ausgegeben, unabhängig davon, ob eine bestimmte Mindestanzahl von Studienfällen vorliegt. Einzige Ausnahme hiervon bildet die Kohortenanalyse, wo Auswertungen nur dann vorgenommen werden, wenn die Kohorte eine Mindestgröße von sechs Studienfällen erreicht. 
+
+Zum besseren Verständnis der Kohortenanalyse werden die wichtigsten fachlichen Konzepte und Begriffe im Folgenden näher definiert:
+
+#### Was bedeutet eine Kohortenanalyse?
+
+Bei der Kohortenanalyse werden nach ausgewählten Kriterien Gruppen von Studierenden gebildet und diese über einen definierten Zeitraum betrachtet. Hierbei können die Veränderungen innerhalb der Kohorte näher betrachtet werden und Aussagen über die Studienerfolgsquote, Studienabbruchquote getroffen werden.
+
+Der Datensatz eines Studierenden wird in eine Kohorte über das Startsemester aufgenommen, wenn dieser erstmals oder erneut mit einer geänderten bzw. neuen Fach/Abschlusskombination für das gewählte Semester geliefert wird. Die Anzahl der Fach- oder Hochschulsemester und der Status der Studierenden werden zur Bildung der Kohorte nicht berücksichtigt. Damit ist die Basis für die Kohorte festgelegt worden und im weiteren Verlauf wird betrachtet, ob die Studierenden sich exmatrikulieren, das Fach wechseln/abbrechen oder erfolgreich als Absolvent:in abschließen.
+
+Welche Startsemester und wie viele Kohortensemester betrachtet werden, orientiert sich grob an der anderthalbfachen Regelstudienzeit in dem jeweiligen Studiengang bzw. den jeweiligen Studiengängen. Die betrachteten Startsemester wurden so gewählt, dass bei Bachelor-Studiengängen 10 Kohortensemester, bei Master-Studiengängen 8 Kohortensemester und bei Staatsexamens- und Magister Theologiae-Studiengängen 12 Kohortensemester betrachtet werden können.[^staatsexamen] Die wichtigsten fachlichen Konzepte der Kohortenanalyse sind im Anhang ausführlich erläutert (vgl. [Definitionen zur Kohortenanalyse](#Kohorte)).
+
+[^staatsexamen]: In den Staatsexamens-Studiengängen der Medizin ist die Kohortenanalyse technisch leider nicht möglich, beim Staatsexamensstudiengang der Rechtswissenschaft gibt es die Einschränkung, dass nicht zwischen Absolvent:innen und Exmatrikulationen ohne Abschluss differenziert werden kann. Dies liegt in der fehlenden Informationsweitergabe durch die staatlichen Prüfungsämter begründet.
+
+#### Studienanfänger:innen
+
+Studienanfänger:innen sind entweder Studierende im ersten Hochschulsemester (Erstimmatrikulierte) oder im ersten Fachsemester eines bestimmten Studiengangs (Neuimmatrikulierte). Die Studierenden im 1. Fachsemester werden auch als Fachanfänger in einem Studiengang bezeichnet. Im Zusammenhang mit der Kohortenanalyse werden die Studienanfänger als Fachanfänger betrachtet.
+
+#### Startsemester
+
+Das Startsemester definiert den Startpunkt zu dem die Kohorte gebildet wird.
+
+#### Studierende
+
+Zu Beginn einer Kohortenbetrachtung sind dies die tatsächlichen Studienanfänger und in den folgenden Kohortensemestern die noch regulär als Studierende in einem Studiengang eingeschriebenen.
+
+#### Exmatrikulation ohne Abschluss
+
+Als Studienabbrecher:innen werden hier Studierende verstanden die an der RUB ein Studium begonnen haben, aber sich ohne einen Abschluss wieder exmatrikuliert haben und die RUB verlassen haben. In diesen Fällen kann es sich sowohl um einen Hochschulwechsler handeln als auch um jemanden der insgesamt das Studium ohne Erfolg beendet hat.
+
+#### Fachwechsler:innen
+
+Studierende die im Folgesemester ein anderes Fach weiterstudieren, welches sie im aktuellen Semester noch NICHT studiert haben.
+
+#### Fachabbrecher:innen
+
+Studierende die im Folgesemester ein anderes Fach weiterstudieren, welches sie bereits im aktuellen Semester studiert haben. Dies sind keine Fachwechsler, sondern werden als Fachabbrecher bezeichnet.
+
+#### Absolvent:innen
+
+Absolvent:innen sind Studierende mit bestandener Abschlussprüfung, die im Berichtssemester mindestens einen Studiengang abgeschlossen haben.
+
+## Informationen zu den Förderungen für die Weiterentwicklung der Lehre
+
+Der Datenreport gibt neben den Daten zu Studierenden und ihrem Studienverlauf auch Auskunft darüber, für welche Lehrprojekte Fakultäten und ZWE, bzw. Lehrende oder Studierende dieser Einheiten, ab dem 1. April 2019 eine Förderung aus wettbewerblicher Vergabe erhalten haben. Die Lehrförderungen wurden bis zum 1. Dezember 2021 von den jeweiligen Programmverantwortlichen an das Dezernat 1 geliefert.
+
+# Förderungen für Weiterentwicklung der Lehre
+
+```{r funded-projects-table, tab.cap = "PLACEHOLDER_TABFörderungen für Weiterentwicklung der Lehre", tab.id = "projects-tab", ft.align = "left"}
+
+ft_funded_projects <- source(
+  system.file(
+    "examples",
+    "rub_table_programs.R",
+    package = "RUBer"
+  )
+)
+
+ft_funded_projects[["value"]]
+```
+
+```{r create-figures, include = FALSE}
+
+figure_output <- knitr::knit(
+  text = figure_chunks
+)
+```
+
+```{r paste-figures, results = 'asis'}
+
+cat(
+  figure_output,
+  sep = '\n'
+)
+```
+
+```{r items-child, child = "items.Rmd"}
+```
+
+```{r pagebreak-items-table}
+officer::run_pagebreak()
+```
+
+```{r items-table, tab.cap = "PLACEHOLDER_TABAcht Items je Abschlussart mit besonders großen Abweichungen zur Fächergruppe", tab.id = "items-tab", ft.align = "left"}
+
+ft_item <- source(
+  system.file(
+    "examples",
+    "rub_table_item.R",
+    package = "RUBer"
+  )
+)
+
+ft_item[["value"]]
+
+```
+
+# Zusammensetzung der Befragten mit gültigen Fragebögen im Vergleich zur Grundgesamtheit der angeschriebenen Personen
+
+Die Grundgesamtheit und die gültigen Fragebögen für die drei Rücklauftabellen beziehen sich auf die in den Datenreporten berücksichtigten Studiengänge (vgl. Tabelle \@ref(tab:stg-tab)), ausgeschlossene Studiengänge (vgl. Tabelle \@ref(tab:stg-excluded-tab)) wurden nicht berücksichtigt.
+
+```{r studieneingang, tab.cap = "PLACEHOLDER_TABZusammensetzung Studieneingangsbefragung", tab.id = "eb-tab", ft.align = "left"}
+
+ft_eb <- source(
+  system.file(
+    "examples",
+    "rub_table_eb.R",
+    package = "RUBer"
+  )
+)
+
+ft_eb[["value"]]
+
+```
+
+```{r pagebreak-eb}
+officer::run_pagebreak()
+```
+
+```{r studienverlauf, tab.cap = "PLACEHOLDER_TABZusammensetzung Studienverlaufsbefragung", tab.id = "vb-tab", ft.align = "left"}
+
+ft_vb <- source(
+  system.file(
+    "examples",
+    "rub_table_vb.R",
+    package = "RUBer"
+  )
+)
+
+ft_vb[["value"]]
+
+```
+
+```{r pagebreak-vb}
+officer::run_pagebreak()
+```
+
+```{r studienabschluss, tab.cap = "PLACEHOLDER_TABZusammensetzung Absolvent:innenbefragung", tab.id = "ab-tab", ft.align = "left"}
+
+ft_ab <- source(
+  system.file(
+    "examples",
+    "rub_table_ab.R",
+    package = "RUBer"
+  )
+)
+
+ft_ab[["value"]]
+
+```
+
+```{r pagebreak-ab}
+officer::run_pagebreak()
+```
+
+# Berücksichtige Studiengänge je Datenreport und Fächergruppengliederung gemäß Fächersystematik des statistischen Bundesamtes
+
+Auslaufende Fach-Abschluss-Kombinationen und weiterbildende Studiengänge werden bei den Datenreports grundsätzlich nicht berücksichtigt. Für sehr neue Studiengänge liegen in der Regel weder Befragungsdaten noch aussagekräftige deskriptive Statistiken aus dem Informationsmanagement-System vor, weshalb diese ebenfalls nicht berücksichtigt werden.
+
+```{r studiengaenge, tab.cap = "PLACEHOLDER_TABBerücksichtigte Studiengänge", tab.id = "stg-tab", ft.align = "left"}
+
+ft_included_programs <- source(
+  system.file(
+    "examples",
+    "rub_table_included_programs.R",
+    package = "RUBer"
+  )
+)
+
+ft_included_programs[["value"]]
+
+```
+
+```{r pagebreak-studiengaenge}
+officer::run_pagebreak()
+```
+
+```{r studiengaenge-ausgeschlossen, tab.cap = "PLACEHOLDER_TABAusgeschlossene Studiengänge", tab.id = "stg-excluded-tab", ft.align = "left"}
+
+ft_excluded_programs <- source(
+  system.file(
+    "examples",
+    "rub_table_excluded_programs.R",
+    package = "RUBer"
+  )
+)
+
+ft_excluded_programs[["value"]]
+
+```
+
+
+```{r pagebreak-studiengaenge-ausgeschlossen}
+officer::run_pagebreak()
+```
+
+# Technische Angaben zur Berichtserstellung
+
+Die Datenreporte, Abbildungen und Tabellen für die neunte Lehrberichterstattung 2020/21 wurden automatisiert mit der freien Programmiersprache R generiert [@pkgbase]. Für die parametrische Erstellung von Berichten im Corporate Design der RUB wurde das Package RUBer [@pkgRUBer] entwickelt, dessen Code unter der MIT-Lizenz veröffentlicht ist. Die technischen Voraussetzungen für das RUBer Package wurden durch eine Vielzahl weiterer Autor:innen und Packages geschaffen, von denen die wichtigsten hier dankend genannt werden: das Dokumentformat R Markdown [@pkgrmarkdown] in Verbindung mit knitr [@pkgknitr], das die Kombination von dynamischem Code, Text, Tabellen und Abbildungen überhaupt erst ermöglicht, die Grafikbibliothek ggplot2 [@pkgggplot2] zur Erstellung der Abbildungen, flextable [@pkgflextable] für die Erstellung der Tabellen, officedown [@pkgofficedown] für die Erzeugung von Microsoft Word Dokumenten und devEMF [@pkgdevEMF] für die Ausgabe von Vektorgrafiken im proprietären Format von Microsoft.
+
+Anregungen und Rückfragen zur technischen Berichtserstellung sind ausdrücklich erwünscht (vgl. [Ansprechpersonen und Kontakt](#Kontakt)).
+
+# Quellenangaben
+
+<div id="refs"></div>
+
+# Ansprechpersonen und Kontakt {#Kontakt}
+
+Bei Fragen zum Datenreport und/oder für weitere Auswertungsinteressen können Sie uns gerne kontaktieren:
+
+#### Ansprechpartner hochschulstatistische Daten
+
+> **JOHN DOE**  
+> Tel.: 0234 - 32-XXXXX  
+E-Mail: [john.doe@domain.com](mailto:john.doe@domain.com)
+
+[https://www.rub.de/qm-lehre](www.rub.de/qm-lehre)  
+[https://www.rub.de/dwh](www.rub.de/dwh)
+
+#### Ansprechpartnerin Befragungsdaten
+
+> **JANE DOE**  
+> Tel.: 0234 - 32-XXXXX  
+E-Mail: [jane.doe@domain.com](mailto:jane.doe@domain.com)
+
+[https://www.rub.de/qm-lehre](www.rub.de/qm-lehre)  
+[https://www.rub.de/studierendenmonitor](www.rub.de/studierendenmonitor)  
+[https://www.rub.de/absolventenstudie](www.rub.de/absolventenstudie)
+
+#### Ansprechpartner Technische Berichtserstellung
+
+> **JOHN DOE**  
+> Tel.: 0234 - 32-XXXXX  
+E-Mail: [john.doe@domain.com](mailto:john.doe@domain.com)
+
+[https://www.rub.de/qm-lehre](www.rub.de/qm-lehre)  
+[https://richardmeyer-eppler.github.io/RUBer](RUBer Package auf GitHub)
+
+#### Ansprechpartner Förderungen für Weiterentwicklung der Lehre
+
+> **JOHN DOE**  
+> Tel.: 0234 - 32-2XXXXX   
+E-Mail: [john.doe@domain.com](mailto:john.doe@domain.com)
+
+[https://uni.ruhr-uni-bochum.de/de/lehre-der-ruhr-universitaet](https://uni.ruhr-uni-bochum.de/de/lehre-der-ruhr-universitaet)  
+[www.ruhr-uni-bochum.de/universitaetsprogramme](www.ruhr-uni-bochum.de/universitaetsprogramme)
