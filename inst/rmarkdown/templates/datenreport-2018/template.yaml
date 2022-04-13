@@ -1,4 +1,0 @@
-name: Datenreport 2018
-description: >
-   A dynamic reporting template using parameters and knit_expand
-create_dir: TRUE
