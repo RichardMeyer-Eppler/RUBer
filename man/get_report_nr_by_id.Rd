@@ -2,7 +2,7 @@
 % Please edit documentation in R/report.R
 \name{get_report_nr_by_id}
 \alias{get_report_nr_by_id}
-\title{Get all values of \code{report_nr} for a \code{report_type_id}}
+\title{Get all unique values of \code{report_nr} for a \code{report_type_id}}
 \usage{
 get_report_nr_by_id(df, report_type_id)
 }
@@ -15,5 +15,8 @@ get_report_nr_by_id(df, report_type_id)
 Integer vector
 }
 \description{
-Get all values of \code{report_nr} for a \code{report_type_id}
+Get all unique values of \code{report_nr} for a \code{report_type_id}
+}
+\examples{
+get_report_nr_by_id(df = df_example, report_type_id = "FGR")
 }

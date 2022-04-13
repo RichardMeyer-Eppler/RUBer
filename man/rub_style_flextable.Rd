@@ -4,7 +4,7 @@
 \alias{rub_style_flextable}
 \title{Applies RUB theme to flextable object}
 \usage{
-rub_style_flextable(table, font = "RUB Scala TZ", font_size = 9)
+rub_style_flextable(table, font = "RUB Scala TZ", font_size = 9, zebra = NULL)
 }
 \arguments{
 \item{table}{Flextable object}
@@ -12,6 +12,9 @@ rub_style_flextable(table, font = "RUB Scala TZ", font_size = 9)
 \item{font}{Font for the Flextable theme, defaults to RUB Scala TZ}
 
 \item{font_size}{Font size, defaults to 9}
+
+\item{zebra}{Optional character, one of c("even", "odd"). Applies coloring to
+all even or odd rows, respectively.}
 }
 \value{
 Styled Flextable object

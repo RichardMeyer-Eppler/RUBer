@@ -2,7 +2,7 @@
 % Please edit documentation in R/report.R
 \name{filter_report}
 \alias{filter_report}
-\title{Filter data frame based on \code{report_nr} column}
+\title{Filter data frame based on \code{report_nr}}
 \usage{
 filter_report(df, report_nr)
 }
@@ -15,7 +15,7 @@ filter_report(df, report_nr)
 Filtered data frame with data for the report nr
 }
 \description{
-Filter data frame based on \code{report_nr} column
+Filter data frame based on \code{report_nr}
 }
 \examples{
 filter_report(df_example, report_nr = 12)

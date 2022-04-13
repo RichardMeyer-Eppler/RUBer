@@ -5,12 +5,15 @@
 \title{Render report}
 \usage{
 render_report(
-  p_df,
+  p_df = filter_report(df_example, 6L),
   p_df_stg = NULL,
-  report_nr,
-  rmd_template = here::here("datenreport_new.Rmd"),
-  output_directory = NULL,
-  output_filename = NULL,
+  report_nr = 6L,
+  rmd_template = system.file("rmarkdown", "templates", "datenreport-2022", "skeleton",
+    "skeleton.Rmd", package = "RUBer"),
+  output_directory = fs::path_temp(),
+  output_filename = fs::path_file(fs::file_temp(pattern = "report", ext = ".docx")),
+  title = "Title",
+  author = "Author",
   date = format(Sys.Date(), format = "\%B \%Y"),
   post_process = TRUE
 )
@@ -22,14 +25,17 @@ render_report(
 
 \item{report_nr}{Report number of the report}
 
-\item{rmd_template}{Path to the R Markdown File for that report, defaults to
-\code{here::here("datenreport_new.Rmd")}}
+\item{rmd_template}{Path to the R Markdown File for that report, defaults to Datenreport 2022 template from RUBer package}
 
 \item{output_directory}{Output directory for the rendered report, defaults to
 \code{here::here("output")}}
 
 \item{output_filename}{Output filename for the rendered report, defaults to
 \code{p_df[[1, "file_name"]]}}
+
+\item{title}{Character, title for the title page}
+
+\item{author}{Character, author for the title page}
 
 \item{date}{Date of the report displayed on the title page, defaults to
 \code{format(Sys.Date(), format= "\%B \%Y")}.}
@@ -41,7 +47,40 @@ output file}
 Render report
 }
 \examples{
-\dontrun{
-render_report(df, 12)
+run_ok <- rmarkdown::pandoc_available() &&
+  rmarkdown::pandoc_version() >= numeric_version("2.0")
+
+if(run_ok){
+
+  output_directory <- fs::path_temp()
+
+  output_filename <- fs::path_file(
+    fs::file_temp(
+      pattern = "report",
+      ext = ".docx"
+    )
+  )
+
+  render_report(
+    output_directory = output_directory,
+    output_filename = output_filename
+  )
+
+  path_report_docx <- get_file_path(
+    output_directory,
+    output_filename
+  )
+
+  if(
+    file.exists(
+      path_report_docx
+    )
+  ){
+    message(
+      "File ",
+      path_report_docx,
+      " was written successfully."
+    )
+  }
 }
 }

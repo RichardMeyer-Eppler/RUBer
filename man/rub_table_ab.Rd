@@ -32,16 +32,16 @@ Get formatted flextable of response rates for the Absolvent:innenbefragung
 studienabschluss <- data.frame(
   stringsAsFactors = FALSE,
   studienabschluss = c("Geschlecht","weiblich",
-                       "männlich","Abschlussart","Bachelor 1-Fach",
-                       "Bachelor 2-Fächer","Staatsexamen","Magister Theologiae",
-                       "Master 1-Fach","Master 2-Fächer","Master of Education",
-                       "Fächergruppe (erstes Studienfach)","Geisteswissenschaften",
+                       "m\u00E4nnlich","Abschlussart","Bachelor 1-Fach",
+                       "Bachelor 2-F\u00E4cher","Staatsexamen","Magister Theologiae",
+                       "Master 1-Fach","Master 2-F\u00E4cher","Master of Education",
+                       "F\u00E4chergruppe (erstes Studienfach)","Geisteswissenschaften",
                        "Humanmedizin / Gesundheitswissenschaften",
                        "Ingenieurwissenschaften","Kunst, Kunstwissenschaft",
                        "Mathematik, Naturwissenschaften",
                        "Rechts-, Wirtschafts-, Sozialwissenschaften","Sport",
-                       "Gesamtzahl angeschriebene Absolvent:innen / gültige Fragebögen",
-                       "Rücklaufquote Absolvent:innenbefragungen"),
+                       "Gesamtzahl angeschriebene Absolvent:innen / g\u00FCltige Frageb\u00F6gen",
+                       "R\u00FCcklaufquote Absolvent:innenbefragungen"),
   koepfe_rub = c(NA,"9.887","9.969",NA,
                  "6.673","3.164","1.708","30","6.081","404","1.796",NA,
                  "4.611","882","4.778","265","3.614","5.086","620",
@@ -67,18 +67,18 @@ typology <- data.frame(
     "studienabschluss","koepfe_rub","koepfe_rub_perc","koepfe_bef","koepfe_bef_perc"
   ),
   colC = c(
-    "Studienabschluss","Absolventinnen und Absolventen (Prüfungsjahrgänge 2016 bis 2019)","Absolventinnen und Absolventen (Prüfungsjahrgänge 2016 bis 2019)","Absolventinnen und Absolventen (Prüfungsjahrgänge 2016 bis 2019)","Absolventinnen und Absolventen (Prüfungsjahrgänge 2016 bis 2019)"
+    "Studienabschluss","Absolventinnen und Absolventen (Pr\u00FCfungsjahrg\u00E4nge 2016 bis 2019)","Absolventinnen und Absolventen (Pr\u00FCfungsjahrg\u00E4nge 2016 bis 2019)","Absolventinnen und Absolventen (Pr\u00FCfungsjahrg\u00E4nge 2016 bis 2019)","Absolventinnen und Absolventen (Pr\u00FCfungsjahrg\u00E4nge 2016 bis 2019)"
   ),
   colB = c(
-    "Studienabschluss","Angeschrieben","Angeschrieben","Gültige Fragebögen","Gültige Fragebögen"
+    "Studienabschluss","Angeschrieben","Angeschrieben","G\u00FCltige Frageb\u00F6gen","G\u00FCltige Frageb\u00F6gen"
   ),
   colA = c(
-    "Studienabschluss","Köpfe","(in \%)","Köpfe","(in \%)"
+    "Studienabschluss","K\u00F6pfe","(in \%)","K\u00F6pfe","(in \%)"
   )
 )
 
 headings <- c(
-  "Geschlecht", "Abschlussart", "F\u00E4chergruppe (erstes Studienfach)", "Gesamtzahl angeschriebene Absolvent:innen / gültige Frageb\u00F6gen", "R\u00FCcklaufquote Absolvent:innenbefragungen"
+  "Geschlecht", "Abschlussart", "F\u00E4chergruppe (erstes Studienfach)", "Gesamtzahl angeschriebene Absolvent:innen / g\u00FCltige Frageb\u00F6gen", "R\u00FCcklaufquote Absolvent:innenbefragungen"
 )
 
 # Function call
