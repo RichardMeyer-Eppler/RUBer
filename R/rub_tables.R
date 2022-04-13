@@ -905,3 +905,186 @@ rub_table_metrics <- function(
 
   return(ft)
 }
+
+#' Get formatted flextable of included programs
+#'
+#' @param df Data frame
+#'
+#' @return Formatted flextable
+#' @export
+#'
+#' @section Illustrations:
+#'
+#' \if{html}{\figure{rub_table_included_programs.png}{options: width=100\%}}
+#'
+#' @example inst/examples/rub_table_included_programs.R
+rub_table_included_programs <- function(
+  df
+) {
+
+  df <- df %>%
+    dplyr::mutate(
+      row_nr = dplyr::row_number()
+    )
+
+  row_footnote_m_ed <- df %>%
+    dplyr::filter(
+      .data[["report_type_id"]] == "M_ED"
+    ) %>%
+    dplyr::pull(
+      .data[["row_nr"]]
+    )
+
+  row_footnote_fgr <- df %>%
+    dplyr::filter(
+      .data[["report_type_id"]] == "FGR"
+    ) %>%
+    dplyr::pull(
+      .data[["row_nr"]]
+    )
+
+  report_nr_m_ed <- df %>%
+    dplyr::filter(
+      .data[["report_type_id"]] == "M_ED"
+    ) %>%
+    dplyr::pull(
+      .data[["report_nr"]]
+    ) %>%
+    unique(
+      .
+    )
+
+  report_nr_fgr <- df %>%
+    dplyr::filter(
+      .data[["report_type_id"]] == "FGR"
+    ) %>%
+    dplyr::pull(
+      .data[["report_nr"]]
+    ) %>%
+    unique(
+      .
+    )
+
+  df <- df %>%
+    dplyr::select(
+      .data[["row_nr"]],
+      head1 = .data[["report_nr"]],
+      head2 = .data[["subject_degree"]],
+      head3 = .data[["subject_group"]]
+    )
+
+  footnote_text_m_ed <- glue::glue(
+    "Im Datenreport Nr. {report_nr_m_ed} sind f\u00E4chergruppen\u00FCbergreifend alle Master of Education Studieng\u00E4nge ber\u00FCcksichtigt, weshalb der Datenreport mehrfach aufgef\u00FChrt wird."
+  )
+
+  footnote_text_fgr <- glue::glue(
+    "Im Datenreport Nr. {report_nr_fgr} sind alle Studieng\u00E4nge je F\u00E4chergruppe berücksichtigt, weshalb der Datenreport mehrfach aufgef\u00FChrt wird."
+  )
+
+  ft <- df %>%
+    flextable::flextable(
+      col_keys = c(
+        "head1",
+        "head2",
+        "head3"
+      )
+    ) %>%
+    flextable::theme_zebra(
+      even_body = "#ECECEC",
+      odd_body = "transparent"
+    ) %>%
+    flextable::footnote(
+      i = row_footnote_m_ed,
+      value = flextable::as_paragraph(
+        footnote_text_m_ed
+      ),
+      ref_symbols = "*",
+      part = "body"
+    ) %>%
+    flextable::footnote(
+      i = row_footnote_fgr,
+      value = flextable::as_paragraph(
+        footnote_text_fgr
+      ),
+      ref_symbols = "**",
+      part = "body"
+    ) %>%
+    RUBer::rub_style_flextable() %>%
+    flextable::set_header_labels(
+      head1 = "Datenreport Nr.",
+      head2 = "Fach-Abschluss-Kombinationen",
+      head3 = "F\u00E4chergruppe"
+    ) %>%
+    flextable::align(
+      j = "head1",
+      align = "center",
+      part = "body"
+    ) %>%
+    flextable::align(
+      j = "head1",
+      align = "center",
+      part = "header"
+    ) %>%
+    flextable::width(
+      j = "head1",
+      width = 1
+    ) %>%
+    flextable::width(
+      j = "head2",
+      width = 3.63
+    ) %>%
+    flextable::width(
+      j = "head3",
+      width = 2.25
+    )
+
+  return(ft)
+}
+
+#' Get formatted flextable of excluded programs
+#'
+#' @param df Data frame
+#'
+#' @return Formatted flextable
+#' @export
+#'
+#' @section Illustrations:
+#'
+#' \if{html}{\figure{rub_table_excluded_programs.png}{options: width=100\%}}
+#'
+#' @example inst/examples/rub_table_excluded_programs.R
+rub_table_excluded_programs <- function(
+  df
+) {
+
+  ft <- df %>%
+    flextable::flextable(
+      col_keys = c(
+        "head1",
+        "head2",
+        "head3"
+      )
+    ) %>%
+    flextable::set_header_labels(
+      head1 = "Ausschlussgrund",
+      head2 = "F\u00E4chergruppe",
+      head3 = "Fach-Abschluss-Kombinationen"
+    ) %>%
+    flextable::width(
+      j = "head1",
+      width = 1.1
+    ) %>%
+    flextable::width(
+      j = "head2",
+      width = 2.15
+    ) %>%
+    flextable::width(
+      j = "head3",
+      width = 3.63
+    ) %>%
+    RUBer::rub_style_flextable(
+      zebra = "even"
+    )
+
+ return(ft)
+}
