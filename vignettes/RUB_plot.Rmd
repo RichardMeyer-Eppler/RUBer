@@ -38,32 +38,8 @@ knitr::opts_chunk$set(
 library(RUBer)
 ```
 
-```{r run-example-function, echo = FALSE}
-run_example <- function(
-  example_file,
-  chunk_name
-) {
-  src <- c(
-    "```{r chunk_name}\n",
-    readLines(
-      system.file(
-        "examples", example_file, package = "RUBer"
-      )
-    ),
-    "```\n"
-  )
-
-  out <- knitr::knit(
-    text = src,
-    quiet = TRUE
-  )
-  
-  return(out)
-}
-```
-
 ```{r run-examples, echo = FALSE, message = FALSE, warning = FALSE}
-rub_plot_type_1 <- run_example(
+rub_plot_type_1 <- RUBer:::run_example_as_chunk(
   example_file = "rub_plot_type_1.R",
   chunk_name = "rub-plot-type-1"
 )
