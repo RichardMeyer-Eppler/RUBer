@@ -27,7 +27,7 @@ reference:
   - RUB_colors
   - RUB_palettes
 
-- title: Reporting funcitons
+- title: Reporting functions
   desc: >
     Functions for creating the parametric reports and associated helper
     functions, such as filter and file path functions.
@@ -36,6 +36,18 @@ reference:
   - get_report_nr_by_id
   - filter_report
   - render_report
+
+- title: Templating Functions
+  desc: >
+    Functions for creating the code chunks required for the figures and the
+    dynamic placement of headings.
+  contents:
+  - get_figure_chunk_df
+  - get_figure_chunk_text
+  - tpl_get_figure_df
+  - tpl_heading
+  - tpl_subheading
+  - tpl_plot_figure
 
 - title: Theming functions
   desc: >
@@ -59,13 +71,18 @@ reference:
   - rub_table_programs
   - rub_table_item
   - rub_table_metrics
+  - rub_table_included_programs
+  - rub_table_excluded_programs
 
 - title: Data
   desc: >
-    Example data set for generating parametric reports with dynamic number
-    of figures and headings.
+    Two data sets: `df_example` containing algorithmically generated data to
+    produce varying numbers of figures for each report and to place headings and
+    subheadings dynamically. `df_report` containing the meta data for each
+    report, such as the file name or the report author.
   contents:
   - df_example
+  - df_report
 
 figures:
   dev: ragg::agg_png
