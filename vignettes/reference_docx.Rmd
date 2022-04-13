@@ -31,9 +31,9 @@ We can use `officer::styles_info` to extract all custom styles defined in the re
 reference_docx <- system.file(
   "rmarkdown",
   "templates",
-  "datenreport-2018",
+  "datenreport-2022",
   "skeleton",
-  "rub_reference.docx",
+  "rub_reference_2021.docx",
   package = "RUBer"
 )
 
