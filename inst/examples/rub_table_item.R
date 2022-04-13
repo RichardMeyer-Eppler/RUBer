@@ -2,13 +2,13 @@
 df_item <- data.frame(
   stringsAsFactors = FALSE,
   figure_caption = c(
-    "Beurteilung der Studienangebote und -bedingungen - Kontakte","Fachbezogene Englischkenntnisse","Fachbezogene Englischkenntnisse","Auslandsaufenthalt während des Studiums","Beurteilung der Prüfungssituation","Beurteilung der Studienangebote und -bedingungen - Kontakte","Beurteilung der Studienangebote und -bedingungen - Struktur des Studiums","Beurteilung der Studienangebote und -bedingungen - Kontakte"
+    "Beurteilung der Studienangebote und -bedingungen - Kontakte","Fachbezogene Englischkenntnisse","Fachbezogene Englischkenntnisse","Auslandsaufenthalt w\u00E4hrend des Studiums","Beurteilung der Pr\u00FCfungssituation","Beurteilung der Studienangebote und -bedingungen - Kontakte","Beurteilung der Studienangebote und -bedingungen - Struktur des Studiums","Beurteilung der Studienangebote und -bedingungen - Kontakte"
   ),
   facet = c(
-    "Kontakte zu Lehrenden","Vorbereitung auf englischsprachige Fachkommunikation","Vorbereitung auf den Umgang mit englischsprachiger Literatur","Auslandsaufenthalt während des Studiums","Ausgewogenheit der Prüfungsformen (Klausur, Hausarbeit, Projekte, mündliche Prüfungen etc.).","Kontakte zu Mitstudierenden","Zugang zu erforderlichen Lehrveranstaltungen (z. B. Seminare, Übungen)","Kontakte zu Lehrenden"
+    "Kontakte zu Lehrenden","Vorbereitung auf englischsprachige Fachkommunikation","Vorbereitung auf den Umgang mit englischsprachiger Literatur","Auslandsaufenthalt w\u00E4hrend des Studiums","Ausgewogenheit der Pr\u00FCfungsformen (Klausur, Hausarbeit, Projekte, m\u00FCndliche Pr\u00FCfungen etc.).","Kontakte zu Mitstudierenden","Zugang zu erforderlichen Lehrveranstaltungen (z. B. Seminare, \u00DCbungen)","Kontakte zu Lehrenden"
   ),
   y = c(
-    "Bachelor 2-Fächer","Bachelor 2-Fächer","Bachelor 2-Fächer","Bachelor 2-Fächer","Master of Education","Master of Education","Master of Education","Master of Education"
+    "Bachelor 2-F\u00E4cher","Bachelor 2-F\u00E4cher","Bachelor 2-F\u00E4cher","Bachelor 2-F\u00E4cher","Master of Education","Master of Education","Master of Education","Master of Education"
   ),
   aggregation_sort_1 = c(
     2, 2, 2, 2, 55, 55, 55, 55

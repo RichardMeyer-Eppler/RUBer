@@ -2,16 +2,16 @@
 studienverlauf <- data.frame(
   stringsAsFactors = FALSE,
   studienverlauf = c("Geschlecht","weiblich",
-                     "männlich","Abschlussart","Bachelor 1-Fach",
-                     "Bachelor 2-Fächer","Staatsexamen","Magister Theologiae",
-                     "Master 1-Fach","Master 2-Fächer",
-                     "Master of Education","Fächergruppe (erstes Studienfach)",
+                     "m\u00E4nnlich","Abschlussart","Bachelor 1-Fach",
+                     "Bachelor 2-F\u00E4cher","Staatsexamen","Magister Theologiae",
+                     "Master 1-Fach","Master 2-F\u00E4cher",
+                     "Master of Education","F\u00E4chergruppe (erstes Studienfach)",
                      "Geisteswissenschaften",
                      "Humanmedizin / Gesundheitswissenschaften","Ingenieurwissenschaften",
                      "Kunst, Kunstwissenschaft","Mathematik, Naturwissenschaften",
                      "Rechts-, Wirtschafts-, Sozialwissenschaften","Sport",
-                     "Gesamtzahl angeschriebene Studierende / gültige Fragebögen",
-                     "Rücklaufquote Studienverlaufsbefragungen"),
+                     "Gesamtzahl angeschriebene Studierende / g\u00FCltige Frageb\u00F6gen",
+                     "R\u00FCcklaufquote Studienverlaufsbefragungen"),
   koepfe_2fs_rub = c(NA,"1.597","1.576",NA,
                      NA,NA,NA,NA,"2.590","99","484",NA,"733",NA,
                      "776","40","718","805","101","3.173","38%"),
@@ -56,10 +56,10 @@ typology <- data.frame(
     "Studienverlauf","2. Fachsemester","2. Fachsemester","2. Fachsemester","2. Fachsemester","5. Fachsemester","5. Fachsemester","5. Fachsemester","5. Fachsemester"
   ),
   colB = c(
-    "Studienverlauf","Angeschrieben","Angeschrieben","Gültige Fragebögen","Gültige Fragebögen","Angeschrieben","Angeschrieben","Gültige Fragebögen","Gültige Fragebögen"
+    "Studienverlauf","Angeschrieben","Angeschrieben","G\u00FCltige Frageb\u00F6gen","G\u00FCltige Frageb\u00F6gen","Angeschrieben","Angeschrieben","G\u00FCltige Frageb\u00F6gen","G\u00FCltige Frageb\u00F6gen"
   ),
   colA = c(
-    "Studienverlauf","Köpfe","(in %)","Köpfe","(in %)","Köpfe","(in %)","Köpfe","(in %)"
+    "Studienverlauf","K\u00F6pfe","(in %)","K\u00F6pfe","(in %)","K\u00F6pfe","(in %)","K\u00F6pfe","(in %)"
   )
 )
 

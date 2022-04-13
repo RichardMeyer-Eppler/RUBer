@@ -1,25 +1,68 @@
-# Example data
+# Example data (with icon paths as a placeholder)
 df_metrics <- data.frame(
   stringsAsFactors = FALSE,
   col1 = c(
-    "D:/Data/Documents/R/win-library/4.1/Datenreport2022/rmarkdown/templates/datenreport-2022/skeleton/streamline-icon-pie-line-graph@48x48.png","Drei Befragungen: Absolvent:innenbefragung (8.297 Fälle), Studieneingangsbefragung (5.283 Fälle) und Studienverlaufsbefragung (5.912 Fälle)","D:/Data/Documents/R/win-library/4.1/Datenreport2022/rmarkdown/templates/datenreport-2022/skeleton/streamline-icon-list-numbers@48x48.png",NA,"D:/Data/Documents/R/win-library/4.1/Datenreport2022/rmarkdown/templates/datenreport-2022/skeleton/streamline-icon-user-female-teacher-math@48x48.png",NA
+    "PLACEHOLDER_PATH/streamline-icon-pie-line-graph.png",
+    "Drei Befragungen:\nAbsolvent:innenbefragung (8.297 F\u00E4lle), Studieneingangsbefragung (5.283 F\u00E4lle)\nund Studienverlaufsbefragung (5.912 F\u00E4lle)",
+    "PLACEHOLDER_PATH/streamline-icon-list-numbers.png",NA,
+    "PLACEHOLDER_PATH/streamline-icon-user-female-teacher-math.png",NA
   ),
   col2 = c(
-    "Insgesamt 66 Datenreporte für 177 Studiengänge","Drei Befragungen: Absolvent:innenbefragung (8.297 Fälle), Studieneingangsbefragung (5.283 Fälle) und Studienverlaufsbefragung (5.912 Fälle)","Auswertung von 52 Fragen und 251 Items",NA,"134 Lehrförderungen verteilt auf 217 Antragssteller:innen","Hochschulstatistische Daten und Kohortenanalysen zu 46.516 Studienfällen und 5.684 Absolvent:innen"
+    "Insgesamt 67 Datenreporte\nf\u00FCr 177 Studieng\u00E4nge",
+    "Drei Befragungen:\nAbsolvent:innenbefragung (8.297 F\u00E4lle), Studieneingangsbefragung (5.283 F\u00E4lle)\nund Studienverlaufsbefragung (5.912 F\u00E4lle)",
+    "Auswertung von 53 Fragen\nund 251 Items",NA,
+    "143 Lehrf\u00F6rderungen verteilt auf\n222 Antragssteller:innen",
+    "Hochschulstatistische Daten und Kohortenanalysen zu 46.601 Studienf\u00E4llen und 5.537 Absolvent:innen"
   ),
   col3 = c(
-    "Insgesamt 66 Datenreporte für 177 Studiengänge","Drei Befragungen: Absolvent:innenbefragung (8.297 Fälle), Studieneingangsbefragung (5.283 Fälle) und Studienverlaufsbefragung (5.912 Fälle)","Auswertung von 52 Fragen und 251 Items", "901.433 ausgewertete Antworten visualisiert in 4.995 Abbildungen","134 Lehrförderungen verteilt auf 217 Antragssteller:innen","Hochschulstatistische Daten und Kohortenanalysen zu 46.516 Studienfällen und 5.684 Absolvent:innen"
+    "Insgesamt 67 Datenreporte\nf\u00FCr 177 Studieng\u00E4nge",
+    "Drei Befragungen:\nAbsolvent:innenbefragung (8.297 F\u00E4lle), Studieneingangsbefragung (5.283 F\u00E4lle)\nund Studienverlaufsbefragung (5.912 F\u00E4lle)",
+    "Auswertung von 53 Fragen\nund 251 Items",
+    "904.321 ausgewertete Antworten\nvisualisiert in 5.027 Abbildungen",
+    "143 Lehrf\u00F6rderungen verteilt auf\n222 Antragssteller:innen",
+    "Hochschulstatistische Daten und Kohortenanalysen zu 46.601 Studienf\u00E4llen und 5.537 Absolvent:innen"
   ),
   col4 = c(
-    "Insgesamt 66 Datenreporte für 177 Studiengänge","Drei Befragungen: Absolvent:innenbefragung (8.297 Fälle), Studieneingangsbefragung (5.283 Fälle) und Studienverlaufsbefragung (5.912 Fälle)","Auswertung von 52 Fragen und 251 Items","901.433 ausgewertete Antworten visualisiert in 4.995 Abbildungen","134 Lehrförderungen verteilt auf 217 Antragssteller:innen","Hochschulstatistische Daten und Kohortenanalysen zu 46.516 Studienfällen und 5.684 Absolvent:innen"
+    "Insgesamt 67 Datenreporte\nf\u00FCr 177 Studieng\u00E4nge",
+    "Drei Befragungen:\nAbsolvent:innenbefragung (8.297 F\u00E4lle), Studieneingangsbefragung (5.283 F\u00E4lle)\nund Studienverlaufsbefragung (5.912 F\u00E4lle)",
+    "Auswertung von 53 Fragen\nund 251 Items",
+    "904.321 ausgewertete Antworten\nvisualisiert in 5.027 Abbildungen",
+    "143 Lehrf\u00F6rderungen verteilt auf\n222 Antragssteller:innen",
+    "Hochschulstatistische Daten und Kohortenanalysen zu 46.601 Studienf\u00E4llen und 5.537 Absolvent:innen"
   ),
   col5 = c(
-    NA,"Drei Befragungen: Absolvent:innenbefragung (8.297 Fälle), Studieneingangsbefragung (5.283 Fälle) und Studienverlaufsbefragung (5.912 Fälle)",NA,"901.433 ausgewertete Antworten visualisiert in 4.995 Abbildungen","134 Lehrförderungen verteilt auf 217 Antragssteller:innen","Hochschulstatistische Daten und Kohortenanalysen zu 46.516 Studienfällen und 5.684 Absolvent:innen"
+    NA,
+    "Drei Befragungen:\nAbsolvent:innenbefragung (8.297 F\u00E4lle), Studieneingangsbefragung (5.283 F\u00E4lle)\nund Studienverlaufsbefragung (5.912 F\u00E4lle)",NA,
+    "904.321 ausgewertete Antworten\nvisualisiert in 5.027 Abbildungen",
+    "143 Lehrf\u00F6rderungen verteilt auf\n222 Antragssteller:innen",
+    "Hochschulstatistische Daten und Kohortenanalysen zu 46.601 Studienf\u00E4llen und 5.537 Absolvent:innen"
   ),
   col6 = c(
-    NA,"D:/Data/Documents/R/win-library/4.1/Datenreport2022/rmarkdown/templates/datenreport-2022/skeleton/streamline-icon-team-meeting-message-men-question@48x48.png",NA,"D:/Data/Documents/R/win-library/4.1/Datenreport2022/rmarkdown/templates/datenreport-2022/skeleton/streamline-icon-analytics-bars-horizontal@48x48.png",NA,"D:/Data/Documents/R/win-library/4.1/Datenreport2022/rmarkdown/templates/datenreport-2022/skeleton/streamline-icon-people-man-graduate@48x48.png"
+    NA,
+    "PLACEHOLDER_PATH/streamline-icon-team-meeting-message-men-question.png",NA,
+    "PLACEHOLDER_PATH/streamline-icon-analytics-bars-horizontal.png",NA,
+    "PLACEHOLDER_PATH/streamline-icon-people-man-graduate.png"
   )
 )
+
+# df_metrics needs to be updated with runtime path to the streamline icons
+skeleton_path <- system.file(
+  "rmarkdown",
+  "templates",
+  "datenreport-2022",
+  "skeleton",
+  package = "RUBer"
+)
+
+df_metrics <- df_metrics %>%
+  dplyr::mutate(
+    dplyr::across(
+      tidyselect::everything(),
+      stringr::str_replace_all,
+      pattern = "PLACEHOLDER_PATH",
+      replacement = skeleton_path
+    )
+  )
 
 # Function call
 rub_table_metrics(
