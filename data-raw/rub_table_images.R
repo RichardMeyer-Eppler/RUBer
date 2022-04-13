@@ -55,7 +55,9 @@ table_function_names <- c(
   "rub_table_ab",
   "rub_table_programs",
   "rub_table_item",
-  "rub_table_metrics"
+  "rub_table_metrics",
+  "rub_table_excluded_programs",
+  "rub_table_included_programs"
 )
 
 purrr::walk(
