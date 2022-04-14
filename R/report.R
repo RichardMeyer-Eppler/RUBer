@@ -89,6 +89,8 @@ get_report_nr_by_id <- function(
 #'     output file
 #' @param title Character, title for the title page
 #' @param author Character, author for the title page
+#' @param font_file Character, font file to use in all plots, defaults to
+#'     "RubFlama-Regular.ttf"
 #'
 #' @export
 #'
@@ -118,6 +120,7 @@ render_report <- function(
     Sys.Date(),
     format= "%B %Y"
   ),
+  font_file = "RubFlama-Regular.ttf",
   post_process = TRUE
 ) {
 
@@ -147,7 +150,8 @@ render_report <- function(
       p_author = author,
       p_date = date,
       p_df = df,
-      p_df_stg = p_df_stg
+      p_df_stg = p_df_stg,
+      p_font_file = font_file
     ),
     encoding = "UTF-8",
     output_file = file_path
