@@ -149,7 +149,7 @@ register_font <- function(
 #' @param bolditalic Character, path of the font file for "bold italic" font style,
 #'     defaults to `get_font_df("RubFlama-BoldItalic.ttf")[["path"]]`
 #'
-#' @return
+#' @return Side effects
 #' @export
 #'
 #' @examples
@@ -185,7 +185,7 @@ register_font_flama <- function(
 #' @param bolditalic Character, path of the font file for "bold italic" font style,
 #'     defaults to `get_font_df("RUB Scala TZ Bold Italic.ttf")[["path"]]`
 #'
-#' @return
+#' @return Side effects
 #' @export
 #'
 #' @examples
