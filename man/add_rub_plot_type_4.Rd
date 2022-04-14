@@ -12,7 +12,7 @@ add_rub_plot_type_4(
   group_var,
   group_label = NULL,
   base_size = 11,
-  base_family = "RubFlama",
+  base_family = get_font_df()[["family"]],
   color = RUB_colors["blue"],
   palette_reverse = FALSE,
   legend_columns = 5

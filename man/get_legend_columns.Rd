@@ -11,7 +11,7 @@ get_legend_columns(
   legend_key_spacing = plot_width/100,
   plot_width = 6.8,
   base_size = 11,
-  base_family = "RubFlama"
+  base_family = get_font_df()[["family"]]
 )
 }
 \arguments{

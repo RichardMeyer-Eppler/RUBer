@@ -19,7 +19,7 @@ rub_plot_type_2(
   filter_cutoff = 0.04,
   color = RUB_colors["blue"],
   palette_reverse = FALSE,
-  base_family = "RubFlama",
+  base_family = get_font_df()[["family"]],
   base_size = 11,
   max_width_strip_label = 80
 )

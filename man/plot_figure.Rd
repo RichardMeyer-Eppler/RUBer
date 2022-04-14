@@ -4,10 +4,13 @@
 \alias{plot_figure}
 \title{Plot RUB figure}
 \usage{
-plot_figure(df)
+plot_figure(df, font_family = get_font_df()[["family"]])
 }
 \arguments{
-\item{df}{Data Frame bzw. Tibble}
+\item{df}{Data Frame}
+
+\item{font_family}{Character, the font family to use for all plots, defaults
+to \code{get_font_df()[["family"]]}}
 }
 \value{
 ggplot object
@@ -16,7 +19,10 @@ ggplot object
 Plot RUB figure
 }
 \examples{
-\dontrun{
-plot_figure(df)
-}
+df_example \%>\%
+  dplyr::filter(
+    .data[["report_nr"]] == 6L,
+    .data[["figure_count"]] == 1L
+  ) \%>\%
+  RUBer::plot_figure()
 }

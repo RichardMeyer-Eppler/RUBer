@@ -22,7 +22,7 @@ rub_plot_type_1_and_4(
   facet_var = NULL,
   color = RUB_colors["blue"],
   palette_reverse = FALSE,
-  base_family = "RubFlama",
+  base_family = get_font_df()[["family"]],
   base_size = 11,
   plot_width = 6.8
 )

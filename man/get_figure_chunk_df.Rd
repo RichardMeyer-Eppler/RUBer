@@ -4,10 +4,20 @@
 \alias{get_figure_chunk_df}
 \title{Get code chunks for plotting all figures}
 \usage{
-get_figure_chunk_df(df, function_call = "RUBer::plot_figure")
+get_figure_chunk_df(
+  df,
+  font_family = get_font_df()[["family"]],
+  function_call = "RUBer::plot_figure"
+)
 }
 \arguments{
 \item{df}{Data frame with columns \code{figure_count}}
+
+\item{font_family}{Character, the font family to use for all plots, defaults
+to \code{get_font_df()[["family"]]}}
+
+\item{function_call}{Character, the function call for each plot chunk,
+defaults to \code{RUBer::plot_figure}}
 }
 \value{
 Data frame with columns \code{figure_count}, \code{chunk_heading},
