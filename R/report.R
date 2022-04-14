@@ -96,7 +96,7 @@ get_report_nr_by_id <- function(
 #'
 #' @example inst/examples/render_report.R
 render_report <- function(
-  p_df = filter_report(df_example, 6L),
+  p_df = filter_report(RUBer::df_example, 6L),
   p_df_stg = NULL,
   report_nr = 6L,
   rmd_template = system.file(
