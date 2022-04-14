@@ -12,13 +12,25 @@ get_fallback_font_df(
 \arguments{
 \item{fonts}{Data frame obtained by \code{systemfonts::system_fonts}}
 
-\item{fallback_alias}{Character, defaults to "sans"}
+\item{fallback_alias}{Character, one of \code{c("sans", "serif", "mono", "emoji")}
+defaults to "sans".}
 }
 \value{
 Data frame obtained by \code{systemfonts::system_fonts} with one row
 }
 \description{
-Get system dependent fallback font if a given font is not available
+This functions returns the system dependent font for the alias "sans".
+}
+\details{
+The aliases are mapped the following way:
+\itemize{
+\item "" and "sans" return Helvetica on Mac, Arial on Windows, and the default sans-serif font on Linux (DejaVu Sans on Ubuntu)
+\item "serif" return Times on Mac, Times New Roman on Windows, and the default serif font on Linux (DejaVu Serif on Ubuntu)
+\item "mono" return Courier on Mac, Courier New on Windows, and the default mono font on Linux (DejaVu Mono on Ubuntu)
+\item "emoji" return Apple Color Emoji on Mac, Segoe UI Emoji on Windows, and the default emoji font on Linux (Noto Color on Ubuntu)
+}
+
+See https://github.com/r-lib/systemfonts for details
 }
 \examples{
 get_fallback_font_df()
