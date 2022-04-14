@@ -49,7 +49,7 @@
     </div>
 
     <div class="section level2">
-      <h2 id="plotting">Plotting<a class="anchor" aria-label="anchor" href="#plotting"></a></h2>
+      <h2 id="plotting-functions">Plotting functions<a class="anchor" aria-label="anchor" href="#plotting-functions"></a></h2>
       
       <p class="section-desc"></p><p>Plotting functions for each <code>figure_type_id</code>.</p>
 
@@ -264,9 +264,9 @@ frame</dd>
 
       <dl><dt>
           
-          <code><a href="rub_table_stg.html">rub_table_stg()</a></code> 
+          <code><a href="rub_table_ab.html">rub_table_ab()</a></code> 
         </dt>
-        <dd>Get formatted flextable of student cases</dd>
+        <dd>Get formatted flextable of response rates for the Absolvent:innenbefragung</dd>
       </dl><dl><dt>
           
           <code><a href="rub_table_eb.html">rub_table_eb()</a></code> 
@@ -274,19 +274,14 @@ frame</dd>
         <dd>Get formatted flextable of response rates for the Eingangsbefragung</dd>
       </dl><dl><dt>
           
-          <code><a href="rub_table_vb.html">rub_table_vb()</a></code> 
+          <code><a href="rub_table_excluded_programs.html">rub_table_excluded_programs()</a></code> 
         </dt>
-        <dd>Get formatted flextable of response rates for the Verlaufsbefragung</dd>
+        <dd>Get formatted flextable of excluded programs</dd>
       </dl><dl><dt>
           
-          <code><a href="rub_table_ab.html">rub_table_ab()</a></code> 
+          <code><a href="rub_table_included_programs.html">rub_table_included_programs()</a></code> 
         </dt>
-        <dd>Get formatted flextable of response rates for the Absolvent:innenbefragung</dd>
-      </dl><dl><dt>
-          
-          <code><a href="rub_table_programs.html">rub_table_programs()</a></code> 
-        </dt>
-        <dd>Get formatted flextable of funded projects</dd>
+        <dd>Get formatted flextable of included programs</dd>
       </dl><dl><dt>
           
           <code><a href="rub_table_item.html">rub_table_item()</a></code> 
@@ -299,14 +294,50 @@ frame</dd>
         <dd>Get formatted flextable of metrics</dd>
       </dl><dl><dt>
           
-          <code><a href="rub_table_included_programs.html">rub_table_included_programs()</a></code> 
+          <code><a href="rub_table_programs.html">rub_table_programs()</a></code> 
         </dt>
-        <dd>Get formatted flextable of included programs</dd>
+        <dd>Get formatted flextable of funded projects</dd>
       </dl><dl><dt>
           
-          <code><a href="rub_table_excluded_programs.html">rub_table_excluded_programs()</a></code> 
+          <code><a href="rub_table_stg.html">rub_table_stg()</a></code> 
         </dt>
-        <dd>Get formatted flextable of excluded programs</dd>
+        <dd>Get formatted flextable of student cases</dd>
+      </dl><dl><dt>
+          
+          <code><a href="rub_table_vb.html">rub_table_vb()</a></code> 
+        </dt>
+        <dd>Get formatted flextable of response rates for the Verlaufsbefragung</dd>
+      </dl></div><div class="section level2">
+      <h2 id="font-functions">Font functions<a class="anchor" aria-label="anchor" href="#font-functions"></a></h2>
+      
+      <p class="section-desc"></p><p>These functions load the RUB corporate design fonts RUB Flama and RUB Scala TZ. The package <code>showtext</code> is used to make the fonts available to <code>ggplot2</code>.</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="get_fallback_font_df.html">get_fallback_font_df()</a></code> 
+        </dt>
+        <dd>Get system dependent fallback font if a given font is not available</dd>
+      </dl><dl><dt>
+          
+          <code><a href="get_font_df.html">get_font_df()</a></code> 
+        </dt>
+        <dd>Get data frame of font information for a font file</dd>
+      </dl><dl><dt>
+          
+          <code><a href="register_font_flama.html">register_font_flama()</a></code> 
+        </dt>
+        <dd>Registers RUB Flama font to be used with <code>showtext</code> package</dd>
+      </dl><dl><dt>
+          
+          <code><a href="register_font_scala.html">register_font_scala()</a></code> 
+        </dt>
+        <dd>Registers RUB Scala TZ font to be used with <code>showtext</code> package</dd>
       </dl></div><div class="section level2">
       <h2 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a></h2>
       
@@ -329,9 +360,7 @@ reporting package, containing the data to generate all figures.</dd>
           <code><a href="df_report.html">df_report</a></code> 
         </dt>
         <dd>Example data set illustrating the use of the RUBer parameterized
-reporting package, containing the metadata for each report. The metadata
-includes the author, the title, the file name, and the subfolder to be used
-in the output path.</dd>
+reporting package, containing the metadata for each report.</dd>
       </dl></div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>

@@ -58,6 +58,9 @@
     <loc>/reference/get_RUB_palettes.html</loc>
   </url>
   <url>
+    <loc>/reference/get_fallback_font_df.html</loc>
+  </url>
+  <url>
     <loc>/reference/get_figure_chunk_df.html</loc>
   </url>
   <url>
@@ -65,6 +68,9 @@
   </url>
   <url>
     <loc>/reference/get_file_path.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_font_df.html</loc>
   </url>
   <url>
     <loc>/reference/get_label_formula.html</loc>
@@ -92,6 +98,12 @@
   </url>
   <url>
     <loc>/reference/post_process.html</loc>
+  </url>
+  <url>
+    <loc>/reference/register_font_flama.html</loc>
+  </url>
+  <url>
+    <loc>/reference/register_font_scala.html</loc>
   </url>
   <url>
     <loc>/reference/render_report.html</loc>
