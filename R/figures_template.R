@@ -77,9 +77,9 @@ get_figure_chunk_df <- function(
     ) %>%
     dplyr::select(
       1L,
-      tidyselect::last_col(
+      dplyr::last_col(
         offset = 3L
-      ) : tidyselect::last_col()
+      ) : dplyr::last_col()
     )
 
   return(chunk_parameters)
@@ -100,7 +100,7 @@ get_figure_chunk_text <- function(
 ) {
   chunk_text <- df %>%
     tidyr::pivot_longer(
-      2L : tidyselect::last_col(),
+      2L : dplyr::last_col(),
       values_to = "chunk_text"
     ) %>%
     dplyr::select(
