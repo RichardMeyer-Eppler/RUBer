@@ -91,7 +91,7 @@ plot_figure <- function(
 #' @keywords internal
 #'
 #' @examples
-#' plot_discrete_palette(12)
+#' RUBer:::plot_discrete_palette(12)
 plot_discrete_palette <- function(colors_n)  {
   palette <- paste0(
     "discrete_",
@@ -148,6 +148,7 @@ plot_discrete_palette <- function(colors_n)  {
 #' @return A ggplot object
 #' @export
 #' @importFrom rlang .data
+#' @importFrom rlang :=
 #'
 #' @example inst/examples/rub_plot_type_1.R
 rub_plot_type_1 <- function(df,
@@ -331,6 +332,7 @@ rub_plot_type_1 <- function(df,
 #' @return A ggplot object
 #' @export
 #' @importFrom rlang .data
+#' @importFrom rlang :=
 #'
 #' @examples
 #' # Create test values for all three mandatory variables (x_var, y_var, fill_var)
@@ -543,6 +545,8 @@ rub_plot_type_2 <- function(df,
 #' @return A ggplot object
 #' @export
 #' @importFrom rlang .data
+#' @importFrom rlang :=
+#'
 #' @examples
 #' # Create test values for all three mandatory variables (x_var, y_var,
 #' # fill_var)
@@ -786,6 +790,7 @@ rub_plot_type_3 <- function(df, x_var,
 #' @return A ggplot2 object
 #' @export
 #' @importFrom rlang .data
+#' @importFrom rlang :=
 #'
 #' @examples
 #' \dontrun{
@@ -1072,6 +1077,8 @@ rub_plot_type_1_and_4 <- function(df,
 #' @return List of ggplot2 expressions
 #' @keywords internal
 #'
+#' @importFrom rlang :=
+#'
 #' @examples
 #' \dontrun{
 #' add_rub_plot_type_4(df, x, y, group, group_label)
@@ -1310,6 +1317,8 @@ get_label_formula <- function(label_var,
 #'    y-coordinate variable
 #' @keywords internal
 #'
+#' @importFrom rlang :=
+#'
 #' @examples
 #' \dontrun{
 #' add_label_position(df, x_var, y_var, fill)
@@ -1414,6 +1423,8 @@ add_label_position <- function(df, x_var,
 #'
 #' @return Numeric with the number of columns for the legend
 #' @export
+#'
+#' @importFrom graphics strwidth
 #'
 #' @examples
 #' get_legend_columns(
