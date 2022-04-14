@@ -1,5 +1,6 @@
 utils::globalVariables(
   c(
+    ".",
     "report_nr",
     "figure_count",
     "report_type_id",
