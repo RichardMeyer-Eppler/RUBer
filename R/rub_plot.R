@@ -1,15 +1,18 @@
 #' Plot RUB figure
 #'
-#' @param df Data Frame bzw. Tibble
+#' @param df Data Frame
+#' @param font_family Character, the font family to use for all plots, defaults
+#'     to `get_font_df()[["family"]]`
 #'
 #' @return ggplot object
 #' @export
 #'
-#' @examples
-#' \dontrun{
-#' plot_figure(df)
-#' }
-plot_figure <- function(df) {
+#' @example inst/examples/plot_figure.R
+plot_figure <- function(
+  df,
+  font_family = get_font_df()[["family"]]
+) {
+
   figure_type_id <- sort(
     unique(
       df[["figure_type_id"]]
@@ -26,7 +29,8 @@ plot_figure <- function(df) {
           y_axis_label = .[[1, "y_label"]],
           fill_var = fill,
           fill_label = fill_label,
-          caption = .[[1, "source_caption"]]
+          caption = .[[1, "source_caption"]],
+          base_family = font_family
         )
     } else if (figure_type_id == 2L) {
       p <- df %>%
@@ -38,7 +42,8 @@ plot_figure <- function(df) {
           fill_label = fill_label,
           facet_var = facet,
           caption = .[[1, "source_caption"]],
-          filter_cutoff = 0.05
+          filter_cutoff = 0.05,
+          base_family = font_family
         )
     } else if (figure_type_id == 3L) {
       p <- df %>%
@@ -49,12 +54,13 @@ plot_figure <- function(df) {
           fill_label = fill_label,
           facet_var = facet,
           title = .[[1, "question_txt"]],
-          caption = .[[1, "source_caption"]]
+          caption = .[[1, "source_caption"]],
+          base_family = font_family
         )
     }
   } else if (length(figure_type_id) > 1) {
     if (identical(figure_type_id, c(1L, 4L))) {
-       p <- df %>%
+      p <- df %>%
         rub_plot_type_1_and_4(
           x_var = x,
           x_var_label = x_label,
@@ -64,7 +70,8 @@ plot_figure <- function(df) {
           fill_label = fill_label,
           group_var = group,
           group_label = group_label,
-          caption = .[[1, "source_caption"]]
+          caption = .[[1, "source_caption"]],
+          base_family = font_family
         )
     }
   }
@@ -151,7 +158,7 @@ rub_plot_type_1 <- function(df,
                            caption = "", caption_prefix = "Quelle:",
                            filter_cutoff = 0.04, facet_var = NULL,
                            color = RUB_colors["blue"], palette_reverse = FALSE,
-                           base_family = "RubFlama", base_size = 11,
+                           base_family = get_font_df()[["family"]], base_size = 11,
                            plot_width = 6.8) {
   # Defuse R expressions
   fill_var_sym <- rlang::ensym(fill_var)
@@ -365,7 +372,7 @@ rub_plot_type_2 <- function(df,
                            facet_var = NULL, caption = "",
                            caption_prefix = "Quelle:", filter_cutoff = 0.04,
                            color = RUB_colors["blue"], palette_reverse = FALSE,
-                           base_family = "RubFlama", base_size = 11,
+                           base_family = get_font_df()[["family"]], base_size = 11,
                            max_width_strip_label = 80) {
 
   # Defuse R expressions
@@ -561,7 +568,7 @@ rub_plot_type_3 <- function(df, x_var,
                            title = NA_character_, caption = "",
                            caption_prefix = "Quelle:", filter_cutoff = 0.05,
                            color = RUB_colors["blue"], palette_reverse = FALSE,
-                           base_family = "RubFlama", base_size = 11,
+                           base_family = get_font_df()[["family"]], base_size = 11,
                            max_width_axis_text_y = 30,
                            max_width_strip_label = 80, plot_width = 6.8) {
 
@@ -797,7 +804,7 @@ rub_plot_type_4 <- function(df,
                            caption = "", caption_prefix = "Quelle:",
                            filter_cutoff = 5, facet_var = NULL,
                            color = RUB_colors["blue"], palette_reverse = FALSE,
-                           base_family = "RubFlama", base_size = 11) {
+                           base_family = get_font_df()[["family"]], base_size = 11) {
 
   # Defuse R expressions
   y_var_sym <- rlang::ensym(y_var)
@@ -967,7 +974,7 @@ rub_plot_type_1_and_4 <- function(df,
                                   filter_cutoff = 0.04, facet_var = NULL,
                                   color = RUB_colors["blue"],
                                   palette_reverse = FALSE,
-                                  base_family = "RubFlama",
+                                  base_family = get_font_df()[["family"]],
                                   base_size = 11,
                                   plot_width = 6.8)  {
 
@@ -1072,7 +1079,7 @@ rub_plot_type_1_and_4 <- function(df,
 add_rub_plot_type_4 <- function(df_t4, x_var, x_var_label = NULL,
                                y_var, group_var,
                                group_label = NULL, base_size = 11,
-                               base_family = "RubFlama",
+                               base_family = get_font_df()[["family"]],
                                color = RUB_colors["blue"],
                                palette_reverse = FALSE,
                                legend_columns = 5) {
@@ -1429,7 +1436,7 @@ get_legend_columns <- function(
   legend_key_spacing = plot_width / 100,
   plot_width = 6.8,
   base_size = 11,
-  base_family = "RubFlama"
+  base_family = get_font_df()[["family"]]
 ) {
 
   # If total legend text has fewer than 50 characters, return as many columns

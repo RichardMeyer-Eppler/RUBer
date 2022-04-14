@@ -1,15 +1,20 @@
 #' Get code chunks for plotting all figures
 #'
 #' @param df Data frame with columns `figure_count`
+#' @param font_family Character, the font family to use for all plots, defaults
+#'     to `get_font_df()[["family"]]`
+#' @param function_call Character, the function call for each plot chunk,
+#'     defaults to `RUBer::plot_figure`
 #'
 #' @return Data frame with columns `figure_count`, `chunk_heading`,
-#'         `chunk_subheading`, `chunk_figure_df` and `chunk_plot_figure`
+#'     `chunk_subheading`, `chunk_figure_df` and `chunk_plot_figure`
 #' @export
 #'
 #' @examples
 #' get_figure_chunk_df(RUBer::df_example %>% dplyr::filter(report_nr == 1L))
 get_figure_chunk_df <- function(
   df,
+  font_family = get_font_df()[["family"]],
   function_call = "RUBer::plot_figure"
 ) {
   chunk_parameters <- df %>%
@@ -66,7 +71,8 @@ get_figure_chunk_df <- function(
       chunk_plot_figure = tpl_plot_figure(
         chunk_label = .data[["chunk_label"]],
         figure_caption = .data[["figure_caption"]],
-        figure_height = .data[["figure_height"]]
+        figure_height = .data[["figure_height"]],
+        font_family = font_family
       )
     ) %>%
     dplyr::select(
