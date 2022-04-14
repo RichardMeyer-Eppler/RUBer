@@ -67,10 +67,14 @@ typology <- data.frame(
     "studienabschluss","koepfe_rub","koepfe_rub_perc","koepfe_bef","koepfe_bef_perc"
   ),
   colC = c(
-    "Studienabschluss","Absolventinnen und Absolventen (Pr\u00FCfungsjahrg\u00E4nge 2016 bis 2019)","Absolventinnen und Absolventen (Pr\u00FCfungsjahrg\u00E4nge 2016 bis 2019)","Absolventinnen und Absolventen (Pr\u00FCfungsjahrg\u00E4nge 2016 bis 2019)","Absolventinnen und Absolventen (Pr\u00FCfungsjahrg\u00E4nge 2016 bis 2019)"
+    "Studienabschluss","Absolventinnen und Absolventen (Pr\u00FCfungsjahrg\u00E4nge 2016 bis 2019)",
+    "Absolventinnen und Absolventen (Pr\u00FCfungsjahrg\u00E4nge 2016 bis 2019)",
+    "Absolventinnen und Absolventen (Pr\u00FCfungsjahrg\u00E4nge 2016 bis 2019)",
+    "Absolventinnen und Absolventen (Pr\u00FCfungsjahrg\u00E4nge 2016 bis 2019)"
   ),
   colB = c(
-    "Studienabschluss","Angeschrieben","Angeschrieben","G\u00FCltige Frageb\u00F6gen","G\u00FCltige Frageb\u00F6gen"
+    "Studienabschluss","Angeschrieben","Angeschrieben","G\u00FCltige Frageb\u00F6gen",
+    "G\u00FCltige Frageb\u00F6gen"
   ),
   colA = c(
     "Studienabschluss","K\u00F6pfe","(in \%)","K\u00F6pfe","(in \%)"
@@ -78,7 +82,9 @@ typology <- data.frame(
 )
 
 headings <- c(
-  "Geschlecht", "Abschlussart", "F\u00E4chergruppe (erstes Studienfach)", "Gesamtzahl angeschriebene Absolvent:innen / g\u00FCltige Frageb\u00F6gen", "R\u00FCcklaufquote Absolvent:innenbefragungen"
+  "Geschlecht", "Abschlussart", "F\u00E4chergruppe (erstes Studienfach)",
+  "Gesamtzahl angeschriebene Absolvent:innen / g\u00FCltige Frageb\u00F6gen",
+  "R\u00FCcklaufquote Absolvent:innenbefragungen"
 )
 
 # Function call

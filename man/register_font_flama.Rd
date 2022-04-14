@@ -29,7 +29,7 @@ defaults to \code{get_font_df("RubFlama-Bold.ttf")[["path"]]}}
 defaults to \code{get_font_df("RubFlama-BoldItalic.ttf")[["path"]]}}
 }
 \value{
-
+Side effects
 }
 \description{
 Registers RUB Flama font to be used with \code{showtext} package

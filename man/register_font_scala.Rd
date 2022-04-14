@@ -29,7 +29,7 @@ defaults to \code{get_font_df("RUB Scala TZ Bold.ttf")[["path"]]}}
 defaults to \code{get_font_df("RUB Scala TZ Bold Italic.ttf")[["path"]]}}
 }
 \value{
-
+Side effects
 }
 \description{
 Registers RUB Scala TZ font to be used with \code{showtext} package

@@ -5,7 +5,7 @@
 \title{Render report}
 \usage{
 render_report(
-  p_df = filter_report(df_example, 6L),
+  p_df = filter_report(RUBer::df_example, 6L),
   p_df_stg = NULL,
   report_nr = 6L,
   rmd_template = system.file("rmarkdown", "templates", "datenreport-2022", "skeleton",

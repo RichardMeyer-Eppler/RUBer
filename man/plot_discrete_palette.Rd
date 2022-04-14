@@ -18,6 +18,6 @@ At the moment, RUB_palettes has discrete palettes for up to eight unique
 colors. Above that number, colors are interpolated.
 }
 \examples{
-plot_discrete_palette(12)
+RUBer:::plot_discrete_palette(12)
 }
 \keyword{internal}

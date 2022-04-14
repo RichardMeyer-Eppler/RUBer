@@ -77,24 +77,36 @@ typology <- data.frame(
   stringsAsFactors = FALSE,
   NA,
   col_keys = c(
-    "studienverlauf","koepfe_2fs_rub","koepfe_2fs_rub_perc","koepfe_2fs_bef","koepfe_2fs_bef_perc","koepfe_5fs_rub","koepfe_5fs_rub_perc","koepfe_5fs_bef","koepfe_5fs_bef_perc"
+    "studienverlauf","koepfe_2fs_rub","koepfe_2fs_rub_perc","koepfe_2fs_bef",
+    "koepfe_2fs_bef_perc","koepfe_5fs_rub","koepfe_5fs_rub_perc","koepfe_5fs_bef",
+    "koepfe_5fs_bef_perc"
   ),
   colD = c(
-    "Studienverlauf","Studierende (WiSe 18/19 bis  WiSe 20/21)","Studierende (WiSe 18/19 bis  WiSe 20/21)","Studierende (WiSe 18/19 bis  WiSe 20/21)","Studierende (WiSe 18/19 bis  WiSe 20/21)","Studierende (WiSe 18/19 bis  WiSe 20/21)","Studierende (WiSe 18/19 bis  WiSe 20/21)","Studierende (WiSe 18/19 bis  WiSe 20/21)","Studierende (WiSe 18/19 bis  WiSe 20/21)"
+    "Studienverlauf","Studierende (WiSe 18/19 bis  WiSe 20/21)",
+    "Studierende (WiSe 18/19 bis  WiSe 20/21)","Studierende (WiSe 18/19 bis  WiSe 20/21)",
+    "Studierende (WiSe 18/19 bis  WiSe 20/21)","Studierende (WiSe 18/19 bis  WiSe 20/21)",
+    "Studierende (WiSe 18/19 bis  WiSe 20/21)","Studierende (WiSe 18/19 bis  WiSe 20/21)",
+    "Studierende (WiSe 18/19 bis  WiSe 20/21)"
   ),
   colC = c(
-    "Studienverlauf","2. Fachsemester","2. Fachsemester","2. Fachsemester","2. Fachsemester","5. Fachsemester","5. Fachsemester","5. Fachsemester","5. Fachsemester"
+    "Studienverlauf","2. Fachsemester","2. Fachsemester","2. Fachsemester","2. Fachsemester",
+    "5. Fachsemester","5. Fachsemester","5. Fachsemester","5. Fachsemester"
   ),
   colB = c(
-    "Studienverlauf","Angeschrieben","Angeschrieben","G\u00FCltige Frageb\u00F6gen","G\u00FCltige Frageb\u00F6gen","Angeschrieben","Angeschrieben","G\u00FCltige Frageb\u00F6gen","G\u00FCltige Frageb\u00F6gen"
+    "Studienverlauf","Angeschrieben","Angeschrieben","G\u00FCltige Frageb\u00F6gen",
+    "G\u00FCltige Frageb\u00F6gen","Angeschrieben","Angeschrieben","G\u00FCltige Frageb\u00F6gen",
+    "G\u00FCltige Frageb\u00F6gen"
   ),
   colA = c(
-    "Studienverlauf","K\u00F6pfe","(in \%)","K\u00F6pfe","(in \%)","K\u00F6pfe","(in \%)","K\u00F6pfe","(in \%)"
+    "Studienverlauf","K\u00F6pfe","(in \%)","K\u00F6pfe","(in \%)","K\u00F6pfe","(in \%)",
+    "K\u00F6pfe","(in \%)"
   )
 )
 
 headings <- c(
-  "Geschlecht", "Abschlussart", "F\u00E4chergruppe (erstes Studienfach)", "Gesamtzahl angeschriebene Studierende / g\u00FCltige Frageb\u00F6gen", "R\u00FCcklaufquote Studienverlaufsbefragungen"
+  "Geschlecht", "Abschlussart", "F\u00E4chergruppe (erstes Studienfach)",
+  "Gesamtzahl angeschriebene Studierende / g\u00FCltige Frageb\u00F6gen",
+  "R\u00FCcklaufquote Studienverlaufsbefragungen"
 )
 
 # Function call
