@@ -1,7 +1,18 @@
 #' Get system dependent fallback font if a given font is not available
 #'
+#' This functions returns the system dependent font for the alias "sans".
+#'
+#' The aliases are mapped the following way:
+#' * "" and "sans" return Helvetica on Mac, Arial on Windows, and the default sans-serif font on Linux (DejaVu Sans on Ubuntu)
+#' * "serif" return Times on Mac, Times New Roman on Windows, and the default serif font on Linux (DejaVu Serif on Ubuntu)
+#' * "mono" return Courier on Mac, Courier New on Windows, and the default mono font on Linux (DejaVu Mono on Ubuntu)
+#' * "emoji" return Apple Color Emoji on Mac, Segoe UI Emoji on Windows, and the default emoji font on Linux (Noto Color on Ubuntu)
+#'
+#' See https://github.com/r-lib/systemfonts for details
+#'
 #' @param fonts Data frame obtained by `systemfonts::system_fonts`
-#' @param fallback_alias Character, defaults to "sans"
+#' @param fallback_alias Character, one of `c("sans", "serif", "mono", "emoji")`
+#'     defaults to "sans".
 #'
 #' @return Data frame obtained by `systemfonts::system_fonts` with one row
 #' @export
@@ -12,6 +23,13 @@ get_fallback_font_df <- function(
   fonts = systemfonts::system_fonts(),
   fallback_alias = "sans"
 ) {
+
+  fallback_alias <- rlang::arg_match(
+    fallback_alias,
+    values = c(
+      "sans", "serif", "mono", "emoji"
+    )
+  )
 
   fallback_font <- systemfonts::match_font(
     fallback_alias
@@ -81,6 +99,41 @@ get_font_df <- function(
   }
 
   return(df_font)
+}
+
+#' Register font contained in font data frame
+#'
+#' @param font_df Data frame with one row obtained by `RUBer::get_font_df()`
+#'
+#' @return Side effects
+#' @export
+#'
+#' @examples
+#' register_font()
+register_font <- function(
+  font_df = RUBer::get_font_df()
+) {
+
+  font_family <- font_df[["family"]]
+  font_path <- font_df[["path"]]
+  font_file <- fs::path_file(
+    font_path
+  )
+
+  if(
+    font_file == "RubFlama-Regular.ttf"
+  ) {
+    RUBer::register_font_flama()
+  } else if(
+    font_file == "RUB Scala TZ.ttf"
+  ) {
+    RUBer::register_font_scala()
+  } else {
+    sysfonts::font_add(
+      family = font_family,
+      regular = font_file
+    )
+  }
 }
 
 #' Registers RUB Flama font to be used with `showtext` package
