@@ -58,9 +58,10 @@
 "df_example"
 
 #' Example data set illustrating the use of the RUBer parameterized
-#' reporting package, containing the metadata for each report. The metadata
-#' includes the author, the title, the file name, and the subfolder to be used
-#' in the output path.
+#' reporting package, containing the metadata for each report.
+#'
+#' The metadata includes the author, the title, the file name, and the
+#' subfolder to be used in the output path.
 #'
 #' @format A data frame with `r format(nrow(df_report),big.mark=",")` rows and `r ncol(df_report)` variables:
 #' \describe{
