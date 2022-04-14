@@ -75,8 +75,11 @@ palette.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">plot_discrete_palette</span><span class="op">(</span><span class="fl">12</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in plot_discrete_palette(12):</span> could not find function "plot_discrete_palette"</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">RUBer</span><span class="fu">:::</span><span class="fu">plot_discrete_palette</span><span class="op">(</span><span class="fl">12</span><span class="op">)</span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Number of requested colors for discrete palette exceeds eight.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>       No predefined palette for more than eight discrete colors exists</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>       in RUB_palettes. Additional colors will be interpolated.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "discrete_8"</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
