@@ -4,7 +4,7 @@ template:
 destination: docs
 
 reference:
-- title: Plotting
+- title: Plotting functions
   desc: Plotting functions for each `figure_type_id`.
   contents:
   - plot_figure
@@ -64,15 +64,16 @@ reference:
     These functions take data frames as input and return formatted flextable
     objects.
   contents:
-  - rub_table_stg
-  - rub_table_eb
-  - rub_table_vb
-  - rub_table_ab
-  - rub_table_programs
-  - rub_table_item
-  - rub_table_metrics
-  - rub_table_included_programs
-  - rub_table_excluded_programs
+  - starts_with("rub_table_")
+
+- title: Font functions
+  desc: >
+    These functions load the RUB corporate design fonts RUB Flama and RUB Scala
+    TZ. The package `showtext` is used to make the fonts available to `ggplot2`.
+  contents:
+  - get_fallback_font_df
+  - get_font_df
+  - starts_with("register_font_")
 
 - title: Data
   desc: >
