@@ -73,7 +73,7 @@ reference:
   contents:
   - get_fallback_font_df
   - get_font_df
-  - starts_with("register_font_")
+  - starts_with("register_font")
 
 - title: Data
   desc: >
