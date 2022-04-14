@@ -7,6 +7,7 @@ params:
     p_path_figure_template: "fig_template.Rmd"
     p_df:
     p_df_stg:
+    p_font_file: "RubFlama-Regular.ttf"
 title: "`r params$p_title`"
 author: "`r params$p_author`"
 date: "`r params$p_date`"
@@ -54,9 +55,18 @@ toc-title: "Inhaltsverzeichnis"
 ---
 
 ```{r setup, include=FALSE}
+
 library(RUBer)
 library(devEMF)
-library(extrafont)
+library(dplyr)
+
+font_family <- RUBer::get_font_df(
+    font_file = params$p_font_file
+  )[["family"]]
+
+if(params$p_font_file == "RubFlama-Regular.ttf") {
+  RUBer::register_font_flama()
+}
 
 knitr::opts_chunk$set(
   echo = FALSE,
@@ -64,6 +74,9 @@ knitr::opts_chunk$set(
   message = FALSE,
   dev = "emf",
   dev.args = list(
+    family = font_family,
+    pointsize = 12,
+    coordDPI = 72,
     emfPlus = TRUE,
     emfPlusRaster = TRUE,
     emfPlusFontToPath = TRUE
@@ -72,16 +85,12 @@ knitr::opts_chunk$set(
   fig.ext = "emf"
 )
 
-extrafont::loadfonts(
-  device = "win",
-  quiet = TRUE
-)
-
 gtsummary::theme_gtsummary_language(
   language = "de",
   decimal.mark = ",",
   big.mark = "."
 )
+
 ```
 
 ```{r data}
@@ -301,6 +310,12 @@ ft_funded_projects <- source(
 ft_funded_projects[["value"]]
 ```
 
+```{r showtext-on, include = FALSE}
+
+showtext::showtext_auto()
+
+```
+
 ```{r create-figures, include = FALSE}
 
 figure_output <- knitr::knit(
@@ -314,6 +329,12 @@ cat(
   figure_output,
   sep = '\n'
 )
+```
+
+```{r showtext-off, include = FALSE}
+
+showtext::showtext_auto(FALSE)
+
 ```
 
 ```{r items-child, child = "items.Rmd"}
