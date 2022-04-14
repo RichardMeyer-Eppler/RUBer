@@ -15,6 +15,7 @@ render_report(
   title = "Title",
   author = "Author",
   date = format(Sys.Date(), format = "\%B \%Y"),
+  font_file = "RubFlama-Regular.ttf",
   post_process = TRUE
 )
 }
@@ -39,6 +40,9 @@ render_report(
 
 \item{date}{Date of the report displayed on the title page, defaults to
 \code{format(Sys.Date(), format= "\%B \%Y")}.}
+
+\item{font_file}{Character, font file to use in all plots, defaults to
+"RubFlama-Regular.ttf"}
 
 \item{post_process}{Boolean, whether \code{post_process} gets called on the
 output file}

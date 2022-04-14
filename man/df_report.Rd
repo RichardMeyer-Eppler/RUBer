@@ -4,9 +4,7 @@
 \name{df_report}
 \alias{df_report}
 \title{Example data set illustrating the use of the RUBer parameterized
-reporting package, containing the metadata for each report. The metadata
-includes the author, the title, the file name, and the subfolder to be used
-in the output path.}
+reporting package, containing the metadata for each report.}
 \format{
 A data frame with 67 rows and 6 variables:
 \describe{
@@ -25,10 +23,8 @@ page and in the header of each page.}
 df_report
 }
 \description{
-Example data set illustrating the use of the RUBer parameterized
-reporting package, containing the metadata for each report. The metadata
-includes the author, the title, the file name, and the subfolder to be used
-in the output path.
+The metadata includes the author, the title, the file name, and the
+subfolder to be used in the output path.
 }
 \details{
 Table: Data summary\tabular{ll}{
