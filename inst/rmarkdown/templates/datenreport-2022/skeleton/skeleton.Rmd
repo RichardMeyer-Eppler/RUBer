@@ -1,5 +1,5 @@
 ---
-params: 
+params:
     p_report_nr: 6
     p_title: "Title"
     p_author: "Author"
@@ -60,13 +60,15 @@ library(RUBer)
 library(devEMF)
 library(dplyr)
 
-font_family <- RUBer::get_font_df(
-    font_file = params$p_font_file
-  )[["family"]]
+font_df <- RUBer::get_font_df(
+  font_file = params$p_font_file
+)
 
-if(params$p_font_file == "RubFlama-Regular.ttf") {
-  RUBer::register_font_flama()
-}
+font_family <- font_df[["family"]]
+
+register_font(
+  font_df = font_df
+)
 
 knitr::opts_chunk$set(
   echo = FALSE,
@@ -128,6 +130,24 @@ writeLines(
   
 close(con)
 
+```
+
+# Abbildungsverzeichnis
+
+```{r}
+officer::block_toc(
+  level = 5,
+  style = "Image Caption"
+)
+```
+
+# Tabellenverzeichnis
+
+```{r}
+officer::block_toc(
+  level = 6,
+  style = "Table Caption"
+)
 ```
 
 # Einleitung
