@@ -18,9 +18,9 @@ rub_table_stg <- function(
 
   df %>%
     gtsummary::tbl_summary(
-      by = studienfachzaehler,
+      by = .data[["studienfachzaehler"]],
       label = list(
-        studiengang ~ "Studiengang"
+        .data[["studiengang"]] ~ "Studiengang"
       ),
       statistic = list(
         gtsummary::all_categorical() ~ "{n} ({p}%)"
@@ -108,18 +108,18 @@ rub_table_eb <- function(
 
   rows_heading <- df %>%
     dplyr::filter(
-      studieneingang %in% headings
+      .data[["studieneingang"]] %in% headings
     ) %>%
     dplyr::pull(
-      row_id
+      .data[["row_id"]]
     )
 
   rows_no_heading <- df %>%
     dplyr::filter(
-      studieneingang %in% headings == FALSE
+      .data[["studieneingang"]] %in% headings == FALSE
     ) %>%
     dplyr::pull(
-      row_id
+      .data[["row_id"]]
     )
 
   ft <- flextable::flextable(
@@ -257,18 +257,18 @@ rub_table_vb <- function(
 
   rows_heading <- df %>%
     dplyr::filter(
-      studienverlauf %in% headings
+      .data[["studienverlauf"]] %in% headings
     ) %>%
     dplyr::pull(
-      row_id
+      .data[["row_id"]]
     )
 
   rows_no_heading <- df %>%
     dplyr::filter(
-      studienverlauf %in% headings == FALSE
+      .data[["studienverlauf"]] %in% headings == FALSE
     ) %>%
     dplyr::pull(
-      row_id
+      .data[["row_id"]]
     )
 
   ft <- flextable::flextable(
@@ -409,18 +409,18 @@ rub_table_ab <- function(
 
   rows_heading <- df %>%
     dplyr::filter(
-      studienabschluss %in% headings
+      .data[["studienabschluss"]] %in% headings
     ) %>%
     dplyr::pull(
-      row_id
+      .data[["row_id"]]
     )
 
   rows_no_heading <- df %>%
     dplyr::filter(
-      studienabschluss %in% headings == FALSE
+      .data[["studienabschluss"]] %in% headings == FALSE
     ) %>%
     dplyr::pull(
-      row_id
+      .data[["row_id"]]
     )
 
   ft <- flextable::flextable(
@@ -564,10 +564,10 @@ rub_table_programs <- function(
       rn = dplyr::row_number()
     ) %>%
     dplyr::filter(
-      is_last_row
+      .data[["is_last_row"]]
     ) %>%
     dplyr::pull(
-      rn
+      .data[["rn"]]
     )
 
   ft <- flextable::flextable(
@@ -702,12 +702,12 @@ rub_table_item <- function(
 
   ft <- df %>%
     dplyr::select(
-      y,
-      figure_caption,
-      facet,
-      mean,
-      mean_fgr,
-      distance
+      .data[["y"]],
+      .data[["figure_caption"]],
+      .data[["facet"]],
+      .data[["mean"]],
+      .data[["mean_fgr"]],
+      .data[["distance"]]
     ) %>%
     flextable::flextable() %>%
     flextable::set_header_df(
@@ -978,7 +978,7 @@ rub_table_included_programs <- function(
   )
 
   footnote_text_fgr <- glue::glue(
-    "Im Datenreport Nr. {report_nr_fgr} sind alle Studieng\u00E4nge je F\u00E4chergruppe berücksichtigt, weshalb der Datenreport mehrfach aufgef\u00FChrt wird."
+    "Im Datenreport Nr. {report_nr_fgr} sind alle Studieng\u00E4nge je F\u00E4chergruppe ber\u00FCcksichtigt, weshalb der Datenreport mehrfach aufgef\u00FChrt wird."
   )
 
   ft <- df %>%
