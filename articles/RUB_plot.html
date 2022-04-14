@@ -133,7 +133,10 @@
   y_var <span class="op">=</span> <span class="va">students</span>,
   fill_var <span class="op">=</span> <span class="va">degree</span>,
   base_size <span class="op">=</span> <span class="fl">14</span>
-<span class="op">)</span></code></pre></div>
+<span class="op">)</span>
+<span class="co">#&gt; Warning: <span style="color: #BB0000;">✖</span> Font file "RubFlama-Regular.ttf" could not be found</span>
+<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Using fallback font "DejaVuSans" instead</span>
+<span class="co">#&gt; <span style="color: #555555;">This warning is displayed once per session.</span></span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/rub-plot-type-1-1.png"><!-- --></p>
 <p>Next a more complex example, in which we additionally provide the label for the y-axis, <code>y_label</code> and a caption indicating the source of the data, <code>caption</code>. By default, the caption has the German prefix “<em>Quelle:</em>”, which we change to English “<em>Source:</em>” using the parameter <code>caption_prefix</code>. We also want to suppress the value label for Master students in the spring term of 2017, because the value is so small. By default, labels for values accounting for less than 4% of the total value are suppressed. In this case, the seven students account for 7/(7+122) = 5.4% of the total value, so we increase the value for <code>filter_cutoff</code> from the default of 0.04 to 0.06.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">

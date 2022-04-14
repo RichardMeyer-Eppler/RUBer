@@ -56,13 +56,16 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">plot_figure</span><span class="op">(</span><span class="va">df</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">plot_figure</span><span class="op">(</span><span class="va">df</span>, font_family <span class="op">=</span> <span class="fu"><a href="get_font_df.html">get_font_df</a></span><span class="op">(</span><span class="op">)</span><span class="op">[[</span><span class="st">"family"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>df</dt>
-<dd><p>Data Frame bzw. Tibble</p></dd>
+<dd><p>Data Frame</p></dd>
+<dt>font_family</dt>
+<dd><p>Character, the font family to use for all plots, defaults
+to <code>get_font_df()[["family"]]</code></p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -71,9 +74,13 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu">plot_figure</span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">df_example</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
+<span class="r-in">  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="va">.data</span><span class="op">[[</span><span class="st">"report_nr"</span><span class="op">]</span><span class="op">]</span> <span class="op">==</span> <span class="fl">6L</span>,</span>
+<span class="r-in">    <span class="va">.data</span><span class="op">[[</span><span class="st">"figure_count"</span><span class="op">]</span><span class="op">]</span> <span class="op">==</span> <span class="fl">1L</span></span>
+<span class="r-in">  <span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
+<span class="r-in">  <span class="fu">RUBer</span><span class="fu">::</span><span class="fu">plot_figure</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-plt img"><img src="plot_figure-1.png" alt="" width="696" height="430"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
