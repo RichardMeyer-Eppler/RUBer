@@ -49,10 +49,14 @@ typology_example <- structure(
       "studieneingang", "koepfe_rub", "koepfe_rub_perc", "koepfe_bef", "koepfe_bef_perc"
     ),
     colC = c(
-      "Studieneingang", "Studierende im 1. HS (WiSe 18/19 bis  WiSe 20/21)", "Studierende im 1. HS (WiSe 18/19 bis  WiSe 20/21)", "Studierende im 1. HS (WiSe 18/19 bis  WiSe 20/21)", "Studierende im 1. HS (WiSe 18/19 bis  WiSe 20/21)"
+      "Studieneingang", "Studierende im 1. HS (WiSe 18/19 bis  WiSe 20/21)",
+      "Studierende im 1. HS (WiSe 18/19 bis  WiSe 20/21)",
+      "Studierende im 1. HS (WiSe 18/19 bis  WiSe 20/21)",
+      "Studierende im 1. HS (WiSe 18/19 bis  WiSe 20/21)"
     ),
     colB = c(
-      "Studieneingang", "Angeschrieben", "Angeschrieben", "G\u00FCltige Frageb\u00F6gen", "G\u00FCltige Frageb\u00F6gen"
+      "Studieneingang", "Angeschrieben", "Angeschrieben", "G\u00FCltige Frageb\u00F6gen",
+      "G\u00FCltige Frageb\u00F6gen"
     ),
     colA = c(
       "Studieneingang", "K\u00F6pfe", "(in %)", "K\u00F6pfe", "(in %)"
@@ -64,7 +68,9 @@ typology_example <- structure(
 
 # Text for rows that receive special formatting
 headings_example <- c(
-  "Geschlecht", "Abschlussart", "F\u00E4chergruppe (erstes Studienfach)", "Gesamtzahl angeschriebene Studierende / g\u00FCltige Frageb\u00F6gen", "R\u00FCcklaufquote Studieneingangsbefragungen"
+  "Geschlecht", "Abschlussart", "F\u00E4chergruppe (erstes Studienfach)",
+  "Gesamtzahl angeschriebene Studierende / g\u00FCltige Frageb\u00F6gen",
+  "R\u00FCcklaufquote Studieneingangsbefragungen"
 )
 
 # Function call

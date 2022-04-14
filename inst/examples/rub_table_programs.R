@@ -18,12 +18,12 @@ example_data <- data.frame(
     "UNIC@RUB"
   ),
   projekttitel = c(
-    "Interkulturelle Bibelhermeneutiken. Kontextuelle Exegese im theologisch-interdisziplin\u00E4ren Diskurs",
+    "Interkulturelle Bibelhermeneutiken",
     "Migration lokal denken. Begegnungen mit religi\u00F6sen Gemeinschaften in NRW",
-    "Traumatheologie: Kritische Bibellekt\u00FCre anhand von Leiderfahrungen.  Entwicklung eines Tagungs- und Seminarkonzepts mit Studierenden zur angewandten wissenschaftlichen Exegese von Bibeltexten.",
+    "Traumatheologie: Kritische Bibellekt\u00FCre anhand von Leiderfahrungen.",
     "Religi\u00F6se Pluralit\u00E4t entdecken, reflektieren und diskutierend sichtbar machen",
     "Globale Christent\u00FCmer: Theologische und religionswissenschaftliche Perspektiven",
-    "Design of a Virtual Exchange program for the Summer Semester 2022 between the Protestant Faculty of RUB and the Faculty of Theology of the University of Deusto in the frame of the UNIC cooperation"
+    "Design of a Virtual Exchange program"
   ),
   antragsteller_innen_verantwortliche_personen = c(
     "N. N.",

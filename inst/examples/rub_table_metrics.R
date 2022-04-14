@@ -57,7 +57,7 @@ skeleton_path <- system.file(
 df_metrics <- df_metrics %>%
   dplyr::mutate(
     dplyr::across(
-      tidyselect::everything(),
+      dplyr::everything(),
       stringr::str_replace_all,
       pattern = "PLACEHOLDER_PATH",
       replacement = skeleton_path
