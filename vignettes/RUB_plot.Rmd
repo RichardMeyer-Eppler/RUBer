@@ -26,16 +26,18 @@ knitr::opts_chunk$set(
   dpi = 96
 )
 
-# library(extrafont)
-# This registers fonts so that they can be used with the pdf, postscript, or Windows bitmap output device. It must be run once in each R session.
-# extrafont::loadfonts(
-#   device = "win",
-#   quiet = TRUE
-# )
 ```
 
 ```{r setup}
+# Setup
 library(RUBer)
+
+# Attempts to register RubFlama font family, if that fails, registers system dependent font 
+# for the alias "sans" instead. This font family will be used as a parameter for all plots. 
+font_family <- RUBer::register_font_df()
+
+# Required to use custom fonts
+showtext::showtext_auto()
 ```
 
 ```{r run-examples, echo = FALSE, message = FALSE, warning = FALSE}
@@ -125,7 +127,8 @@ RUBer::rub_plot_type_1(
   caption = "Vignette example data",
   caption_prefix = "Source:",
   filter_cutoff = 0.06,
-  base_size = 14
+  base_size = 14,
+  base_family = font_family
 )
 ```
 
@@ -163,9 +166,9 @@ df_t1_ex3 <- tibble::tribble(
    "Spring '17", 92, "Master 1-Subject", "Department of Philosophy"
 )
 
-# Facet by department, which effectively leads to two plots in one figure. The
-# default font is changed to RUB Scala TZ, the main color is changed from
-# RUB blue to dark red, and the size is increased from 11 to 14.
+# Facet by department, which effectively leads to two plots in one figure. 
+# The main color is changed from RUB blue to dark red, and the size is increased
+# from 11 to 14.
 rub_plot_type_1(
   df = df_t1_ex3,
   x_var = term,
@@ -180,7 +183,7 @@ rub_plot_type_1(
   filter_cutoff = 0.06,
   facet_var = department,
   color = RUB_colors["dark red"],
-  base_family = "RUB Scala TZ",
+  base_family = font_family,
   base_size = 14
 )
 ```
@@ -226,7 +229,8 @@ rub_plot_type_2(
   x_var = cohort_term,
   y_var = status_percentage,
   fill_var = cohort_status,
-  base_size = 14
+  base_size = 14,
+  base_family = font_family
 ) 
 ```
 
@@ -292,7 +296,8 @@ rub_plot_type_2(
   caption = "Comparison of two fictitious cohorts",
   caption_prefix = "Source:",
   fill_reverse = TRUE,
-  base_size = 14
+  base_size = 14,
+  base_family = font_family
 )
 ```
 
@@ -320,7 +325,8 @@ rub_plot_type_3(
    x_var = item_value_percentage,
    y_var = survey_group,
    fill_var = item_value,
-   base_size = 14
+   base_size = 14,
+   base_family = font_family
 )
 ```
 
@@ -351,7 +357,8 @@ rub_plot_type_3(
    caption = "Graduate survey 2017/18",
    caption_prefix = "Source:",
    filter_cutoff = 0.20,
-   base_size = 14
+   base_size = 14,
+   base_family = font_family
 )
 ```
 
@@ -377,6 +384,7 @@ rub_plot_type_3(
    caption_prefix = "Source:",
    filter_cutoff = 0.20,
    base_size = 14,
+   base_family = font_family,
    fill_reverse = TRUE
 )
 ```
@@ -397,6 +405,7 @@ rub_plot_type_3(
    caption_prefix = "Source:",
    filter_cutoff = 0.20,
    base_size = 14,
+   base_family = font_family,
    legend_reverse = TRUE
 )
 ```
@@ -429,7 +438,8 @@ rub_plot_type_3(
    facet_var = degree,
    caption = "Graduate survey 2017/18",
    caption_prefix = "Source:",
-   base_size = 14
+   base_size = 14,
+   base_family = font_family
 )
 ```
 
@@ -468,7 +478,8 @@ rub_plot_type_3(
    facet_var = degree,
    caption = "Graduate survey 2017/18",
    caption_prefix = "Source:",
-   base_size = 14
+   base_size = 14,
+   base_family = font_family
 )
 ```
 
@@ -503,7 +514,8 @@ rub_plot_type_4(
   caption = "Vignette example data",
   caption_prefix = "Source:",
   filter_cutoff = 10,
-  base_size = 14
+  base_size = 14,
+  base_family = font_family
 )
 
 rub_plot_type_4(
@@ -518,7 +530,8 @@ rub_plot_type_4(
   ),
   caption = "Vignette example data",
   caption_prefix = "Source:",
-  filter_cutoff = 5
+  filter_cutoff = 5,
+  base_family = font_family
 )
 ```
 
@@ -548,7 +561,8 @@ rub_plot_type_1_and_4(
    y_var = students,
    fill_var = degree,
    group_var = group,
-   base_size = 14
+   base_size = 14,
+   base_family = font_family
 )
 ```
 
@@ -607,7 +621,8 @@ ggplot2::ggplot(
       palette = "discrete"
    ) +
    theme_rub(
-     base_size = 14
+     base_size = 14,
+     base_family = font_family
    )
 
 # By default, the theme shows no axis labels and no legend title. Use the 
@@ -629,6 +644,7 @@ ggplot2::ggplot(
    ) +
    theme_rub(
       base_size = 14,
+      base_family = font_family,
       x_axis_label = TRUE,
       y_axis_label = TRUE,
       legend_title = FALSE
@@ -652,6 +668,7 @@ ggplot2::ggplot(
    ) +
    theme_rub(
       base_size = 14,
+      base_family = font_family,
       x_axis_label = TRUE,
       y_axis_label = TRUE,
       legend_title = FALSE
@@ -680,7 +697,8 @@ ggplot2::ggplot(
       discrete = FALSE
    ) +
    theme_rub(
-      base_size = 14, 
+      base_size = 14,
+      base_family = font_family,
       x_axis_label = TRUE,
       y_axis_label = TRUE,
       legend_title = TRUE
@@ -705,6 +723,7 @@ ggplot2::ggplot(
    ) +
    theme_rub(
       base_size = 14,
+      base_family = font_family,
       x_axis_label = TRUE,
       y_axis_label = TRUE,
       legend_title = TRUE
@@ -728,6 +747,7 @@ ggplot2::ggplot(
    ) +
    theme_rub(
       base_size = 14,
+      base_family = font_family,
       x_axis_label = TRUE,
       y_axis_label = TRUE,
       legend_title = TRUE
@@ -748,11 +768,18 @@ ggplot2::ggplot(
    ) + 
    theme_rub(
       base_size = 14,
+      base_family = font_family,
       x_axis_label = TRUE,
       y_axis_label = TRUE,
       legend_title = TRUE
    )
 ```
+
+```{r showtext-off}
+# Turn off showtext after plotting
+showtext::showtext_auto(FALSE)
+```
+
 
 ## Resources for learning ggplot2 {#resources}
 ### Books
