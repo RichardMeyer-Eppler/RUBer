@@ -97,12 +97,14 @@ df_t1_ex1 <- tibble::tribble(
 )
 
 # x_var is mapped to term, y_var to students, and the fill_var to degree.
-# base_size increases the text sizes from the default, 11, to 14.
+# base_size increases the text sizes from the default, 11, to 14. The font
+# family is changed from "RubFlama" to "sans" (available on all systems).
 rub_plot_type_1(
   df = df_t1_ex1,
   x_var = term,
   y_var = students,
   fill_var = degree,
-  base_size = 14
+  base_size = 14,
+  base_family = "sans"
 )
 }
