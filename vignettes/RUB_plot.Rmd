@@ -32,8 +32,9 @@ knitr::opts_chunk$set(
 # Setup
 library(RUBer)
 
-# Attempts to register RubFlama font family, if that fails, registers system dependent font 
-# for the alias "sans" instead. This font family will be used as a parameter for all plots. 
+# Attempts to register RubFlama font family, if that fails, 
+# registers system dependent font for the alias "sans" instead. 
+# This font family will be used as a parameter for all plots. 
 font_family <- RUBer::register_font_df()
 
 # Required to use custom fonts
@@ -590,7 +591,9 @@ ggplot2::ggplot(
    )
 ) + 
    ggplot2::geom_point() +
-   theme_rub()
+   theme_rub(
+     base_family = font_family
+   )
 ```
 
 ### Scale Functions
