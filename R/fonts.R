@@ -105,12 +105,12 @@ get_font_df <- function(
 #'
 #' @param font_df Data frame with one row obtained by `RUBer::get_font_df()`
 #'
-#' @return Side effects
+#' @return Invisibly returns font family
 #' @export
 #'
 #' @examples
-#' register_font()
-register_font <- function(
+#' register_font_df()
+register_font_df <- function(
   font_df = RUBer::get_font_df()
 ) {
 
@@ -134,6 +134,12 @@ register_font <- function(
       regular = font_file
     )
   }
+
+  return(
+    invisible(
+      font_family
+    )
+  )
 }
 
 #' Registers RUB Flama font to be used with `showtext` package
