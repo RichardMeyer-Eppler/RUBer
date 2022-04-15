@@ -66,7 +66,7 @@ font_df <- RUBer::get_font_df(
 
 font_family <- font_df[["family"]]
 
-register_font(
+register_font_df(
   font_df = font_df
 )
 
