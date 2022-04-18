@@ -132,15 +132,36 @@ palette should be reversed, defaults to FALSE.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu">rub_plot_type_4</span><span class="op">(</span></span>
-<span class="r-in">   df <span class="op">=</span> <span class="va">df_fig_t4</span>,</span>
-<span class="r-in">   x <span class="op">=</span> <span class="va">time</span>,</span>
-<span class="r-in">   y <span class="op">=</span> <span class="va">value_n_total</span>,</span>
-<span class="r-in">   group <span class="op">=</span> <span class="va">degree_sort</span>,</span>
-<span class="r-in">   group_label <span class="op">=</span> <span class="va">degree_txt</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Create test data for all three mandatory variables (x_var, y_var,</span></span>
+<span class="r-in"><span class="co"># group_var)</span></span>
+<span class="r-in"><span class="va">df_t4_ex1</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span>
+<span class="r-in">  <span class="op">~</span><span class="va">term</span>,        <span class="op">~</span><span class="va">students</span>,              <span class="op">~</span><span class="va">degree</span>,</span>
+<span class="r-in">  <span class="st">"Spring '13"</span>,       <span class="fl">110</span>, <span class="st">"Bachelor 1-Subject"</span>,</span>
+<span class="r-in">  <span class="st">"Spring '14"</span>,       <span class="fl">105</span>, <span class="st">"Bachelor 1-Subject"</span>,</span>
+<span class="r-in">  <span class="st">"Spring '15"</span>,       <span class="fl">124</span>, <span class="st">"Bachelor 1-Subject"</span>,</span>
+<span class="r-in">  <span class="st">"Spring '16"</span>,       <span class="fl">114</span>, <span class="st">"Bachelor 1-Subject"</span>,</span>
+<span class="r-in">  <span class="st">"Spring '17"</span>,       <span class="fl">140</span>, <span class="st">"Bachelor 1-Subject"</span>,</span>
+<span class="r-in">  <span class="st">"Spring '13"</span>,       <span class="fl">121</span>,   <span class="st">"Master 1-Subject"</span>,</span>
+<span class="r-in">  <span class="st">"Spring '14"</span>,       <span class="fl">129</span>,   <span class="st">"Master 1-Subject"</span>,</span>
+<span class="r-in">  <span class="st">"Spring '15"</span>,       <span class="fl">135</span>,   <span class="st">"Master 1-Subject"</span>,</span>
+<span class="r-in">  <span class="st">"Spring '16"</span>,       <span class="fl">168</span>,   <span class="st">"Master 1-Subject"</span>,</span>
+<span class="r-in">  <span class="st">"Spring '17"</span>,         <span class="fl">7</span>,   <span class="st">"Master 1-Subject"</span></span>
 <span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="fu">rub_plot_type_4</span><span class="op">(</span></span>
+<span class="r-in">  df <span class="op">=</span> <span class="va">df_t4_ex1</span>,</span>
+<span class="r-in">  x_var <span class="op">=</span> <span class="va">term</span>,</span>
+<span class="r-in">  y_var <span class="op">=</span> <span class="va">students</span>,</span>
+<span class="r-in">  group_var <span class="op">=</span> <span class="va">degree</span>,</span>
+<span class="r-in">  y_axis_label <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_wrap.html" class="external-link">str_wrap</a></span><span class="op">(</span></span>
+<span class="r-in">    string <span class="op">=</span> <span class="st">"Students (1st degree program, 1st and 2nd field of study)"</span>,</span>
+<span class="r-in">    width <span class="op">=</span> <span class="fl">35</span></span>
+<span class="r-in">  <span class="op">)</span>,</span>
+<span class="r-in">  caption <span class="op">=</span> <span class="st">"Vignette example data"</span>,</span>
+<span class="r-in">  caption_prefix <span class="op">=</span> <span class="st">"Source:"</span>,</span>
+<span class="r-in">  base_family <span class="op">=</span> <span class="st">"sans"</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-plt img"><img src="rub_plot_type_4-1.png" alt="" width="696" height="430"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

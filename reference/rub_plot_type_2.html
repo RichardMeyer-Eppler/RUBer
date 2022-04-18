@@ -136,36 +136,37 @@ label passed to ggplot2::label_wrap_gen.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Create test values for all three mandatory variables (x_var, y_var, fill_var)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Create test data for all three mandatory variables (x_var, y_var, fill_var)</span></span>
 <span class="r-in"><span class="va">df_t2_ex1</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="op">~</span><span class="va">cohort_term</span>, <span class="op">~</span><span class="va">status_percentage</span>, <span class="op">~</span><span class="va">cohort_status</span>,</span>
-<span class="r-in">  <span class="st">"2. cohort term"</span>, <span class="fl">0.9513551740</span>, <span class="st">"Studying"</span>,</span>
-<span class="r-in">  <span class="st">"2. cohort term"</span>, <span class="fl">0.0029748098</span>, <span class="st">"Changed subject"</span>,</span>
-<span class="r-in">  <span class="st">"2. cohort term"</span>, <span class="fl">0.0004673679</span>, <span class="st">"Graduated"</span>,</span>
-<span class="r-in">  <span class="st">"2. cohort term"</span>, <span class="fl">0.0186648938</span>, <span class="st">"Disenrolled without degree"</span>,</span>
-<span class="r-in">  <span class="st">"2. cohort term"</span>, <span class="fl">0.0265377545</span>, <span class="st">"Dropped subject"</span>,</span>
-<span class="r-in">  <span class="st">"4. cohort term"</span>, <span class="fl">0.8896149868</span>, <span class="st">"Studying"</span>,</span>
-<span class="r-in">  <span class="st">"4. cohort term"</span>, <span class="fl">0.0616919929</span>, <span class="st">"Changed subject"</span>,</span>
-<span class="r-in">  <span class="st">"4. cohort term"</span>, <span class="fl">0.0016484686</span>, <span class="st">"Graduated"</span>,</span>
-<span class="r-in">  <span class="st">"4. cohort term"</span>, <span class="fl">0.0201024499</span>, <span class="st">"Disenrolled without degree"</span>,</span>
-<span class="r-in">  <span class="st">"4. cohort term"</span>, <span class="fl">0.0269421019</span>, <span class="st">"Dropped subject"</span>,</span>
-<span class="r-in">  <span class="st">"6. cohort term"</span>, <span class="fl">0.7901183540</span>, <span class="st">"Studying"</span>,</span>
-<span class="r-in">  <span class="st">"6. cohort term"</span>, <span class="fl">0.1502641318</span>, <span class="st">"Changed subject"</span>,</span>
-<span class="r-in">  <span class="st">"6. cohort term"</span>, <span class="fl">0.0074548056</span>, <span class="st">"Graduated"</span>,</span>
-<span class="r-in">  <span class="st">"6. cohort term"</span>, <span class="fl">0.0243490259</span>, <span class="st">"Disenrolled without degree"</span>,</span>
-<span class="r-in">  <span class="st">"6. cohort term"</span>, <span class="fl">0.0278136827</span>, <span class="st">"Dropped subject"</span>,</span>
-<span class="r-in">  <span class="st">"8. cohort term"</span>, <span class="fl">0.6115873010</span>, <span class="st">"Studying"</span>,</span>
-<span class="r-in">  <span class="st">"8. cohort term"</span>, <span class="fl">0.2961468339</span>, <span class="st">"Changed subject"</span>,</span>
-<span class="r-in">  <span class="st">"8. cohort term"</span>, <span class="fl">0.0104080044</span>, <span class="st">"Graduated"</span>,</span>
-<span class="r-in">  <span class="st">"8. cohort term"</span>, <span class="fl">0.0274549015</span>, <span class="st">"Disenrolled without degree"</span>,</span>
-<span class="r-in">  <span class="st">"8. cohort term"</span>, <span class="fl">0.0544029593</span>, <span class="st">"Dropped subject"</span>,</span>
+<span class="r-in">  <span class="op">~</span><span class="va">cohort_term</span>,     <span class="op">~</span><span class="va">status_percentage</span>,               <span class="op">~</span><span class="va">cohort_status</span>,</span>
+<span class="r-in">  <span class="st">"2. cohort term"</span>,              <span class="fl">0.951</span>,                   <span class="st">"Studying"</span>,</span>
+<span class="r-in">  <span class="st">"2. cohort term"</span>,              <span class="fl">0.003</span>,            <span class="st">"Changed subject"</span>,</span>
+<span class="r-in">  <span class="st">"2. cohort term"</span>,                  <span class="fl">0</span>,                  <span class="st">"Graduated"</span>,</span>
+<span class="r-in">  <span class="st">"2. cohort term"</span>,              <span class="fl">0.019</span>, <span class="st">"Disenrolled without degree"</span>,</span>
+<span class="r-in">  <span class="st">"2. cohort term"</span>,              <span class="fl">0.027</span>,            <span class="st">"Dropped subject"</span>,</span>
+<span class="r-in">  <span class="st">"4. cohort term"</span>,               <span class="fl">0.89</span>,                   <span class="st">"Studying"</span>,</span>
+<span class="r-in">  <span class="st">"4. cohort term"</span>,              <span class="fl">0.062</span>,            <span class="st">"Changed subject"</span>,</span>
+<span class="r-in">  <span class="st">"4. cohort term"</span>,              <span class="fl">0.002</span>,                  <span class="st">"Graduated"</span>,</span>
+<span class="r-in">  <span class="st">"4. cohort term"</span>,               <span class="fl">0.02</span>, <span class="st">"Disenrolled without degree"</span>,</span>
+<span class="r-in">  <span class="st">"4. cohort term"</span>,              <span class="fl">0.027</span>,            <span class="st">"Dropped subject"</span>,</span>
+<span class="r-in">  <span class="st">"6. cohort term"</span>,               <span class="fl">0.79</span>,                   <span class="st">"Studying"</span>,</span>
+<span class="r-in">  <span class="st">"6. cohort term"</span>,               <span class="fl">0.15</span>,            <span class="st">"Changed subject"</span>,</span>
+<span class="r-in">  <span class="st">"6. cohort term"</span>,              <span class="fl">0.007</span>,                  <span class="st">"Graduated"</span>,</span>
+<span class="r-in">  <span class="st">"6. cohort term"</span>,              <span class="fl">0.024</span>, <span class="st">"Disenrolled without degree"</span>,</span>
+<span class="r-in">  <span class="st">"6. cohort term"</span>,              <span class="fl">0.028</span>,            <span class="st">"Dropped subject"</span>,</span>
+<span class="r-in">  <span class="st">"8. cohort term"</span>,              <span class="fl">0.612</span>,                   <span class="st">"Studying"</span>,</span>
+<span class="r-in">  <span class="st">"8. cohort term"</span>,              <span class="fl">0.296</span>,            <span class="st">"Changed subject"</span>,</span>
+<span class="r-in">  <span class="st">"8. cohort term"</span>,               <span class="fl">0.01</span>,                  <span class="st">"Graduated"</span>,</span>
+<span class="r-in">  <span class="st">"8. cohort term"</span>,              <span class="fl">0.027</span>, <span class="st">"Disenrolled without degree"</span>,</span>
+<span class="r-in">  <span class="st">"8. cohort term"</span>,              <span class="fl">0.054</span>,            <span class="st">"Dropped subject"</span></span>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">rub_plot_type_2</span><span class="op">(</span></span>
 <span class="r-in">  df <span class="op">=</span> <span class="va">df_t2_ex1</span>,</span>
 <span class="r-in">  x_var <span class="op">=</span> <span class="va">cohort_term</span>,</span>
 <span class="r-in">  y_var <span class="op">=</span> <span class="va">status_percentage</span>,</span>
-<span class="r-in">  fill_var <span class="op">=</span> <span class="va">cohort_status</span></span>
+<span class="r-in">  fill_var <span class="op">=</span> <span class="va">cohort_status</span>,</span>
+<span class="r-in">  base_family <span class="op">=</span> <span class="st">"sans"</span></span>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-plt img"><img src="rub_plot_type_2-1.png" alt="" width="696" height="430"></span>
 </code></pre></div>
