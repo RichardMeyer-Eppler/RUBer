@@ -26,7 +26,7 @@ rub_table_stg <- function(
         gtsummary::all_categorical() ~ "{n} ({p}%)"
       ),
       percent = "row",
-      include = studiengang
+      include = .data[["studiengang"]]
     ) %>%
     gtsummary::modify_header(
       update = list(
