@@ -81,35 +81,36 @@ A ggplot object
 Plot vertical stacked bar charts that are scaled to 100\% (figure type 2)
 }
 \examples{
-# Create test values for all three mandatory variables (x_var, y_var, fill_var)
+# Create test data for all three mandatory variables (x_var, y_var, fill_var)
 df_t2_ex1 <- tibble::tribble(
-  ~cohort_term, ~status_percentage, ~cohort_status,
-  "2. cohort term", 0.9513551740, "Studying",
-  "2. cohort term", 0.0029748098, "Changed subject",
-  "2. cohort term", 0.0004673679, "Graduated",
-  "2. cohort term", 0.0186648938, "Disenrolled without degree",
-  "2. cohort term", 0.0265377545, "Dropped subject",
-  "4. cohort term", 0.8896149868, "Studying",
-  "4. cohort term", 0.0616919929, "Changed subject",
-  "4. cohort term", 0.0016484686, "Graduated",
-  "4. cohort term", 0.0201024499, "Disenrolled without degree",
-  "4. cohort term", 0.0269421019, "Dropped subject",
-  "6. cohort term", 0.7901183540, "Studying",
-  "6. cohort term", 0.1502641318, "Changed subject",
-  "6. cohort term", 0.0074548056, "Graduated",
-  "6. cohort term", 0.0243490259, "Disenrolled without degree",
-  "6. cohort term", 0.0278136827, "Dropped subject",
-  "8. cohort term", 0.6115873010, "Studying",
-  "8. cohort term", 0.2961468339, "Changed subject",
-  "8. cohort term", 0.0104080044, "Graduated",
-  "8. cohort term", 0.0274549015, "Disenrolled without degree",
-  "8. cohort term", 0.0544029593, "Dropped subject",
+  ~cohort_term,     ~status_percentage,               ~cohort_status,
+  "2. cohort term",              0.951,                   "Studying",
+  "2. cohort term",              0.003,            "Changed subject",
+  "2. cohort term",                  0,                  "Graduated",
+  "2. cohort term",              0.019, "Disenrolled without degree",
+  "2. cohort term",              0.027,            "Dropped subject",
+  "4. cohort term",               0.89,                   "Studying",
+  "4. cohort term",              0.062,            "Changed subject",
+  "4. cohort term",              0.002,                  "Graduated",
+  "4. cohort term",               0.02, "Disenrolled without degree",
+  "4. cohort term",              0.027,            "Dropped subject",
+  "6. cohort term",               0.79,                   "Studying",
+  "6. cohort term",               0.15,            "Changed subject",
+  "6. cohort term",              0.007,                  "Graduated",
+  "6. cohort term",              0.024, "Disenrolled without degree",
+  "6. cohort term",              0.028,            "Dropped subject",
+  "8. cohort term",              0.612,                   "Studying",
+  "8. cohort term",              0.296,            "Changed subject",
+  "8. cohort term",               0.01,                  "Graduated",
+  "8. cohort term",              0.027, "Disenrolled without degree",
+  "8. cohort term",              0.054,            "Dropped subject"
 )
 
 rub_plot_type_2(
   df = df_t2_ex1,
   x_var = cohort_term,
   y_var = status_percentage,
-  fill_var = cohort_status
+  fill_var = cohort_status,
+  base_family = "sans"
 )
 }

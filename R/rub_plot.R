@@ -334,38 +334,7 @@ rub_plot_type_1 <- function(df,
 #' @importFrom rlang .data
 #' @importFrom rlang :=
 #'
-#' @examples
-#' # Create test values for all three mandatory variables (x_var, y_var, fill_var)
-#' df_t2_ex1 <- tibble::tribble(
-#'   ~cohort_term, ~status_percentage, ~cohort_status,
-#'   "2. cohort term", 0.9513551740, "Studying",
-#'   "2. cohort term", 0.0029748098, "Changed subject",
-#'   "2. cohort term", 0.0004673679, "Graduated",
-#'   "2. cohort term", 0.0186648938, "Disenrolled without degree",
-#'   "2. cohort term", 0.0265377545, "Dropped subject",
-#'   "4. cohort term", 0.8896149868, "Studying",
-#'   "4. cohort term", 0.0616919929, "Changed subject",
-#'   "4. cohort term", 0.0016484686, "Graduated",
-#'   "4. cohort term", 0.0201024499, "Disenrolled without degree",
-#'   "4. cohort term", 0.0269421019, "Dropped subject",
-#'   "6. cohort term", 0.7901183540, "Studying",
-#'   "6. cohort term", 0.1502641318, "Changed subject",
-#'   "6. cohort term", 0.0074548056, "Graduated",
-#'   "6. cohort term", 0.0243490259, "Disenrolled without degree",
-#'   "6. cohort term", 0.0278136827, "Dropped subject",
-#'   "8. cohort term", 0.6115873010, "Studying",
-#'   "8. cohort term", 0.2961468339, "Changed subject",
-#'   "8. cohort term", 0.0104080044, "Graduated",
-#'   "8. cohort term", 0.0274549015, "Disenrolled without degree",
-#'   "8. cohort term", 0.0544029593, "Dropped subject",
-#' )
-#'
-#' rub_plot_type_2(
-#'   df = df_t2_ex1,
-#'   x_var = cohort_term,
-#'   y_var = status_percentage,
-#'   fill_var = cohort_status
-#' )
+#' @example inst/examples/rub_plot_type_2.R
 rub_plot_type_2 <- function(df,
                            x_var, x_var_label = NULL,
                            y_var, y_axis_label = "",
@@ -547,23 +516,7 @@ rub_plot_type_2 <- function(df,
 #' @importFrom rlang .data
 #' @importFrom rlang :=
 #'
-#' @examples
-#' # Create test values for all three mandatory variables (x_var, y_var,
-#' # fill_var)
-#' df_t3_ex1 <- tibble::tribble(
-#'    ~survey_group, ~item_value, ~item_value_percentage,
-#'    "Bachelor 1-Subject (n=400)", "Exceeded prescribed period of study", 0.30,
-#'    "Bachelor 1-Subject (n=400)", "Within prescribed period of study", 0.70,
-#'    "SG Bachelor 1-Subject (n=669)", "Exceeded prescribed period of study", 0.11,
-#'    "SG Bachelor 1-Subject (n=669)", "Within prescribed period of study", 0.89
-#' )
-#'
-#' rub_plot_type_3(
-#'    df = df_t3_ex1,
-#'    x_var = item_value_percentage,
-#'    y_var = survey_group,
-#'    fill_var = item_value,
-#' )
+#' @example inst/examples/rub_plot_type_3.R
 rub_plot_type_3 <- function(df, x_var,
                            y_var, x_axis_label = NA_character_,
                            fill_var, fill_label = NULL,
@@ -792,16 +745,7 @@ rub_plot_type_3 <- function(df, x_var,
 #' @importFrom rlang .data
 #' @importFrom rlang :=
 #'
-#' @examples
-#' \dontrun{
-#' rub_plot_type_4(
-#'    df = df_fig_t4,
-#'    x = time,
-#'    y = value_n_total,
-#'    group = degree_sort,
-#'    group_label = degree_txt
-#' )
-#' }
+#' @example inst/examples/rub_plot_type_4.R
 rub_plot_type_4 <- function(df,
                            x_var, x_var_label = NULL, x_axis_label = "",
                            y_var, y_axis_label = "",
@@ -965,10 +909,7 @@ rub_plot_type_4 <- function(df,
 #' @return A ggplot object
 #' @export
 #'
-#' @examples
-#' \dontrun{
-#' rub_plot_type_1_and_4(df = df)
-#' }
+#' @example inst/examples/rub_plot_type_1_and_4.R
 rub_plot_type_1_and_4 <- function(df,
                                   x_var, x_var_label = NULL, x_axis_label = "",
                                   y_var, y_axis_label = "",
