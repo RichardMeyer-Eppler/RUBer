@@ -19,18 +19,7 @@
 #' @param plot_width Width of the plot in inches, defaults to 6.8
 #' @keywords theme_rub
 #' @export
-#' @examples
-#' # Base plot
-#' ggplot2::ggplot(
-#' mtcars,
-#' ggplot2::aes(
-#'     x = mpg,
-#'     y = disp,
-#'     color = as.factor(carb)
-#'   )
-#' ) +
-#' ggplot2::geom_point() +
-#' theme_rub()
+#' @example inst/examples/theme_rub.R
 theme_rub <- function(base_size = 11,
                       base_family = "RubFlama",
                       base_line_size = base_size/22,
