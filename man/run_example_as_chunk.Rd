@@ -20,7 +20,7 @@ Character, text to be inserted in the Markdown file
 Knits an R source file contained in the examples folder of a package
 }
 \examples{
-run_example_as_chunk(
+RUBer:::run_example_as_chunk(
   example_file = "rub_plot_type_1.R",
   chunk_name = "rub-plot-type-1",
   package = "RUBer"

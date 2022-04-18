@@ -49,14 +49,16 @@ This function allows you to add the RUB theme to your ggplot charts.
 \examples{
 # Base plot
 ggplot2::ggplot(
-mtcars,
-ggplot2::aes(
+  mtcars,
+  mapping = ggplot2::aes(
     x = mpg,
     y = disp,
     color = as.factor(carb)
   )
 ) +
 ggplot2::geom_point() +
-theme_rub()
+theme_rub(
+  base_family = "sans"
+)
 }
 \keyword{theme_rub}

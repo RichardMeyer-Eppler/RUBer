@@ -108,8 +108,4 @@ rub_plot_type_3(
    fill_var = item_value,
    base_family = "sans"
 )
-
-datapasta::tribble_paste(
-  df_t3_ex1
-)
 }
