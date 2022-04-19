@@ -131,7 +131,7 @@ register_font_df <- function(
   } else {
     sysfonts::font_add(
       family = font_family,
-      regular = font_file
+      regular = font_path
     )
   }
 
