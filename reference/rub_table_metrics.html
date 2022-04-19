@@ -78,75 +78,53 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Example data (with icon paths as a placeholder)</span></span>
-<span class="r-in"><span class="va">df_metrics</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span class="r-in">  stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span class="r-in">  col1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="st">"PLACEHOLDER_PATH/streamline-icon-pie-line-graph.png"</span>,</span>
-<span class="r-in">    <span class="st">"Drei Befragungen:\nAbsolvent:innenbefragung (8.297 F\u00E4lle), Studieneingangsbefragung (5.283 F\u00E4lle)\nund Studienverlaufsbefragung (5.912 F\u00E4lle)"</span>,</span>
-<span class="r-in">    <span class="st">"PLACEHOLDER_PATH/streamline-icon-list-numbers.png"</span>,<span class="cn">NA</span>,</span>
-<span class="r-in">    <span class="st">"PLACEHOLDER_PATH/streamline-icon-user-female-teacher-math.png"</span>,<span class="cn">NA</span></span>
-<span class="r-in">  <span class="op">)</span>,</span>
-<span class="r-in">  col2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="st">"Insgesamt 67 Datenreporte\nf\u00FCr 177 Studieng\u00E4nge"</span>,</span>
-<span class="r-in">    <span class="st">"Drei Befragungen:\nAbsolvent:innenbefragung (8.297 F\u00E4lle), Studieneingangsbefragung (5.283 F\u00E4lle)\nund Studienverlaufsbefragung (5.912 F\u00E4lle)"</span>,</span>
-<span class="r-in">    <span class="st">"Auswertung von 53 Fragen\nund 251 Items"</span>,<span class="cn">NA</span>,</span>
-<span class="r-in">    <span class="st">"143 Lehrf\u00F6rderungen verteilt auf\n222 Antragssteller:innen"</span>,</span>
-<span class="r-in">    <span class="st">"Hochschulstatistische Daten und Kohortenanalysen zu 46.601 Studienf\u00E4llen und 5.537 Absolvent:innen"</span></span>
-<span class="r-in">  <span class="op">)</span>,</span>
-<span class="r-in">  col3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="st">"Insgesamt 67 Datenreporte\nf\u00FCr 177 Studieng\u00E4nge"</span>,</span>
-<span class="r-in">    <span class="st">"Drei Befragungen:\nAbsolvent:innenbefragung (8.297 F\u00E4lle), Studieneingangsbefragung (5.283 F\u00E4lle)\nund Studienverlaufsbefragung (5.912 F\u00E4lle)"</span>,</span>
-<span class="r-in">    <span class="st">"Auswertung von 53 Fragen\nund 251 Items"</span>,</span>
-<span class="r-in">    <span class="st">"904.321 ausgewertete Antworten\nvisualisiert in 5.027 Abbildungen"</span>,</span>
-<span class="r-in">    <span class="st">"143 Lehrf\u00F6rderungen verteilt auf\n222 Antragssteller:innen"</span>,</span>
-<span class="r-in">    <span class="st">"Hochschulstatistische Daten und Kohortenanalysen zu 46.601 Studienf\u00E4llen und 5.537 Absolvent:innen"</span></span>
-<span class="r-in">  <span class="op">)</span>,</span>
-<span class="r-in">  col4 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="st">"Insgesamt 67 Datenreporte\nf\u00FCr 177 Studieng\u00E4nge"</span>,</span>
-<span class="r-in">    <span class="st">"Drei Befragungen:\nAbsolvent:innenbefragung (8.297 F\u00E4lle), Studieneingangsbefragung (5.283 F\u00E4lle)\nund Studienverlaufsbefragung (5.912 F\u00E4lle)"</span>,</span>
-<span class="r-in">    <span class="st">"Auswertung von 53 Fragen\nund 251 Items"</span>,</span>
-<span class="r-in">    <span class="st">"904.321 ausgewertete Antworten\nvisualisiert in 5.027 Abbildungen"</span>,</span>
-<span class="r-in">    <span class="st">"143 Lehrf\u00F6rderungen verteilt auf\n222 Antragssteller:innen"</span>,</span>
-<span class="r-in">    <span class="st">"Hochschulstatistische Daten und Kohortenanalysen zu 46.601 Studienf\u00E4llen und 5.537 Absolvent:innen"</span></span>
-<span class="r-in">  <span class="op">)</span>,</span>
-<span class="r-in">  col5 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="cn">NA</span>,</span>
-<span class="r-in">    <span class="st">"Drei Befragungen:\nAbsolvent:innenbefragung (8.297 F\u00E4lle), Studieneingangsbefragung (5.283 F\u00E4lle)\nund Studienverlaufsbefragung (5.912 F\u00E4lle)"</span>,<span class="cn">NA</span>,</span>
-<span class="r-in">    <span class="st">"904.321 ausgewertete Antworten\nvisualisiert in 5.027 Abbildungen"</span>,</span>
-<span class="r-in">    <span class="st">"143 Lehrf\u00F6rderungen verteilt auf\n222 Antragssteller:innen"</span>,</span>
-<span class="r-in">    <span class="st">"Hochschulstatistische Daten und Kohortenanalysen zu 46.601 Studienf\u00E4llen und 5.537 Absolvent:innen"</span></span>
-<span class="r-in">  <span class="op">)</span>,</span>
-<span class="r-in">  col6 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="cn">NA</span>,</span>
-<span class="r-in">    <span class="st">"PLACEHOLDER_PATH/streamline-icon-team-meeting-message-men-question.png"</span>,<span class="cn">NA</span>,</span>
-<span class="r-in">    <span class="st">"PLACEHOLDER_PATH/streamline-icon-analytics-bars-horizontal.png"</span>,<span class="cn">NA</span>,</span>
-<span class="r-in">    <span class="st">"PLACEHOLDER_PATH/streamline-icon-people-man-graduate.png"</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># df_metrics needs to be updated with runtime path to the streamline icons</span></span>
-<span class="r-in"><span class="va">skeleton_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Path to skeleton files</span></span>
+<span class="r-in"><span class="va">path_skeleton</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path_package.html" class="external-link">path_package</a></span><span class="op">(</span></span>
+<span class="r-in">  package <span class="op">=</span> <span class="st">"RUBer"</span>,</span>
 <span class="r-in">  <span class="st">"rmarkdown"</span>,</span>
 <span class="r-in">  <span class="st">"templates"</span>,</span>
 <span class="r-in">  <span class="st">"datenreport-2022"</span>,</span>
-<span class="r-in">  <span class="st">"skeleton"</span>,</span>
-<span class="r-in">  package <span class="op">=</span> <span class="st">"RUBer"</span></span>
+<span class="r-in">  <span class="st">"skeleton"</span></span>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="va">df_metrics</span> <span class="op">&lt;-</span> <span class="va">df_metrics</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span></span>
-<span class="r-in">      <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">      <span class="fu">stringr</span><span class="fu">::</span><span class="va"><a href="https://stringr.tidyverse.org/reference/str_replace.html" class="external-link">str_replace_all</a></span>,</span>
-<span class="r-in">      pattern <span class="op">=</span> <span class="st">"PLACEHOLDER_PATH"</span>,</span>
-<span class="r-in">      replacement <span class="op">=</span> <span class="va">skeleton_path</span></span>
-<span class="r-in">    <span class="op">)</span></span>
+<span class="r-in"><span class="co"># Read csv file</span></span>
+<span class="r-in"><span class="va">df_metrics</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span></span>
+<span class="r-in">  <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="va">path_skeleton</span>,</span>
+<span class="r-in">    <span class="st">"metrics_overview.csv"</span></span>
+<span class="r-in">  <span class="op">)</span>,</span>
+<span class="r-in">  encoding <span class="op">=</span> <span class="st">"UTF-8"</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Extract vectors from data frame, construct full file paths</span></span>
+<span class="r-in"><span class="va">metrics_text</span> <span class="op">&lt;-</span> <span class="va">df_metrics</span><span class="op">[[</span><span class="st">"metrics_text"</span><span class="op">]</span><span class="op">]</span></span>
+<span class="r-in"><span class="va">metrics_images</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span></span>
+<span class="r-in">  <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="va">path_skeleton</span>,</span>
+<span class="r-in">    <span class="va">df_metrics</span><span class="op">[[</span><span class="st">"metrics_images"</span><span class="op">]</span><span class="op">]</span></span>
 <span class="r-in">  <span class="op">)</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># For presentation purposes, the data is split into six columns</span></span>
+<span class="r-in"><span class="va">df_metrics_table</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span>
+<span class="r-in">  <span class="op">~</span><span class="va">col1</span>, <span class="op">~</span><span class="va">col2</span>, <span class="op">~</span><span class="va">col3</span>, <span class="op">~</span><span class="va">col4</span>, <span class="op">~</span><span class="va">col5</span>, <span class="op">~</span><span class="va">col6</span>,</span>
+<span class="r-in">  <span class="va">metrics_images</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="va">metrics_text</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="va">metrics_text</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
+<span class="r-in">  <span class="va">metrics_text</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="cn">NA_character_</span>, <span class="cn">NA_character_</span>,</span>
+<span class="r-in">  <span class="va">metrics_text</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, <span class="va">metrics_text</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, <span class="va">metrics_text</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>,</span>
+<span class="r-in">  <span class="va">metrics_text</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, <span class="va">metrics_text</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, <span class="va">metrics_images</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>,</span>
+<span class="r-in">  <span class="va">metrics_images</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>, <span class="va">metrics_text</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>, <span class="va">metrics_text</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>,</span>
+<span class="r-in">  <span class="va">metrics_text</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>, <span class="cn">NA_character_</span>, <span class="cn">NA_character_</span>,</span>
+<span class="r-in">  <span class="cn">NA_character_</span>, <span class="cn">NA_character_</span>, <span class="va">metrics_text</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span>,</span>
+<span class="r-in">  <span class="va">metrics_text</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span>, <span class="va">metrics_text</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span>, <span class="va">metrics_images</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span>,</span>
+<span class="r-in">  <span class="va">metrics_images</span><span class="op">[</span><span class="fl">5</span><span class="op">]</span>, <span class="va">metrics_text</span><span class="op">[</span><span class="fl">5</span><span class="op">]</span>, <span class="va">metrics_text</span><span class="op">[</span><span class="fl">5</span><span class="op">]</span>,</span>
+<span class="r-in">  <span class="va">metrics_text</span><span class="op">[</span><span class="fl">5</span><span class="op">]</span>, <span class="va">metrics_text</span><span class="op">[</span><span class="fl">5</span><span class="op">]</span>, <span class="cn">NA_character_</span>,</span>
+<span class="r-in">  <span class="cn">NA_character_</span>, <span class="va">metrics_text</span><span class="op">[</span><span class="fl">6</span><span class="op">]</span>, <span class="va">metrics_text</span><span class="op">[</span><span class="fl">6</span><span class="op">]</span>,</span>
+<span class="r-in">  <span class="va">metrics_text</span><span class="op">[</span><span class="fl">6</span><span class="op">]</span>, <span class="va">metrics_text</span><span class="op">[</span><span class="fl">6</span><span class="op">]</span>, <span class="va">metrics_images</span><span class="op">[</span><span class="fl">6</span><span class="op">]</span></span>
+<span class="r-in"><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Function call</span></span>
 <span class="r-in"><span class="fu">rub_table_metrics</span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">df_metrics</span></span>
+<span class="r-in">  <span class="va">df_metrics_table</span></span>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> a flextable object.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> col_keys: `col1`, `col2`, `col3`, `col4`, `col5`, `col6` </span>
@@ -154,11 +132,11 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> body has 6 row(s) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> original dataset sample: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                                            col1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                        /home/runner/work/_temp/Library/RUBer/rmarkdown/templates/datenreport-2022/skeleton/streamline-icon-pie-line-graph.png</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                        /home/runner/work/_temp/Library/RUBer/rmarkdown/templates/datenreport-2022/skeleton/pie-line-graph.png</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 Drei Befragungen:\nAbsolvent:innenbefragung (8.297 Fälle), Studieneingangsbefragung (5.283 Fälle)\nund Studienverlaufsbefragung (5.912 Fälle)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                          /home/runner/work/_temp/Library/RUBer/rmarkdown/templates/datenreport-2022/skeleton/streamline-icon-list-numbers.png</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                                          /home/runner/work/_temp/Library/RUBer/rmarkdown/templates/datenreport-2022/skeleton/list-numbers.png</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4                                                                                                                                          &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5              /home/runner/work/_temp/Library/RUBer/rmarkdown/templates/datenreport-2022/skeleton/streamline-icon-user-female-teacher-math.png</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                              /home/runner/work/_temp/Library/RUBer/rmarkdown/templates/datenreport-2022/skeleton/user-female-teacher-math.png</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                                            col2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                                                                                               Insgesamt 67 Datenreporte\nfür 177 Studiengänge</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 Drei Befragungen:\nAbsolvent:innenbefragung (8.297 Fälle), Studieneingangsbefragung (5.283 Fälle)\nund Studienverlaufsbefragung (5.912 Fälle)</span>
@@ -183,12 +161,12 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3                                                                                                                                          &lt;NA&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4                                                                             904.321 ausgewertete Antworten\nvisualisiert in 5.027 Abbildungen</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5                                                                                    143 Lehrförderungen verteilt auf\n222 Antragssteller:innen</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                                        col6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                                                                                                                      &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 /home/runner/work/_temp/Library/RUBer/rmarkdown/templates/datenreport-2022/skeleton/streamline-icon-team-meeting-message-men-question.png</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                                                                                                                                      &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4         /home/runner/work/_temp/Library/RUBer/rmarkdown/templates/datenreport-2022/skeleton/streamline-icon-analytics-bars-horizontal.png</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5                                                                                                                                      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                        col6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                                                                                                      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 /home/runner/work/_temp/Library/RUBer/rmarkdown/templates/datenreport-2022/skeleton/team-meeting-message-men-question.png</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                                                                                                                      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4         /home/runner/work/_temp/Library/RUBer/rmarkdown/templates/datenreport-2022/skeleton/analytics-bars-horizontal.png</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                                                                                                                      &lt;NA&gt;</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
