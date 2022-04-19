@@ -1,70 +1,48 @@
-# Example data (with icon paths as a placeholder)
-df_metrics <- data.frame(
-  stringsAsFactors = FALSE,
-  col1 = c(
-    "PLACEHOLDER_PATH/streamline-icon-pie-line-graph.png",
-    "Drei Befragungen:\nAbsolvent:innenbefragung (8.297 F\u00E4lle), Studieneingangsbefragung (5.283 F\u00E4lle)\nund Studienverlaufsbefragung (5.912 F\u00E4lle)",
-    "PLACEHOLDER_PATH/streamline-icon-list-numbers.png",NA,
-    "PLACEHOLDER_PATH/streamline-icon-user-female-teacher-math.png",NA
-  ),
-  col2 = c(
-    "Insgesamt 67 Datenreporte\nf\u00FCr 177 Studieng\u00E4nge",
-    "Drei Befragungen:\nAbsolvent:innenbefragung (8.297 F\u00E4lle), Studieneingangsbefragung (5.283 F\u00E4lle)\nund Studienverlaufsbefragung (5.912 F\u00E4lle)",
-    "Auswertung von 53 Fragen\nund 251 Items",NA,
-    "143 Lehrf\u00F6rderungen verteilt auf\n222 Antragssteller:innen",
-    "Hochschulstatistische Daten und Kohortenanalysen zu 46.601 Studienf\u00E4llen und 5.537 Absolvent:innen"
-  ),
-  col3 = c(
-    "Insgesamt 67 Datenreporte\nf\u00FCr 177 Studieng\u00E4nge",
-    "Drei Befragungen:\nAbsolvent:innenbefragung (8.297 F\u00E4lle), Studieneingangsbefragung (5.283 F\u00E4lle)\nund Studienverlaufsbefragung (5.912 F\u00E4lle)",
-    "Auswertung von 53 Fragen\nund 251 Items",
-    "904.321 ausgewertete Antworten\nvisualisiert in 5.027 Abbildungen",
-    "143 Lehrf\u00F6rderungen verteilt auf\n222 Antragssteller:innen",
-    "Hochschulstatistische Daten und Kohortenanalysen zu 46.601 Studienf\u00E4llen und 5.537 Absolvent:innen"
-  ),
-  col4 = c(
-    "Insgesamt 67 Datenreporte\nf\u00FCr 177 Studieng\u00E4nge",
-    "Drei Befragungen:\nAbsolvent:innenbefragung (8.297 F\u00E4lle), Studieneingangsbefragung (5.283 F\u00E4lle)\nund Studienverlaufsbefragung (5.912 F\u00E4lle)",
-    "Auswertung von 53 Fragen\nund 251 Items",
-    "904.321 ausgewertete Antworten\nvisualisiert in 5.027 Abbildungen",
-    "143 Lehrf\u00F6rderungen verteilt auf\n222 Antragssteller:innen",
-    "Hochschulstatistische Daten und Kohortenanalysen zu 46.601 Studienf\u00E4llen und 5.537 Absolvent:innen"
-  ),
-  col5 = c(
-    NA,
-    "Drei Befragungen:\nAbsolvent:innenbefragung (8.297 F\u00E4lle), Studieneingangsbefragung (5.283 F\u00E4lle)\nund Studienverlaufsbefragung (5.912 F\u00E4lle)",NA,
-    "904.321 ausgewertete Antworten\nvisualisiert in 5.027 Abbildungen",
-    "143 Lehrf\u00F6rderungen verteilt auf\n222 Antragssteller:innen",
-    "Hochschulstatistische Daten und Kohortenanalysen zu 46.601 Studienf\u00E4llen und 5.537 Absolvent:innen"
-  ),
-  col6 = c(
-    NA,
-    "PLACEHOLDER_PATH/streamline-icon-team-meeting-message-men-question.png",NA,
-    "PLACEHOLDER_PATH/streamline-icon-analytics-bars-horizontal.png",NA,
-    "PLACEHOLDER_PATH/streamline-icon-people-man-graduate.png"
-  )
-)
-
-# df_metrics needs to be updated with runtime path to the streamline icons
-skeleton_path <- system.file(
+# Path to skeleton files
+path_skeleton <- fs::path_package(
+  package = "RUBer",
   "rmarkdown",
   "templates",
   "datenreport-2022",
-  "skeleton",
-  package = "RUBer"
+  "skeleton"
 )
 
-df_metrics <- df_metrics %>%
-  dplyr::mutate(
-    dplyr::across(
-      dplyr::everything(),
-      stringr::str_replace_all,
-      pattern = "PLACEHOLDER_PATH",
-      replacement = skeleton_path
-    )
+# Read csv file
+df_metrics <- read.csv(
+  fs::path(
+    path_skeleton,
+    "metrics_overview.csv"
+  ),
+  encoding = "UTF-8"
+)
+
+# Extract vectors from data frame, construct full file paths
+metrics_text <- df_metrics[["metrics_text"]]
+metrics_images <- as.character(
+  fs::path(
+    path_skeleton,
+    df_metrics[["metrics_images"]]
   )
+)
+
+# For presentation purposes, the data is split into six columns
+df_metrics_table <- tibble::tribble(
+  ~col1, ~col2, ~col3, ~col4, ~col5, ~col6,
+  metrics_images[1], metrics_text[1], metrics_text[1],
+  metrics_text[1], NA_character_, NA_character_,
+  metrics_text[2], metrics_text[2], metrics_text[2],
+  metrics_text[2], metrics_text[2], metrics_images[2],
+  metrics_images[3], metrics_text[3], metrics_text[3],
+  metrics_text[3], NA_character_, NA_character_,
+  NA_character_, NA_character_, metrics_text[4],
+  metrics_text[4], metrics_text[4], metrics_images[4],
+  metrics_images[5], metrics_text[5], metrics_text[5],
+  metrics_text[5], metrics_text[5], NA_character_,
+  NA_character_, metrics_text[6], metrics_text[6],
+  metrics_text[6], metrics_text[6], metrics_images[6]
+)
 
 # Function call
 rub_table_metrics(
-  df_metrics
+  df_metrics_table
 )
