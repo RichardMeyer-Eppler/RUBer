@@ -9,6 +9,7 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/RUBer)](https://cran.r-project.org/package=RUBer)
+[![R-CMD-check](https://github.com/RichardMeyer-Eppler/RUBer/workflows/R-CMD-check/badge.svg)](https://github.com/RichardMeyer-Eppler/RUBer/actions)
 <!-- badges: end -->
 
 ## Overview
