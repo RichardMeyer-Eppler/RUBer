@@ -91,6 +91,9 @@ get_report_nr_by_id <- function(
 #' @param author Character, author for the title page
 #' @param font_file Character, font file to use in all plots, defaults to
 #'     "RubFlama-Regular.ttf"
+#' @param path_figure_template Character, file path to write the dynamically generated figure chunks
+#'     to file (useful for debugging purposes). Defaults to
+#'     `fs::file_temp(pattern = "figure_template_", ext = ".Rmd")`
 #'
 #' @export
 #'
@@ -121,6 +124,10 @@ render_report <- function(
     format= "%B %Y"
   ),
   font_file = "RubFlama-Regular.ttf",
+  path_figure_template = fs::file_temp(
+    pattern = "figure_template_",
+    ext = ".Rmd"
+  ),
   post_process = TRUE
 ) {
 
@@ -151,6 +158,7 @@ render_report <- function(
       p_date = date,
       p_df = df,
       p_df_stg = p_df_stg,
+      p_path_figure_template = path_figure_template,
       p_font_file = font_file
     ),
     encoding = "UTF-8",
