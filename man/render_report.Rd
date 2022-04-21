@@ -2,7 +2,7 @@
 % Please edit documentation in R/report.R
 \name{render_report}
 \alias{render_report}
-\title{Render report}
+\title{Call \code{render_report} for each report in \code{RUBer::df_report}}
 \usage{
 render_report(
   p_df = filter_report(RUBer::df_example, 6L),
@@ -51,11 +51,19 @@ to file (useful for debugging purposes). Defaults to
 
 \item{post_process}{Boolean, whether \code{post_process} gets called on the
 output file}
+
+\item{report_type_id}{}
+}
+\value{
+Side effects
 }
 \description{
-Render report
+Call \code{render_report} for each report in \code{RUBer::df_report}
 }
 \examples{
+render_all_reports(report_nr = 6L)
+Render report
+
 # Check if pandoc is available in the minimum required version
 run_ok <- rmarkdown::pandoc_available() &&
   rmarkdown::pandoc_version() >= numeric_version("2.0")
