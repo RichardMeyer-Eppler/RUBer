@@ -11,7 +11,7 @@ get_figure_chunk_df(
 )
 }
 \arguments{
-\item{df}{Data frame with columns \code{figure_count}}
+\item{df}{Data frame with columns \code{figure_nr}}
 
 \item{font_family}{Character, the font family to use for all plots, defaults
 to \code{get_font_df()[["family"]]}}
@@ -20,7 +20,7 @@ to \code{get_font_df()[["family"]]}}
 defaults to \code{RUBer::plot_figure}}
 }
 \value{
-Data frame with columns \code{figure_count}, \code{chunk_heading},
+Data frame with columns \code{figure_nr}, \code{chunk_heading},
 \code{chunk_subheading}, \code{chunk_figure_df} and \code{chunk_plot_figure}
 }
 \description{

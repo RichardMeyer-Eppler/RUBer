@@ -29,7 +29,7 @@ frame
 # Returns code chunk as list
 code_chunk_list <- tpl_get_figure_df(
   chunk_label = 1L,
-  function_params = "df, figure_count == 1L"
+  function_params = "df, figure_nr == 1L"
 )
 
 # Unlist
@@ -49,8 +49,8 @@ tpl_get_figure_df(
     2L
   ),
   function_params = c(
-    "df, figure_count == 1L",
-    "df, figure_count == 2L"
+    "df, figure_nr == 1L",
+    "df, figure_nr == 2L"
   )
 )
 }

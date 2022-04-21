@@ -6,10 +6,10 @@
 \title{Example data set illustrating the use of the RUBer parameterized
 reporting package, containing the metadata for each report.}
 \format{
-A data frame with 67 rows and 6 variables:
+A data frame with 68 rows and 6 variables:
 \describe{
 \item{report_nr}{Integer, report number used for filtering and joining}
-\item{report_type_id}{Character, one of \code{c("STG", "MED", "M_ED", "FGR")}.
+\item{report_type_id}{Character, one of \code{c("STG", "MED", "M_ED", "FGR", "SZMA")}.
 This ID is used for filtering and conditional logic.}
 \item{report_title}{Character, the report title, appearing on the title
 page and in the header of each page.}
@@ -30,7 +30,7 @@ subfolder to be used in the output path.
 Table: Data summary\tabular{ll}{
     \tab  \cr
    Name \tab df_report \cr
-   Number of rows \tab 67 \cr
+   Number of rows \tab 68 \cr
    Number of columns \tab 6 \cr
    _______________________ \tab  \cr
    Column type frequency: \tab  \cr
@@ -43,17 +43,17 @@ Table: Data summary\tabular{ll}{
 
 \strong{Variable type: character}\tabular{lrrrrrrr}{
    skim_variable \tab n_missing \tab complete_rate \tab min \tab max \tab empty \tab n_unique \tab whitespace \cr
-   report_type_id \tab 0 \tab 1.00 \tab 3 \tab 4 \tab 0 \tab 4 \tab 0 \cr
-   report_title \tab 0 \tab 1.00 \tab 26 \tab 27 \tab 0 \tab 67 \tab 0 \cr
-   report_author \tab 0 \tab 1.00 \tab 10 \tab 82 \tab 0 \tab 67 \tab 0 \cr
-   file_name \tab 0 \tab 1.00 \tab 29 \tab 30 \tab 0 \tab 67 \tab 0 \cr
-   subfolder \tab 2 \tab 0.97 \tab 5 \tab 39 \tab 0 \tab 7 \tab 0 \cr
+   report_type_id \tab 0 \tab 1.00 \tab 3 \tab 4 \tab 0 \tab 5 \tab 0 \cr
+   report_title \tab 0 \tab 1.00 \tab 26 \tab 27 \tab 0 \tab 68 \tab 0 \cr
+   report_author \tab 0 \tab 1.00 \tab 10 \tab 178 \tab 0 \tab 68 \tab 0 \cr
+   file_name \tab 0 \tab 1.00 \tab 29 \tab 30 \tab 0 \tab 68 \tab 0 \cr
+   subfolder \tab 3 \tab 0.96 \tab 5 \tab 39 \tab 0 \tab 7 \tab 0 \cr
 }
 
 
 \strong{Variable type: numeric}\tabular{lrrrrrrrrrl}{
    skim_variable \tab n_missing \tab complete_rate \tab mean \tab sd \tab p0 \tab p25 \tab p50 \tab p75 \tab p100 \tab hist \cr
-   report_nr \tab 0 \tab 1 \tab 34 \tab 19.49 \tab 1 \tab 17.5 \tab 34 \tab 50.5 \tab 67 \tab ▇▇▇▇▇ \cr
+   report_nr \tab 0 \tab 1 \tab 34.5 \tab 19.77 \tab 1 \tab 17.75 \tab 34.5 \tab 51.25 \tab 68 \tab ▇▇▇▇▇ \cr
 }
 }
 \keyword{datasets}

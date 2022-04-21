@@ -108,7 +108,7 @@ cat(
 ```
 
 Next a more complex example, in which we additionally provide the label
-for the y-axis, `y_label` and a caption indicating the source of the
+for the y-axis, `y_axis_label` and a caption indicating the source of the
 data, `caption`. By default, the caption has the German prefix "*Quelle:*",
 which we change to English "*Source:*" using the parameter
 `caption_prefix`. We also want to suppress the value label for Master

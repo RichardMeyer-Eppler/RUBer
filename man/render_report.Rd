@@ -16,6 +16,7 @@ render_report(
   author = "Author",
   date = format(Sys.Date(), format = "\%B \%Y"),
   font_file = "RubFlama-Regular.ttf",
+  path_figure_template = fs::file_temp(pattern = "figure_template_", ext = ".Rmd"),
   post_process = TRUE
 )
 }
@@ -43,6 +44,10 @@ render_report(
 
 \item{font_file}{Character, font file to use in all plots, defaults to
 "RubFlama-Regular.ttf"}
+
+\item{path_figure_template}{Character, file path to write the dynamically generated figure chunks
+to file (useful for debugging purposes). Defaults to
+\code{fs::file_temp(pattern = "figure_template_", ext = ".Rmd")}}
 
 \item{post_process}{Boolean, whether \code{post_process} gets called on the
 output file}
