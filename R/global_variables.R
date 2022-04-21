@@ -13,6 +13,7 @@ utils::globalVariables(
     "y_axis_label",
     "fill",
     "fill_var",
+    "fill_label",
     "facet",
     "facet_var",
     "group",
