@@ -1,12 +1,12 @@
 #' Get code chunks for plotting all figures
 #'
-#' @param df Data frame with columns `figure_count`
+#' @param df Data frame with columns `figure_nr`
 #' @param font_family Character, the font family to use for all plots, defaults
 #'     to `get_font_df()[["family"]]`
 #' @param function_call Character, the function call for each plot chunk,
 #'     defaults to `RUBer::plot_figure`
 #'
-#' @return Data frame with columns `figure_count`, `chunk_heading`,
+#' @return Data frame with columns `figure_nr`, `chunk_heading`,
 #'     `chunk_subheading`, `chunk_figure_df` and `chunk_plot_figure`
 #' @export
 #'
@@ -20,11 +20,11 @@ get_figure_chunk_df <- function(
   chunk_parameters <- df %>%
     dplyr::filter(
       !is.na(
-        .data[["figure_count"]]
+        .data[["figure_nr"]]
       )
     ) %>%
     dplyr::distinct(
-      .data[["figure_count"]],
+      .data[["figure_nr"]],
       .data[["is_heading"]],
       .data[["is_subheading"]],
       .data[["heading"]],
@@ -34,12 +34,12 @@ get_figure_chunk_df <- function(
     ) %>%
     dplyr::mutate(
       chunk_label = stringr::str_pad(
-        .data[["figure_count"]],
+        .data[["figure_nr"]],
         width = 3L,
         pad = "0"
       ),
       function_parameters = glue::glue(
-        "df, figure_count == {figure_count}L"
+        "df, figure_nr == {figure_nr}L"
       ),
       .before = .data[["is_heading"]]
     ) %>%
