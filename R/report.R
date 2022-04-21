@@ -44,13 +44,15 @@ get_file_path <- function(
   )
 }
 
-#' Get all unique values of \code{report_nr} for a \code{report_type_id}
+#' Get all unique values of `report_nr` for a `report_type_id`
 #'
-#' @param df Data frame with columns \code{report_nr} and \code{report_type_id}
-#' @param report_type_id One of STG, M_ED, MED or FGR
+#' @param df Data frame with columns `report_nr` and `report_type_id`
+#' @param report_type_id Any of `c("STG", "M_ED", "MED", "FGR", "SZMA")`
 #'
 #' @return Integer vector
 #' @export
+#'
+#' @importFrom rlang .env
 #'
 #' @examples
 #' get_report_nr_by_id(df = df_example, report_type_id = "FGR")
@@ -61,7 +63,7 @@ get_report_nr_by_id <- function(
 
   report_nr <- df %>%
     dplyr::filter(
-      report_type_id == !!report_type_id
+      report_type_id %in% .env[["report_type_id"]]
     ) %>%
     dplyr::pull(
       report_nr
@@ -85,7 +87,7 @@ get_report_nr_by_id <- function(
 # #'
 # #' @importFrom rlang .env
 # #' @examples
-#' render_all_reports(report_nr = 6L)
+# #' render_all_reports(report_nr = 6L)
 # render_all_reports <- function(
 #   df = RUBer::df_example,
 #   df_report = RUBer::df_report,
@@ -174,7 +176,12 @@ get_report_nr_by_id <- function(
 #   )
 # }
 
-#' Render report
+#' Render a single parametric report as Word file
+#'
+#' @description
+#'
+#' The `render_report` function is called once for each report to be created. `render_report_safely`
+#' wraps `render_report` in `purrr::safely`.
 #'
 #' @param p_df Data frame containing the data for all reports
 #' @param p_df_stg Optional data frame with information on cases
@@ -195,7 +202,7 @@ get_report_nr_by_id <- function(
 #' @param path_figure_template Character, file path to write the dynamically generated figure chunks
 #'     to file (useful for debugging purposes). Defaults to
 #'     `fs::file_temp(pattern = "figure_template_", ext = ".Rmd")`
-#'
+#' @return Invisibly returns `p_df`
 #' @export
 #'
 #' @example inst/examples/render_report.R
@@ -282,6 +289,9 @@ render_report <- function(
   )
 
 }
+
+#' @rdname render_report
+render_report_safely <- function(...) "dummy"
 
 #' Post process Word file created with officedown
 #'
