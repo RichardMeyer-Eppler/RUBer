@@ -943,6 +943,14 @@ rub_table_included_programs <- function(
       .data[["row_nr"]]
     )
 
+  row_footnote_szma <- df %>%
+    dplyr::filter(
+      .data[["report_type_id"]] == "SZMA"
+    ) %>%
+    dplyr::pull(
+      .data[["row_nr"]]
+    )
+
   report_nr_m_ed <- df %>%
     dplyr::filter(
       .data[["report_type_id"]] == "M_ED"
@@ -965,6 +973,17 @@ rub_table_included_programs <- function(
       .
     )
 
+  report_nr_szma <- df %>%
+    dplyr::filter(
+      .data[["report_type_id"]] == "SZMA"
+    ) %>%
+    dplyr::pull(
+      .data[["report_nr"]]
+    ) %>%
+    unique(
+      .
+    )
+
   df <- df %>%
     dplyr::select(
       .data[["row_nr"]],
@@ -979,6 +998,10 @@ rub_table_included_programs <- function(
 
   footnote_text_fgr <- glue::glue(
     "Im Datenreport Nr. {report_nr_fgr} sind alle Studieng\u00E4nge je F\u00E4chergruppe ber\u00FCcksichtigt, weshalb der Datenreport mehrfach aufgef\u00FChrt wird."
+  )
+
+  footnote_text_szma<- glue::glue(
+    "Im Datenreport Nr. {report_nr_szma} sind f\u00E4chergruppen\u00FCbergreifend alle am Servicezentrum Mathematik und Anwendungen beteiligten Studieng\u00E4nge ber\u00FCcksichtigt, weshalb der Datenreport mehrfach aufgef\u00FChrt wird."
   )
 
   ft <- df %>%
@@ -1007,6 +1030,14 @@ rub_table_included_programs <- function(
         footnote_text_fgr
       ),
       ref_symbols = "**",
+      part = "body"
+    ) %>%
+    flextable::footnote(
+      i = row_footnote_szma,
+      value = flextable::as_paragraph(
+        footnote_text_szma
+      ),
+      ref_symbols = "***",
       part = "body"
     ) %>%
     RUBer::rub_style_flextable() %>%
