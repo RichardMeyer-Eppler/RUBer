@@ -73,6 +73,107 @@ get_report_nr_by_id <- function(
   return(report_nr)
 }
 
+# #' Call `render_report` for each report in `RUBer::df_report`
+# #'
+# #' @param df
+# #' @param df_report
+# #' @param report_nr
+# #' @param report_type_id
+# #'
+# #' @return Side effects
+# #' @export
+# #'
+# #' @importFrom rlang .env
+# #' @examples
+#' render_all_reports(report_nr = 6L)
+# render_all_reports <- function(
+#   df = RUBer::df_example,
+#   df_report = RUBer::df_report,
+#   report_nr = NULL,
+#   report_type_id = NULL
+# ) {
+#
+#   if(
+#     !is.null(report_nr)
+#   ) {
+#     df <- df %>%
+#       dplyr::filter(
+#         report_nr %in% .env[["report_nr"]]
+#       )
+#
+#     df_report <- df_report %>%
+#       dplyr::filter(
+#         report_nr %in% .env[["report_nr"]]
+#       )
+#   }
+#
+#   if(
+#     !is.null(report_type_id)
+#   ) {
+#     df <- df %>%
+#       dplyr::filter(
+#         report_type_id %in% .env[["report_type_id"]]
+#       )
+#
+#     df_report <- df_report %>%
+#       dplyr::filter(
+#         report_type_id %in% .env[["report_type_id"]]
+#       )
+#   }
+#
+#   reports <- df_report[["report_nr"]]
+#   titles <- df_report[["report_title"]]
+#   authors <- df_report[["report_author"]]
+#   output_directories <- df_report[["output_path"]]
+#   output_filenames <- df_report[["file_name"]]
+#
+#   df_list <- purrr::map(
+#     .x = report_nr,
+#     filter_report,
+#     df = df
+#   )
+#
+#   rmd_template <- fs::path_package(
+#     package = "RUBer",
+#     "rmarkdown",
+#     "templates",
+#     "datenreport-2022",
+#     "skeleton",
+#     "skeleton.Rmd"
+#   )
+#
+#   date <- format(Sys.Date(), format = "%B %Y")
+#
+#
+#   path_figure_template <- fs::file_temp(
+#     pattern = "figure_template_",
+#     ext = ".Rmd"
+#   )
+#
+#   purrr::pwalk(
+#     list(
+#       p_df = df_list,
+#       report_nr = reports,
+#       output_directory = output_directories,
+#       output_filename = output_filenames,
+#       title = titles,
+#       author = authors,
+#       path_figure_template = path_figure_template()
+#     ),
+#     safely_render_report,
+#     rmd_template = rmd_template,
+#     date = date,
+#     post_process = TRUE,
+#     path_figure_template = path_figure_template
+#   )
+#
+#   return(
+#     invisible(
+#       df
+#     )
+#   )
+# }
+
 #' Render report
 #'
 #' @param p_df Data frame containing the data for all reports
