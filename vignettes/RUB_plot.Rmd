@@ -41,6 +41,17 @@ font_family <- RUBer::register_font_df()
 showtext::showtext_auto()
 ```
 
+```{r font-debug}
+
+options(max.print = 1000)
+
+font_family
+
+sysfonts::font_families()
+
+print(systemfonts::system_fonts() %>% dplyr::select(1:5), n = 500)
+```
+
 ```{r run-examples, echo = FALSE, message = FALSE, warning = FALSE}
 type_1_example_1 <- RUBer:::run_example_as_chunk(
   example_file = "rub_plot_type_1.R",
