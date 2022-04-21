@@ -26,7 +26,7 @@ plot_figure <- function(
           x_var = x,
           x_var_label = x_label,
           y_var = y,
-          y_axis_label = .[[1, "y_label"]],
+          y_axis_label = .[[1, "y_axis_label"]],
           fill_var = fill,
           fill_label = fill_label,
           caption = .[[1, "source_caption"]],
@@ -65,7 +65,7 @@ plot_figure <- function(
           x_var = x,
           x_var_label = x_label,
           y_var = y,
-          y_axis_label = .[[1, "y_label"]],
+          y_axis_label = .[[1, "y_axis_label"]],
           fill_var = fill,
           fill_label = fill_label,
           group_var = group,
@@ -569,12 +569,24 @@ rub_plot_type_3 <- function(df, x_var,
 
   # Make sure that the fill variable is plotted in the correct order and with
   # the appropriate labels.
-  df <- set_factor_var(
-    df = df,
-    var = {{fill_var}},
-    var_label = {{fill_label}},
-    reverse = !fill_reverse
-  )
+  # df <- set_factor_var(
+  #   df = df,
+  #   var = {{fill_var}},
+  #   var_label = {{fill_label}},
+  #   reverse = !fill_reverse
+  # )
+  # TO DO: Clean up set_factor_var so it can also respect fixed orderings!
+  fill_label_quo <- rlang::enquo(fill_label)
+  is_null_fill_label_quo <- rlang::quo_is_null(fill_label_quo)
+  if(!is_null_fill_label_quo)  {
+    fill_label_sym <- rlang::ensym(fill_label)
+    df[[fill_var_sym]] <- forcats::as_factor(df[[fill_label_sym]])
+  } else{
+    df[[fill_var_sym]] <- forcats::as_factor(df[[fill_var_sym]])
+  }
+  if(!fill_reverse) {
+    df[[fill_var_sym]] <- forcats::fct_rev(df[[fill_var_sym]])
+  }
 
   # Determines the number of columns to be used for the fill labels in the
   # legend.
@@ -668,7 +680,8 @@ rub_plot_type_3 <- function(df, x_var,
   ) +
     ggplot2::geom_bar(
         position = "fill",
-        stat = "identity"
+        stat = "identity",
+        na.rm = TRUE
     ) +
     ggplot2::geom_label(
       data = df_label,
@@ -1173,9 +1186,6 @@ add_rub_plot_type_4 <- function(df_t4, x_var, x_var_label = NULL,
 #' }
 set_factor_var <- function(df, var, var_label = NULL, reverse = FALSE)  {
   var_sym <- rlang::ensym(var)
-  # https://community.rstudio.com/t/unquoting-issue-in-purrr-map-df-function/106676/2
-  # Required in call to forcats::fct_rev()
-  var_name <- rlang::as_name(var_sym)
 
   # Var is always used to determine the ordering, even if var_label will later
   # get displayed. This allows, for instance, to have sort_keys in var and the
@@ -1192,23 +1202,23 @@ set_factor_var <- function(df, var, var_label = NULL, reverse = FALSE)  {
     # If var_label is not a factor yet, it will get converted to one
     is_factor_var_label <- is.factor(df_ordered[[var_label_sym]])
     if(!is_factor_var_label)  {
-      df_ordered[[var_name]] <- forcats::as_factor(df_ordered[[var_label_sym]])
+      df_ordered[[var_sym]] <- forcats::as_factor(df_ordered[[var_label_sym]])
     }
     # var_label effectively replaces var. We only needed var for the ordering.
     # Use of forcats::reorder is not possible, because it only works for numeric
     # and var may not be numeric.
-    df_ordered[[var_name]] <- forcats::as_factor(df_ordered[[var_label_sym]])
+    df_ordered[[var_sym]] <- forcats::as_factor(df_ordered[[var_label_sym]])
   }
 
-  is_factor_var <- is.factor(df[[var_name]])
+  is_factor_var <- is.factor(df[[var_sym]])
   # If var is not yet a factor, it gets gets turned into a factor. Otherwise
   # no action required.
   if(!is_factor_var)  {
-    df_ordered[[var_name]] <- forcats::as_factor(df_ordered[[var_name]])
+    df_ordered[[var_sym]] <- forcats::as_factor(df_ordered[[var_sym]])
   }
 
   if (reverse) {
-    df_ordered[[var_name]] <- forcats::fct_rev(df_ordered[[var_name]])
+    df_ordered[[var_sym]] <- forcats::fct_rev(df_ordered[[var_sym]])
   }
 
   return(df_ordered)
