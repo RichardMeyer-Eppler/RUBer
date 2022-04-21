@@ -68,6 +68,7 @@
   author <span class="op">=</span> <span class="st">"Author"</span>,
   date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>, format <span class="op">=</span> <span class="st">"%B %Y"</span><span class="op">)</span>,
   font_file <span class="op">=</span> <span class="st">"RubFlama-Regular.ttf"</span>,
+  path_figure_template <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/file_temp.html" class="external-link">file_temp</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"figure_template_"</span>, ext <span class="op">=</span> <span class="st">".Rmd"</span><span class="op">)</span>,
   post_process <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span></code></pre></div>
     </div>
@@ -98,6 +99,10 @@
 <dt>font_file</dt>
 <dd><p>Character, font file to use in all plots, defaults to
 "RubFlama-Regular.ttf"</p></dd>
+<dt>path_figure_template</dt>
+<dd><p>Character, file path to write the dynamically generated figure chunks
+to file (useful for debugging purposes). Defaults to
+<code>fs::file_temp(pattern = "figure_template_", ext = ".Rmd")</code></p></dd>
 <dt>post_process</dt>
 <dd><p>Boolean, whether <code>post_process</code> gets called on the
 output file</p></dd>
@@ -399,35 +404,9 @@ output file</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ tab.id  : chr "stg-tab"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ ft.align: chr "left"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |...............................................................       |  89%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ordinary text without R code</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Quitting from lines 444-455 (skeleton.Rmd) </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in mapply(function(x, y) {    y$seq_index &lt;- max(x$seq_index, na.rm = TRUE) + 1    rbind.match.columns(list(x, y))}, x = x[[part]]$content[i, j], y = symbols_chunks, SIMPLIFY = FALSE):</span> zero-length inputs cannot be mixed with those of non-zero length</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |................................................................      |  91%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> label: pagebreak-studiengaenge</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |.................................................................     |  93%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ordinary text without R code</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |..................................................................    |  95%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> label: studiengaenge-ausgeschlossen (with options) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> List of 3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ tab.cap : chr "PLACEHOLDER_TABAusgeschlossene Studiengänge"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ tab.id  : chr "stg-excluded-tab"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ ft.align: chr "left"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |....................................................................  |  96%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ordinary text without R code</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |..................................................................... |  98%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> label: pagebreak-studiengaenge-ausgeschlossen</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |......................................................................| 100%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ordinary text without R code</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> output file: skeleton.knit.md</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /usr/bin/pandoc +RTS -K512m -RTS skeleton.knit.md --to docx --from markdown+autolink_bare_uris+tex_math_single_backslash --output /tmp/RtmpQcmUdG/RUBer_report_33bc41bce333.docx --lua-filter /home/runner/work/_temp/Library/rmarkdown/rmarkdown/lua/pagebreak.lua --table-of-contents --toc-depth 2 --highlight-style tango --reference-doc /home/runner/work/_temp/Library/RUBer/rmarkdown/templates/datenreport-2022/skeleton/rub_reference_2021.docx --filter /usr/bin/pandoc-citeproc </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Output created: /tmp/RtmpQcmUdG/RUBer_report_33bc41bce333.docx</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">ℹ</span> File "/tmp/RtmpQcmUdG/RUBer_report_33bc41bce333.docx" was written successfully.</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

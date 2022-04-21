@@ -88,7 +88,7 @@ frame</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Returns code chunk as list</span></span>
 <span class="r-in"><span class="va">code_chunk_list</span> <span class="op">&lt;-</span> <span class="fu">tpl_get_figure_df</span><span class="op">(</span></span>
 <span class="r-in">  chunk_label <span class="op">=</span> <span class="fl">1L</span>,</span>
-<span class="r-in">  function_params <span class="op">=</span> <span class="st">"df, figure_count == 1L"</span></span>
+<span class="r-in">  function_params <span class="op">=</span> <span class="st">"df, figure_nr == 1L"</span></span>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Unlist</span></span>
@@ -102,7 +102,7 @@ frame</p>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ```{r prep-fig-1, include = FALSE}</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> df_fig &lt;- dplyr::filter(df, figure_count == 1L)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> df_fig &lt;- dplyr::filter(df, figure_nr == 1L)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># The function is vectorized, so you can do this:</span></span>
@@ -112,19 +112,19 @@ frame</p>
 <span class="r-in">    <span class="fl">2L</span></span>
 <span class="r-in">  <span class="op">)</span>,</span>
 <span class="r-in">  function_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="st">"df, figure_count == 1L"</span>,</span>
-<span class="r-in">    <span class="st">"df, figure_count == 2L"</span></span>
+<span class="r-in">    <span class="st">"df, figure_nr == 1L"</span>,</span>
+<span class="r-in">    <span class="st">"df, figure_nr == 2L"</span></span>
 <span class="r-in">  <span class="op">)</span></span>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "\n```{r prep-fig-1, include = FALSE}"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "df_fig &lt;- dplyr::filter(df, figure_count == 1L)"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "```"                                            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "\n```{r prep-fig-1, include = FALSE}"        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "df_fig &lt;- dplyr::filter(df, figure_nr == 1L)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "```"                                         </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "\n```{r prep-fig-2, include = FALSE}"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "df_fig &lt;- dplyr::filter(df, figure_count == 2L)"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "```"                                            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "\n```{r prep-fig-2, include = FALSE}"        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "df_fig &lt;- dplyr::filter(df, figure_nr == 2L)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "```"                                         </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>
