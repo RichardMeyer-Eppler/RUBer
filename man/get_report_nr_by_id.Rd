@@ -9,7 +9,7 @@ get_report_nr_by_id(df, report_type_id)
 \arguments{
 \item{df}{Data frame with columns \code{report_nr} and \code{report_type_id}}
 
-\item{report_type_id}{One of STG, M_ED, MED or FGR}
+\item{report_type_id}{Any of \code{c("STG", "M_ED", "MED", "FGR", "SZMA")}}
 }
 \value{
 Integer vector
