@@ -99,6 +99,77 @@
 
 <span class="co"># Required to use custom fonts</span>
 <span class="fu">showtext</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/showtext/man/showtext_auto.html" class="external-link">showtext_auto</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>max.print <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span>
+
+<span class="va">font_family</span>
+<span class="co">#&gt; [1] "DejaVu Sans"</span>
+
+<span class="fu">sysfonts</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/sysfonts/man/font_families.html" class="external-link">font_families</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; [1] "sans"         "serif"        "mono"         "DejaVu Sans"  "wqy-microhei"</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu">systemfonts</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/systemfonts/man/system_fonts.html" class="external-link">system_fonts</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>, n <span class="op">=</span> <span class="fl">500</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 57 × 5</span></span>
+<span class="co">#&gt;    path                                                 index name  family style</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> /usr/share/fonts/truetype/lato/Lato-ThinItalic.ttf       0 Lato… Lato   Thin…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> /usr/share/fonts/truetype/liberation/LiberationSans…     0 Libe… Liber… Bold </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> /usr/share/fonts/truetype/lato/Lato-SemiboldItalic.…     0 Lato… Lato   Semi…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> /usr/share/fonts/truetype/liberation/LiberationMono…     0 Libe… Liber… Bold </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> /usr/share/fonts/truetype/lato/Lato-MediumItalic.ttf     0 Lato… Lato   Medi…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> /usr/share/fonts/truetype/dejavu/DejaVuSerif-Italic…     0 Deja… DejaV… Ital…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> /usr/share/fonts/truetype/liberation/LiberationMono…     0 Libe… Liber… Ital…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> /usr/share/fonts/truetype/dejavu/DejaVuSansCondense…     0 Deja… DejaV… Cond…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> /usr/share/fonts/truetype/liberation/LiberationSeri…     0 Libe… Liber… Bold </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> /usr/share/fonts/truetype/dejavu/DejaVuSans.ttf          0 Deja… DejaV… Book </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> /usr/share/fonts/truetype/liberation/LiberationSans…     0 Libe… Liber… Bold…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">12</span> /usr/share/fonts/truetype/lato/Lato-BlackItalic.ttf      0 Lato… Lato   Blac…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">13</span> /usr/share/fonts/truetype/lato/Lato-Medium.ttf           0 Lato… Lato   Medi…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">14</span> /usr/share/fonts/truetype/liberation/LiberationSeri…     0 Libe… Liber… Bold…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">15</span> /usr/share/fonts/truetype/lato/Lato-Bold.ttf             0 Lato… Lato   Bold </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">16</span> /usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.t…     0 Deja… DejaV… Bold </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">17</span> /usr/share/fonts/truetype/dejavu/DejaVuSansCondense…     0 Deja… DejaV… Cond…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">18</span> /usr/share/fonts/truetype/liberation/LiberationSeri…     0 Libe… Liber… Ital…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">19</span> /usr/share/fonts/truetype/liberation/LiberationSans…     0 Libe… Liber… Ital…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">20</span> /usr/share/fonts/truetype/liberation/LiberationSans…     0 Libe… Liber… Regu…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">21</span> /usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf      0 Deja… DejaV… Book </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">22</span> /usr/share/fonts/truetype/lato/Lato-Black.ttf            0 Lato… Lato   Black</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">23</span> /usr/share/fonts/truetype/dejavu/DejaVuSansCondense…     0 Deja… DejaV… Cond…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">24</span> /usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bol…     0 Deja… DejaV… Bold…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">25</span> /usr/share/fonts/truetype/lato/Lato-Hairline.ttf         0 Lato… Lato   Hair…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">26</span> /usr/share/fonts/truetype/dejavu/DejaVuSerifCondens…     0 Deja… DejaV… Cond…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">27</span> /usr/share/fonts/truetype/noto/NotoColorEmoji.ttf        0 Noto… Noto … Regu…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">28</span> /usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bol…     0 Deja… DejaV… Bold </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">29</span> /usr/share/fonts/truetype/liberation/LiberationSans…     0 Libe… Liber… Bold </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">30</span> /usr/share/fonts/truetype/lato/Lato-Thin.ttf             0 Lato… Lato   Thin </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">31</span> /usr/share/fonts/truetype/dejavu/DejaVuSans-BoldObl…     0 Deja… DejaV… Bold…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">32</span> /usr/share/fonts/truetype/liberation/LiberationSans…     0 Libe… Liber… Bold…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">33</span> /usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf     0 Deja… DejaV… Bold </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">34</span> /usr/share/fonts/truetype/dejavu/DejaVuSans-ExtraLi…     0 Deja… DejaV… Extr…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">35</span> /usr/share/fonts/truetype/lato/Lato-Semibold.ttf         0 Lato… Lato   Semi…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">36</span> /usr/share/fonts/truetype/dejavu/DejaVuSans-Oblique…     0 Deja… DejaV… Obli…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">37</span> /usr/share/fonts/truetype/liberation/LiberationMono…     0 Libe… Liber… Bold…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">38</span> /usr/share/fonts/truetype/dejavu/DejaVuSansMono-Obl…     0 Deja… DejaV… Obli…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">39</span> /usr/share/fonts/truetype/lato/Lato-BoldItalic.ttf       0 Lato… Lato   Bold…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">40</span> /usr/share/fonts/truetype/dejavu/DejaVuSansCondense…     0 Deja… DejaV… Cond…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">41</span> /usr/share/fonts/truetype/dejavu/DejaVuMathTeXGyre.…     0 Deja… DejaV… Regu…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">42</span> /usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf         0 Deja… DejaV… Book </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">43</span> /usr/share/fonts/truetype/dejavu/DejaVuSerifCondens…     0 Deja… DejaV… Cond…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">44</span> /usr/share/fonts/truetype/liberation/LiberationSeri…     0 Libe… Liber… Regu…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">45</span> /usr/share/fonts/truetype/liberation/LiberationSans…     0 Libe… Liber… Regu…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">46</span> /usr/share/fonts/truetype/lato/Lato-Regular.ttf          0 Lato… Lato   Regu…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">47</span> /usr/share/fonts/truetype/lato/Lato-HairlineItalic.…     0 Lato… Lato   Hair…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">48</span> /usr/share/fonts/truetype/dejavu/DejaVuSerifCondens…     0 Deja… DejaV… Cond…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">49</span> /usr/share/fonts/truetype/lato/Lato-LightItalic.ttf      0 Lato… Lato   Ligh…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">50</span> /usr/share/fonts/truetype/liberation/LiberationSans…     0 Libe… Liber… Ital…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">51</span> /usr/share/fonts/truetype/lato/Lato-Italic.ttf           0 Lato… Lato   Ital…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">52</span> /usr/share/fonts/truetype/lato/Lato-Light.ttf            0 Lato… Lato   Light</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">53</span> /usr/share/fonts/truetype/lato/Lato-HeavyItalic.ttf      0 Lato… Lato   Heav…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">54</span> /usr/share/fonts/truetype/dejavu/DejaVuSerifCondens…     0 Deja… DejaV… Cond…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">55</span> /usr/share/fonts/truetype/lato/Lato-Heavy.ttf            0 Lato… Lato   Heavy</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">56</span> /usr/share/fonts/truetype/dejavu/DejaVuSerif-BoldIt…     0 Deja… DejaV… Bold…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">57</span> /usr/share/fonts/truetype/liberation/LiberationMono…     0 Libe… Liber… Regu…</span></code></pre></div>
 <p>The plotting functions in RUBer do not extend the functionality provided by <a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a> itself. By preconfiguring a lot of the parameters, though, RUBer’s plotting functions are meant to be more accessible and easier to use. One of the inspirations for this was the <code>bbplot</code> package used by the data team at BBC News.</p>
 <div class="section level2">
 <h2 id="figure-types">Figure Types<a class="anchor" aria-label="anchor" href="#figure-types"></a>
@@ -120,7 +191,7 @@
 <h3 id="figure-type-1---vertical-stacked-bar-charts">Figure Type 1 - Vertical stacked bar charts<a class="anchor" aria-label="anchor" href="#figure-type-1---vertical-stacked-bar-charts"></a>
 </h3>
 <p>For plotting vertical stacked bar charts, we use <code><a href="../reference/rub_plot_type_1.html">RUBer::rub_plot_type_1</a></code>. Three variable names are mandatory: <code>x_var</code> for the x-coordinate, <code>y_var</code> for the y-coordinate and <code>fill_var</code> for the fill variable, which determines the groups to be stacked. Consider this example:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co"># Create test values for all three mandatory variables (x_var, y_var, fill_var).</span>
 <span class="va">df_t1_ex1</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span>
@@ -150,7 +221,7 @@
 <span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/rub-plot-type-1-1.png"><!-- --></p>
 <p>Next a more complex example, in which we additionally provide the label for the y-axis, <code>y_axis_label</code> and a caption indicating the source of the data, <code>caption</code>. By default, the caption has the German prefix “<em>Quelle:</em>”, which we change to English “<em>Source:</em>” using the parameter <code>caption_prefix</code>. We also want to suppress the value label for Master students in the spring term of 2017, because the value is so small. By default, labels for values accounting for less than 4% of the total value are suppressed. In this case, the seven students account for 7/(7+122) = 5.4% of the total value, so we increase the value for <code>filter_cutoff</code> from the default of 0.04 to 0.06.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Create test values for all three mandatory variables (x_var, y_var, fill_var).</span>
 <span class="va">df_t1_ex2</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span>
    <span class="op">~</span><span class="va">term</span>, <span class="op">~</span><span class="va">students</span>, <span class="op">~</span><span class="va">degree</span>,
@@ -185,7 +256,7 @@
 <span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/type-1-example-2-1.png"><!-- --></p>
 <p>The third example adds even more parameters. You can facet the figure by a discrete variable, <code>facet_var</code>, in order to make direct comparisons between groups, e.g. different departments. You can also change a figure’s default color with <code>color</code>, the default font with <code>base_family</code>, and the size of all text elements with <code>base_size</code> (see the documentation for <code><a href="../reference/theme_rub.html">RUBer::theme_rub()</a></code>).</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Create test values for all three mandatory variables (x_var, y_var, fill_var)</span>
 <span class="co"># and the optional facet variable (facet_var).</span>
 <span class="va">df_t1_ex3</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span>
@@ -238,7 +309,7 @@
 <h3 id="figure-type-2---vertical-stacked-bar-charts-scaled-to-100">Figure Type 2 - Vertical stacked bar charts scaled to 100%<a class="anchor" aria-label="anchor" href="#figure-type-2---vertical-stacked-bar-charts-scaled-to-100"></a>
 </h3>
 <p>Figure type 2, plotted with <code><a href="../reference/rub_plot_type_2.html">RUBer::rub_plot_type_2</a></code>, is very similar to type 1. The main differences are that the y-axis uses a percentage scale rather than an absolute one and that all stacked bars are scaled to 100%. Like for figure type 1, three variable names are mandatory: <code>x_var</code> for the x-coordinate, <code>y_var</code> for the y-coordinate and <code>fill_var</code> for the fill variable, which determines the groups to be stacked.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co"># Create test data for all three mandatory variables (x_var, y_var, fill_var)</span>
 <span class="va">df_t2_ex1</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span>
@@ -274,7 +345,7 @@
 <span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/rub-plot-type-2-1.png"><!-- --></p>
 <p>Now let us say we are unhappy with the default ordering of the stacked bars, because we want the largest cohort group, those still studying, on top. We can use the boolean parameter <code>fill_reverse</code> to do just that. We also provide a discrete facetting variable, <code>facet_var</code>, a text for <code>caption</code> and <code>caption_prefix</code>, and a higher threshhold for the <code>filter_cutoff</code>, leading to fewer labels being displayed.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_t2_ex2</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span>
    <span class="op">~</span><span class="va">cohort_term</span>, <span class="op">~</span><span class="va">status_percentage</span>, <span class="op">~</span><span class="va">cohort_status</span>, <span class="op">~</span><span class="va">cohort_label</span>, 
    <span class="st">"2. cohort term"</span>, <span class="fl">0.9513551740</span>, <span class="st">"Studying"</span>, <span class="st">"Bachelor 1-Subject: Starting cohort fall 2011 (n=222)"</span>,
@@ -338,7 +409,7 @@
 <h3 id="figure-type-3---horizontal-stacked-bar-charts-scaled-to-100">Figure Type 3 - Horizontal stacked bar charts scaled to 100%<a class="anchor" aria-label="anchor" href="#figure-type-3---horizontal-stacked-bar-charts-scaled-to-100"></a>
 </h3>
 <p>Figure type 3, plotted with <code><a href="../reference/rub_plot_type_3.html">RUBer::rub_plot_type_3</a></code>, is very similar to figure type 2, with the exception that the stacked bar charts are plotted horizontally. As with the first two figure types, three variable names are mandatory: <code>x_var</code> for the x-coordinate, <code>y_var</code> for the y-coordinate and <code>fill_var</code> for the fill variable, which determines the groups to be stacked.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co"># Create test data for all three mandatory variables (x_var, y_var,</span>
 <span class="co"># fill_var)</span>
@@ -359,7 +430,7 @@
 <span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/rub-plot-type-3-1.png"><!-- --></p>
 <p>The second example once again adds a facetting variable, <code>fill_var</code>, for plotting direct comparisons between groups. We also use <code>caption</code>, <code>caption_prefix</code>, a <code>filter_cutoff</code> that suppresses all values below 20%, and increase the text size to 14.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_t3_ex2</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span>
    <span class="op">~</span><span class="va">survey_group</span>, <span class="op">~</span><span class="va">item_value</span>, <span class="op">~</span><span class="va">item_value_percentage</span>, <span class="op">~</span><span class="va">degree</span>,
    <span class="st">"Bachelor 1-Subject (n=400)"</span>, <span class="st">"Exceeded prescribed period of study"</span>, <span class="fl">0.30</span>, <span class="st">"Bachelor 1-Subject"</span>,
@@ -389,7 +460,7 @@
 <h4 id="changing-ordering">Changing ordering<a class="anchor" aria-label="anchor" href="#changing-ordering"></a>
 </h4>
 <p>In the last example above, the ordering of the fill variable, item_value, is going from bad (“Exceeded prescribed period of study”) to good (“Within prescribed period of study”). This is because, by default, the fill variable will be ordered alphabetically if not a factor. So what if we want the fill variable ordered the other way? We can use the optional boolean parameter <code>fill_reverse</code> to change the ordering of the the fill variable and of the legend.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Reversed fill, reversed legend</span>
 <span class="fu"><a href="../reference/rub_plot_type_3.html">rub_plot_type_3</a></span><span class="op">(</span>
    df <span class="op">=</span> <span class="va">df_t3_ex2</span>,
@@ -406,7 +477,7 @@
 <span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/type-3-example-3-1.png"><!-- --></p>
 <p>If we simply want to reverse the order of the legend items, without actually reversing the order of the stacked bar segments, we can use the optional parameter <code>legend_reverse</code> instead.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Reversed legend</span>
 <span class="fu"><a href="../reference/rub_plot_type_3.html">rub_plot_type_3</a></span><span class="op">(</span>
    df <span class="op">=</span> <span class="va">df_t3_ex2</span>,
@@ -423,7 +494,7 @@
 <span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/type-3-example-4-1.png"><!-- --></p>
 <p>What if we want to use a custom ordering of the fill variable? Consider the following example:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_t3_ex4</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span>
    <span class="op">~</span><span class="va">survey_group</span>, <span class="op">~</span><span class="va">item_value</span>, <span class="op">~</span><span class="va">item_value_percentage</span>, <span class="op">~</span><span class="va">degree</span>,
    <span class="st">"Bachelor 1-Subject (n=400)"</span>, <span class="st">"Exceeded prescribed period of study"</span>, <span class="fl">0.30</span>, <span class="st">"Bachelor 1-Subject"</span>,
@@ -453,7 +524,7 @@
 <span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/type-3-example-5-1.png"><!-- --></p>
 <p>Here, we neither want alphabetic ordering, nor its reverse. Instead, we would prefer an alphabetic ordering with the item_value “Unknown” always coming last. For this, we can explicitly turn the <code>fill_var</code> into a factor with a predetermined ordering. The plotting function will respect this ordering.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Take the data from previous example</span>
 <span class="va">df_t3_ex5</span> <span class="op">&lt;-</span> <span class="va">df_t3_ex4</span>
 
@@ -495,7 +566,7 @@
 <div class="section level3">
 <h3 id="figure-type-4---line-charts">Figure Type 4 - Line Charts<a class="anchor" aria-label="anchor" href="#figure-type-4---line-charts"></a>
 </h3>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co"># Create test data for all three mandatory variables (x_var, y_var,</span>
 <span class="co"># group_var)</span>
@@ -531,7 +602,7 @@
 <div class="section level3">
 <h3 id="figure-type-1-and-4---vertical-stacked-bar-charts-combined-with-line-charts">Figure Type 1 and 4 - Vertical Stacked Bar Charts Combined with Line Charts<a class="anchor" aria-label="anchor" href="#figure-type-1-and-4---vertical-stacked-bar-charts-combined-with-line-charts"></a>
 </h3>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="va">df_t1_and_t4_ex1</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span>
   <span class="op">~</span><span class="va">term</span>,        <span class="op">~</span><span class="va">students</span>,              <span class="op">~</span><span class="va">degree</span>,              <span class="op">~</span><span class="va">group</span>, <span class="op">~</span><span class="va">figure_type_id</span>,
@@ -571,7 +642,7 @@
 <h3 id="applying-the-rub-theme">Applying the RUB Theme<a class="anchor" aria-label="anchor" href="#applying-the-rub-theme"></a>
 </h3>
 <p>The function <code>theme_rub</code> is a normal <code><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">ggplot2::theme()</a></code> function based on <code><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">ggplot2::theme_minimal()</a></code>. You can use it for any ggplot object:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Base plot</span>
 <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>
    data <span class="op">=</span> <span class="va">mtcars</span>,
@@ -591,7 +662,7 @@
 <h3 id="scale-functions">Scale Functions<a class="anchor" aria-label="anchor" href="#scale-functions"></a>
 </h3>
 <p>The RUB palettes are used through corresponding scale functions. Currently, (1) <code>scale_color_rub</code> (a wrapper for <code><a href="https://ggplot2.tidyverse.org/reference/discrete_scale.html" class="external-link">ggplot2::discrete_scale()</a></code> if discrete, or for <code><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html" class="external-link">ggplot2::scale_color_gradientn()</a></code> if continuous) and (2) <code>scale_fill_rub</code> (a wrapper for <code><a href="https://ggplot2.tidyverse.org/reference/discrete_scale.html" class="external-link">ggplot2::discrete_scale()</a></code> if discrete, or for <code><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html" class="external-link">ggplot2::scale_fill_gradientn()</a></code> if continuous) are implemented. Use these scale functions to ensure that appropriate RUB palettes and colors are used.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Basic themed plot with discrete scale function</span>
 <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>
    data <span class="op">=</span> <span class="va">mtcars</span>,
@@ -612,7 +683,7 @@
      base_family <span class="op">=</span> <span class="va">font_family</span>
    <span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/theme-rub-color-discrete-1.png"><!-- --></p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co"># By default, the theme shows no axis labels and no legend title. Use the </span>
 <span class="co"># boolean parameters x_axis_label, y_axis_label and legend_title to activate </span>
@@ -639,7 +710,7 @@
       legend_title <span class="op">=</span> <span class="cn">FALSE</span>
    <span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/theme-rub-color-discrete-2.png"><!-- --></p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co"># Reverse the color palette by setting reverse to TRUE in the scale function</span>
 <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>
@@ -666,7 +737,7 @@
    <span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/theme-rub-color-discrete-3.png"><!-- --></p>
 <p>Continuous scales are used by setting <code>discrete</code> to <code>FALSE</code> and by providing the name of a continuous palette to <code>palette</code> (see <code><a href="../articles/RUB_colors.html">vignette("RUB_colors")</a></code>).</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Basic plot with continuous scale function</span>
 <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>
    data <span class="op">=</span> <span class="va">mtcars</span>,
@@ -691,7 +762,7 @@
       legend_title <span class="op">=</span> <span class="cn">TRUE</span>
    <span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/theme-rub-color-continuous-1.png"><!-- --></p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co"># Reverse the color palette by setting reverse to TRUE in the scale function</span>
 <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>
@@ -718,7 +789,7 @@
       legend_title <span class="op">=</span> <span class="cn">TRUE</span>
    <span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/theme-rub-color-continuous-2.png"><!-- --></p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co"># Example of continuous_diverging palette</span>
 <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>
@@ -744,7 +815,7 @@
       legend_title <span class="op">=</span> <span class="cn">TRUE</span>
    <span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/theme-rub-color-continuous-3.png"><!-- --></p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>
    data <span class="op">=</span> <span class="va">mtcars</span>,
    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>
@@ -764,7 +835,7 @@
       legend_title <span class="op">=</span> <span class="cn">TRUE</span>
    <span class="op">)</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/theme-rub-scale-1.png"><!-- --></p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Turn off showtext after plotting</span>
 <span class="fu">showtext</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/showtext/man/showtext_auto.html" class="external-link">showtext_auto</a></span><span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 </div>
