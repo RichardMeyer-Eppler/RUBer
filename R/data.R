@@ -10,18 +10,16 @@
 #' @format A data frame with `r format(nrow(df_example),big.mark=",")` rows and `r ncol(df_example)` variables:
 #' \describe{
 #'   \item{report_nr}{Integer, report number used for filtering and joining}
-#'   \item{figure_count}{Integer, unique identifier for each figure}
-#'   \item{report_type_id}{Character, one of `c("STG", "MED", "M_ED", "FGR")`.
+#'   \item{figure_nr}{Integer, unique identifier for each figure}
+#'   \item{report_type_id}{Character, one of `c("STG", "MED", "M_ED", "FGR", "SZMA")`.
 #'           This ID is used for filtering and conditional logic.}
 #'   \item{x}{Character, x axis values. Will only be used for ordering if
 #'           x_label is filled.}
 #'   \item{x_label}{Character, x axis values to be displayed}
 #'   \item{y}{Character, y axis value of the figure}
-#'   \item{y_label}{Character, y axis label of the figure}
+#'   \item{y_axis_label}{Character, y axis label of the figure}
 #'   \item{fill}{Integer, values used for ordering of the fill}
 #'   \item{fill_label}{Character, values used for the fill labels}
-#'   \item{fill_reverse}{Boolean, if `TRUE` the fill ordering will be reversed
-#'          when plotting.}
 #'   \item{facet}{Character, values to use for facetting the figure}
 #'   \item{group}{Integer, values to use for the grouping}
 #'   \item{group_label}{Character, values to use as group labels}
@@ -66,7 +64,7 @@
 #' @format A data frame with `r format(nrow(df_report),big.mark=",")` rows and `r ncol(df_report)` variables:
 #' \describe{
 #'   \item{report_nr}{Integer, report number used for filtering and joining}
-#'   \item{report_type_id}{Character, one of `c("STG", "MED", "M_ED", "FGR")`.
+#'   \item{report_type_id}{Character, one of `c("STG", "MED", "M_ED", "FGR", "SZMA")`.
 #'           This ID is used for filtering and conditional logic.}
 #'   \item{report_title}{Character, the report title, appearing on the title
 #'           page and in the header of each page.}
