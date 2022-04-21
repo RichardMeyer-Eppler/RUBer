@@ -1400,6 +1400,7 @@ get_legend_columns <- function(
   base_size = 11,
   base_family = get_font_df()[["family"]]
 ) {
+  # TODO: base_family param currently does not work. Replace strwidth with systemfonts::string_width
 
   # If total legend text has fewer than 50 characters, return as many columns
   # as there are elements in the legend text vector
