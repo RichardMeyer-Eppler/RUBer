@@ -6,7 +6,7 @@
 \title{Example data set illustrating the use of the RUBer parameterized
 reporting package, containing the data to generate all figures.}
 \format{
-A data frame with 21 rows and 6 variables:
+A data frame with 164,794 rows and 24 variables:
 \describe{
 \item{report_nr}{Integer, report number used for filtering and joining}
 \item{figure_nr}{Integer, unique identifier for each figure}
@@ -56,19 +56,20 @@ df_example
 All data values in this data set are algorithmically generated. With that
 exception, though, the data set closely resembles the confidential data the
 package was developed for. It contains the data to generate
-0 reports with varying numbers
+68 reports with varying numbers
 of figures each.
 }
 \details{
 Table: Data summary\tabular{ll}{
     \tab  \cr
    Name \tab df_example \cr
-   Number of rows \tab 21 \cr
-   Number of columns \tab 6 \cr
+   Number of rows \tab 164794 \cr
+   Number of columns \tab 24 \cr
    _______________________ \tab  \cr
    Column type frequency: \tab  \cr
-   character \tab 5 \cr
-   numeric \tab 1 \cr
+   character \tab 16 \cr
+   logical \tab 2 \cr
+   numeric \tab 6 \cr
    ________________________ \tab  \cr
    Group variables \tab None \cr
 }
@@ -76,17 +77,40 @@ Table: Data summary\tabular{ll}{
 
 \strong{Variable type: character}\tabular{lrrrrrrr}{
    skim_variable \tab n_missing \tab complete_rate \tab min \tab max \tab empty \tab n_unique \tab whitespace \cr
-   studieneingang \tab 0 \tab 1.00 \tab 5 \tab 58 \tab 0 \tab 21 \tab 0 \cr
-   koepfe_rub \tab 4 \tab 0.81 \tab 1 \tab 6 \tab 0 \tab 17 \tab 0 \cr
-   koepfe_rub_perc \tab 4 \tab 0.81 \tab 3 \tab 5 \tab 0 \tab 16 \tab 0 \cr
-   koepfe_bef \tab 4 \tab 0.81 \tab 1 \tab 5 \tab 0 \tab 17 \tab 0 \cr
-   koepfe_bef_perc \tab 4 \tab 0.81 \tab 3 \tab 5 \tab 0 \tab 16 \tab 0 \cr
+   report_type_id \tab 0 \tab 1.00 \tab 3 \tab 4 \tab 0 \tab 5 \tab 0 \cr
+   x \tab 0 \tab 1.00 \tab 1 \tab 20 \tab 0 \tab 156768 \tab 0 \cr
+   x_label \tab 156748 \tab 0.05 \tab 9 \tab 16 \tab 0 \tab 20 \tab 0 \cr
+   y \tab 0 \tab 1.00 \tab 1 \tab 57 \tab 0 \tab 18591 \tab 0 \cr
+   y_axis_label \tab 161644 \tab 0.02 \tab 30 \tab 45 \tab 0 \tab 2 \tab 0 \cr
+   fill_label \tab 952 \tab 0.99 \tab 1 \tab 58 \tab 0 \tab 108 \tab 0 \cr
+   facet \tab 3150 \tab 0.98 \tab 9 \tab 168 \tab 0 \tab 1415 \tab 0 \cr
+   group_label \tab 163842 \tab 0.01 \tab 24 \tab 25 \tab 0 \tab 2 \tab 0 \cr
+   source_caption \tab 0 \tab 1.00 \tab 46 \tab 76 \tab 0 \tab 8 \tab 0 \cr
+   question_txt \tab 9996 \tab 0.94 \tab 19 \tab 213 \tab 0 \tab 53 \tab 0 \cr
+   figure_caption \tab 0 \tab 1.00 \tab 24 \tab 122 \tab 0 \tab 812 \tab 0 \cr
+   heading \tab 0 \tab 1.00 \tab 20 \tab 57 \tab 0 \tab 5 \tab 0 \cr
+   subheading \tab 32647 \tab 0.80 \tab 15 \tab 46 \tab 0 \tab 9 \tab 0 \cr
+   report_author \tab 0 \tab 1.00 \tab 10 \tab 178 \tab 0 \tab 68 \tab 0 \cr
+   report_title \tab 0 \tab 1.00 \tab 26 \tab 27 \tab 0 \tab 68 \tab 0 \cr
+   file_name \tab 0 \tab 1.00 \tab 29 \tab 30 \tab 0 \tab 68 \tab 0 \cr
+}
+
+
+\strong{Variable type: logical}\tabular{lrrrl}{
+   skim_variable \tab n_missing \tab complete_rate \tab mean \tab count \cr
+   is_heading \tab 0 \tab 1 \tab 0.05 \tab FAL: 157293, TRU: 7501 \cr
+   is_subheading \tab 0 \tab 1 \tab 0.08 \tab FAL: 151770, TRU: 13024 \cr
 }
 
 
 \strong{Variable type: numeric}\tabular{lrrrrrrrrrl}{
    skim_variable \tab n_missing \tab complete_rate \tab mean \tab sd \tab p0 \tab p25 \tab p50 \tab p75 \tab p100 \tab hist \cr
-   row_id \tab 0 \tab 1 \tab 11 \tab 6.2 \tab 1 \tab 6 \tab 11 \tab 16 \tab 21 \tab ▇▆▆▆▆ \cr
+   report_nr \tab 0 \tab 1.00 \tab 35.78 \tab 22.23 \tab 1.0 \tab 16.00 \tab 36.00 \tab 59.00 \tab 68.00 \tab ▇▅▇▃▇ \cr
+   figure_nr \tab 0 \tab 1.00 \tab 87.63 \tab 105.12 \tab 1.0 \tab 29.00 \tab 56.00 \tab 93.00 \tab 550.00 \tab ▇▁▁▁▁ \cr
+   fill \tab 952 \tab 0.99 \tab 3.02 \tab 2.17 \tab 0.0 \tab 2.00 \tab 3.00 \tab 4.00 \tab 22.00 \tab ▇▂▁▁▁ \cr
+   group \tab 7094 \tab 0.96 \tab 81.98 \tab 15.49 \tab 8.0 \tab 81.00 \tab 82.00 \tab 88.00 \tab 99.00 \tab ▁▁▁▁▇ \cr
+   figure_type_id \tab 0 \tab 1.00 \tab 2.95 \tab 0.29 \tab 1.0 \tab 3.00 \tab 3.00 \tab 3.00 \tab 4.00 \tab ▁▁▁▇▁ \cr
+   figure_height \tab 0 \tab 1.00 \tab 6.59 \tab 2.12 \tab 1.3 \tab 4.92 \tab 7.28 \tab 8.54 \tab 9.45 \tab ▁▅▃▆▇ \cr
 }
 }
 \keyword{datasets}
