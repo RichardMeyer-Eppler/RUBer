@@ -122,10 +122,12 @@ output file</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Check if pandoc is available in the minimum required version</span></span>
-<span class="r-in"><span class="va">run_ok</span> <span class="op">&lt;-</span> <span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/rmarkdown/reference/pandoc_available.html" class="external-link">pandoc_available</a></span><span class="op">(</span><span class="op">)</span> <span class="op">&amp;&amp;</span></span>
-<span class="r-in">  <span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/rmarkdown/reference/pandoc_available.html" class="external-link">pandoc_version</a></span><span class="op">(</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric_version.html" class="external-link">numeric_version</a></span><span class="op">(</span><span class="st">"2.0"</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">pandoc_available</span> <span class="op">&lt;-</span> <span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/rmarkdown/reference/pandoc_available.html" class="external-link">pandoc_available</a></span><span class="op">(</span></span>
+<span class="r-in">  version <span class="op">=</span> <span class="st">"2.0"</span>,</span>
+<span class="r-in">  error <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span class="r-in"><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span><span class="op">(</span><span class="va">run_ok</span><span class="op">)</span><span class="op">{</span></span>
+<span class="r-in"><span class="kw">if</span><span class="op">(</span><span class="va">pandoc_available</span><span class="op">)</span><span class="op">{</span></span>
 <span class="r-in"></span>
 <span class="r-in">  <span class="co"># Get paths for skeleton.Rmd</span></span>
 <span class="r-in">  <span class="va">skeleton_location</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path_package.html" class="external-link">path_package</a></span><span class="op">(</span></span>
@@ -421,10 +423,10 @@ output file</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> output file: skeleton.knit.md</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /usr/bin/pandoc +RTS -K512m -RTS skeleton.knit.md --to docx --from markdown+autolink_bare_uris+tex_math_single_backslash --output /tmp/RtmpHiOZ6R/RUBer_report_33b243413837.docx --lua-filter /home/runner/work/_temp/Library/rmarkdown/rmarkdown/lua/pagebreak.lua --table-of-contents --toc-depth 2 --highlight-style tango --reference-doc /home/runner/work/_temp/Library/RUBer/rmarkdown/templates/datenreport-2022/skeleton/rub_reference_2021.docx --filter /usr/bin/pandoc-citeproc </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /usr/bin/pandoc +RTS -K512m -RTS skeleton.knit.md --to docx --from markdown+autolink_bare_uris+tex_math_single_backslash --output /tmp/RtmpHsHfAx/RUBer_report_32a554b0252e.docx --lua-filter /home/runner/work/_temp/Library/rmarkdown/rmarkdown/lua/pagebreak.lua --table-of-contents --toc-depth 2 --highlight-style tango --reference-doc /home/runner/work/_temp/Library/RUBer/rmarkdown/templates/datenreport-2022/skeleton/rub_reference_2021.docx --filter /usr/bin/pandoc-citeproc </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Output created: /tmp/RtmpHiOZ6R/RUBer_report_33b243413837.docx</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">ℹ</span> File "/tmp/RtmpHiOZ6R/RUBer_report_33b243413837.docx" was written successfully.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Output created: /tmp/RtmpHsHfAx/RUBer_report_32a554b0252e.docx</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">ℹ</span> File "/tmp/RtmpHsHfAx/RUBer_report_32a554b0252e.docx" was written successfully.</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
