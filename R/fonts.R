@@ -71,7 +71,8 @@ get_font_df <- function(
         fs::path_file(
           .data[["path"]]
         )
-      ) == tolower(font_file)
+      ) == tolower(font_file),
+      .data[["index"]] == 0L
     )
 
   if(
