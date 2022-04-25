@@ -1,8 +1,10 @@
 # Check if pandoc is available in the minimum required version
-run_ok <- rmarkdown::pandoc_available() &&
-  rmarkdown::pandoc_version() >= numeric_version("2.0")
+pandoc_available <- rmarkdown::pandoc_available(
+  version = "2.0",
+  error = FALSE
+)
 
-if(run_ok){
+if(pandoc_available){
 
   # Get paths for skeleton.Rmd
   skeleton_location <- fs::path_package(
