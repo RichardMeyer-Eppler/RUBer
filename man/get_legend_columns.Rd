@@ -2,7 +2,7 @@
 % Please edit documentation in R/rub_plot.R
 \name{get_legend_columns}
 \alias{get_legend_columns}
-\title{Gets number of legend columns based on the plot width and the text base size}
+\title{Gets appropriate number of legend columns based on the plot, font and active graphics device}
 \usage{
 get_legend_columns(
   legend_text,
@@ -11,7 +11,8 @@ get_legend_columns(
   legend_key_spacing = plot_width/100,
   plot_width = 6.8,
   base_size = 11,
-  base_family = get_font_df()[["family"]]
+  base_family = get_font_df()[["family"]],
+  systemfonts_suffix = "_systemfonts"
 )
 }
 \arguments{
@@ -28,12 +29,14 @@ get_legend_columns(
 \item{base_size}{base font size, defaults to 11}
 
 \item{base_family}{base font family, defaults to RubFlama}
+
+\item{systemfonts_suffix}{Suffix attached to the font family name in \code{systemfonts::register_font}}
 }
 \value{
 Numeric with the number of columns for the legend
 }
 \description{
-Gets number of legend columns based on the plot width and the text base size
+Gets appropriate number of legend columns based on the plot, font and active graphics device
 }
 \examples{
 get_legend_columns(
@@ -49,4 +52,11 @@ get_legend_columns(
     "FG Bachelor 2-Fächer (n=1.310)"
   )
 )
+}
+\references{
+\itemize{
+\item \href{https://github.com/yihui/knitr/issues/729}{Unneeded warnings when creating plot using non-default fonts #729}
+\item \href{https://github.com/yihui/knitr/blob/master/R/block.R}{chunk_device in block.R}
+\item \href{https://github.com/yihui/knitr/issues/73}{Access to chunk label #73}
+}
 }

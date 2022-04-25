@@ -2,14 +2,15 @@
 % Please edit documentation in R/fonts.R
 \name{register_font_flama}
 \alias{register_font_flama}
-\title{Registers RUB Flama font to be used with \code{showtext} package}
+\title{Registers RUB Flama font to be used with the \code{showtext} and \code{systemfonts} packages}
 \usage{
 register_font_flama(
   family = get_font_df()[["family"]],
   regular = get_font_df()[["path"]],
   bold = get_font_df("RubFlama-Bold.ttf")[["path"]],
   italic = get_font_df("RubFlama-Italic.ttf")[["path"]],
-  bolditalic = get_font_df("RubFlama-BoldItalic.ttf")[["path"]]
+  bolditalic = get_font_df("RubFlama-BoldItalic.ttf")[["path"]],
+  systemfonts_suffix = "_systemfonts"
 )
 }
 \arguments{
@@ -27,12 +28,14 @@ defaults to \code{get_font_df("RubFlama-Bold.ttf")[["path"]]}}
 
 \item{bolditalic}{Character, path of the font file for "bold italic" font style,
 defaults to \code{get_font_df("RubFlama-BoldItalic.ttf")[["path"]]}}
+
+\item{systemfonts_suffix}{Suffix attached to the font family name in \code{systemfonts::register_font}}
 }
 \value{
 Side effects
 }
 \description{
-Registers RUB Flama font to be used with \code{showtext} package
+Registers RUB Flama font to be used with the \code{showtext} and \code{systemfonts} packages
 }
 \examples{
 register_font_flama()

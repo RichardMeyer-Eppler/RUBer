@@ -2,14 +2,15 @@
 % Please edit documentation in R/fonts.R
 \name{register_font_scala}
 \alias{register_font_scala}
-\title{Registers RUB Scala TZ font to be used with \code{showtext} package}
+\title{Registers RUB Scala TZ font to be used with \code{showtext} and \code{systemfonts} packages}
 \usage{
 register_font_scala(
   family = get_font_df("RUB Scala TZ.ttf")[["family"]],
   regular = get_font_df("RUB Scala TZ.ttf")[["path"]],
   bold = get_font_df("RUB Scala TZ Bold.ttf")[["path"]],
   italic = get_font_df("RUB Scala TZ Italic.ttf")[["path"]],
-  bolditalic = get_font_df("RUB Scala TZ Bold Italic.ttf")[["path"]]
+  bolditalic = get_font_df("RUB Scala TZ Bold Italic.ttf")[["path"]],
+  systemfonts_suffix = "_systemfonts"
 )
 }
 \arguments{
@@ -27,12 +28,14 @@ defaults to \code{get_font_df("RUB Scala TZ Bold.ttf")[["path"]]}}
 
 \item{bolditalic}{Character, path of the font file for "bold italic" font style,
 defaults to \code{get_font_df("RUB Scala TZ Bold Italic.ttf")[["path"]]}}
+
+\item{systemfonts_suffix}{Suffix attached to the font family name in \code{systemfonts::register_font}}
 }
 \value{
 Side effects
 }
 \description{
-Registers RUB Scala TZ font to be used with \code{showtext} package
+Registers RUB Scala TZ font to be used with \code{showtext} and \code{systemfonts} packages
 }
 \examples{
 register_font_scala()

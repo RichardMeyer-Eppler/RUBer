@@ -11,7 +11,7 @@ tpl_plot_figure(
   font_family = get_font_df()[["family"]],
   function_call = "RUBer::plot_figure",
   tab_placeholder = "PLACEHOLDER_TAB",
-  suppress_warnings = TRUE
+  suppress_warnings = FALSE
 )
 }
 \arguments{
@@ -31,7 +31,7 @@ tabs, which is why a placeholder text is needed that will get replaced
 with tabs in post-processing, defaults to "PLACEHOLDER_TAB"}
 
 \item{suppress_warnings}{Boolean, whether to suppress the warnings generated
-by this code chunk, defaults to \code{TRUE}.}
+by this code chunk, defaults to \code{FALSE}.}
 }
 \value{
 List of character vectors with chunk texts

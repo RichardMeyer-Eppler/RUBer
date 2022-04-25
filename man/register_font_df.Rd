@@ -2,18 +2,26 @@
 % Please edit documentation in R/fonts.R
 \name{register_font_df}
 \alias{register_font_df}
-\title{Register font contained in font data frame}
+\title{Register font using \code{sysfonts::font_add} and \code{systemfonts::register_font}}
 \usage{
-register_font_df(font_df = RUBer::get_font_df())
+register_font_df(
+  font_df = RUBer::get_font_df(),
+  systemfonts_suffix = "_systemfonts"
+)
 }
 \arguments{
 \item{font_df}{Data frame with one row obtained by \code{RUBer::get_font_df()}}
+
+\item{systemfonts_suffix}{Suffix attached to the font family name in \code{systemfonts::register_font}}
 }
 \value{
 Invisibly returns font family
 }
 \description{
-Register font contained in font data frame
+Registration with \code{sysfonts::font_add} exclusively works for \code{showtext}, while
+\code{systemfonts::register_font} is required for the calculation of string widths, for instance.
+The family name must be unique across the two registrations, so the \code{systemfonts} registration
+uses a suffix behind the family name.
 }
 \examples{
 register_font_df()

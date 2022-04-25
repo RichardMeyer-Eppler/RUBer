@@ -121,3 +121,11 @@ rub_plot_type_1_and_4(
   base_family = "sans"
 )
 }
+\seealso{
+Other rub_plot_types: 
+\code{\link{rub_plot_type_1}()},
+\code{\link{rub_plot_type_2}()},
+\code{\link{rub_plot_type_3}()},
+\code{\link{rub_plot_type_4}()}
+}
+\concept{rub_plot_types}
