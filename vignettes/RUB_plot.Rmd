@@ -129,7 +129,7 @@ value are suppressed. In this case, the seven students account for
 7/(7+122) = 5.4% of the total value, so we increase the value for
 `filter_cutoff` from the default of 0.04 to 0.06.
 
-```{r type-1-example-2}
+```{r type-1-example-2, fig.showtext = TRUE}
 # Create test values for all three mandatory variables (x_var, y_var, fill_var).
 df_t1_ex2 <- tibble::tribble(
    ~term, ~students, ~degree,
@@ -171,7 +171,7 @@ figure's default color with `color`, the default font with
 `base_family`, and the size of all text elements with `base_size` (see
 the documentation for `RUBer::theme_rub()`).
 
-```{r type-1-example-3}
+```{r type-1-example-3, fig.showtext = TRUE}
 # Create test values for all three mandatory variables (x_var, y_var, fill_var)
 # and the optional facet variable (facet_var).
 df_t1_ex3 <- tibble::tribble(
@@ -244,7 +244,7 @@ also provide a discrete facetting variable, `facet_var`, a text for
 `caption` and `caption_prefix`, and a higher threshhold for the
 `filter_cutoff`, leading to fewer labels being displayed.
 
-```{r type-2-example-2}
+```{r type-2-example-2, fig.showtext = TRUE}
 df_t2_ex2 <- tibble::tribble(
    ~cohort_term, ~status_percentage, ~cohort_status, ~cohort_label, 
    "2. cohort term", 0.9513551740, "Studying", "Bachelor 1-Subject: Starting cohort fall 2011 (n=222)",
@@ -325,7 +325,7 @@ plotting direct comparisons between groups. We also use `caption`,
 `caption_prefix`, a `filter_cutoff` that suppresses all values below
 20%, and increase the text size to 14.
 
-```{r type-3-example-2}
+```{r type-3-example-2, fig.showtext = TRUE}
 df_t3_ex2 <- tibble::tribble(
    ~survey_group, ~item_value, ~item_value_percentage, ~degree,
    "Bachelor 1-Subject (n=400)", "Exceeded prescribed period of study", 0.30, "Bachelor 1-Subject",
@@ -362,7 +362,7 @@ what if we want the fill variable ordered the other way? We can use the
 optional boolean parameter `fill_reverse` to change the ordering of the
 the fill variable and of the legend.
 
-```{r type-3-example-3}
+```{r type-3-example-3, fig.showtext = TRUE}
 # Reversed fill, reversed legend
 rub_plot_type_3(
    df = df_t3_ex2,
@@ -383,7 +383,7 @@ If we simply want to reverse the order of the legend items, without
 actually reversing the order of the stacked bar segments, we can use the
 optional parameter `legend_reverse` instead.
 
-```{r type-3-example-4}
+```{r type-3-example-4, fig.showtext = TRUE}
 # Reversed legend
 rub_plot_type_3(
    df = df_t3_ex2,
@@ -403,7 +403,7 @@ rub_plot_type_3(
 What if we want to use a custom ordering of the fill variable? Consider
 the following example:
 
-```{r type-3-example-5}
+```{r type-3-example-5, fig.showtext = TRUE}
 df_t3_ex4 <- tibble::tribble(
    ~survey_group, ~item_value, ~item_value_percentage, ~degree,
    "Bachelor 1-Subject (n=400)", "Exceeded prescribed period of study", 0.30, "Bachelor 1-Subject",
@@ -439,7 +439,7 @@ coming last. For this, we can explicitly turn the `fill_var` into a
 factor with a predetermined ordering. The plotting function will respect
 this ordering.
 
-```{r type-3-example-6}
+```{r type-3-example-6, fig.showtext = TRUE}
 # Take the data from previous example
 df_t3_ex5 <- df_t3_ex4
 
@@ -504,7 +504,7 @@ for help on getting started with `{ggplot2}`.
 The function `theme_rub` is a normal `ggplot2::theme()` function based
 on `ggplot2::theme_minimal()`. You can use it for any ggplot object:
 
-```{r theme-rub}
+```{r theme-rub, fig.showtext = TRUE}
 # Base plot
 ggplot2::ggplot(
    data = mtcars,
@@ -531,7 +531,7 @@ or for `ggplot2::scale_fill_gradientn()` if continuous) are implemented.
 Use these scale functions to ensure that appropriate RUB palettes and
 colors are used.
 
-```{r theme-rub-color-discrete}
+```{r theme-rub-color-discrete, fig.showtext = TRUE}
 # Basic themed plot with discrete scale function
 ggplot2::ggplot(
    data = mtcars,
@@ -606,7 +606,7 @@ Continuous scales are used by setting `discrete` to `FALSE` and by
 providing the name of a continuous palette to `palette` (see
 `vignette("RUB_colors")`).
 
-```{r theme-rub-color-continuous}
+```{r theme-rub-color-continuous, fig.showtext = TRUE}
 # Basic plot with continuous scale function
 ggplot2::ggplot(
    data = mtcars,
@@ -681,7 +681,7 @@ ggplot2::ggplot(
    )
 ```
 
-```{r theme-rub-scale}
+```{r theme-rub-scale, fig.showtext = TRUE}
 ggplot2::ggplot(
    data = mtcars,
    ggplot2::aes(
