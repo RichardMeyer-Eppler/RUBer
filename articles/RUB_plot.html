@@ -427,7 +427,10 @@
    y_var <span class="op">=</span> <span class="va">survey_group</span>,
    fill_var <span class="op">=</span> <span class="va">item_value</span>,
    base_family <span class="op">=</span> <span class="st">"sans"</span>
-<span class="op">)</span></code></pre></div>
+<span class="op">)</span>
+<span class="co">#&gt; Warning in dev_string_widths_c(as.character(strings), as.character(family), :</span>
+<span class="co">#&gt; Font metric information not found for family 'sans_systemfonts'; using</span>
+<span class="co">#&gt; 'Helvetica' instead</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/rub-plot-type-3-1.png"><!-- --></p>
 <p>The second example once again adds a facetting variable, <code>fill_var</code>, for plotting direct comparisons between groups. We also use <code>caption</code>, <code>caption_prefix</code>, a <code>filter_cutoff</code> that suppresses all values below 20%, and increase the text size to 14.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -454,7 +457,10 @@
    filter_cutoff <span class="op">=</span> <span class="fl">0.20</span>,
    base_size <span class="op">=</span> <span class="fl">14</span>,
    base_family <span class="op">=</span> <span class="va">font_family</span>
-<span class="op">)</span></code></pre></div>
+<span class="op">)</span>
+<span class="co">#&gt; Warning in dev_string_widths_c(as.character(strings), as.character(family), :</span>
+<span class="co">#&gt; Font metric information not found for family 'DejaVu Sans_systemfonts'; using</span>
+<span class="co">#&gt; 'Helvetica' instead</span></code></pre></div>
 <p><img src="RUB_plot_files/figure-html/type-3-example-2-1.png"><!-- --></p>
 <div class="section level4">
 <h4 id="changing-ordering">Changing ordering<a class="anchor" aria-label="anchor" href="#changing-ordering"></a>
@@ -900,7 +906,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
     </footer>
