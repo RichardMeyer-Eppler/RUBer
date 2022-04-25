@@ -144,6 +144,7 @@ plot_discrete_palette <- function(colors_n)  {
 #' @param palette_reverse Optional boolean indicating whether the colors in the
 #'     palette should be reversed, defaults to FALSE.
 #' @inheritParams theme_rub
+#' @family rub_plot_types
 #'
 #' @return A ggplot object
 #' @export
@@ -328,6 +329,7 @@ rub_plot_type_1 <- function(df,
 #' @inheritParams theme_rub
 #' @param max_width_strip_label Optional maximum width in characters for the facet
 #'     label passed to ggplot2::label_wrap_gen.
+#' @family rub_plot_types
 #'
 #' @return A ggplot object
 #' @export
@@ -510,6 +512,7 @@ rub_plot_type_2 <- function(df,
 #'     label passed to ggplot2::label_wrap_gen.
 #' @inheritParams rub_plot_type_1
 #' @inheritParams theme_rub
+#' @family rub_plot_types
 #'
 #' @return A ggplot object
 #' @export
@@ -752,6 +755,7 @@ rub_plot_type_3 <- function(df, x_var,
 #' @param filter_cutoff Optional integer marking the cutoff below which all
 #'     value labels are suppressed, defaults to 5.
 #' @inheritParams theme_rub
+#' @family rub_plot_types
 #'
 #' @return A ggplot2 object
 #' @export
@@ -918,6 +922,7 @@ rub_plot_type_4 <- function(df,
 #' @inheritParams rub_plot_type_1
 #' @inheritParams rub_plot_type_4
 #' @inheritParams theme_rub
+#' @family rub_plot_types
 #'
 #' @return A ggplot object
 #' @export
@@ -1364,18 +1369,21 @@ add_label_position <- function(df, x_var,
 }
 
 
-#' Gets number of legend columns based on the plot width and the text base size
+#' Gets appropriate number of legend columns based on the plot, font and active graphics device
 #'
 #' @param legend_text Vector with the legend text
 #' @param legend_key_width Legend key width
 #' @param legend_key_spacing Legend key spacing
 #' @param y_axis_text Vector with the text labels of the y axis
 #' @inheritParams rub_plot_type_3
+#' @inheritParams register_font_df
+#' @references
+#' * [Unneeded warnings when creating plot using non-default fonts #729](https://github.com/yihui/knitr/issues/729)
+#' * [chunk_device in block.R](https://github.com/yihui/knitr/blob/master/R/block.R)
+#' * [Access to chunk label #73](https://github.com/yihui/knitr/issues/73)
 #'
 #' @return Numeric with the number of columns for the legend
 #' @export
-#'
-#' @importFrom graphics strwidth
 #'
 #' @examples
 #' get_legend_columns(
@@ -1398,9 +1406,9 @@ get_legend_columns <- function(
   legend_key_spacing = plot_width / 100,
   plot_width = 6.8,
   base_size = 11,
-  base_family = get_font_df()[["family"]]
+  base_family = get_font_df()[["family"]],
+  systemfonts_suffix = "_systemfonts"
 ) {
-  # TODO: base_family param currently does not work. Replace strwidth with systemfonts::string_width
 
   # If total legend text has fewer than 50 characters, return as many columns
   # as there are elements in the legend text vector
@@ -1410,26 +1418,129 @@ get_legend_columns <- function(
       na.rm = TRUE
     ) < 50
   ) {
-    test <- length(legend_text)
-    return(test)
+    legend_text_length <- length(legend_text)
+    return(legend_text_length)
   }
 
   y_axis_text_max <- y_axis_text[which.max(
     stringr::str_length(y_axis_text)
     )]
 
-  y_axis_text_width <- strwidth(
-    y_axis_text_max,
-    units = "inches",
-    family = base_family,
-    cex = 0.9
+  # Debug information
+  # rlang::inform(
+  #   message = c(
+  #     "Device before opening:",
+  #     glue::glue(
+  #       "Current device is: {.Device}"
+  #     ),
+  #     glue::glue(
+  #       "Available devices are: {.Devices}"
+  #     )
+  #   )
+  # )
+
+  emf_index <- dev.list()["emf"]
+  dev_cur <- dev.cur()
+
+  if(
+    is.null(
+      emf_index
+    ) ||
+    is.na(
+      emf_index
+    )
+  ) {
+
+    file = fs::file_temp(
+      ext = "emf"
+    )
+
+    fs::dir_create(
+      fs::path_temp()
+    )
+
+    width = knitr::opts_current$get(
+      "fig.width"
+    )
+
+    height = knitr::opts_current$get(
+      "fig.height"
+    )
+
+    font_family_systemfonts <- paste0(
+      base_family,
+      systemfonts_suffix
+    )
+
+    # If no graphics device "emf" in list of devices, open it
+    devEMF::emf(
+      file = file,
+      # file = fs::file_temp(),
+      width = width,
+      height = height,
+      pointsize = base_size,
+      family = font_family_systemfonts,
+      coordDPI = 72,
+      emfPlus = TRUE,
+      emfPlusRaster = TRUE,
+      emfPlusFontToPath = TRUE
+    )
+  } else {
+    # Switch to emf device in list of devices
+    dev.set(
+      which = emf_index
+    )
+  }
+
+  y_axis_text_width <- systemfonts::string_widths_dev(
+    strings = y_axis_text_max,
+    family = paste0(
+      base_family,
+      "_systemfonts"
+    ),
+    face = 1,
+    size = base_size,
+    cex = 0.9,
+    unit = "inches"
   )
 
-  txt_width <- strwidth(
-    legend_text,
-    units = "inches",
-    family = base_family,
-    cex = 0.9
+  txt_width <- systemfonts::string_widths_dev(
+    strings = legend_text,
+    family = paste0(
+      base_family,
+      "_systemfonts"
+    ),
+    face = 1,
+    size = base_size,
+    cex = 0.9,
+    unit = "inches"
+  )
+
+  # Debug information
+  # rlang::inform(
+  #   message = c(
+  #     "Device after opening:",
+  #     glue::glue(
+  #       "Current device is: {.Device}"
+  #     ),
+  #     glue::glue(
+  #       "Available devices are: {.Devices}"
+  #     ),
+  #     glue::glue(
+  #       "Systemfonts family is: {unique(systemfonts::registry_fonts()[['family']])}"
+  #     ),
+  #     glue::glue(
+  #       "y_axis_text_width is: {y_axis_text_width}"
+  #     ),
+  #     glue::glue(
+  #       "max_txt_width is: {max(txt_width)}"
+  #     )
+  #   )
+  # )
+
+  # Switch back to old device
+  dev.set(
+    dev_cur
   )
 
   col_width <- max(txt_width) +
