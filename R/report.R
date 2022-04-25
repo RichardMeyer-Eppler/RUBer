@@ -202,8 +202,12 @@ get_report_nr_by_id <- function(
 #' @param path_figure_template Character, file path to write the dynamically generated figure chunks
 #'     to file (useful for debugging purposes). Defaults to
 #'     `fs::file_temp(pattern = "figure_template_", ext = ".Rmd")`
+#' @param ... Arguments passed on to `render_report`
 #' @return Invisibly returns `p_df`
 #' @export
+#'
+#' @importFrom officedown rdocx_document
+#' @importFrom showtext showtext_auto
 #'
 #' @example inst/examples/render_report.R
 render_report <- function(
@@ -258,7 +262,7 @@ render_report <- function(
 	}
 
   rmarkdown::render(
-    rmd_template,
+    input = rmd_template,
     params = list(
       p_report_nr = report_nr,
       p_title = title,

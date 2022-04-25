@@ -54,6 +54,8 @@ to file (useful for debugging purposes). Defaults to
 
 \item{post_process}{Boolean, whether \code{post_process} gets called on the
 output file}
+
+\item{...}{Arguments passed on to \code{render_report}}
 }
 \value{
 Invisibly returns \code{p_df}
