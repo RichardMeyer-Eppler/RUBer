@@ -70,6 +70,10 @@ register_font_df(
   font_df = font_df
 )
 
+# knitr::opts_knit$set(
+#   base.dir = fs::path_temp()
+# )
+
 knitr::opts_chunk$set(
   echo = FALSE,
   warning = FALSE,
@@ -85,6 +89,8 @@ knitr::opts_chunk$set(
   ),
   fig.width = 6.8,
   fig.ext = "emf"
+  # http://www.randigriffin.com/2017/04/25/how-to-knit-for-mysite.html
+#  ,fig.path = "testxxx/figure/"
 )
 
 gtsummary::theme_gtsummary_language(
@@ -103,7 +109,7 @@ if(is.null(params$p_df)) {
     report_nr = as.integer(
       params$p_report_nr
     )
-  )
+  ) 
 } else {
   df <- params$p_df
 }
