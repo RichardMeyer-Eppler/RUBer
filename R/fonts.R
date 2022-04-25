@@ -101,9 +101,15 @@ get_font_df <- function(
   return(df_font)
 }
 
-#' Register font contained in font data frame
+#' Register font using `sysfonts::font_add` and `systemfonts::register_font`
+#'
+#' Registration with `sysfonts::font_add` exclusively works for `showtext`, while
+#' `systemfonts::register_font` is required for the calculation of string widths, for instance.
+#' The family name must be unique across the two registrations, so the `systemfonts` registration
+#' uses a suffix behind the family name.
 #'
 #' @param font_df Data frame with one row obtained by `RUBer::get_font_df()`
+#' @param systemfonts_suffix Suffix attached to the font family name in `systemfonts::register_font`
 #'
 #' @return Invisibly returns font family
 #' @export
@@ -111,7 +117,8 @@ get_font_df <- function(
 #' @examples
 #' register_font_df()
 register_font_df <- function(
-  font_df = RUBer::get_font_df()
+  font_df = RUBer::get_font_df(),
+  systemfonts_suffix = "_systemfonts"
 ) {
 
   font_family <- font_df[["family"]]
@@ -133,6 +140,14 @@ register_font_df <- function(
       family = font_family,
       regular = font_path
     )
+
+    systemfonts::register_font(
+      name = paste0(
+        font_family,
+        systemfonts_suffix
+      ),
+      plain = font_path
+    )
   }
 
   return(
@@ -142,8 +157,9 @@ register_font_df <- function(
   )
 }
 
-#' Registers RUB Flama font to be used with `showtext` package
+#' Registers RUB Flama font to be used with the `showtext` and `systemfonts` packages
 #'
+#' @inheritParams register_font_df
 #' @param family Character, font family, defaults to
 #'     `get_font_df()[["family"]]`
 #' @param regular Character, path of the font file for "regular" font style
@@ -165,7 +181,8 @@ register_font_flama <- function(
   regular = get_font_df()[["path"]],
   bold = get_font_df("RubFlama-Bold.ttf")[["path"]],
   italic = get_font_df("RubFlama-Italic.ttf")[["path"]],
-  bolditalic = get_font_df("RubFlama-BoldItalic.ttf")[["path"]]
+  bolditalic = get_font_df("RubFlama-BoldItalic.ttf")[["path"]],
+  systemfonts_suffix = "_systemfonts"
 ) {
 
   sysfonts::font_add(
@@ -176,10 +193,22 @@ register_font_flama <- function(
     bolditalic = bolditalic
   )
 
+  systemfonts::register_font(
+    name = paste0(
+      family,
+      systemfonts_suffix
+    ),
+    plain = regular,
+    bold = bold,
+    italic = italic,
+    bolditalic = bolditalic
+  )
+
 }
 
-#' Registers RUB Scala TZ font to be used with `showtext` package
+#' Registers RUB Scala TZ font to be used with `showtext` and `systemfonts` packages
 #'
+#' @inheritParams register_font_df
 #' @param family Character, font family, defaults to
 #'     `get_font_df("RUB Scala TZ.ttf")[["family"]]`
 #' @param regular Character, path of the font file for "regular" font style
@@ -201,12 +230,24 @@ register_font_scala <- function(
   regular = get_font_df("RUB Scala TZ.ttf")[["path"]],
   bold = get_font_df("RUB Scala TZ Bold.ttf")[["path"]],
   italic = get_font_df("RUB Scala TZ Italic.ttf")[["path"]],
-  bolditalic = get_font_df("RUB Scala TZ Bold Italic.ttf")[["path"]]
+  bolditalic = get_font_df("RUB Scala TZ Bold Italic.ttf")[["path"]],
+  systemfonts_suffix = "_systemfonts"
 ) {
 
   sysfonts::font_add(
     family = family,
     regular = regular,
+    bold = bold,
+    italic = italic,
+    bolditalic = bolditalic
+  )
+
+  systemfonts::register_font(
+    name = paste0(
+      family,
+      systemfonts_suffix
+    ),
+    plain = regular,
     bold = bold,
     italic = italic,
     bolditalic = bolditalic
