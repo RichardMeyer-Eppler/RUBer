@@ -159,7 +159,7 @@ tpl_plot_figure <- function(
   font_family = get_font_df()[["family"]],
   function_call = "RUBer::plot_figure",
   tab_placeholder = "PLACEHOLDER_TAB",
-  suppress_warnings = TRUE
+  suppress_warnings = FALSE
 ) {
 
   get_chunk_texts <- function(
@@ -172,7 +172,7 @@ tpl_plot_figure <- function(
     list(
       c(
         glue::glue(
-          "\n```{r fig-<<chunk_label>>, fig.cap = '<<tab_placeholder>><<figure_caption>>', fig.height= <<figure_height>>, warning = <<!suppress_warnings>>}",
+          "\n```{r fig-<<chunk_label>>, fig.cap = '<<tab_placeholder>><<figure_caption>>', fig.height = <<figure_height>>, fig.showtext = TRUE, warning = <<!suppress_warnings>>}",
           .open = "<<",
           .close = ">>",
           .trim = FALSE
