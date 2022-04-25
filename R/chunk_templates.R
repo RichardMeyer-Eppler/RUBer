@@ -146,7 +146,7 @@ tpl_subheading <- function(
 #'     tabs, which is why a placeholder text is needed that will get replaced
 #'     with tabs in post-processing, defaults to "PLACEHOLDER_TAB"
 #' @param suppress_warnings Boolean, whether to suppress the warnings generated
-#'     by this code chunk, defaults to `TRUE`.
+#'     by this code chunk, defaults to `FALSE`.
 #'
 #' @return List of character vectors with chunk texts
 #' @export
