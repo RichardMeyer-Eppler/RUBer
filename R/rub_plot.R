@@ -1385,6 +1385,8 @@ add_label_position <- function(df, x_var,
 #' @return Numeric with the number of columns for the legend
 #' @export
 #'
+#' @importFrom grDevices dev
+#'
 #' @examples
 #' get_legend_columns(
 #'   legend_text = c(
