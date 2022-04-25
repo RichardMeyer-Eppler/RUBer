@@ -1385,7 +1385,9 @@ add_label_position <- function(df, x_var,
 #' @return Numeric with the number of columns for the legend
 #' @export
 #'
-#' @importFrom grDevices dev
+#' @importFrom grDevices dev.list
+#' @importFrom grDevices dev.cur
+#' @importFrom grDevices dev.set
 #'
 #' @examples
 #' get_legend_columns(
@@ -1441,7 +1443,7 @@ get_legend_columns <- function(
   #   )
   # )
 
-  emf_index <- dev.list()["emf"]
+  emf_index <- dev.list()["emf"][1]
   dev_cur <- dev.cur()
 
   if(
