@@ -111,20 +111,6 @@
 </ul>
 </div>
 <div class="section level2">
-<h2 id="guiding-design-principles">Guiding design principles<a class="anchor" aria-label="anchor" href="#guiding-design-principles"></a>
-</h2>
-<ol style="list-style-type: decimal">
-<li>Output format for the paramterized reporting is Microsoft Word, so that the reports can be shared and edited as widely as possible.</li>
-<li>The generated reports adhere to the RUB corporate design and are ready for printing as is, with no further adjustments to layout or content required.</li>
-<li>As far as possible, the data manipulation is done independently of all the reporting steps. The idea is that the data passed to the R Markdown template can come from any source, not just R. While the data wrangling for the eigth (2018-19) and ninth (2019-21) reporting cycle for teaching <em>was</em> done in R, this is not a requirement. If there is a need to create or alter datasets using Microsoft Excel, it is possible to use these datasets as basis for all reporting functions of <code>RUBer</code>.</li>
-</ol>
-</div>
-<div class="section level2">
-<h2 id="project-background">Project background<a class="anchor" aria-label="anchor" href="#project-background"></a>
-</h2>
-<p>Every three years, the teaching and program quality of all degree programs at the University of Bochum is assessed (<a href="https://einrichtungen.ruhr-uni-bochum.de/de/lehrberichterstattung" class="external-link"><em>Lehrberichterstattung</em></a>). The university administration assists this process by providing data reports that combine descriptive higher education statistics with survey data. The University of Bochum regularly collects survey data in the study entry phase (<em>Studieneingangsbefragung</em>), mid-study (<em>Studienverlaufsbefragung</em>) and for its graduates (<em>AbsolventInnenbefragung</em>, collected through the nationwide <a href="https://istat.de/de/koab_a.html" class="external-link">Graduate Survey Cooperation Project (KOAB)</a>). Previously, for the data reports, these rich data sources were analyzed and visualized by hand. <code>RUBer</code> automates this process, creating large numbers of print-ready reports in Microsoft Word.</p>
-</div>
-<div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>Install the development version from GitHub with:</p>
@@ -137,6 +123,60 @@
   repo <span class="op">=</span> <span class="st">"RichardMeyer-Eppler/RUBer"</span>,
   build_vignettes <span class="op">=</span> <span class="cn">TRUE</span>
   <span class="op">)</span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://richardmeyer-eppler.github.io/RUBer" class="external-link">RUBer</a></span><span class="op">)</span>
+
+<span class="co"># RUBer comes with two example data sets with generated data</span>
+
+<span class="co"># df_report contains meta data about each of the 68 reports</span>
+<span class="va">df_report</span>
+<span class="co">#&gt; # A tibble: 68 x 6</span>
+<span class="co">#&gt;   report_nr report_type_id report_title        report_author file_name subfolder</span>
+<span class="co">#&gt;       &lt;int&gt; &lt;chr&gt;          &lt;glue&gt;              &lt;chr&gt;         &lt;glue&gt;    &lt;chr&gt;    </span>
+<span class="co">#&gt; 1         1 STG            RUBer Example Repo~ Example 01    RUBer_Ex~ Geistesw~</span>
+<span class="co">#&gt; 2         2 STG            RUBer Example Repo~ Example 02, ~ RUBer_Ex~ Geistesw~</span>
+<span class="co">#&gt; 3         3 STG            RUBer Example Repo~ Example 04, ~ RUBer_Ex~ Geistesw~</span>
+<span class="co">#&gt; 4         4 STG            RUBer Example Repo~ Example 08, ~ RUBer_Ex~ Geistesw~</span>
+<span class="co">#&gt; 5         5 STG            RUBer Example Repo~ Example 14, ~ RUBer_Ex~ Geistesw~</span>
+<span class="co">#&gt; # ... with 63 more rows</span>
+
+<span class="co"># df_example contains the data required to dynamically create all figures</span>
+<span class="va">df_example</span>
+<span class="co">#&gt; # A tibble: 164,794 x 24</span>
+<span class="co">#&gt;   report_nr figure_nr report_type_id x     x_label    y     y_axis_label    fill</span>
+<span class="co">#&gt;       &lt;int&gt;     &lt;int&gt; &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;          &lt;dbl&gt;</span>
+<span class="co">#&gt; 1         1         1 STG            20152 WiSe 15/16 526   Studienfälle ~     2</span>
+<span class="co">#&gt; 2         1         1 STG            20152 WiSe 15/16 616   Studienfälle ~    20</span>
+<span class="co">#&gt; 3         1         1 STG            20152 WiSe 15/16 170   Studienfälle ~    21</span>
+<span class="co">#&gt; 4         1         1 STG            20162 WiSe 16/17 520   Studienfälle ~     2</span>
+<span class="co">#&gt; 5         1         1 STG            20162 WiSe 16/17 576   Studienfälle ~    20</span>
+<span class="co">#&gt; # ... with 164,789 more rows, and 16 more variables: fill_label &lt;chr&gt;,</span>
+<span class="co">#&gt; #   facet &lt;chr&gt;, group &lt;dbl&gt;, group_label &lt;chr&gt;, source_caption &lt;chr&gt;,</span>
+<span class="co">#&gt; #   question_txt &lt;chr&gt;, figure_type_id &lt;int&gt;, figure_caption &lt;glue&gt;,</span>
+<span class="co">#&gt; #   heading &lt;chr&gt;, subheading &lt;chr&gt;, is_heading &lt;lgl&gt;, is_subheading &lt;lgl&gt;,</span>
+<span class="co">#&gt; #   report_author &lt;chr&gt;, report_title &lt;glue&gt;, file_name &lt;glue&gt;,</span>
+<span class="co">#&gt; #   figure_height &lt;dbl&gt;</span>
+
+<span class="co"># This generates a Word report using df_report and df_example</span>
+<span class="co">## render_report()</span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="guiding-design-principles">Guiding design principles<a class="anchor" aria-label="anchor" href="#guiding-design-principles"></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li>Output format for the paramterized reporting is Microsoft Word, so that the reports can be shared and edited as widely as possible.</li>
+<li>The generated reports adhere to the RUB corporate design and are ready for printing as is, with no further adjustments to layout or content required.</li>
+<li>As far as possible, the data manipulation is done independently of all the reporting steps. The idea is that the data passed to the R Markdown template can come from any source, not just R. While the data wrangling for the eigth (2018-19) and ninth (2019-21) reporting cycle for teaching <em>was</em> done in R, this is not a requirement. If there is a need to create or alter datasets using Microsoft Excel, it is possible to use these datasets as basis for all reporting functions of <code>RUBer</code>.</li>
+</ol>
+</div>
+<div class="section level2">
+<h2 id="project-background">Project background<a class="anchor" aria-label="anchor" href="#project-background"></a>
+</h2>
+<p>Every three years, the teaching and program quality of all degree programs at the University of Bochum is assessed (<a href="https://einrichtungen.ruhr-uni-bochum.de/de/lehrberichterstattung" class="external-link"><em>Lehrberichterstattung</em></a>). The university administration assists this process by providing data reports that combine descriptive higher education statistics with survey data. The University of Bochum regularly collects survey data in the study entry phase (<em>Studieneingangsbefragung</em>), mid-study (<em>Studienverlaufsbefragung</em>) and for its graduates (<em>AbsolventInnenbefragung</em>, collected through the nationwide <a href="https://istat.de/de/koab_a.html" class="external-link">Graduate Survey Cooperation Project (KOAB)</a>). Previously, for the data reports, these rich data sources were analyzed and visualized by hand. <code>RUBer</code> automates this process, creating large numbers of print-ready reports in Microsoft Word.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
@@ -173,9 +213,9 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
+<li><a href="https://github.com/RichardMeyer-Eppler/RUBer/actions" class="external-link"><img src="https://github.com/RichardMeyer-Eppler/RUBer/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://www.tidyverse.org/lifecycle/#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
 <li><a href="https://cran.r-project.org/package=RUBer" class="external-link"><img src="https://www.r-pkg.org/badges/version/RUBer" alt="CRAN status"></a></li>
-<li><a href="https://github.com/RichardMeyer-Eppler/RUBer/actions" class="external-link"><img src="https://github.com/RichardMeyer-Eppler/RUBer/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
 
