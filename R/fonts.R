@@ -45,7 +45,11 @@ get_fallback_font_df <- function(
         fs::path_file(
           fallback_font[["path"]]
         )
-      )
+      ),
+      .data[["index"]] == 0L
+    ) %>%
+    dplyr::slice_head(
+      n = 1
     )
 
   return(df_font)
