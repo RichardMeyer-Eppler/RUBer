@@ -73,6 +73,9 @@ get_font_df <- function(
         )
       ) == tolower(font_file),
       .data[["index"]] == 0L
+    ) %>%
+    dplyr::slice_head(
+      n = 1
     )
 
   if(
