@@ -5,11 +5,11 @@
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/RichardMeyer-Eppler/RUBer/workflows/R-CMD-check/badge.svg)](https://github.com/RichardMeyer-Eppler/RUBer/actions)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/RUBer)](https://cran.r-project.org/package=RUBer)
-[![R-CMD-check](https://github.com/RichardMeyer-Eppler/RUBer/workflows/R-CMD-check/badge.svg)](https://github.com/RichardMeyer-Eppler/RUBer/actions)
 <!-- badges: end -->
 
 ## Overview
@@ -50,6 +50,61 @@ as functions making the RUB corporate design colors available.
     algorithmically generated, the other columns, though, are mostly
     identical to the confidential production dataset.
 
+## Installation
+
+Install the development version from GitHub with:
+
+``` r
+# If package "remotes" is not installed, install it first:
+# install.packages("remotes")
+
+# Install RUBer from Github
+remotes::install_github(
+  repo = "RichardMeyer-Eppler/RUBer",
+  build_vignettes = TRUE
+  )
+```
+
+## Usage
+
+``` r
+library(RUBer)
+
+# RUBer comes with two example data sets with generated data
+
+# df_report contains meta data about each of the 68 reports
+df_report
+#> # A tibble: 68 x 6
+#>   report_nr report_type_id report_title        report_author file_name subfolder
+#>       <int> <chr>          <glue>              <chr>         <glue>    <chr>    
+#> 1         1 STG            RUBer Example Repo~ Example 01    RUBer_Ex~ Geistesw~
+#> 2         2 STG            RUBer Example Repo~ Example 02, ~ RUBer_Ex~ Geistesw~
+#> 3         3 STG            RUBer Example Repo~ Example 04, ~ RUBer_Ex~ Geistesw~
+#> 4         4 STG            RUBer Example Repo~ Example 08, ~ RUBer_Ex~ Geistesw~
+#> 5         5 STG            RUBer Example Repo~ Example 14, ~ RUBer_Ex~ Geistesw~
+#> # ... with 63 more rows
+
+# df_example contains the data required to dynamically create all figures
+df_example
+#> # A tibble: 164,794 x 24
+#>   report_nr figure_nr report_type_id x     x_label    y     y_axis_label    fill
+#>       <int>     <int> <chr>          <chr> <chr>      <chr> <chr>          <dbl>
+#> 1         1         1 STG            20152 WiSe 15/16 526   Studienfälle ~     2
+#> 2         1         1 STG            20152 WiSe 15/16 616   Studienfälle ~    20
+#> 3         1         1 STG            20152 WiSe 15/16 170   Studienfälle ~    21
+#> 4         1         1 STG            20162 WiSe 16/17 520   Studienfälle ~     2
+#> 5         1         1 STG            20162 WiSe 16/17 576   Studienfälle ~    20
+#> # ... with 164,789 more rows, and 16 more variables: fill_label <chr>,
+#> #   facet <chr>, group <dbl>, group_label <chr>, source_caption <chr>,
+#> #   question_txt <chr>, figure_type_id <int>, figure_caption <glue>,
+#> #   heading <chr>, subheading <chr>, is_heading <lgl>, is_subheading <lgl>,
+#> #   report_author <chr>, report_title <glue>, file_name <glue>,
+#> #   figure_height <dbl>
+
+# This generates a Word report using df_report and df_example
+## render_report()
+```
+
 ## Guiding design principles
 
 1.  Output format for the paramterized reporting is Microsoft Word, so
@@ -81,18 +136,3 @@ Survey Cooperation Project (KOAB)](https://istat.de/de/koab_a.html)).
 Previously, for the data reports, these rich data sources were analyzed
 and visualized by hand. `RUBer` automates this process, creating large
 numbers of print-ready reports in Microsoft Word.
-
-## Installation
-
-Install the development version from GitHub with:
-
-``` r
-# If package "remotes" is not installed, install it first:
-# install.packages("remotes")
-
-# Install RUBer from Github
-remotes::install_github(
-  repo = "RichardMeyer-Eppler/RUBer",
-  build_vignettes = TRUE
-  )
-```
