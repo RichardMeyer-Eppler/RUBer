@@ -49,7 +49,7 @@ get_fallback_font_df <- function(
       .data[["index"]] == 0L
     ) %>%
     dplyr::slice_head(
-      n = 1
+      n = 1L
     )
 
   return(df_font)
@@ -79,7 +79,7 @@ get_font_df <- function(
       .data[["index"]] == 0L
     ) %>%
     dplyr::slice_head(
-      n = 1
+      n = 1L
     )
 
   if(
