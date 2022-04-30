@@ -528,7 +528,7 @@ E-Mail: [john.doe@domain.com](mailto:john.doe@domain.com)
 #### Ansprechpartner Förderungen für Weiterentwicklung der Lehre
 
 > **JOHN DOE**  
-> Tel.: 0234 - 32-2XXXXX   
+> Tel.: 0234 - 32-XXXXX   
 E-Mail: [john.doe@domain.com](mailto:john.doe@domain.com)
 
 [https://uni.ruhr-uni-bochum.de/de/lehre-der-ruhr-universitaet](https://uni.ruhr-uni-bochum.de/de/lehre-der-ruhr-universitaet)  
