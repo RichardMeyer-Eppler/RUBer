@@ -60,19 +60,21 @@ wraps <code>render_report</code> in <code><a href="https://purrr.tidyverse.org/r
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">render_report</span><span class="op">(</span>
-  p_df <span class="op">=</span> <span class="fu"><a href="filter_report.html">filter_report</a></span><span class="op">(</span><span class="fu">RUBer</span><span class="fu">::</span><span class="va"><a href="df_example.html">df_example</a></span>, <span class="fl">6L</span><span class="op">)</span>,
+  p_df <span class="op">=</span> <span class="fu"><a href="filter_report.html">filter_report</a></span><span class="op">(</span>df <span class="op">=</span> <span class="fu">RUBer</span><span class="fu">::</span><span class="va"><a href="df_example.html">df_example</a></span>, report_nr <span class="op">=</span> <span class="fl">6L</span><span class="op">)</span>,
   p_df_stg <span class="op">=</span> <span class="cn">NULL</span>,
   report_nr <span class="op">=</span> <span class="fl">6L</span>,
-  rmd_template <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"rmarkdown"</span>, <span class="st">"templates"</span>, <span class="st">"datenreport-2022"</span>, <span class="st">"skeleton"</span>,
-    <span class="st">"skeleton.Rmd"</span>, package <span class="op">=</span> <span class="st">"RUBer"</span><span class="op">)</span>,
+  rmd_template <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path_package.html" class="external-link">path_package</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"RUBer"</span>, <span class="st">"rmarkdown"</span>, <span class="st">"templates"</span>,
+    <span class="st">"datenreport-2022"</span>, <span class="st">"skeleton"</span>, <span class="st">"skeleton.Rmd"</span><span class="op">)</span>,
   output_directory <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/file_temp.html" class="external-link">path_temp</a></span><span class="op">(</span><span class="op">)</span>,
-  output_filename <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path_file.html" class="external-link">path_file</a></span><span class="op">(</span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/file_temp.html" class="external-link">file_temp</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"report"</span>, ext <span class="op">=</span> <span class="st">".docx"</span><span class="op">)</span><span class="op">)</span>,
+  output_filename <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path_file.html" class="external-link">path_file</a></span><span class="op">(</span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/file_temp.html" class="external-link">file_temp</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"RUBer_report_"</span>, ext <span class="op">=</span>
+    <span class="st">".docx"</span><span class="op">)</span><span class="op">)</span>,
   title <span class="op">=</span> <span class="st">"Title"</span>,
   author <span class="op">=</span> <span class="st">"Author"</span>,
   date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>, format <span class="op">=</span> <span class="st">"%B %Y"</span><span class="op">)</span>,
   font_file <span class="op">=</span> <span class="st">"RubFlama-Regular.ttf"</span>,
   path_figure_template <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/file_temp.html" class="external-link">file_temp</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"figure_template_"</span>, ext <span class="op">=</span> <span class="st">".Rmd"</span><span class="op">)</span>,
-  post_process <span class="op">=</span> <span class="cn">TRUE</span>
+  post_process <span class="op">=</span> <span class="cn">TRUE</span>,
+  quiet <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span>
 
 <span class="fu">render_report_safely</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></code></pre></div>
@@ -111,8 +113,9 @@ to file (useful for debugging purposes). Defaults to
 <dt>post_process</dt>
 <dd><p>Boolean, whether <code>post_process</code> gets called on the
 output file</p></dd>
-<dt>...</dt>
-<dd><p>Arguments passed on to <code>render_report</code></p></dd>
+<dt>quiet</dt>
+<dd><p>An option to suppress printing during rendering from knitr, pandoc command line and
+others. Passed on to <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">rmarkdown::render</a></code></p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -177,20 +180,6 @@ output file</p></dd>
 <span class="r-in">    output_directory <span class="op">=</span> <span class="va">output_directory</span>,</span>
 <span class="r-in">    output_filename <span class="op">=</span> <span class="va">output_filename</span></span>
 <span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="kw">if</span><span class="op">(</span></span>
-<span class="r-in">    <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/file_access.html" class="external-link">file_exists</a></span><span class="op">(</span></span>
-<span class="r-in">      <span class="va">path_report_docx</span></span>
-<span class="r-in">    <span class="op">)</span></span>
-<span class="r-in">  <span class="op">)</span><span class="op">{</span></span>
-<span class="r-in">    <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">inform</a></span><span class="op">(</span></span>
-<span class="r-in">      message <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span class="r-in">        <span class="st">"i"</span> <span class="op">=</span> <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span></span>
-<span class="r-in">          <span class="st">'File "{path_report_docx}" was written successfully.'</span></span>
-<span class="r-in">        <span class="op">)</span></span>
-<span class="r-in">      <span class="op">)</span></span>
-<span class="r-in">    <span class="op">)</span></span>
-<span class="r-in">  <span class="op">}</span></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
@@ -423,10 +412,10 @@ output file</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> output file: skeleton.knit.md</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /usr/bin/pandoc +RTS -K512m -RTS skeleton.knit.md --to docx --from markdown+autolink_bare_uris+tex_math_single_backslash --output /tmp/RtmpBjQUg1/RUBer_report_330814a0de10.docx --lua-filter /home/runner/work/_temp/Library/rmarkdown/rmarkdown/lua/pagebreak.lua --table-of-contents --toc-depth 2 --highlight-style tango --reference-doc /home/runner/work/_temp/Library/RUBer/rmarkdown/templates/datenreport-2022/skeleton/rub_reference_2021.docx --filter /usr/bin/pandoc-citeproc </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /usr/bin/pandoc +RTS -K512m -RTS skeleton.knit.md --to docx --from markdown+autolink_bare_uris+tex_math_single_backslash --output /tmp/RtmpKLHIrD/RUBer_report_32c17830271f.docx --lua-filter /home/runner/work/_temp/Library/rmarkdown/rmarkdown/lua/pagebreak.lua --table-of-contents --toc-depth 2 --highlight-style tango --reference-doc /home/runner/work/_temp/Library/RUBer/rmarkdown/templates/datenreport-2022/skeleton/rub_reference_2021.docx --filter /usr/bin/pandoc-citeproc </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Output created: /tmp/RtmpBjQUg1/RUBer_report_330814a0de10.docx</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">ℹ</span> File "/tmp/RtmpBjQUg1/RUBer_report_330814a0de10.docx" was written successfully.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Output created: /tmp/RtmpKLHIrD/RUBer_report_32c17830271f.docx</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">ℹ</span> Report "/tmp/RtmpKLHIrD/RUBer_report_32c17830271f.docx" was written successfully.</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
