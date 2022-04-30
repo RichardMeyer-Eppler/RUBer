@@ -8,13 +8,15 @@
 #' @return Filtered data frame with data for the report nr
 #' @export
 #'
+#' @importFrom rlang .env
+#'
 #' @examples
 #' filter_report(df_example, report_nr = 12)
 filter_report <- function(df, report_nr) {
 
   filtered_df <- df %>%
     dplyr::filter(
-      report_nr == !!report_nr
+      report_nr == .env[["report_nr"]]
     )
 
   return(filtered_df)
@@ -33,15 +35,19 @@ filter_report <- function(df, report_nr) {
 get_file_path <- function(
   file_directory = "output",
   file_name = fs::path_file(
-    tempfile(
-      fileext = ".docx"
+    fs::file_temp(
+      ext = ".docx"
     )
   )
 )  {
-  here::here(
+  file_path <- fs::path(
     file_directory,
     file_name
   )
+
+  path_norm <- fs::path_norm(file_path)
+
+  return(path_norm)
 }
 
 #' Get all unique values of `report_nr` for a `report_type_id`
@@ -202,7 +208,10 @@ get_report_nr_by_id <- function(
 #' @param path_figure_template Character, file path to write the dynamically generated figure chunks
 #'     to file (useful for debugging purposes). Defaults to
 #'     `fs::file_temp(pattern = "figure_template_", ext = ".Rmd")`
+#' @param quiet An option to suppress printing during rendering from knitr, pandoc command line and
+#'     others. Passed on to `rmarkdown::render`
 #' @param ... Arguments passed on to `render_report`
+#'
 #' @return Invisibly returns `p_df`
 #' @export
 #'
@@ -211,21 +220,24 @@ get_report_nr_by_id <- function(
 #'
 #' @example inst/examples/render_report.R
 render_report <- function(
-  p_df = filter_report(RUBer::df_example, 6L),
+  p_df = filter_report(
+    df = RUBer::df_example,
+    report_nr = 6L
+  ),
   p_df_stg = NULL,
   report_nr = 6L,
-  rmd_template = system.file(
+  rmd_template = fs::path_package(
+    package = "RUBer",
     "rmarkdown",
     "templates",
     "datenreport-2022",
     "skeleton",
-    "skeleton.Rmd",
-    package = "RUBer"
+    "skeleton.Rmd"
   ),
   output_directory = fs::path_temp(),
   output_filename = fs::path_file(
     fs::file_temp(
-      pattern = "report",
+      pattern = "RUBer_report_",
       ext = ".docx"
     )
   ),
@@ -240,7 +252,8 @@ render_report <- function(
     pattern = "figure_template_",
     ext = ".Rmd"
   ),
-  post_process = TRUE
+  post_process = TRUE,
+  quiet = FALSE
 ) {
 
   df <- p_df
@@ -273,8 +286,8 @@ render_report <- function(
       p_path_figure_template = path_figure_template,
       p_font_file = font_file
     ),
-    encoding = "UTF-8",
-    output_file = file_path
+    output_file = file_path,
+    quiet = quiet
   )
 
   if(post_process) {
@@ -283,6 +296,20 @@ render_report <- function(
       old_path = file_path,
       new_path = file_path,
       overwrite = TRUE
+    )
+  }
+
+  if(
+    fs::file_exists(
+      file_path
+    )
+  ){
+    rlang::inform(
+      message = c(
+        "i" = glue::glue(
+          'Report "{file_path}" was written successfully.'
+        )
+      )
     )
   }
 
