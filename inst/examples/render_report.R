@@ -54,18 +54,4 @@ if(pandoc_available){
     output_directory = output_directory,
     output_filename = output_filename
   )
-
-  if(
-    fs::file_exists(
-      path_report_docx
-    )
-  ){
-    rlang::inform(
-      message = c(
-        "i" = glue::glue(
-          'File "{path_report_docx}" was written successfully.'
-        )
-      )
-    )
-  }
 }
