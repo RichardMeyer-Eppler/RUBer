@@ -6,19 +6,21 @@
 \title{Render a single parametric report as Word file}
 \usage{
 render_report(
-  p_df = filter_report(RUBer::df_example, 6L),
+  p_df = filter_report(df = RUBer::df_example, report_nr = 6L),
   p_df_stg = NULL,
   report_nr = 6L,
-  rmd_template = system.file("rmarkdown", "templates", "datenreport-2022", "skeleton",
-    "skeleton.Rmd", package = "RUBer"),
+  rmd_template = fs::path_package(package = "RUBer", "rmarkdown", "templates",
+    "datenreport-2022", "skeleton", "skeleton.Rmd"),
   output_directory = fs::path_temp(),
-  output_filename = fs::path_file(fs::file_temp(pattern = "report", ext = ".docx")),
+  output_filename = fs::path_file(fs::file_temp(pattern = "RUBer_report_", ext =
+    ".docx")),
   title = "Title",
   author = "Author",
   date = format(Sys.Date(), format = "\%B \%Y"),
   font_file = "RubFlama-Regular.ttf",
   path_figure_template = fs::file_temp(pattern = "figure_template_", ext = ".Rmd"),
-  post_process = TRUE
+  post_process = TRUE,
+  quiet = FALSE
 )
 
 render_report_safely(...)
@@ -55,7 +57,8 @@ to file (useful for debugging purposes). Defaults to
 \item{post_process}{Boolean, whether \code{post_process} gets called on the
 output file}
 
-\item{...}{Arguments passed on to \code{render_report}}
+\item{quiet}{An option to suppress printing during rendering from knitr, pandoc command line and
+others. Passed on to \code{rmarkdown::render}}
 }
 \value{
 Invisibly returns \code{p_df}
@@ -121,19 +124,5 @@ if(pandoc_available){
     output_directory = output_directory,
     output_filename = output_filename
   )
-
-  if(
-    fs::file_exists(
-      path_report_docx
-    )
-  ){
-    rlang::inform(
-      message = c(
-        "i" = glue::glue(
-          'File "{path_report_docx}" was written successfully.'
-        )
-      )
-    )
-  }
 }
 }

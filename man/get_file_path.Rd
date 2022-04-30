@@ -6,7 +6,7 @@
 \usage{
 get_file_path(
   file_directory = "output",
-  file_name = fs::path_file(tempfile(fileext = ".docx"))
+  file_name = fs::path_file(fs::file_temp(ext = ".docx"))
 )
 }
 \arguments{
