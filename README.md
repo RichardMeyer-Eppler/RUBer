@@ -102,7 +102,9 @@ df_example
 #> #   figure_height <dbl>
 
 # This generates a Word report using df_report and df_example
-## render_report()
+render_report(quiet = TRUE)
+#> i Report "C:/Users/Richard/AppData/Local/Temp/Rtmpa4Jpt6/
+#> RUBer_report_1c9429401b2b.docx" was written successfully.
 ```
 
 ## Guiding design principles

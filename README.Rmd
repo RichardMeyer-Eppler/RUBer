@@ -55,7 +55,7 @@ remotes::install_github(
 
 ## Usage
 
-```{r usage, eval = c(1:12), echo = -1}
+```{r usage, echo = -1}
 library(tibble)
 library(RUBer)
 
@@ -68,7 +68,7 @@ df_report
 df_example
 
 # This generates a Word report using df_report and df_example
-render_report()
+render_report(quiet = TRUE)
 ```
 
 
