@@ -59,6 +59,8 @@ output file}
 
 \item{quiet}{An option to suppress printing during rendering from knitr, pandoc command line and
 others. Passed on to \code{rmarkdown::render}}
+
+\item{...}{Arguments passed on to \code{render_report}}
 }
 \value{
 Invisibly returns \code{p_df}
