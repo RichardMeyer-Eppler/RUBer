@@ -69,6 +69,7 @@ get_figure_chunk_df <- function(
         function_params = .data[["function_parameters"]]
       ),
       chunk_plot_figure = tpl_plot_figure(
+        function_call = function_call,
         chunk_label = .data[["chunk_label"]],
         figure_caption = .data[["figure_caption"]],
         figure_height = .data[["figure_height"]],
