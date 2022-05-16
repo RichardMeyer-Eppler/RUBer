@@ -564,11 +564,22 @@ rub_plot_type_3 <- function(df, x_var,
     df[[y_var_sym]] <- forcats::fct_rev(df[[y_var_sym]])
   }
 
-  # Levels of y-factor should not exceed character limit
-  levels(df[[y_var_sym]]) <- stringr::str_wrap(
-    levels(df[[y_var_sym]]),
-    width = max_width_axis_text_y
-  )
+  # Levels of y-factor should not exceed character limit.
+  # Only use stringr::str_wrap when no manual line breaks are detected
+  has_line_breaks <- levels(df[[y_var_sym]]) %>%
+    stringr::str_detect(
+      pattern = stringr::fixed(
+        "\n"
+      )
+    ) %>%
+    max()
+
+  if(!has_line_breaks) {
+    levels(df[[y_var_sym]]) <- stringr::str_wrap(
+      levels(df[[y_var_sym]]),
+      width = max_width_axis_text_y
+    )
+  }
 
   # Make sure that the fill variable is plotted in the correct order and with
   # the appropriate labels.
