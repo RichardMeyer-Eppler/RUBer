@@ -7,7 +7,8 @@
 get_figure_chunk_df(
   df,
   font_family = get_font_df()[["family"]],
-  function_call = "RUBer::plot_figure"
+  function_call = "RUBer::plot_figure",
+  heading_starting_lvl = 1L
 )
 }
 \arguments{
@@ -18,6 +19,8 @@ to \code{get_font_df()[["family"]]}}
 
 \item{function_call}{Character, the function call for each plot chunk,
 defaults to \code{RUBer::plot_figure}}
+
+\item{heading_starting_lvl}{Integer, the level of the heading.}
 }
 \value{
 Data frame with columns \code{figure_nr}, \code{chunk_heading},

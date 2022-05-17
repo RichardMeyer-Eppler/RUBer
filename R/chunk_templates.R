@@ -52,6 +52,7 @@ tpl_get_figure_df <- function(
 #'
 #' @param chunk_label Character, chunk label
 #' @param heading Character, heading text
+#' @param level Integer, level of the heading, defaults to `1L`
 #'
 #' @return List of character vectors with chunk texts
 #' @export
@@ -59,12 +60,22 @@ tpl_get_figure_df <- function(
 #' @example inst/examples/tpl_heading.R
 tpl_heading <- function(
   chunk_label,
-  heading
+  heading,
+  level = 1L
 ) {
+
+  level_string <- paste0(
+    rep(
+      "#",
+      times = level
+    ),
+    collapse = ""
+  )
 
   get_chunk_texts <- function(
     chunk_label,
-    heading
+    heading,
+    level_string
   ) {
     chunk_texts <- list(
       c(
@@ -75,7 +86,7 @@ tpl_heading <- function(
           .trim = FALSE
         ),
         glue::glue(
-          "cat(paste(\"#\", \"{heading}\"))"
+          "cat(paste(\"{level_string}\", \"{heading}\"))"
         ),
         "```"
       )
@@ -85,7 +96,8 @@ tpl_heading <- function(
   template <- purrr::map2(
     chunk_label,
     heading,
-    get_chunk_texts
+    get_chunk_texts,
+    level_string
   )
 
   return(template)
@@ -95,6 +107,7 @@ tpl_heading <- function(
 #'
 #' @param chunk_label Character, chunk label
 #' @param subheading Character, subheading text
+#' @param level Integer, level of the heading, defaults to `2L`
 #'
 #' @return List of character vectors with chunk texts
 #' @export
@@ -102,12 +115,22 @@ tpl_heading <- function(
 #' @example inst/examples/tpl_subheading.R
 tpl_subheading <- function(
   chunk_label,
-  subheading
+  subheading,
+  level = 2L
 ) {
+
+  level_string <- paste0(
+    rep(
+      "#",
+      times = level
+    ),
+    collapse = ""
+  )
 
   get_chunk_texts <- function(
     chunk_label,
-    subheading
+    subheading,
+    level_string
   ) {
     list(
       c(
@@ -118,7 +141,7 @@ tpl_subheading <- function(
           .trim = FALSE
         ),
         glue::glue(
-          "cat(paste(\"##\", \"{subheading}\"))"
+          "cat(paste(\"{level_string}\", \"{subheading}\"))"
         ),
         "```"
       )
@@ -128,7 +151,8 @@ tpl_subheading <- function(
   template <- purrr::map2(
     chunk_label,
     subheading,
-    get_chunk_texts
+    get_chunk_texts,
+    level_string
   )
 
   return(template)

@@ -5,6 +5,7 @@
 #'     to `get_font_df()[["family"]]`
 #' @param function_call Character, the function call for each plot chunk,
 #'     defaults to `RUBer::plot_figure`
+#' @param heading_starting_lvl Integer, the level of the heading.
 #'
 #' @return Data frame with columns `figure_nr`, `chunk_heading`,
 #'     `chunk_subheading`, `chunk_figure_df` and `chunk_plot_figure`
@@ -15,7 +16,8 @@
 get_figure_chunk_df <- function(
   df,
   font_family = get_font_df()[["family"]],
-  function_call = "RUBer::plot_figure"
+  function_call = "RUBer::plot_figure",
+  heading_starting_lvl = 1L
 ) {
   chunk_parameters <- df %>%
     dplyr::filter(
@@ -48,7 +50,8 @@ get_figure_chunk_df <- function(
         .data[["is_heading"]],
         tpl_heading(
           chunk_label = .data[["chunk_label"]],
-          heading = .data[["heading"]]
+          heading = .data[["heading"]],
+          level = heading_starting_lvl
         ),
         list(
           NA_character_
@@ -58,7 +61,8 @@ get_figure_chunk_df <- function(
         .data[["is_subheading"]],
         tpl_subheading(
           chunk_label = .data[["chunk_label"]],
-          subheading = .data[["subheading"]]
+          subheading = .data[["subheading"]],
+          level = heading_starting_lvl + 1L
         ),
         list(
           NA_character_

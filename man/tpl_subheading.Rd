@@ -4,12 +4,14 @@
 \alias{tpl_subheading}
 \title{Returns a character vector for the code chunk to insert a subheading}
 \usage{
-tpl_subheading(chunk_label, subheading)
+tpl_subheading(chunk_label, subheading, level = 2L)
 }
 \arguments{
 \item{chunk_label}{Character, chunk label}
 
 \item{subheading}{Character, subheading text}
+
+\item{level}{Integer, level of the heading, defaults to \code{2L}}
 }
 \value{
 List of character vectors with chunk texts

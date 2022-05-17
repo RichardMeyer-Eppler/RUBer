@@ -4,12 +4,14 @@
 \alias{tpl_heading}
 \title{Returns a character vector for the code chunk to insert a heading}
 \usage{
-tpl_heading(chunk_label, heading)
+tpl_heading(chunk_label, heading, level = 1L)
 }
 \arguments{
 \item{chunk_label}{Character, chunk label}
 
 \item{heading}{Character, heading text}
+
+\item{level}{Integer, level of the heading, defaults to \code{1L}}
 }
 \value{
 List of character vectors with chunk texts
