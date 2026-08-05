@@ -39,6 +39,6 @@ get_RUB_palettes(palette = "continuous")
 #>         rgb(x[, 1L], x[, 2L], x[, 3L], x[, 4L], maxColorValue = 255)
 #>     else rgb(x[, 1L], x[, 2L], x[, 3L], maxColorValue = 255)
 #> }
-#> <bytecode: 0x5639244eb830>
-#> <environment: 0x5639244e8b80>
+#> <bytecode: 0x55ceefec3c28>
+#> <environment: 0x55ceefebf090>
 ```

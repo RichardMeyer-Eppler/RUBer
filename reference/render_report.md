@@ -216,8 +216,6 @@ if(pandoc_available){
 #> 48/57 [pagebreak-ab]                          
 #> 49/57                                         
 #> 50/57 [studiengaenge]                         
-#> Error in data.frame(i = i, j = j): arguments imply differing number of rows: 4, 3
-#> Error: object 'ft_included_programs' not found
 #> 51/57                                         
 #> 52/57 [pagebreak-studiengaenge]               
 #> 53/57                                         
@@ -226,8 +224,8 @@ if(pandoc_available){
 #> 56/57 [pagebreak-studiengaenge-ausgeschlossen]
 #> 57/57                                         
 #> output file: skeleton.knit.md
-#> /opt/hostedtoolcache/pandoc/3.8.3/x64/pandoc +RTS -K512m -RTS skeleton.knit.md --to docx --from markdown+autolink_bare_uris+tex_math_single_backslash --output /tmp/Rtmp7CMMI3/RUBer_report_1b1963d349d4.docx --lua-filter /home/runner/work/_temp/Library/rmarkdown/rmarkdown/lua/pagebreak.lua --table-of-contents --toc-depth 2 --syntax-highlighting tango --reference-doc /home/runner/work/_temp/Library/RUBer/rmarkdown/templates/datenreport-2022/skeleton/rub_reference_2021.docx --extract-media /tmp/Rtmp7CMMI3/RUBer_report_1b1963d349d4_files --citeproc 
+#> /opt/hostedtoolcache/pandoc/3.8.3/x64/pandoc +RTS -K512m -RTS skeleton.knit.md --to docx --from markdown+autolink_bare_uris+tex_math_single_backslash --output /tmp/RtmpOWh16n/RUBer_report_1ab059a793e2.docx --lua-filter /home/runner/work/_temp/Library/rmarkdown/rmarkdown/lua/pagebreak.lua --table-of-contents --toc-depth 2 --syntax-highlighting tango --reference-doc /home/runner/work/_temp/Library/RUBer/rmarkdown/templates/datenreport-2022/skeleton/rub_reference_2021.docx --extract-media /tmp/RtmpOWh16n/RUBer_report_1ab059a793e2_files --citeproc 
 #> 
-#> Output created: /tmp/Rtmp7CMMI3/RUBer_report_1b1963d349d4.docx
-#> ℹ Report "/tmp/Rtmp7CMMI3/RUBer_report_1b1963d349d4.docx" was written successfully.
+#> Output created: /tmp/RtmpOWh16n/RUBer_report_1ab059a793e2.docx
+#> ℹ Report "/tmp/RtmpOWh16n/RUBer_report_1ab059a793e2.docx" was written successfully.
 ```
