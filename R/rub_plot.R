@@ -880,7 +880,7 @@ rub_plot_type_4 <- function(df,
   ) +
     ggplot2::geom_line(
       stat = "identity",
-      size = base_size / 10
+      linewidth = base_size / 10
     ) +
     ggplot2::geom_label(
       data = df_label,
@@ -1123,7 +1123,7 @@ add_rub_plot_type_4 <- function(df_t4, x_var, x_var_label = NULL,
         color = {{group_var}}
       ),
       stat = "identity",
-      size = base_size / 10,
+      linewidth = base_size / 10,
       inherit.aes = FALSE
     #  ,show.legend = FALSE
     )
