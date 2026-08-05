@@ -1,198 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/articles/RUB_colors.html</loc>
-  </url>
-  <url>
-    <loc>/articles/RUB_plot.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/articles/reference_docx.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/RUB_colors.html</loc>
-  </url>
-  <url>
-    <loc>/reference/RUB_palettes.html</loc>
-  </url>
-  <url>
-    <loc>/reference/RUBer-package.html</loc>
-  </url>
-  <url>
-    <loc>/reference/add_label_position.html</loc>
-  </url>
-  <url>
-    <loc>/reference/add_rub_plot_type_4.html</loc>
-  </url>
-  <url>
-    <loc>/reference/df_example.html</loc>
-  </url>
-  <url>
-    <loc>/reference/df_report.html</loc>
-  </url>
-  <url>
-    <loc>/reference/filter_report.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_RUB_colors.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_RUB_palettes.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_fallback_font_df.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_figure_chunk_df.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_figure_chunk_text.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_file_path.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_font_df.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_label_formula.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_legend_columns.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_report_nr_by_id.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot_discrete_palette.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot_figure.html</loc>
-  </url>
-  <url>
-    <loc>/reference/post_process.html</loc>
-  </url>
-  <url>
-    <loc>/reference/register_font_df.html</loc>
-  </url>
-  <url>
-    <loc>/reference/register_font_flama.html</loc>
-  </url>
-  <url>
-    <loc>/reference/register_font_scala.html</loc>
-  </url>
-  <url>
-    <loc>/reference/render_report.html</loc>
-  </url>
-  <url>
-    <loc>/reference/replace_first_page_header.html</loc>
-  </url>
-  <url>
-    <loc>/reference/replace_placeholder.html</loc>
-  </url>
-  <url>
-    <loc>/reference/replace_toc.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rub_format_mixed.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rub_format_percent.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rub_plot_type_1.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rub_plot_type_1_and_4.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rub_plot_type_2.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rub_plot_type_3.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rub_plot_type_4.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rub_style_flextable.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rub_table_ab.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rub_table_eb.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rub_table_excluded_programs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rub_table_included_programs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rub_table_item.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rub_table_metrics.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rub_table_programs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rub_table_stg.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rub_table_vb.html</loc>
-  </url>
-  <url>
-    <loc>/reference/run_example_as_chunk.html</loc>
-  </url>
-  <url>
-    <loc>/reference/scale_color_rub.html</loc>
-  </url>
-  <url>
-    <loc>/reference/scale_fill_rub.html</loc>
-  </url>
-  <url>
-    <loc>/reference/set_factor_var.html</loc>
-  </url>
-  <url>
-    <loc>/reference/theme_rub.html</loc>
-  </url>
-  <url>
-    <loc>/reference/tpl_get_figure_df.html</loc>
-  </url>
-  <url>
-    <loc>/reference/tpl_heading.html</loc>
-  </url>
-  <url>
-    <loc>/reference/tpl_plot_figure.html</loc>
-  </url>
-  <url>
-    <loc>/reference/tpl_subheading.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/LICENSE.html</loc></url>
+<url><loc>/articles/RUB_colors.html</loc></url>
+<url><loc>/articles/RUB_plot.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/articles/reference_docx.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/reference/RUB_colors.html</loc></url>
+<url><loc>/reference/RUB_palettes.html</loc></url>
+<url><loc>/reference/RUBer-package.html</loc></url>
+<url><loc>/reference/add_label_position.html</loc></url>
+<url><loc>/reference/add_rub_plot_type_4.html</loc></url>
+<url><loc>/reference/df_example.html</loc></url>
+<url><loc>/reference/df_report.html</loc></url>
+<url><loc>/reference/filter_report.html</loc></url>
+<url><loc>/reference/get_RUB_colors.html</loc></url>
+<url><loc>/reference/get_RUB_palettes.html</loc></url>
+<url><loc>/reference/get_fallback_font_df.html</loc></url>
+<url><loc>/reference/get_figure_chunk_df.html</loc></url>
+<url><loc>/reference/get_figure_chunk_text.html</loc></url>
+<url><loc>/reference/get_file_path.html</loc></url>
+<url><loc>/reference/get_font_df.html</loc></url>
+<url><loc>/reference/get_label_formula.html</loc></url>
+<url><loc>/reference/get_legend_columns.html</loc></url>
+<url><loc>/reference/get_report_nr_by_id.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/pipe.html</loc></url>
+<url><loc>/reference/plot_discrete_palette.html</loc></url>
+<url><loc>/reference/plot_figure.html</loc></url>
+<url><loc>/reference/post_process.html</loc></url>
+<url><loc>/reference/register_font_df.html</loc></url>
+<url><loc>/reference/register_font_flama.html</loc></url>
+<url><loc>/reference/register_font_scala.html</loc></url>
+<url><loc>/reference/render_report.html</loc></url>
+<url><loc>/reference/replace_first_page_header.html</loc></url>
+<url><loc>/reference/replace_placeholder.html</loc></url>
+<url><loc>/reference/replace_toc.html</loc></url>
+<url><loc>/reference/rub_format_mixed.html</loc></url>
+<url><loc>/reference/rub_format_percent.html</loc></url>
+<url><loc>/reference/rub_plot_type_1.html</loc></url>
+<url><loc>/reference/rub_plot_type_1_and_4.html</loc></url>
+<url><loc>/reference/rub_plot_type_2.html</loc></url>
+<url><loc>/reference/rub_plot_type_3.html</loc></url>
+<url><loc>/reference/rub_plot_type_4.html</loc></url>
+<url><loc>/reference/rub_style_flextable.html</loc></url>
+<url><loc>/reference/rub_table_ab.html</loc></url>
+<url><loc>/reference/rub_table_eb.html</loc></url>
+<url><loc>/reference/rub_table_excluded_programs.html</loc></url>
+<url><loc>/reference/rub_table_included_programs.html</loc></url>
+<url><loc>/reference/rub_table_item.html</loc></url>
+<url><loc>/reference/rub_table_metrics.html</loc></url>
+<url><loc>/reference/rub_table_programs.html</loc></url>
+<url><loc>/reference/rub_table_stg.html</loc></url>
+<url><loc>/reference/rub_table_vb.html</loc></url>
+<url><loc>/reference/run_example_as_chunk.html</loc></url>
+<url><loc>/reference/scale_color_rub.html</loc></url>
+<url><loc>/reference/scale_fill_rub.html</loc></url>
+<url><loc>/reference/set_factor_var.html</loc></url>
+<url><loc>/reference/theme_rub.html</loc></url>
+<url><loc>/reference/tpl_get_figure_df.html</loc></url>
+<url><loc>/reference/tpl_heading.html</loc></url>
+<url><loc>/reference/tpl_plot_figure.html</loc></url>
+<url><loc>/reference/tpl_subheading.html</loc></url>
 </urlset>
+

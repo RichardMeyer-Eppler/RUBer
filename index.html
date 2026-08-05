@@ -5,80 +5,52 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="RUBer is an R package created for parameterized reporting
-    according to the requirements at the Ruhr-Universität Bochum (RUB).
-    The package provides a large example dataset containing fake values,
-    an R Markdown template in the RUB corporate design, preconfigured
-    ggplot2 plotting functions, custom themes for ggplot2 and flextable,
-    as well as functions making the RUB corporate design colors available.">
 <title>Parameterized Microsoft Word reports in the RUB corporate design • RUBer</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Parameterized Microsoft Word reports in the RUB corporate design">
-<meta property="og:description" content="RUBer is an R package created for parameterized reporting
-    according to the requirements at the Ruhr-Universität Bochum (RUB).
-    The package provides a large example dataset containing fake values,
-    an R Markdown template in the RUB corporate design, preconfigured
-    ggplot2 plotting functions, custom themes for ggplot2 and flextable,
-    as well as functions making the RUB corporate design colors available.">
+<link href="deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Parameterized Microsoft Word reports in the RUB corporate design">
+<meta name="description" content="RUBer is an R package created for parameterized reporting according to the requirements at the Ruhr-Universität Bochum (RUB). The package provides a large example dataset containing fake values, an R Markdown template in the RUB corporate design, preconfigured ggplot2 plotting functions, custom themes for ggplot2 and flextable, as well as functions making the RUB corporate design colors available.">
+<meta property="og:description" content="RUBer is an R package created for parameterized reporting according to the requirements at the Ruhr-Universität Bochum (RUB). The package provides a large example dataset containing fake values, an R Markdown template in the RUB corporate design, preconfigured ggplot2 plotting functions, custom themes for ggplot2 and flextable, as well as functions making the RUB corporate design colors available.">
 <meta property="og:image" content="/logo.png">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
-    
+
+    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="index.html">RUBer</a>
 
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
 
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item">
-  <a class="nav-link" href="reference/index.html">Reference</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="articles/RUB_colors.html">Using RUB colors</a>
-    <a class="dropdown-item" href="articles/RUB_plot.html">Using the RUB plotting functions</a>
-    <a class="dropdown-item" href="articles/reference_docx.html">Formatting for the reference docx document</a>
-  </div>
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="articles/reference_docx.html">Formatting for the reference docx document</a></li>
+    <li><a class="dropdown-item" href="articles/RUB_colors.html">Using RUB colors</a></li>
+    <li><a class="dropdown-item" href="articles/RUB_plot.html">Using the RUB plotting functions</a></li>
+  </ul>
 </li>
       </ul>
-<form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
-</form>
-
-      <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/RichardMeyer-Eppler/RUBer/" aria-label="github">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/RichardMeyer-Eppler/RUBer/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
-    
+
   </div>
 </nav><div class="container template-home">
 <div class="row">
@@ -89,6 +61,7 @@
 </h1>
 </div>
 <!-- badges: start -->
+
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
@@ -115,56 +88,56 @@
 </h2>
 <p>Install the development version from GitHub with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># If package "remotes" is not installed, install it first:</span>
-<span class="co"># install.packages("remotes")</span>
-
-<span class="co"># Install RUBer from Github</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span>
-  repo <span class="op">=</span> <span class="st">"RichardMeyer-Eppler/RUBer"</span>,
-  build_vignettes <span class="op">=</span> <span class="cn">TRUE</span>
-  <span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># If package "remotes" is not installed, install it first:</span></span>
+<span><span class="co"># install.packages("remotes")</span></span>
+<span></span>
+<span><span class="co"># Install RUBer from Github</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span></span>
+<span>  repo <span class="op">=</span> <span class="st">"RichardMeyer-Eppler/RUBer"</span>,</span>
+<span>  build_vignettes <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://richardmeyer-eppler.github.io/RUBer" class="external-link">RUBer</a></span><span class="op">)</span>
-
-<span class="co"># RUBer comes with two example data sets with generated data</span>
-
-<span class="co"># df_report contains meta data about each of the 68 reports</span>
-<span class="va">df_report</span>
-<span class="co">#&gt; # A tibble: 68 x 6</span>
-<span class="co">#&gt;   report_nr report_type_id report_title        report_author file_name subfolder</span>
-<span class="co">#&gt;       &lt;int&gt; &lt;chr&gt;          &lt;glue&gt;              &lt;chr&gt;         &lt;glue&gt;    &lt;chr&gt;    </span>
-<span class="co">#&gt; 1         1 STG            RUBer Example Repo~ Example 01    RUBer_Ex~ Geistesw~</span>
-<span class="co">#&gt; 2         2 STG            RUBer Example Repo~ Example 02, ~ RUBer_Ex~ Geistesw~</span>
-<span class="co">#&gt; 3         3 STG            RUBer Example Repo~ Example 04, ~ RUBer_Ex~ Geistesw~</span>
-<span class="co">#&gt; 4         4 STG            RUBer Example Repo~ Example 08, ~ RUBer_Ex~ Geistesw~</span>
-<span class="co">#&gt; 5         5 STG            RUBer Example Repo~ Example 14, ~ RUBer_Ex~ Geistesw~</span>
-<span class="co">#&gt; # ... with 63 more rows</span>
-
-<span class="co"># df_example contains the data required to dynamically create all figures</span>
-<span class="va">df_example</span>
-<span class="co">#&gt; # A tibble: 164,794 x 24</span>
-<span class="co">#&gt;   report_nr figure_nr report_type_id x     x_label    y     y_axis_label    fill</span>
-<span class="co">#&gt;       &lt;int&gt;     &lt;int&gt; &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;          &lt;dbl&gt;</span>
-<span class="co">#&gt; 1         1         1 STG            20152 WiSe 15/16 526   Studienfälle ~     2</span>
-<span class="co">#&gt; 2         1         1 STG            20152 WiSe 15/16 616   Studienfälle ~    20</span>
-<span class="co">#&gt; 3         1         1 STG            20152 WiSe 15/16 170   Studienfälle ~    21</span>
-<span class="co">#&gt; 4         1         1 STG            20162 WiSe 16/17 520   Studienfälle ~     2</span>
-<span class="co">#&gt; 5         1         1 STG            20162 WiSe 16/17 576   Studienfälle ~    20</span>
-<span class="co">#&gt; # ... with 164,789 more rows, and 16 more variables: fill_label &lt;chr&gt;,</span>
-<span class="co">#&gt; #   facet &lt;chr&gt;, group &lt;dbl&gt;, group_label &lt;chr&gt;, source_caption &lt;chr&gt;,</span>
-<span class="co">#&gt; #   question_txt &lt;chr&gt;, figure_type_id &lt;int&gt;, figure_caption &lt;glue&gt;,</span>
-<span class="co">#&gt; #   heading &lt;chr&gt;, subheading &lt;chr&gt;, is_heading &lt;lgl&gt;, is_subheading &lt;lgl&gt;,</span>
-<span class="co">#&gt; #   report_author &lt;chr&gt;, report_title &lt;glue&gt;, file_name &lt;glue&gt;,</span>
-<span class="co">#&gt; #   figure_height &lt;dbl&gt;</span>
-
-<span class="co"># This generates a Word report using df_report and df_example</span>
-<span class="fu"><a href="reference/render_report.html">render_report</a></span><span class="op">(</span>quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; i Report "C:/Users/Richard/AppData/Local/Temp/Rtmpa4Jpt6/</span>
-<span class="co">#&gt; RUBer_report_1c9429401b2b.docx" was written successfully.</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://richardmeyer-eppler.github.io/RUBer" class="external-link">RUBer</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># RUBer comes with two example data sets with generated data</span></span>
+<span></span>
+<span><span class="co"># df_report contains meta data about each of the 68 reports</span></span>
+<span><span class="va">df_report</span></span>
+<span><span class="co">#&gt; # A tibble: 68 x 6</span></span>
+<span><span class="co">#&gt;   report_nr report_type_id report_title        report_author file_name subfolder</span></span>
+<span><span class="co">#&gt;       &lt;int&gt; &lt;chr&gt;          &lt;glue&gt;              &lt;chr&gt;         &lt;glue&gt;    &lt;chr&gt;    </span></span>
+<span><span class="co">#&gt; 1         1 STG            RUBer Example Repo~ Example 01    RUBer_Ex~ Geistesw~</span></span>
+<span><span class="co">#&gt; 2         2 STG            RUBer Example Repo~ Example 02, ~ RUBer_Ex~ Geistesw~</span></span>
+<span><span class="co">#&gt; 3         3 STG            RUBer Example Repo~ Example 04, ~ RUBer_Ex~ Geistesw~</span></span>
+<span><span class="co">#&gt; 4         4 STG            RUBer Example Repo~ Example 08, ~ RUBer_Ex~ Geistesw~</span></span>
+<span><span class="co">#&gt; 5         5 STG            RUBer Example Repo~ Example 14, ~ RUBer_Ex~ Geistesw~</span></span>
+<span><span class="co">#&gt; # ... with 63 more rows</span></span>
+<span></span>
+<span><span class="co"># df_example contains the data required to dynamically create all figures</span></span>
+<span><span class="va">df_example</span></span>
+<span><span class="co">#&gt; # A tibble: 164,794 x 24</span></span>
+<span><span class="co">#&gt;   report_nr figure_nr report_type_id x     x_label    y     y_axis_label    fill</span></span>
+<span><span class="co">#&gt;       &lt;int&gt;     &lt;int&gt; &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;          &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1         1         1 STG            20152 WiSe 15/16 526   Studienfälle ~     2</span></span>
+<span><span class="co">#&gt; 2         1         1 STG            20152 WiSe 15/16 616   Studienfälle ~    20</span></span>
+<span><span class="co">#&gt; 3         1         1 STG            20152 WiSe 15/16 170   Studienfälle ~    21</span></span>
+<span><span class="co">#&gt; 4         1         1 STG            20162 WiSe 16/17 520   Studienfälle ~     2</span></span>
+<span><span class="co">#&gt; 5         1         1 STG            20162 WiSe 16/17 576   Studienfälle ~    20</span></span>
+<span><span class="co">#&gt; # ... with 164,789 more rows, and 16 more variables: fill_label &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   facet &lt;chr&gt;, group &lt;dbl&gt;, group_label &lt;chr&gt;, source_caption &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   question_txt &lt;chr&gt;, figure_type_id &lt;int&gt;, figure_caption &lt;glue&gt;,</span></span>
+<span><span class="co">#&gt; #   heading &lt;chr&gt;, subheading &lt;chr&gt;, is_heading &lt;lgl&gt;, is_subheading &lt;lgl&gt;,</span></span>
+<span><span class="co">#&gt; #   report_author &lt;chr&gt;, report_title &lt;glue&gt;, file_name &lt;glue&gt;,</span></span>
+<span><span class="co">#&gt; #   figure_height &lt;dbl&gt;</span></span>
+<span></span>
+<span><span class="co"># This generates a Word report using df_report and df_example</span></span>
+<span><span class="fu"><a href="reference/render_report.html">render_report</a></span><span class="op">(</span>quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; i Report "C:/Users/Richard/AppData/Local/Temp/Rtmpa4Jpt6/</span></span>
+<span><span class="co">#&gt; RUBer_report_1c9429401b2b.docx" was written successfully.</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="guiding-design-principles">Guiding design principles<a class="anchor" aria-label="anchor" href="#guiding-design-principles"></a>
@@ -208,7 +181,7 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Richard Meyer-Eppler <br><small class="roles"> Author, maintainer </small>  </li>
+<li>Richard Meyer-Eppler <br><small class="roles"> Author, maintainer </small>   </li>
 </ul>
 </div>
 
@@ -226,21 +199,19 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p>
-<p>Developed by Richard Meyer-Eppler.</p>
+  <p>Developed by Richard Meyer-Eppler.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>
 </div>
 
-  
 
-  
+
+
 
   </body>
 </html>
