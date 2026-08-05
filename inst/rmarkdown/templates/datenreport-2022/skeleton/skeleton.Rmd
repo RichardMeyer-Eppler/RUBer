@@ -80,12 +80,14 @@ knitr::opts_chunk$set(
   message = FALSE,
   dev = "emf",
   dev.args = list(
-    family = font_family,
-    pointsize = 12,
-    coordDPI = 72,
-    emfPlus = TRUE,
-    emfPlusRaster = TRUE,
-    emfPlusFontToPath = TRUE
+    emf = list(
+      family = font_family,
+      pointsize = 12,
+      coordDPI = 72,
+      emfPlus = TRUE,
+      emfPlusRaster = TRUE,
+      emfPlusFontToPath = TRUE
+    )
   ),
   fig.width = 6.8,
   fig.ext = "emf"
