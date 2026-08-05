@@ -1004,6 +1004,21 @@ rub_table_included_programs <- function(
     "Im Datenreport Nr. {report_nr_szma} sind f\u00E4chergruppen\u00FCbergreifend alle am Servicezentrum Mathematik und Anwendungen beteiligten Studieng\u00E4nge ber\u00FCcksichtigt, weshalb der Datenreport mehrfach aufgef\u00FChrt wird."
   )
 
+  footnote_grid_m_ed <- expand.grid(
+    i = row_footnote_m_ed,
+    j = c(1, 2, 3)
+  )
+
+  footnote_grid_fgr <- expand.grid(
+    i = row_footnote_fgr,
+    j = c(1, 2, 3)
+  )
+
+  footnote_grid_szma <- expand.grid(
+    i = row_footnote_szma,
+    j = c(1, 2, 3)
+  )
+
   ft <- df %>%
     flextable::flextable(
       col_keys = c(
@@ -1017,7 +1032,8 @@ rub_table_included_programs <- function(
       odd_body = "transparent"
     ) %>%
     flextable::footnote(
-      i = row_footnote_m_ed,
+      i = footnote_grid_m_ed$i,
+      j = footnote_grid_m_ed$j,
       value = flextable::as_paragraph(
         footnote_text_m_ed
       ),
@@ -1025,7 +1041,8 @@ rub_table_included_programs <- function(
       part = "body"
     ) %>%
     flextable::footnote(
-      i = row_footnote_fgr,
+      i = footnote_grid_fgr$i,
+      j = footnote_grid_fgr$j,
       value = flextable::as_paragraph(
         footnote_text_fgr
       ),
@@ -1033,7 +1050,8 @@ rub_table_included_programs <- function(
       part = "body"
     ) %>%
     flextable::footnote(
-      i = row_footnote_szma,
+      i = footnote_grid_szma$i,
+      j = footnote_grid_szma$j,
       value = flextable::as_paragraph(
         footnote_text_szma
       ),
